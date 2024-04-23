@@ -1,5 +1,15 @@
 const express = require("express");
 const app = express();
+const adminRoutes = require('./routes/adminRoute.js');
+const billingRoutes = require('./routes/billingRoute.js');
+const budgetRoutes = require('./routes/budgetRoute.js');
+const bouyerRoutes = require('./routes/buyerRoute.js');
+const cartRoutes = require('./routes/cartRoute.js');
+const licensesRoutes = require('./routes/licenseRoute.js');
+const managerRoutes = require('./routes/managerRoute.js');
+const packagesRoutes = require('./routes/packagesRoute.js');
+const productsRoutes = require('./routes/productsRoute.js');
+const ticketsRoutes = require('./routes/ticketRoute.js');
 //Configurações
 app.set("port", process.env.PORT || 3000);
 //Middlewares
