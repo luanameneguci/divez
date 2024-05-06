@@ -10,9 +10,23 @@ var Admin = sequelize.define('admin', {
         primaryKey: true,
         autoIncrement: true,
       },
-      adminname: Sequelize.STRING,
-      adminemail: Sequelize.STRING,
-      adminpassword: Sequelize.STRING,
+      adminname: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isAlpha: true,
+      },
+      adminemail: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isEmail: true,
+      },
+      adminpassword: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
       iddepartment: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
