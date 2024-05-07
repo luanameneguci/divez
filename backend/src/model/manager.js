@@ -3,25 +3,41 @@ const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
-var Ticket = require('./ticket');
+var Buyer = require('./buyer');
 
-var TicketPrint = sequelize.define('ticketPrint', {
-    idTicketPrint: {
+var Manager = sequelize.define('manager', {
+    idManager: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      linkPrint: {
+      managerName: {
         type: Sequelize.STRING,
         notNull: true,
         notEmpty: true,
-        isUrl: true,
+        isAlpha: true,
       },
-      idTicket: {
+      managerNif: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
+      managerEmail: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isEmail: true,
+      },
+      managerPassword: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
+      idBuyer: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
-          model: Ticket,
+          model: Buyer,
           key: "id",
         },
       },
@@ -29,4 +45,4 @@ var TicketPrint = sequelize.define('ticketPrint', {
 {
 timestamps: false,
 });
-module.exports = TicketPrint;
+module.exports = Manager;

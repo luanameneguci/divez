@@ -1,4 +1,5 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
@@ -14,7 +15,7 @@ var License = sequelize.define('license', {
         autoIncrement: true,
       },
       licenseDescript: Sequelize.STRING,
-      idbuyer: {
+      idBuyer: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -22,7 +23,7 @@ var License = sequelize.define('license', {
           key: "id",
         },
       },
-      idbill: {
+      idBill: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -30,7 +31,7 @@ var License = sequelize.define('license', {
           key: "id",
         },
       },
-      idlicensestatus: {
+      idLicenseStatus: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -38,7 +39,7 @@ var License = sequelize.define('license', {
           key: "id",
         },
       },
-      idlicenseuser: {
+      idLicenseUser: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {

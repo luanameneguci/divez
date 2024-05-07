@@ -1,4 +1,5 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
@@ -8,17 +9,36 @@ var TicketDepartment = require('./ticketDepartment');
 var Manager = require('./manager');
 
 var Ticket = sequelize.define('ticket', {
-    idticket: {
+    idTicket: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      ticketname: Sequelize.STRING,
-      ticketdescript: Sequelize.STRING,
-      ticketdata: Sequelize.DATE,
-      ticketpriority: Sequelize.INTEGER,
+      ticketName: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
+      ticketDescript: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        max: 300,
+      },
+      ticketData: {
+        type: Sequelize.DATE,
+        notNull: true,
+        notEmpty: true,
+        isDate: true,
+      },
+      ticketPriority: {
+        type: Sequelize.INTEGER,
+        notNull: true,
+        notEmpty: true,
+        isNumeric: true,
+      },
 
-      idbuyer: {
+      idBuyer: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -26,7 +46,7 @@ var Ticket = sequelize.define('ticket', {
           key: "id",
         },
       },
-      idticketstatus: {
+      idTicketstatus: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -34,7 +54,7 @@ var Ticket = sequelize.define('ticket', {
           key: "id",
         },
       },
-      idticketdepartment: {
+      idTicketDepartment: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -42,7 +62,7 @@ var Ticket = sequelize.define('ticket', {
           key: "id",
         },
       },
-      idmanager: {
+      idManager: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {

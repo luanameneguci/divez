@@ -1,4 +1,5 @@
-var Sequelize = require("sequelize");
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require("./database");
 
 var Product = sequelize.define(

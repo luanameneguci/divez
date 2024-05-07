@@ -1,13 +1,18 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 var BudgetStatus = sequelize.define('budgetStatus', {
-    idbudgetstatus: {
+    idBudgetStatus: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      budgetstatusdescript: Sequelize.STRING,
+      budgetStatusDescript: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
     },
 {
 timestamps: false,

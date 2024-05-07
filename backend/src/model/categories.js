@@ -1,13 +1,19 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 var Categorie = sequelize.define('categorie', {
-    idcategorie: {
+    idCategorie: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      categoriename: Sequelize.STRING,
+      categorieName: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isAlpha: true,
+      },
     },
 {
 timestamps: false,

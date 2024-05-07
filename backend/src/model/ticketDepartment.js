@@ -2,22 +2,20 @@ const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
-var LicenseUser = sequelize.define('licenseuser', {
-    idLicenseUser: {
-        type: Sequelize.STRING,
+var TicketDepartment = sequelize.define('ticketDepartment', {
+    idTicketDepartment: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        isIPv4: true,
-        max: 15,
       },
-      licenseUserEmail: {
+      departmentDescript: {
         type: Sequelize.STRING,
         notNull: true,
         notEmpty: true,
-        isEmail: true,
+        max: 50,
       },
     },
 {
 timestamps: false,
 });
-module.exports = LicenseUser;
+module.exports = TicketDepartment;
