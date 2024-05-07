@@ -1,0 +1,26 @@
+var Sequelize = require('sequelize');
+var sequelize = require('./database');
+
+// importa o modelo – chave forasteira idBuyer
+var Ticket = require('./ticket');
+
+var TicketPrint = sequelize.define('ticketPrint', {
+    idticketprint: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      linkprint: Sequelize.STRING,
+      idticket: {
+        type: Sequelize.INTEGER,
+        // referência a outro modelo
+        references: {
+          model: Ticket,
+          key: "id",
+        },
+      },
+    },
+{
+timestamps: false,
+});
+module.exports = TicketPrint;
