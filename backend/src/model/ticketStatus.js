@@ -1,13 +1,19 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 var TicketStatus = sequelize.define('ticketStatus', {
-    idticketstatus: {
+    idTicketStatus: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      statusdescript: Sequelize.STRING,
+      statusDescript: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        max: 50,
+      },
     },
 {
 timestamps: false,

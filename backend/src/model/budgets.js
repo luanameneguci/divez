@@ -1,4 +1,5 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
@@ -6,15 +7,28 @@ var BudgetStatus = require('./budgetStatus');
 var Cart = require('./cart');
 
 var Budget = sequelize.define('budget', {
-    idbudget: {
+    idBudget: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      budgetname: Sequelize.STRING,
-      budgetdescript: Sequelize.STRING,
-      date: Sequelize.DATE,
-      idbudgetstatus: {
+      budgetName: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isAlpha: true,
+      },
+      budgetDescript: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
+      date: {
+        type: Sequelize.DATE,
+        notNull: true,
+        isDate: true,
+      },
+      idBudgetStatus: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {
@@ -22,7 +36,7 @@ var Budget = sequelize.define('budget', {
           key: "id",
         },
       },
-      idcart: {
+      idCart: {
         type: Sequelize.INTEGER,
         // referência a outro modelo
         references: {

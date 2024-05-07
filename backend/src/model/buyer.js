@@ -1,27 +1,39 @@
-var Sequelize = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
-// importa o modelo – chave forasteira idCart
-var Department = require('./cart');
-
 var Buyer = sequelize.define('buyer', {
-    idbuyer: {
+    idBuyer: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      buyername: Sequelize.STRING,
-      buyernif: Sequelize.STRING,
-      buyeremail: Sequelize.STRING,
-      buyerpassword: Sequelize.STRING,
-      buyercompany: Sequelize.STRING,
-      idcart: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Cart,
-          key: "id",
-        },
+      buyerName: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isAlpha: true,
+      },
+      buyerNif: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
+      buyerEmail: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isEmail: true,
+      },
+      buyerPassword: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+      },
+      buyerCompany: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
       },
     },
 {
