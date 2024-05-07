@@ -1,0 +1,32 @@
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
+var sequelize = require('./database');
+
+// importa o modelo – chave forasteira idBuyer
+var Ticket = require('./ticket');
+
+var TicketPrint = sequelize.define('ticketPrint', {
+    idTicketPrint: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      linkPrint: {
+        type: Sequelize.STRING,
+        notNull: true,
+        notEmpty: true,
+        isUrl: true,
+      },
+      idTicket: {
+        type: Sequelize.INTEGER,
+        // referência a outro modelo
+        references: {
+          model: Ticket,
+          key: "id",
+        },
+      },
+    },
+{
+timestamps: false,
+});
+module.exports = TicketPrint;
