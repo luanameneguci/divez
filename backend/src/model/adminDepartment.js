@@ -3,7 +3,7 @@ const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 var Department = sequelize.define('admindepartment', {
-    idDepartemnet: {
+    iddepartemnet: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
