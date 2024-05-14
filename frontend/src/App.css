@@ -29,6 +29,15 @@
   margin-top: -5px;
 }
 
+.box-container {
+  min-height: 100px;
+}
+
+.box-image {
+  width: 30px;
+  height: 30px;
+}
+
 /*
 Já cá estava, tirar isto tudo acho eu
 
