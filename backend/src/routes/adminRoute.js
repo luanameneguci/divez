@@ -5,19 +5,19 @@ const adminController = require("../controllers/adminController");
 
 router.get("/", adminController.admin_dashboard);
 
-router.get("/clients", adminController.admin_clients);
+router.get("/buyers", adminController.admin_buyers);
 
 router.get("/products", adminController.admin_products);
 
-router.get("/sales", adminController.admin_sales);
+router.get("/licenses", adminController.admin_licenses);
 
-router.get("/tickets", adminController_tickets);
+router.get("/tickets", adminController.admin_tickets);
 
-router.get("/inbox", adminController_inbox);
+router.get("/inbox/:idTicket", adminController.admin_inbox);
 
-router.get("/budget", adminController_budgets);
+router.get("/budgets", adminController.admin_budgets);
 
-router.get("/clients/:idClient", adminController.admin_specific_client);
+router.get("/buyers/:idbuyer", adminController.admin_specific_buyer);
 
 router.post("/create", adminController.admin_create);
 
