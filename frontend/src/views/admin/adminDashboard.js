@@ -26,13 +26,3 @@ const AdminDashboard = () => {
 
     );
 }
-
-function Box(props) {
-    return <div className="box-container bg-white col-auto rounded d-flex justify-content-between align-items-center p-3">
-        <span className="box-title d-block">{props.title}</span>
-        <span className="box-number d-block">{props.number}</span>
-        <img src={props.image} alt="" className="box-image ms-3" />
-        <span className="box-evolution d-block">{props.evolution}% </span>
-    </div>;
-}
-export default AdminDashboard;
