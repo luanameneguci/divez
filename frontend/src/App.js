@@ -9,7 +9,7 @@ import ManagerDashboard from './views/manager/managerDashboard';
 function App() {
   return (
     <div>
-      <BuyerMenu />
+      <Menu />
     </div>
 
   );
