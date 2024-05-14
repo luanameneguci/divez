@@ -1,0 +1,82 @@
+/*o active true do bootstrap não funcionava pq não é nav-link, é nav-items e o nav-links não parecia estar a funcionar*/
+.active-true {
+  background-color: #55B7F1;
+  border-radius: 5px;
+  color: white !important;
+}
+
+.header-logo {
+  width: 60%;
+  max-width: 60%;
+}
+
+.notification-icon {
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.username-text {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.account-text {
+  font-size: 13px;
+
+}
+
+.account-type {
+  margin-top: -5px;
+}
+
+.box-container {
+  min-height: 100px;
+}
+
+.box-image {
+  width: 30px;
+  height: 30px;
+}
+
+/*
+Já cá estava, tirar isto tudo acho eu
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*/
