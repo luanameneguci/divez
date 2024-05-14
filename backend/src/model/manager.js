@@ -1,5 +1,4 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
@@ -38,11 +37,12 @@ var Manager = sequelize.define('manager', {
         // referência a outro modelo
         references: {
           model: Buyer,
-          key: "id",
+          key: "idBuyer",
         },
       },
     },
 {
 timestamps: false,
 });
+Manager.belongsTo(Buyer);
 module.exports = Manager;

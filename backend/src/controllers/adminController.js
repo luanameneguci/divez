@@ -6,7 +6,6 @@ var Licenses = require("../model/lincenses");
 var Tickets = require("../model/tickets");
 var Message = require("../model/message");
 var Budgets = require("../model/budgets");
-
 var sequelize = require("../model/database");
 const controllers = {};
 sequelize.sync();
@@ -16,7 +15,7 @@ controllers.admin_list = async (req, res) => {
   res.json(data);
 };
 
-controllers.admin_create = async (req, res) => {
+/* controllers.admin_create = async (req, res) => {
   const { adminName, adminEmail, adminPassword, idDepartment } = req.body;
   const admin = await Admin.create({
     adminName,
@@ -91,6 +90,6 @@ controllers.admin_products = async (req, res) => {
     res.json(data);
   };
 
-  
+   */
 
 module.exports = controllers;

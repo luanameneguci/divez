@@ -3,9 +3,9 @@ const router = express.Router();
 
 const adminController = require("../controllers/adminController");
 
-router.get("/", adminController.admin_dashboard);
+router.get("/", adminController.admin_list); 
 
-router.get("/buyers", adminController.admin_buyers);
+/* router.get("/buyers", adminController.admin_buyers);
 
 router.get("/products", adminController.admin_products);
 
@@ -31,6 +31,6 @@ router.put("/update/:idAdmin");
 
 router.put("/product/update/:idProduct", adminController.admin_product_update);
 
-router.put("/product/addToPackage", adminController.admin_addToPackage);
+router.put("/product/addToPackage", adminController.admin_addToPackage); */
 
 module.exports = router;

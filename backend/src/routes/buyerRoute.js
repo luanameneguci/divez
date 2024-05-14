@@ -1,11 +1,11 @@
-const express = require("express");
+/* const express = require("express");
 const router = express.Router();
 
 const buyerController = require("../controllers/buyerController");
 
-router.get("/", buyerController.buyer_dashboard);
+router.get("/", buyerController.buyer_list);
 
-router.get("/products", buyerController.buyer_products);
+/* router.get("/products", buyerController.buyer_products);
 
 router.get("/store", buyerController.buyer_store);
 
@@ -47,3 +47,4 @@ router.delete("cart/delete/:idCart", buyerController.buyer_cart_delete);
 
 
 
+ */

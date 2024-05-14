@@ -1,5 +1,4 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
@@ -43,7 +42,7 @@ var Ticket = sequelize.define('ticket', {
         // referência a outro modelo
         references: {
           model: Buyer,
-          key: "id",
+          key: "idBuyer",
         },
       },
       idTicketstatus: {
@@ -51,7 +50,7 @@ var Ticket = sequelize.define('ticket', {
         // referência a outro modelo
         references: {
           model: TicketStatus,
-          key: "id",
+          key: "idTicketStatus",
         },
       },
       idTicketDepartment: {
@@ -59,7 +58,7 @@ var Ticket = sequelize.define('ticket', {
         // referência a outro modelo
         references: {
           model: TicketDepartment,
-          key: "id",
+          key: "idTicketDepartment",
         },
       },
       idManager: {
@@ -67,11 +66,16 @@ var Ticket = sequelize.define('ticket', {
         // referência a outro modelo
         references: {
           model: Manager,
-          key: "id",
+          key: "idManager",
         },
       },
     },
 {
 timestamps: false,
 });
+Ticket.belongsTo(Buyer);
+Ticket.belongsTo(TicketStatus);
+Ticket.belongsTo(TicketDepartment);
+Ticket.belongsTo(Manager);
+
 module.exports = Ticket;

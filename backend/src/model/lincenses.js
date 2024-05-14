@@ -1,10 +1,9 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
 var Buyer = require('./buyer');
-var Bill = require('./bill');
+var Bill = require('./billing');
 var LicenseStatus = require('./licenseStatus');
 var LicenseUser = require('./licenseuser');
 
@@ -20,7 +19,7 @@ var License = sequelize.define('license', {
         // referência a outro modelo
         references: {
           model: Buyer,
-          key: "id",
+          key: "idBuyer",
         },
       },
       idBill: {
@@ -28,7 +27,7 @@ var License = sequelize.define('license', {
         // referência a outro modelo
         references: {
           model: Bill,
-          key: "id",
+          key: "idBill",
         },
       },
       idLicenseStatus: {
@@ -36,7 +35,7 @@ var License = sequelize.define('license', {
         // referência a outro modelo
         references: {
           model: LicenseStatus,
-          key: "id",
+          key: "idLicenseStatus",
         },
       },
       idLicenseUser: {
@@ -44,11 +43,14 @@ var License = sequelize.define('license', {
         // referência a outro modelo
         references: {
           model: LicenseUser,
-          key: "id",
+          key: "idLicenseUser",
         },
       },
     },
 {
 timestamps: false,
 });
+License.belongsTo(Bill);
+License.belongsTo(LicenseStatus);
+License.belongsTo(LicenseUser);
 module.exports = License;
