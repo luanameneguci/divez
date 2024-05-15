@@ -6,13 +6,18 @@ var Licenses = require("../model/lincenses");
 var Tickets = require("../model/tickets");
 var Message = require("../model/message");
 var Budgets = require("../model/budgets");
-
 var sequelize = require("../model/database");
+const Department = require("../model/adminDepartment");
 const controllers = {};
 sequelize.sync();
 
 controllers.admin_list = async (req, res) => {
-  const data = await Admin.findAll();
+  const data = await Admin.findAll({include:[Department]});
+  res.json(data);
+};
+
+controllers.department_list = async (req, res) => {
+  const data = await Department.findAll();
   res.json(data);
 };
 
@@ -26,6 +31,17 @@ controllers.admin_create = async (req, res) => {
   });
   res.json(admin);
 };
+
+controllers.admin_create_department = async (req, res) => {
+  const { adminDepartmentDescript } = req.body;
+  console.log(adminDepartmentDescript);
+  const adminDepartment = await Department.create({
+    adminDepartmentDescript
+  });
+  res.json(adminDepartment);
+};
+
+/*
 
 controllers.admin_update = async (req, res) => {
   let idReceived = req.params.id;
@@ -91,6 +107,6 @@ controllers.admin_products = async (req, res) => {
     res.json(data);
   };
 
-  
+   */
 
 module.exports = controllers;
