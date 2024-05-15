@@ -9,7 +9,8 @@ app.set("port", process.env.PORT || 3000);
 //Middlewares
 app.use(express.json());
 //Rotas
-/* app.use('/admin/:idAdmin',adminRoutes)
+app.use('/admin',adminRoutes)
+/*
 app.use('/buyer/:idBuyer',buyerRoutes)
 app.use('/manager',managerRoutes) */
 

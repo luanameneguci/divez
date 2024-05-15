@@ -39,5 +39,6 @@ var Admin = sequelize.define('admin', {
 {
 timestamps: false,
 });
-Admin.belongsTo(Department);
+Admin.belongsTo(Department,{foreignKey: 'idDepartment' });
+Department.hasMany(Admin, {foreignKey: 'idDepartment' });
 module.exports = Admin

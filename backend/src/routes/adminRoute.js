@@ -5,6 +5,12 @@ const adminController = require("../controllers/adminController");
 
 router.get("/", adminController.admin_list); 
 
+router.get("/departments", adminController.department_list); 
+
+router.post("/create", adminController.admin_create);
+
+router.post("/createDepartment", adminController.admin_create_department);
+
 /* router.get("/buyers", adminController.admin_buyers);
 
 router.get("/products", adminController.admin_products);

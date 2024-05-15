@@ -3,10 +3,10 @@ var sequelize = require('./database');
 
 var Department = sequelize.define('admindepartment', {
     idDepartment: {
-        type: Sequelize.INTEGER,
+       type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-      },
+      }, 
       adminDepartmentDescript: {
         type: Sequelize.STRING,
         notNull: true,
