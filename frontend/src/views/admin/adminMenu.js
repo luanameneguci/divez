@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const Menu = () => {
     return (
-        <div className="row flex-nowrap px-0 mx-0">
+        <div className="row flex-nowrap">
       <div className="col-auto col-md-3 col-xl-2 px-sm-3 px-0 bg-white">
         <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
           <a href="/" className="d-flex align-items-center pb-3 mx-auto">
@@ -94,8 +94,8 @@ const Menu = () => {
           </ul>
         </div>
       </div>
-      <div className="col-10 h-25 bg-white py-2 px-4 me-3">
-        <div className="d-flex align-self-end sticky-top flex-row-reverse">
+      <div className="col-10 h-25 bg-white">
+        <div className="d-flex align-self-end sticky-top flex-row-reverse px-4 py-2 me-3">
           <div>
             <div>
               <span className="username-text">Utilizador</span>
