@@ -1,6 +1,8 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var sequelize = require('./database');
 
+var Cart = require('./cart');
+
 var Buyer = sequelize.define('buyer', {
     idBuyer: {
         type: Sequelize.INTEGER,
@@ -34,8 +36,19 @@ var Buyer = sequelize.define('buyer', {
         notNull: true,
         notEmpty: true,
       },
+      idCart: {
+        type: Sequelize.INTEGER,
+        // referência a outro modelo
+        references: {
+          model: Cart,
+          key: "idCart",
+        },
+      },
     },
 {
 timestamps: false,
 });
-module.exports = Buyer
+Buyer.belongsTo(Cart, {foreignKey: 'idCart' });
+Cart.hasOne(Buyer, {foreignKey: 'idCart' });
+
+module.exports = Buyer;

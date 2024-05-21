@@ -50,7 +50,11 @@ var License = sequelize.define('license', {
 {
 timestamps: false,
 });
+
+License.belongsTo(Bill, {foreignKey: 'idBill' });
+Bill.hasMany(License, {foreignKey: 'Bill' });
 License.belongsTo(Bill);
+License.belongsTo(Buyer);
 License.belongsTo(LicenseStatus);
 License.belongsTo(LicenseUser);
 module.exports = License;

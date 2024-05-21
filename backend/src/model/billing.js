@@ -26,5 +26,6 @@ var Bill = sequelize.define('bill', {
 {
 timestamps: false,
 });
-Bill.belongsTo(Cart);
+Bill.belongsTo(Cart, {foreignKey: 'idCart' });
+Cart.hasMany(Bill, {foreignKey: 'idCart' });
 module.exports = Bill;
