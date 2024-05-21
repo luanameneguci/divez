@@ -33,7 +33,8 @@ controllers.admin_create = async (req, res) => {
 };
 
 controllers.admin_create_department = async (req, res) => {
-  const { adminDepartmentDescript } = req.body;
+  console.log(req.body)
+  const {adminDepartmentDescript} = req.body;
   console.log(adminDepartmentDescript);
   const adminDepartment = await Department.create({
     adminDepartmentDescript
