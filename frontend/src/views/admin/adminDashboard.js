@@ -4,7 +4,7 @@ import notificationicon from "../../images/notification.png";
 
 const AdminDashboard = () => {
     return (
-        <div className="dashboard-content h-100 bg-light w-100">
+        <div className="dashboard-content bg-dark w-100">
             <h4 className="title">Dashboard</h4>
             <div class="container text-center">
                 <div class="row">
@@ -28,11 +28,17 @@ const AdminDashboard = () => {
 }
 
 function Box(props) {
-    return <div className="box-container bg-white col-auto rounded d-flex justify-content-between align-items-center p-3">
-        <span className="box-title d-block">{props.title}</span>
-        <span className="box-number d-block">{props.number}</span>
-        <img src={props.image} alt="" className="box-image ms-3" />
-        <span className="box-evolution d-block">{props.evolution}% </span>
+    return <div className="box-container bg-white col-auto rounded p-3 d-flex">
+        <div className="col-9 d-flex flex-column align-items-start justify-content-between">
+            <span className="box-title d-block fw-light">{props.title}</span>
+            <span className="box-number d-block fw-bold">{props.number}</span>
+            <span className="box-evolution d-block fw-light">{props.evolution}% up from last week </span>
+        </div>
+        <div className="col-3">
+            <img src={props.image} alt="" className="box-image ms-3" />
+
+        </div>
+
     </div>;
 }
 export default AdminDashboard;
