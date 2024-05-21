@@ -26,7 +26,6 @@ const AdminDashboard = () => {
 
     );
 }
-
 function Box(props) {
     return <div className="box-container bg-white col-auto rounded p-3 d-flex">
         <div className="col-9 d-flex flex-column align-items-start justify-content-between">

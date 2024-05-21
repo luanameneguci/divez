@@ -1,5 +1,4 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idDepartment
@@ -33,11 +32,13 @@ var Admin = sequelize.define('admin', {
         // referência a outro modelo
         references: {
           model: Department,
-          key: "id",
+          key: "idDepartment",
         },
       },
     },
 {
 timestamps: false,
 });
+Admin.belongsTo(Department,{foreignKey: 'idDepartment' });
+Department.hasMany(Admin, {foreignKey: 'idDepartment' });
 module.exports = Admin

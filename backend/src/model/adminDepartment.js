@@ -1,13 +1,12 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
 var sequelize = require('./database');
 
 var Department = sequelize.define('admindepartment', {
-    idDepartement: {
-        type: Sequelize.INTEGER,
+    idDepartment: {
+       type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-      },
+      }, 
       adminDepartmentDescript: {
         type: Sequelize.STRING,
         notNull: true,
