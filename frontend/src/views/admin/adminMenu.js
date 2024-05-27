@@ -6,6 +6,7 @@ import AdminDashboard from './adminDashboard';
 import AdminClientList from './adminClientList';
 import AdminClientDashboard from './adminClientDashboard';
 import AdminProductList from './adminProductList';
+import AdminProductDashboard from './adminProductDashboard';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -119,7 +120,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminProductList />
+            <AdminProductDashboard />
           </div>
         </div>
       </div>
