@@ -3,6 +3,7 @@ var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
 var Buyer = require('./buyer');
+var License = require('./lincenses');
 
 var Manager = sequelize.define('manager', {
     idManager: {
@@ -44,5 +45,7 @@ var Manager = sequelize.define('manager', {
 {
 timestamps: false,
 });
-Manager.belongsTo(Buyer);
+Manager.hasMany(Buyer, {foreignKey: 'idBuyer' });
+Manager.belongsToMany(License, { through: 'ManagerLicense' });
+License.belongsToMany(Manager, { through: 'ManagerLicense' });
 module.exports = Manager;

@@ -48,7 +48,6 @@ var Buyer = sequelize.define('buyer', {
 {
 timestamps: false,
 });
-Buyer.belongsTo(Cart, {foreignKey: 'idCart' });
-Cart.hasOne(Buyer, {foreignKey: 'idCart' });
+
 
 module.exports = Buyer;
