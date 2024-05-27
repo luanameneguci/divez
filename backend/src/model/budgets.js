@@ -47,6 +47,8 @@ var Budget = sequelize.define('budget', {
 {
 timestamps: false,
 });
-Budget.belongsTo(Cart);
-Budget.belongsTo(BudgetStatus);
+Budget.belongsTo(Cart, {foreignKey: 'idCart' });
+Cart.hasMany(Budget, {foreignKey: 'idCart' });
+Budget.belongsTo(BudgetStatus, {foreignKey:'idBudgetStatus'});
+BudgetStatus.hasMany(Budget, {foreignKey: 'idBudget' });
 module.exports = Budget;

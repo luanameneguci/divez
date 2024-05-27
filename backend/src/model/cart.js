@@ -3,6 +3,7 @@ var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idBuyer
 var Buyer = require('./buyer');
+var Product = require('./products');
 
 var Cart = sequelize.define('cart', {
     idCart: {
@@ -34,5 +35,7 @@ var Cart = sequelize.define('cart', {
 {
 timestamps: false,
 });
-Cart.belongsTo(Buyer);
+Cart.belongsToMany(Product, { through: 'CartProduct' });
+Product.belongsToMany(Cart, { through: 'CartProduct' });
+Cart.hasOne(Buyer, {foreignKey: 'idBuyer' });
 module.exports = Cart

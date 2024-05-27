@@ -28,5 +28,6 @@ var TicketPrint = sequelize.define('ticketPrint', {
 {
 timestamps: false,
 });
-TicketPrint.belongsTo(Ticket);
+TicketPrint.belongsTo(Ticket, {foreignKey: 'idTicket' });
+Ticket.hasMany(TicketPrint, {foreignKey: 'idTicket' });
 module.exports = TicketPrint;

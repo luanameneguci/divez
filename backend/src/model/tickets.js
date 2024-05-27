@@ -73,9 +73,13 @@ var Ticket = sequelize.define('ticket', {
 {
 timestamps: false,
 });
-Ticket.belongsTo(Buyer);
-Ticket.belongsTo(TicketStatus);
-Ticket.belongsTo(TicketDepartment);
-Ticket.belongsTo(Manager);
+Ticket.belongsTo(Buyer, {foreignKey: 'idBuyer' });
+Buyer.hasMany(Ticket, {foreignKey: 'idBuyer' });
+Ticket.belongsTo(TicketStatus, {foreignKey: 'idTicketStatus' });
+TicketStatus.hasMany(Ticket, {foreignKey: 'idTicketStatus' });
+Ticket.belongsTo(TicketDepartment, {foreignKey: 'idTicketDepartment' });
+TicketDepartment.hasMany(Ticket, {foreignKey: 'idTicketStatus' });
+Ticket.belongsTo(Manager, {foreignKey: 'idManager' });
+Manager.hasMany(Ticket, {foreignKey: 'idManager' });
 
 module.exports = Ticket;

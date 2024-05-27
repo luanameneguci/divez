@@ -1,5 +1,17 @@
+body {
+  overflow-x: hidden;
+}
+
 .mainblue-bg {
   background-color: #55B7F1 !important;
+}
+
+.box-height {
+  height: 300px;
+}
+
+.table3 td {
+  padding-left: 2%;
 }
 
 /*Remover isto prob*/
@@ -45,7 +57,6 @@
   width: 50px;
   height: 50px;
 }
-
 /*
 Já cá estava, tirar isto tudo acho eu
 

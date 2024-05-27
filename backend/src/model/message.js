@@ -3,6 +3,7 @@ var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idDepartment
 var Ticket = require('./tickets');
+const TicketStatus = require('./ticketStatus');
 
 var Message = sequelize.define('message', {
     idMessage: {
@@ -24,9 +25,20 @@ var Message = sequelize.define('message', {
           key: "idTicket",
         },
       },
+      idTicketStatus: {
+        type: Sequelize.INTEGER,
+        // referência a outro modelo
+        references: {
+          model: TicketStatus,
+          key: "idTicketStatus",
+        },
+      },
     },
 {
 timestamps: false,
 });
-Message.belongsTo(Ticket);
+Message.belongsTo(Ticket, {foreignKey: 'idTicket' });
+Ticket.hasMany(Message, {foreignKey: 'idTicket' });
+Message.belongsTo(TicketStatus, {foreignKey: 'idTicketStatus' });
+Ticket.hasOne(TicketStatus, {foreignKey: 'idTicketStatus' });
 module.exports = Message;

@@ -3,6 +3,10 @@ var sequelize = require('./database');
 
 // importa o modelo – chave forasteira idDepartment
 var Department = require('./adminDepartment');
+var Budget = require('./budgets');
+var Product = require('./products');
+var Budget = require('./budgets');
+var Ticket = require('./tickets');
 
 var Admin = sequelize.define('admin', {
     idAdmin: {
@@ -41,4 +45,10 @@ timestamps: false,
 });
 Admin.belongsTo(Department,{foreignKey: 'idDepartment' });
 Department.hasMany(Admin, {foreignKey: 'idDepartment' });
+Admin.belongsToMany(Product, { through: 'AdminProduct' });
+Product.belongsToMany(Admin, { through: 'AdminProduct' });
+Admin.belongsToMany(Budget, { through: 'AdminBudget' });
+Budget.belongsToMany(Admin, { through: 'AdminBudget' });
+Admin.belongsToMany(Ticket, { through: 'AdminTicket' });
+Ticket.belongsToMany(Admin, { through: 'AdminTicket' });
 module.exports = Admin

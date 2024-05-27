@@ -42,37 +42,33 @@ controllers.admin_create_department = async (req, res) => {
   res.json(adminDepartment);
 };
 
-/*
-
 controllers.admin_update = async (req, res) => {
   let idReceived = req.params.id;
   const { adminName, adminEmail, adminPassword, idDepartment } = req.body;
   const admin = await Admin.update(
     { adminName, adminEmail, adminPassword, idDepartment },
-    { where: { id: idReceived } }
+    { where: { idAdmin: idReceived } }
   );
 
   res.json({ admin });
 };
 
+
 controllers.admin_detail = async (req, res) => {
   let idReceived = req.params.id;
 
-  const data = await Admin.findOne({ where: { id: idReceived } });
+  const data = await Admin.findOne({ where: { idAdmin: idReceived } });
   res.json(data);
 };
+
+
 
 controllers.admin_delete = async (req, res) => {
   let idReceived = req.params.id;
   await Admin.destroy({ where: { id: idReceived } });
   res.json({ message: "Excluído com sucesso!" });
 };
-
-controllers.admin_buyers = async (req, res) => {
-  const data = await Buyer.findAll();
-  res.json(data);
-};
-
+/*
 controllers.admin_products = async (req, res) => {
     const data = await Product.findAll();
     res.json(data);
