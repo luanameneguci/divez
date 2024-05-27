@@ -1,5 +1,6 @@
 body {
   overflow-x: hidden;
+  max-width: 1920px;
 }
 
 .mainblue-bg {
@@ -27,9 +28,9 @@ body {
   height: 50px;
 }
 
-/*Remover isto prob*/
+
 .admin-box-maxw {
-  max-width: 283.5px;
+  max-width: 250px;
 }
 
 .active-true {
@@ -37,7 +38,7 @@ body {
   border-radius: 5px;
   color: white !important;
 }
-
+/*Remover isto prob*/
 .header-logo {
   width: 60%;
   max-width: 60%;

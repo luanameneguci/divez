@@ -43,21 +43,21 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow4) {
 
 const AdminClientDashboard = () => {
     return (
-        <div className="dashboard-content bg-dark w-100"> {/*mudar para bg-light>*/}
-            <h4 className="title my-2">Client Name</h4> {/*Obter nome da base de dados com Props probably>*/}
-            <div className="container-fluid text-center">
-                <div className="row">
-                    <div className="col">
+        <div className="dashboard-content bg-light w-100">
+            <h4 className="title my-2">Product Name</h4>
+            <div className="container text-center">
+                <div className="row d-flex justify-content-between">
+                    <div className="col mx-1 bg-white roundbg">
                         <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
+                    <div className="col mx-1 bg-white roundbg">
+                        <Box title="Pending Sales" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
+                    <div className="col mx-1 bg-white roundbg">
+                        <Box title="Inactive Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
+                    <div className="col mx-1 bg-white roundbg">
+                        <Box title="Active Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
                 </div>
                 <div className="row my-6 my-4 rounded">
@@ -128,7 +128,7 @@ function ClientProductsBox() {
                                                 padding: '10px 10px',
                                             }}
                                         >
-                                            <span style={{ ...spanStyle, padding: '4px 15px',  display: 'inline-block' }}>
+                                            <span style={{ ...spanStyle, padding: '4px 15px', display: 'inline-block' }}>
                                                 {data}
                                             </span>
                                         </td>
@@ -139,7 +139,7 @@ function ClientProductsBox() {
                     </tbody>
                 </table>
                 <div className="mt-2"> {/*Não consigo por esta porcaria bottom 0*/}
-                <button className='btn btn-outline-dark'>See more</button>
+                    <button className='btn btn-outline-dark'>See more</button>
                 </div>
             </div>
         </div>

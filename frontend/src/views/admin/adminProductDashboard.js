@@ -44,26 +44,27 @@ const AdminProductDashboard = () => {
     return (
         <div className="dashboard-content bg-light w-100">
             <h4 className="title my-2">Product Name</h4>
-            <div className="container-fluid text-center">
-                <div className="row">
-                    <div className="col">
+            <div className="container text-center">
+                <div className="row d-flex justify-content-between">
+                    <div className="col mx-1 bg-white roundbg">
                         <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
+                    <div className="col mx-1 bg-white roundbg">
                         <Box title="Pending Sales" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
+                    <div className="col mx-1 bg-white roundbg">
                         <Box title="Inactive Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
+                    <div className="col mx-1 bg-white roundbg">
                         <Box title="Active Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
                 </div>
-                <div className="row my-6 my-4 rounded">
-                    <div className="col-12 roundbg">
+                <div className="row my-4">
+                    <div className="col-12 bg-white roundbg my-2">
+                        <h2>Sales</h2>
                         <ProductGraph />
                     </div>
-                    <div className="col-12 roundbg">
+                    <div className="col-12 bg-white roundbg my-2">
                         <LastSalesBox />
                     </div>
                 </div>
@@ -76,12 +77,8 @@ function Box(props) {
     return (
         <div className="box-container bg-white col-auto rounded d-flex px-4 py-4 admin-box-maxw">
             <div className="col-10">
-                <span className="box-title d-flex justify-content-start">
-                    <strong><h6>{props.title}</h6></strong>
-                </span>
-                <span className="box-number d-flex justify-content-start pt-2">
-                    <strong><h2>{props.number}</h2></strong>
-                </span>
+                <span className="box-title d-flex justify-content-start"><strong><h6>{props.title}</h6></strong></span>
+                <span className="box-number d-flex justify-content-start pt-2"><strong><h2>{props.number}</h2></strong></span>
             </div>
             <div>
                 <img src={props.image} alt="" className="box-image ms-3" />

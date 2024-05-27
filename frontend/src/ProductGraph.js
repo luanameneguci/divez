@@ -13,7 +13,7 @@ const ProductGraph = () => {
         const ctx = canvasRef.current.getContext("2d");
 
         const xValues = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const yValues = [500, 1000, 1500, 2000, 2500];
+        const yValues = [100, 120, 163, 636, 183, 283, 974, 458, 763, 163, 385, 579];
 
         if (chartRef.current) {
             chartRef.current.destroy();
@@ -29,6 +29,34 @@ const ProductGraph = () => {
                     data: yValues
                 }]
             },
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            color: "rgba(255,255,255,50)", // Background line color
+                            lineWidth: 1, // Width of the background lines
+                            drawBorder: false, // Whether to draw the border of the chart area
+                            drawOnChartArea: true // Whether to draw lines inside the chart area
+                        },
+                        ticks: {
+                            maxRotation: 0, // Rotates the text to be horizontal
+                            minRotation: 0, // Ensures text is horizontal
+                            autoSkip: true, // Automatically skip ticks if they overlap
+                            maxTicksLimit: 12 // Maximum number of ticks to display
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: true,
+                            color: "rgba(0,0,0,0.1)", // Background line color
+                            lineWidth: 1, // Width of the background lines
+                            drawBorder: false, // Whether to draw the border of the chart area
+                            drawOnChartArea: true // Whether to draw lines inside the chart area
+                        }
+                    }
+                }
+            }
         });
 
         return () => {
@@ -39,9 +67,9 @@ const ProductGraph = () => {
     }, []);
 
     return (
-        <div className="box-container bg-white roundbg d-flex h-100">
+        <div className="box-container bg-white roundbg d-flex" style={{height: '500px'}}>
             <div className="col-12">
-                <canvas ref={canvasRef} style={{ width: "100%"}}></canvas>
+            <canvas ref={canvasRef} style={{ width: "100%", margin: "auto"}}></canvas>
             </div>
         </div>
     );
