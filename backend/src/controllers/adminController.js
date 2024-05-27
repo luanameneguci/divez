@@ -61,14 +61,14 @@ controllers.admin_detail = async (req, res) => {
   res.json(data);
 };
 
-/*
+
 
 controllers.admin_delete = async (req, res) => {
   let idReceived = req.params.id;
   await Admin.destroy({ where: { id: idReceived } });
   res.json({ message: "Excluído com sucesso!" });
 };
-
+/*
 controllers.admin_products = async (req, res) => {
     const data = await Product.findAll();
     res.json(data);

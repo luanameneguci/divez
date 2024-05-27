@@ -3,6 +3,8 @@ import '../../App.css';
 import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
 import AdminDashboard from './adminDashboard';
+import AdminClientList from './adminClientList';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';

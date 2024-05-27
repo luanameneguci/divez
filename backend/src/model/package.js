@@ -1,6 +1,8 @@
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var sequelize = require('./database');
 
+var Product = require('./products');
+
 var Package = sequelize.define('package', {
     idPackage: {
         type: Sequelize.INTEGER,
@@ -22,4 +24,6 @@ var Package = sequelize.define('package', {
 {
 timestamps: false,
 });
+Package.belongsToMany(Product, { through: 'PackageProduct' });
+Product.belongsToMany(Package, { through: 'PackageProduct' });
 module.exports = Package;
