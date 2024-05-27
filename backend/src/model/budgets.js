@@ -49,4 +49,6 @@ timestamps: false,
 });
 Budget.belongsTo(Cart, {foreignKey: 'idCart' });
 Cart.hasMany(Budget, {foreignKey: 'idCart' });
+Budget.belongsTo(BudgetStatus, {foreignKey:'idBudgetStatus'});
+BudgetStatus.hasMany(Budget, {foreignKey: 'idBudget' });
 module.exports = Budget;
