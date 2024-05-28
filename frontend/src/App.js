@@ -1,5 +1,5 @@
 import './App.css';
-import Menu from './views/admin/adminMenu';
+import AdminMenu from './views/admin/adminMenu';
 
 import BuyerMenu from './views/buyer/buyerMenu';
 import BuyerDashboard from './views/buyer/buyerDashboard';
@@ -10,7 +10,7 @@ import AdminDashboard from './views/admin/adminDashboard';
 function App() {
   return (
     <div>
-      <Menu />
+      <AdminMenu />
     </div>
 
   );

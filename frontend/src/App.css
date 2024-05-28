@@ -14,6 +14,19 @@ body {
   padding-left: 2%;
 }
 
+.border-product {
+  border-color: #979797;
+}
+
+.roundbg {
+  border-radius: 15px;
+}
+
+.listimage img {
+  width: 50px;
+  height: 50px;
+}
+
 /*Remover isto prob*/
 .admin-box-maxw {
   max-width: 283.5px;
@@ -57,7 +70,6 @@ body {
   width: 50px;
   height: 50px;
 }
-
 /*
 Já cá estava, tirar isto tudo acho eu
 
