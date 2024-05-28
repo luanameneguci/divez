@@ -1,53 +1,45 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-var Cart = require('./cart');
-
-var Buyer = sequelize.define('buyer', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('buyers', {
     idBuyer: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      buyerName: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isAlpha: true,
-      },
-      buyerNif: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      buyerEmail: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isEmail: true,
-      },
-      buyerPassword: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      buyerCompany: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      idCart: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Cart,
-          key: "idCart",
-        },
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-
-
-module.exports = Buyer;
+    buyerName: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    buyerNif: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    buyerEmail: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    buyerPassword: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    buyerCompany: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    }
+  }, {
+    sequelize,
+    tableName: 'buyers',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "buyers_pkey",
+        unique: true,
+        fields: [
+          { name: "idBuyer" },
+        ]
+      },
+    ]
+  });
+};
