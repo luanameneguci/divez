@@ -1,16 +1,10 @@
 const express = require("express");
-var BudgetStatus = require("../model/budgetStatus");
-var Buyer = require("../model/buyer");
-var Product = require("../model/products");
-var Licenses = require("../model/licenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-const Department = require("../model/adminDepartment");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
 const initModels = require("../model/init-models");
 var models = initModels(sequelize);
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var BudgetStatus = require("../model/budgetStatus")(sequelize, DataTypes);
+
 const controllers = {};
 sequelize.sync();
 
@@ -21,7 +15,7 @@ controllers.budgetStatus_list = async (req, res) => {
 
 controllers.budgetStatus_create = async (req, res) => {
   const { budgetStatusDescript } = req.body;
-  const budgetStatus = await budgetStatusDescript.create({
+  const budgetStatus = await BudgetStatus.create({
     budgetStatusDescript
   });
   res.json(budgetStatus);

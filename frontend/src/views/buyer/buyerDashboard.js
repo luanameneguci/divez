@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import notificationicon from "../../images/notification.png";
-//const axios = require('axios');
+/*import axios from "axios";*/
 
 var coiso = 100;
 
@@ -51,6 +51,27 @@ for (let i = 0; i < 18; i += itemsPerRow) {
 }
 
 const AdminDashboard = () => {
+  const [budgetStatus, setdataBudgetStatus] = useState([]);
+
+  {/*useEffect(() => {
+    const url = "http://localhost:8080/budgetStatus/list";
+    axios
+      .get(url)
+      then((res) => {  
+        if (res.status === 200) {
+          const dataBudgetStatus = res.data;
+          setdataBudgetStatus(dataBudgetStatus);
+        } else {
+          alert("Error Web Service!");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []); */}
+  
+  const pendingBudgets = budgetStatus.filter((budgetStatus) => budgetStatus.budgetStatusDescript === "Pending").length;
+
   return (
     <div className="dashboard-content h-100 bg-light w-100">
       <h2 className="title py-3">Dashboard</h2>
@@ -59,9 +80,9 @@ const AdminDashboard = () => {
           <div class="col" >
             <Box
               title="Pending budgets"
-              number="20"
+              number={pendingBudgets}
               image={notificationicon}
-              evolution="10"
+         
             />
           </div>
           <div class="col">
@@ -69,7 +90,7 @@ const AdminDashboard = () => {
               title="Active Licenses"
               number="2000"
               image={notificationicon}
-              evolution="10"
+             
             />
           </div>
           <div class="col">
@@ -77,7 +98,7 @@ const AdminDashboard = () => {
               title="Linked Users"
               number="200"
               image={notificationicon}
-              evolution="10"
+           
             />
           </div>
         </div>
@@ -120,9 +141,6 @@ function Box(props) {
           <strong>
             <h2>{props.number}</h2>
           </strong>
-        </span>
-        <span className="box-evolution d-flex justify-content-bottom pt-2">
-          {props.evolution}% more than yesterday{" "}
         </span>
       </div>
       <div>

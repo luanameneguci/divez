@@ -4,12 +4,12 @@ import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
 
 import BuyerProductList from "./buyerProducts";
-import BuyerManagerList from "./buyerManagers";
-import AdminDashboard from "./buyerDashboard";
-import BuyerShop from "./buyerShop";
+//import BuyerManagerList from "./buyerManagers";
+//import AdminDashboard from "./buyerDashboard";
+//import BuyerShop from "./buyerShop";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
+//import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Menu = () => {
   return (
@@ -116,7 +116,7 @@ const Menu = () => {
             />
           </div>
         </div>
-
+ 
         <div className="mw-100 h-25 bg-light py-2 px-3">
           <div className="row">
             <BuyerProductList />

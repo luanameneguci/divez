@@ -120,7 +120,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminDashboard />
+            <AdminClientDashboard />
           </div>
         </div>
       </div>
