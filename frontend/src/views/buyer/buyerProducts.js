@@ -2,37 +2,45 @@ import React from "react";
 import "../../App.css";
 
 const BuyerProductList = () => {
-  return (
-    <div className="dashboard-content bg-light w-100 h-100">
-      <div className="d-flex justify-content-between p-2">
-        <h2 className="title my-2 ">Products</h2>
+
+    return (
+        <div className="dashboard-content bg-light w-100 h-100">
+            <div className='d-flex justify-content-between p-2'>
+                <h2 className="title my-2 ">Products</h2>
+            </div>
+            <BoxProgress props={result}/>
+        </div>
+
+    );
+}
+
+const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
+    <div className="mb-3">
+      <div className="d-flex justify-content-between">
+        <p>
+          <strong>{nome}</strong>
+        </p>
+        <div className="d-flex">
+          <p>
+            {numeroAtivos} of {numeroTotal}
+          </p>
+        </div>
+      </div>
+      <div className="progress">
+        <div
+          className="progress-bar"
+          role="progressbar"
+          style={{ width: `${percentage}%` }}
+          aria-valuenow={percentage}
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {percentage}%
+        </div>
       </div>
       <BoxProgress props={result} />
     </div>
   );
-};
-
-const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
-  <div className="mb-3">
-    <div className="d-flex text-center col-12">
-      <p className="text-center">
-        {numeroAtivos} of {numeroTotal}
-      </p>
-    </div>
-    <div className="progress">
-      <div
-        className="progress-bar"
-        role="progressbar"
-        style={{ width: `${percentage}%` }}
-        aria-valuenow={percentage}
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        {percentage}%
-      </div>
-    </div>
-  </div>
-);
 
 const ProgressDivs = ({ resultado }) => {
   return (
