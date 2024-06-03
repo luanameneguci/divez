@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import notificationicon from "../../images/notification.png";
-//const axios = require('axios');
+import axios from "axios";
 
 var coiso = 100;
 
@@ -51,6 +51,27 @@ for (let i = 0; i < 18; i += itemsPerRow) {
 }
 
 const AdminDashboard = () => {
+  const [budgetStatus, setdataBudgetStatus] = useState([]);
+
+  useEffect(() => {
+    const url = "http://localhost:8080/budgetStatus/list";
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.status === 200) {
+          const dataBudgetStatus = res.data;
+          setdataBudgetStatus(dataBudgetStatus);
+        } else {
+          alert("Error Web Service!");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []); 
+  
+  const pendingBudgets = budgetStatus.filter((budgetStatus) => budgetStatus.budgetStatusDescript === "Pending").length;
+
   return (
     <div className="dashboard-content h-100 bg-light w-100">
       <h2 className="title py-3">Dashboard</h2>
@@ -59,9 +80,9 @@ const AdminDashboard = () => {
           <div class="col" >
             <Box
               title="Pending budgets"
-              number="20"
+              number={pendingBudgets}
               image={notificationicon}
-              evolution="10"
+         
             />
           </div>
           <div class="col">
@@ -69,7 +90,7 @@ const AdminDashboard = () => {
               title="Active Licenses"
               number="2000"
               image={notificationicon}
-              evolution="10"
+             
             />
           </div>
           <div class="col">
@@ -77,7 +98,7 @@ const AdminDashboard = () => {
               title="Linked Users"
               number="200"
               image={notificationicon}
-              evolution="10"
+           
             />
           </div>
         </div>
@@ -120,9 +141,6 @@ function Box(props) {
           <strong>
             <h2>{props.number}</h2>
           </strong>
-        </span>
-        <span className="box-evolution d-flex justify-content-bottom pt-2">
-          {props.evolution}% more than yesterday{" "}
         </span>
       </div>
       <div>
@@ -281,6 +299,22 @@ const managersData = [
   },
 ];
 
+const boxProductsContent = [
+  "1", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'New',
+  "2", 'Adobe Photoshop', '20/10/2024', "Department", '2', 'New',
+  "3", 'Adobe Photoshop', '20/10/2024', "Department", '3', 'New',
+  "4", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'Working',
+  "5", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'Working',
+];
+
+// Split the boxProductsContent array into rows of 3 items each
+const rows4 = [];
+const itemsPerRowTwo = 6;
+
+for (let i = 0; i < boxProductsContent.length; i += itemsPerRowTwo) {
+  rows4.push(boxProductsContent.slice(i, i + itemsPerRowTwo));
+}
+
 const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
   <div className="mb-3">
     <div className="d-flex justify-content-between">
@@ -354,8 +388,8 @@ const UserStatus = ({ userData }) => {
           style={{ width: "60px", height: "60px", borderRadius: "50%" }}
         />
         <div className="d-flex flex-column align-items-start">
-          <h5 className="mb-0">{userData[1]}</h5>
-          <h6 className="mb-0">{userData[0]}</h6>
+          <h5 className="mb-0">{userData[0]}</h5>
+          <h6 className="mb-0">{userData[1]}</h6>
         </div>
       </div>
       <div className="d-flex align-items-center">
@@ -386,9 +420,8 @@ const ManagersList = ({ managers }) => {
   );
 };
 
-
 function BoxThird() {
-  return <div className="box-container bg-white col-auto rounded d-flex">
+  return <div className="box-container bg-white col-auto rounded d-flex shadow">
       <div className="col-12 mainblue-bg rounded">
           {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
           <table className='container-fluid text-start mainblue-bg py-4 rounded table3'>

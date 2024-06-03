@@ -125,6 +125,7 @@ const Menu = () => {
         <div className="col-auto h-100">
           <div className="row">
             <AdminBudgetList />
+            <AdminClientDashboard />
           </div>
         </div>
       </div> 
