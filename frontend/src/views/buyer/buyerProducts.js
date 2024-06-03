@@ -3,15 +3,15 @@ import "../../App.css";
 
 const BuyerProductList = () => {
 
-    return (
+   return (
         <div className="dashboard-content bg-light w-100 h-100">
             <div className='d-flex justify-content-between p-2'>
                 <h2 className="title my-2 ">Products</h2>
             </div>
-            <BoxProgress props={result}/>
+             <BoxProgress props={result}/> 
         </div>
 
-    );
+    ); 
 }
 
 const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
@@ -25,7 +25,7 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
             {numeroAtivos} of {numeroTotal}
           </p>
         </div>
-      </div>
+      </div>  
       <div className="progress">
         <div
           className="progress-bar"
@@ -38,7 +38,7 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
           {percentage}%
         </div>
       </div>
-      <BoxProgress props={result} />
+      
     </div>
   );
 
@@ -62,7 +62,7 @@ const ProgressDivs = ({ resultado }) => {
           <div className="col-2 mx-2">{item[0]}</div>
           <div className="col-2 mx-2">{item[3]}</div>
           <div className="col-3 mx-2">
-            <ProgressDiv
+           <ProgressDiv
               key={index}
               numeroAtivos={item[2]}
               numeroTotal={item[1]}
@@ -206,7 +206,7 @@ function BoxProgress(props) {
     <div className="box-container bg-white col-auto rounded d-flex shadow">
       <div className="col-12">
         <div className="col-12">
-          <ProgressDivs resultado={resultado} />
+         <ProgressDivs resultado={resultado} />
         </div>
       </div>
     </div>

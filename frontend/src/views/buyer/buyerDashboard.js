@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import notificationicon from "../../images/notification.png";
-import axios from "axios";
+/*import axios from "axios";*/
 
 var coiso = 100;
 
@@ -53,11 +53,11 @@ for (let i = 0; i < 18; i += itemsPerRow) {
 const AdminDashboard = () => {
   const [budgetStatus, setdataBudgetStatus] = useState([]);
 
-  useEffect(() => {
+  {/*useEffect(() => {
     const url = "http://localhost:8080/budgetStatus/list";
     axios
       .get(url)
-      .then((res) => {
+      then((res) => {  
         if (res.status === 200) {
           const dataBudgetStatus = res.data;
           setdataBudgetStatus(dataBudgetStatus);
@@ -68,7 +68,7 @@ const AdminDashboard = () => {
       .catch((error) => {
         alert(error);
       });
-  }, []); 
+  }, []); */}
   
   const pendingBudgets = budgetStatus.filter((budgetStatus) => budgetStatus.budgetStatusDescript === "Pending").length;
 
