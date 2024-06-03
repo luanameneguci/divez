@@ -43,6 +43,7 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow4) {
 
 const AdminClientDashboard = () => {
     return (
+        asdasd apagar
         <div className="dashboard-content bg-light w-100">
             <h4 className="title my-2">Product Name</h4>
             <div className="container text-center">

@@ -41,8 +41,8 @@ function BudgetsListBox() {
     return (
         <div className="box-container d-flex h-100">
             <div className="container">
-                <table className='table table-bordered mainblue-bg text-start'>
-                    <thead className='text-white mainblue-bg'>
+                <table className='table text-start'>
+                    <thead className='mainblue-bg text-white'>
                         <tr>
                             <th className="pt-4 pb-3 ps-4">Budget Nº
                                 <input className="form-control w-75" id="budgetnfilter" type="text" placeholder="Search.."></input>
@@ -62,7 +62,7 @@ function BudgetsListBox() {
                     </thead>
                     <tbody className='bg-white text-start'>
                         {rows.map((row, rowIndex) => (
-                            <tr key={rowIndex}>
+                            <tr key={rowIndex} style={{ borderBottom: '1px solid lightgray' }}>
                                 {row.map((data, colIndex) => {
                                     let color = 'inherit';
                                     if (colIndex === 4) { // Check the value in the last column
