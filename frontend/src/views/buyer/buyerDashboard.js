@@ -421,7 +421,7 @@ const ManagersList = ({ managers }) => {
 };
 
 function BoxThird() {
-  return <div className="box-container bg-white col-auto rounded d-flex">
+  return <div className="box-container bg-white col-auto rounded d-flex shadow">
       <div className="col-12 mainblue-bg rounded">
           {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
           <table className='container-fluid text-start mainblue-bg py-4 rounded table3'>

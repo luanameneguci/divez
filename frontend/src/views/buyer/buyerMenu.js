@@ -2,6 +2,9 @@ import React from "react";
 import "../../App.css";
 import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
+
+import BuyerProductList from "./buyerProducts";
+import BuyerManagerList from "./buyerManagers";
 import AdminDashboard from "./buyerDashboard";
 import BuyerShop from "./buyerShop";
 
@@ -116,7 +119,7 @@ const Menu = () => {
 
         <div className="mw-100 h-25 bg-light py-2 px-3">
           <div className="row">
-            <AdminDashboard />
+            <BuyerProductList />
           </div>
         </div>
       </div>
