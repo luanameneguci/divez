@@ -3,6 +3,10 @@ body {
   max-width: 1920px;
 }
 
+.border-none {
+  border: none !important;
+}
+
 .dashboard-content {
   display: flex; 
   flex-direction: column; 
@@ -15,10 +19,6 @@ body {
 
 .box-height {
   height: 300px;
-}
-
-.table3 td {
-  padding-left: 2%;
 }
 
 .border-product {

@@ -5,6 +5,7 @@ import notificationicon from "../../images/notification.png";
 import AdminDashboard from './adminDashboard';
 import AdminClientList from './adminClientList';
 import AdminClientDashboard from './adminClientDashboard';
+import AdminBudgetList from './adminBudgetList';
 import AdminProductList from './adminProductList';
 import AdminProductDashboard from './adminProductDashboard';
 import AdminSalesDashboard from './adminSalesDashboard';
@@ -123,10 +124,10 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminSalesDashboard />
+            <AdminBudgetList />
           </div>
         </div>
-      </div>
+      </div> 
     </div>
     );
 }
