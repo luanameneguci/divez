@@ -43,7 +43,6 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow4) {
 
 const AdminClientDashboard = () => {
     return (
-        asdasd apagar
         <div className="dashboard-content bg-light w-100">
             <h4 className="title my-2">Product Name</h4>
             <div className="container text-center">
@@ -76,7 +75,7 @@ const AdminClientDashboard = () => {
 
 function Box(props) {
     return (
-        <div className="box-container bg-white col-auto rounded d-flex px-4 py-4 admin-box-maxw">
+        <div className="box-container bg-white col-auto roundbg d-flex px-4 py-4 admin-box-maxw">
             <div className="col-10">
                 <span className="box-title d-flex justify-content-start"><strong><h6>{props.title}</h6></strong></span>
                 <span className="box-number d-flex justify-content-start pt-2"><strong><h2>{props.number}</h2></strong></span>

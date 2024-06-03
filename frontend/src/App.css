@@ -30,8 +30,39 @@ body {
   right: 0;
   bottom: 0;
   left: auto;
-  z-index: 1030; /* Adjust as needed */
+  z-index: 1030;
 }
+
+/*start tabelas*/
+.table {
+  background-color: transparent;
+  width: 100%;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table thead th:first-child {
+  
+  border-radius: 15px 0 0 0;
+}
+
+.table thead th:last-child {
+  border-radius: 0 15px 0 0;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  padding-bottom: 10px;
+  color: white;
+  background-color: #55B7F1 !important;
+  
+}
+
+.table tbody tr:last-child {
+  border-radius: 0 0 15px 15px !important;
+}
+/*end tabelas*/
+
 
 .fixed-bottom-buttons .btn-outline-success {
   background-color: #00B69B;
