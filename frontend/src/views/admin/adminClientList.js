@@ -57,7 +57,6 @@ function ClientList() {
                             ))}
                             <td><button className='btn btn-outline-info me-2'>Edit</button>
                             <button className='btn btn-outline-danger'>Delete</button></td>
-                            
                         </tr>
                     ))}
                 </tbody>

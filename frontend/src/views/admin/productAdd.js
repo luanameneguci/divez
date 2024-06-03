@@ -53,13 +53,13 @@ const packagesList = [
     { value: 'Animation Basics', label: 'Animation Basics' }
 ]
 
-const ProductEdit = () => {
+const ProductAdd = () => {
     return (
         <div className="dashboard-content bg-light w-100 p-2 mt-4">
             <div className="container">
                 <div className="box-container bg-white roundbg d-flex h-100 p-2 shadow">
                     <div className="col-12">
-                        <h2 className='text-start p-3'>Software Name</h2>
+                        <h2 className='text-start p-3'>New Product</h2>
                         <form>
                             <div className="row mx-1">
                                 <div className="col-6">
@@ -108,7 +108,7 @@ const ProductEdit = () => {
             </div>
             <div className="row fixed-bottom-buttons d-flex flex-row m-3">
                 <div className="col-6">
-                    <button type="button" class="btn btn-outline-success">Save</button>
+                    <button type="button" class="btn btn-outline-success">Add</button>
                 </div>
                 <div className="col-6">
                     <button type="button" class="btn btn-outline-danger">Cancel</button>
@@ -120,4 +120,4 @@ const ProductEdit = () => {
     );
 }
 
-export default ProductEdit;
+export default ProductAdd;

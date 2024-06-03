@@ -3,6 +3,10 @@ body {
   max-width: 1920px;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 .border-none {
   border: none !important;
 }
@@ -13,9 +17,6 @@ body {
   min-height: 100vh; 
 }
 
-.mainblue-bg {
-  background-color: #55B7F1 !important;
-}
 
 .box-height {
   height: 300px;
@@ -41,8 +42,12 @@ body {
   border-collapse: collapse;
 }
 
+.w-10 {
+  width: 10% !important;
+}
+
 .table thead th:first-child {
-  
+  width: 12%;
   border-radius: 15px 0 0 0;
 }
 
@@ -54,8 +59,7 @@ body {
   vertical-align: bottom;
   padding-bottom: 10px;
   color: white;
-  background-color: #55B7F1 !important;
-  
+  background-color: #10ccf4 !important;
 }
 
 .table tbody tr:last-child {
@@ -89,7 +93,7 @@ body {
 }
 
 .active-true {
-  background-color: #55B7F1;
+  background-color: #10ccf4;
   border-radius: 5px;
   color: white !important;
 }

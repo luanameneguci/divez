@@ -53,53 +53,50 @@ const packagesList = [
     { value: 'Animation Basics', label: 'Animation Basics' }
 ]
 
-const ProductEdit = () => {
+//Provavelmente vai ser preciso trocar os values para o id dos produtos
+const productList = [
+    { value: 'Photoshop', label: 'Photoshop' },
+    { value: 'Figma', label: 'Figma' },
+    { value: 'VS Code', label: 'VS Code' }
+]
+
+const PackageAdd = () => {
     return (
         <div className="dashboard-content bg-light w-100 p-2 mt-4">
             <div className="container">
                 <div className="box-container bg-white roundbg d-flex h-100 p-2 shadow">
                     <div className="col-12">
-                        <h2 className='text-start p-3'>Software Name</h2>
+                        <h2 className='text-start p-3'>New Package</h2>
                         <form>
                             <div className="row mx-1">
                                 <div className="col-6">
                                     <div className="form-group mb-3">
-                                        <label htmlFor="productnameinput">Product Name</label>
+                                        <label htmlFor="productnameinput">Package Name</label>
                                         <input type="text" className="form-control" id="productnameinput" placeholder="Name" />
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor="productpriceinput">Unit Price</label>
-                                        <input type="number" className="form-control" id="productpriceinput" placeholder="Unit Price" />
+                                        <label htmlFor="productpriceinput">Price</label>
+                                        <input type="number" className="form-control" id="productpriceinput" placeholder="Price" />
                                     </div>
+
                                     <div className="form-group mb-3">
-                                        <label htmlFor="descriptioninput">Description</label>
-                                        <textarea className="form-control" id="descriptioninput" rows="2" maxLength="75"></textarea>
+                                        <label htmlFor="packagesinput">Add Products</label>
+                                        <Select
+                                            id="packagesinput"
+                                            options={productList}
+                                            isMulti
+                                            placeholder="Choose Products..."
+                                            className="form-control p-0"
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group mb-3">
-                                        <label htmlFor="categoryinput">Category</label>
-                                        <select id="categoryinput" className="form-control">
-                                            <option>Choose category...</option>
-                                            {categoriesList.map((category, index) => (
-                                                <option key={index}>{category}</option>
-                                            ))}
-                                        </select>
+                                        <label htmlFor="descriptioninput">Description</label>
+                                        <textarea className="form-control" id="descriptioninput" rows="7" maxLength="100"></textarea>
                                     </div>
-                                    <div className="form-group mb-3">
-                                        <label htmlFor="imagelinkinput">Image</label>
-                                        <input type="text" className="form-control" id="imagelinkinput" placeholder="Image" />
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label htmlFor="packagesinput">Packages</label>
-                                        <Select
-                                            id="packagesinput"
-                                            options={packagesList}
-                                            isMulti
-                                            placeholder="Choose packages..."
-                                            className="form-control p-0"
-                                        />
-                                    </div>
+
+
                                 </div>
                             </div>
                         </form>
@@ -108,7 +105,7 @@ const ProductEdit = () => {
             </div>
             <div className="row fixed-bottom-buttons d-flex flex-row m-3">
                 <div className="col-6">
-                    <button type="button" class="btn btn-outline-success">Save</button>
+                    <button type="button" class="btn btn-outline-success">Create</button>
                 </div>
                 <div className="col-6">
                     <button type="button" class="btn btn-outline-danger">Cancel</button>
@@ -120,4 +117,4 @@ const ProductEdit = () => {
     );
 }
 
-export default ProductEdit;
+export default PackageAdd;

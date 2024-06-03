@@ -10,11 +10,14 @@ import AdminProductList from './adminProductList';
 import AdminProductDashboard from './adminProductDashboard';
 import AdminSalesDashboard from './adminSalesDashboard';
 import ProductEdit from './productEdit';
+import AdminTicketList from './adminTicketList';
 
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import ProductAdd from './productAdd';
+import PackageAdd from './packageAdd';
 
 const Menu = () => {
     return (
@@ -124,8 +127,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminBudgetList />
-            <AdminClientDashboard />
+            <PackageAdd />
           </div>
         </div>
       </div> 

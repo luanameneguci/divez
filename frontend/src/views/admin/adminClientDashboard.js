@@ -138,7 +138,7 @@ function ClientProductsBox() {
                         ))}
                     </tbody>
                 </table>
-                <div className="mt-2"> {/*Não consigo por esta porcaria bottom 0*/}
+                <div className="mt-2">
                     <button className='btn btn-outline-dark'>See more</button>
                 </div>
             </div>
