@@ -3,6 +3,12 @@ body {
   max-width: 1920px;
 }
 
+.dashboard-content {
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh; 
+}
+
 .mainblue-bg {
   background-color: #55B7F1 !important;
 }
@@ -17,6 +23,24 @@ body {
 
 .border-product {
   border-color: #979797;
+}
+
+.fixed-bottom-buttons {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  z-index: 1030; /* Adjust as needed */
+}
+
+.fixed-bottom-buttons .btn-outline-success {
+  background-color: #00B69B;
+  color: white;
+}
+
+.fixed-bottom-buttons .btn-outline-danger {
+  background-color: #DF0404;
+  color: white;
 }
 
 .roundbg {
@@ -71,6 +95,8 @@ body {
   width: 50px;
   height: 50px;
 }
+
+
 /*
 Já cá estava, tirar isto tudo acho eu
 

@@ -91,7 +91,7 @@ function ClientProductsBox() {
     return (
         <div className="box-container bg-white roundbg d-flex h-100">
             <div className="col-12">
-                <h2 className='text-start p-2'>Products</h2>
+                <h3 className='text-start p-3'>Products</h3>
                 <table className='container text-start'>
                     <thead className='text-white mainblue-bg'>
                         <tr>
@@ -152,7 +152,7 @@ function ClientBudgetsBox() {
     return (
         <div className="box-container bg-white roundbg d-flex h-100">
             <div className="col-12">
-                <h2 className='text-start p-2'>Budgets</h2>
+                <h3 className='text-start p-3'>Budgets</h3>
 
                 <table className='container-fluid text-start py-4'>
                     <thead className='text-white mainblue-bg'>
@@ -170,7 +170,7 @@ function ClientBudgetsBox() {
                                     if (colIndex === 2) { // Check the value in the last column
                                         if (data === 'New') color = '#FFD56D'; //amarelo
                                         else if (data === 'Rejected') color = '#EB5757'; // vermelho
-                                        else if (data === 'Paid') color = '#27AE60'; // verde
+                                        else if (data === 'Paid') color = '#00B69B'; // verde
                                         else if (data === 'Waiting') color = '#2D9CDB'; //azul
                                     }
                                     return (
