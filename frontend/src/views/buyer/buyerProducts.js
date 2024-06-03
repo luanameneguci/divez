@@ -9,7 +9,7 @@ const BuyerProductList = () => {
             <div className='d-flex justify-content-between p-2'>
                 <h2 className="title my-2 ">Products</h2>
             </div>
-            <BoxProgress props={}/>
+            <BoxProgress props={result}/>
         </div>
 
     );
