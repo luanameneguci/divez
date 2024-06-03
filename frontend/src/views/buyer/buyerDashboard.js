@@ -82,6 +82,9 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+      <div className="col-12">
+        <TicketsBox />
+      </div>
     </div>
   );
 };
@@ -261,6 +264,22 @@ const managersData = [
   },
 ];
 
+const boxProductsContent = [
+  "1", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'New',
+  "2", 'Adobe Photoshop', '20/10/2024', "Department", '2', 'New',
+  "3", 'Adobe Photoshop', '20/10/2024', "Department", '3', 'New',
+  "4", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'Working',
+  "5", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'Working',
+];
+
+// Split the boxProductsContent array into rows of 3 items each
+const rows3 = [];
+const itemsPerRowTwo = 6;
+
+for (let i = 0; i < boxProductsContent.length; i += itemsPerRowTwo) {
+  rows3.push(boxProductsContent.slice(i, i + itemsPerRowTwo));
+}
+
 const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
   <div className="mb-3">
     <div className="d-flex justify-content-between">
@@ -334,8 +353,8 @@ const UserStatus = ({ userData }) => {
           style={{ width: "60px", height: "60px", borderRadius: "50%" }}
         />
         <div className="d-flex flex-column align-items-start">
-          <h5 className="mb-0">{userData[1]}</h5>
-          <h6 className="mb-0">{userData[0]}</h6>
+          <h5 className="mb-0">{userData[0]}</h5>
+          <h6 className="mb-0">{userData[1]}</h6>
         </div>
       </div>
       <div className="d-flex align-items-center">
@@ -365,6 +384,52 @@ const ManagersList = ({ managers }) => {
     </div>
   );
 };
+
+function TicketsBox() {
+  return (
+      <div className="box-container bg-white roundbg d-flex h-100">
+          <div className="col-12">
+              <h4 className='text-start p-2 mx-3 my-3'>Tickets</h4>
+              <table className='text-start m-0 w-100'>
+                  <thead className='text-white mainblue-bg'>
+                      <tr>
+                          <th className="ps-4 py-2">Ticket Nº</th>
+                          <th className="ps-4 py-2">Title</th>
+                          <th className="ps-4 py-2">Date</th>
+                          <th className="ps-4 py-2">Department</th>
+                          <th className="ps-4 py-2">Priority</th>
+                          <th className="ps-4 py-2">Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {rows3.map((row, rowIndex) => (
+                          <tr key={rowIndex}>
+                              {row.map((data, colIndex) => {
+                                  let spanStyle = {};
+                                      return (
+                                          <td
+                                              key={colIndex}
+                                              style={{
+                                                  padding: '10px',
+                                              }}
+                                          >
+                                              <span style={{ ...spanStyle, padding: '4px 15px', display: 'inline-block' }}>
+                                                  {data}
+                                              </span>
+                                          </td>
+                                      );
+                              })}
+                          </tr>
+                      ))}
+                  </tbody>
+              </table>
+              <div className="mt-2">
+                  <button className='btn btn-outline-dark'>See more</button>
+              </div>
+          </div>
+      </div >
+  );
+}
 
 let result = createDataArrays(data);
 let resultado = calculatePercentages(result);

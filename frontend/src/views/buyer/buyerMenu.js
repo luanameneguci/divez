@@ -3,6 +3,7 @@ import "../../App.css";
 import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
 import AdminDashboard from "./buyerDashboard";
+import BuyerShop from "./buyerShop";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
