@@ -7,6 +7,7 @@ import AdminClientList from './adminClientList';
 import AdminClientDashboard from './adminClientDashboard';
 import AdminProductList from './adminProductList';
 import AdminProductDashboard from './adminProductDashboard';
+import AdminSalesDashboard from './adminSalesDashboard';
 import ProductEdit from './productEdit';
 
 
@@ -121,7 +122,9 @@ const Menu = () => {
         </div>
 
         <div className="col-auto h-100">
-            <ProductEdit />
+          <div className="row">
+            <AdminSalesDashboard />
+          </div>
         </div>
       </div>
     </div>

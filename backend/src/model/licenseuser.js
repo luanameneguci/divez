@@ -1,22 +1,29 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-var LicenseUser = sequelize.define('licenseUser', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('licenseUsers', {
     idLicenseUser: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        isIPv4: true,
-        max: 15,
-      },
-      licenseUserEmail: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isEmail: true,
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-module.exports = LicenseUser;
+    licenseUserEmail: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    }
+  }, {
+    sequelize,
+    tableName: 'licenseUsers',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "licenseUsers_pkey",
+        unique: true,
+        fields: [
+          { name: "idLicenseUser" },
+        ]
+      },
+    ]
+  });
+};

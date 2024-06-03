@@ -1,44 +1,45 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-// importa o modelo – chave forasteira idDepartment
-var Ticket = require('./tickets');
-const TicketStatus = require('./ticketStatus');
-
-var Message = sequelize.define('message', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('messages', {
     idMessage: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      message: {
-        type: Sequelize.STRING,
-        notEmpty: true,
-        notNull: true,
-        max: 300,
-      },
-      idTicket: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Ticket,
-          key: "idTicket",
-        },
-      },
-      idTicketStatus: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: TicketStatus,
-          key: "idTicketStatus",
-        },
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-Message.belongsTo(Ticket, {foreignKey: 'idTicket' });
-Ticket.hasMany(Message, {foreignKey: 'idTicket' });
-Message.belongsTo(TicketStatus, {foreignKey: 'idTicketStatus' });
-Ticket.hasOne(TicketStatus, {foreignKey: 'idTicketStatus' });
-module.exports = Message;
+    messageText: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    idTicket: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'tickets',
+        key: 'idTicket'
+      }
+    },
+    ticketIdTicket: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'tickets',
+        key: 'idTicket'
+      }
+    }
+  }, {
+    sequelize,
+    tableName: 'messages',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "messages_pkey",
+        unique: true,
+        fields: [
+          { name: "idMessage" },
+        ]
+      },
+    ]
+  });
+};

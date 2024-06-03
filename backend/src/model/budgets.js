@@ -1,54 +1,69 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-// importa o modelo – chave forasteira idBuyer
-var BudgetStatus = require('./budgetStatus');
-var Cart = require('./cart');
-
-var Budget = sequelize.define('budget', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('budgets', {
     idBudget: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      budgetName: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isAlpha: true,
-      },
-      budgetDescript: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      date: {
-        type: Sequelize.DATE,
-        notNull: true,
-        isDate: true,
-      },
-      idBudgetStatus: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: BudgetStatus,
-          key: "idBudgetStatus",
-        },
-      },
-      idCart: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Cart,
-          key: "idCart",
-        },
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-Budget.belongsTo(Cart, {foreignKey: 'idCart' });
-Cart.hasMany(Budget, {foreignKey: 'idCart' });
-Budget.belongsTo(BudgetStatus, {foreignKey:'idBudgetStatus'});
-BudgetStatus.hasMany(Budget, {foreignKey: 'idBudget' });
-module.exports = Budget;
+    budgetName: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    budgetDescript: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    idBudgetStatus: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'budgetStatus',
+        key: 'idBudgetStatus'
+      }
+    },
+    idCart: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'carts',
+        key: 'idCart'
+      }
+    },
+    cartIdCart: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'carts',
+        key: 'idCart'
+      }
+    },
+    budgetStatusIdBudgetStatus: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'budgetStatus',
+        key: 'idBudgetStatus'
+      }
+    }
+  }, {
+    sequelize,
+    tableName: 'budgets',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "budgets_pkey",
+        unique: true,
+        fields: [
+          { name: "idBudget" },
+        ]
+      },
+    ]
+  });
+};

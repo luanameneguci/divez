@@ -1,31 +1,45 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-// importa o modelo – chave forasteira idBuyer
-var Cart = require('./cart');
-
-var Bill = sequelize.define('bill', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('bills', {
     idBill: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      billDate: {
-        type: Sequelize.DATE,
-        notNull: true,
-        isDate: true,
-      },
-      idCart: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Cart,
-          key: "idCart",
-        },
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-Bill.belongsTo(Cart, {foreignKey: 'idCart' });
-Cart.hasMany(Bill, {foreignKey: 'idCart' });
-module.exports = Bill;
+    billDate: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    idCart: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'carts',
+        key: 'idCart'
+      }
+    },
+    cartIdCart: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'carts',
+        key: 'idCart'
+      }
+    }
+  }, {
+    sequelize,
+    tableName: 'bills',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "bills_pkey",
+        unique: true,
+        fields: [
+          { name: "idBill" },
+        ]
+      },
+    ]
+  });
+};
