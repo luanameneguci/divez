@@ -11,7 +11,7 @@ import AdminDashboard from './views/admin/adminDashboard';
 function App() {
   return (
     <div>
-      <AdminMenu />
+      <BuyerMenu />
     </div>
 
   );

@@ -1,51 +1,57 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-// importa o modelo – chave forasteira idBuyer
-var Buyer = require('./buyer');
-var License = require('./lincenses');
-
-var Manager = sequelize.define('manager', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('managers', {
     idManager: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      managerName: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isAlpha: true,
-      },
-      managerNif: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      managerEmail: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isEmail: true,
-      },
-      managerPassword: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      idBuyer: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Buyer,
-          key: "idBuyer",
-        },
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-Manager.hasMany(Buyer, {foreignKey: 'idBuyer' });
-Manager.belongsToMany(License, { through: 'ManagerLicense' });
-License.belongsToMany(Manager, { through: 'ManagerLicense' });
-module.exports = Manager;
+    managerName: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    managerNif: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    managerEmail: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    managerPassword: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    idBuyer: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'buyers',
+        key: 'idBuyer'
+      }
+    },
+    buyerIdBuyer: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'buyers',
+        key: 'idBuyer'
+      }
+    }
+  }, {
+    sequelize,
+    tableName: 'managers',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "managers_pkey",
+        unique: true,
+        fields: [
+          { name: "idManager" },
+        ]
+      },
+    ]
+  });
+};

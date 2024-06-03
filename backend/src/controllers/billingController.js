@@ -1,4 +1,5 @@
 const express = require("express");
+var sequelize = require("../model/database");
 var Admin = require("../model/admin");
 var Buyer = require("../model/buyer");
 var Product = require("../model/products");
@@ -6,12 +7,11 @@ var Licenses = require("../model/lincenses");
 var Tickets = require("../model/tickets");
 var Message = require("../model/message");
 var Budgets = require("../model/budgets");
-var sequelize = require("../model/database");
 const Department = require("../model/adminDepartment");
 const Cart = require("../model/cart");
 const Bill = require("../model/billing");
 const controllers = {};
-sequelize.sync();
+//sequelize.sync();
 
 controllers.bill_list = async (req, res) => {
   const data = await Bill.findAll({ include: [Cart] });
