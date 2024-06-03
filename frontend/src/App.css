@@ -10,8 +10,17 @@ body {
   height: 300px;
 }
 
-.table3 td {
-  padding-left: 2%;
+.border-product {
+  border-color: #979797;
+}
+
+.roundbg {
+  border-radius: 15px;
+}
+
+.listimage img {
+  width: 50px;
+  height: 50px;
 }
 
 /*Remover isto prob*/
@@ -57,6 +66,17 @@ body {
   width: 50px;
   height: 50px;
 }
+
+.hover {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hover:hover {
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  transform: scale(1.05);
+}
+
 /*
 Já cá estava, tirar isto tudo acho eu
 
@@ -97,5 +117,4 @@ Já cá estava, tirar isto tudo acho eu
   to {
     transform: rotate(360deg);
   }
-}
-*/
+}*/

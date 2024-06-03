@@ -5,6 +5,22 @@ import notificationicon from "../../images/notification.png";
 
 var coiso = 100;
 
+const box3content = [
+  1, 'Calls are not being received', '10.12.2024', 'Programing', 1, 'New',
+  1, 'Calls are not being received', '10.12.2024', 'Programing', 1, 'New',
+  1, 'Calls are not being received', '10.12.2024', 'Programing', 1, 'New',
+  1, 'Calls are not being received', '10.12.2024', 'Programing', 1, 'New',
+  1, 'Calls are not being received', '10.12.2024', 'Programing', 1, 'New',
+  1, 'Calls are not being received', '10.12.2024', 'Programing', 1, 'New',
+];
+
+// Split the box3content array into rows of 6 items each
+const rows3 = [];
+const itemsPerRow2 = 6;
+
+for (let i = 0; i < box3content.length; i += itemsPerRow2) {
+  rows3.push(box3content.slice(i, i + itemsPerRow2));
+}
 const tablecontent = [
   1,
   "Name Aplication",
@@ -37,10 +53,10 @@ for (let i = 0; i < 18; i += itemsPerRow) {
 const AdminDashboard = () => {
   return (
     <div className="dashboard-content h-100 bg-light w-100">
-      <h4 className="title px-4 py-3">Dashboard</h4>
-      <div class="container text-center">
-        <div class="row">
-          <div class="col">
+      <h2 className="title py-3">Dashboard</h2>
+      <div class="col-12 text-center">
+        <div class="row" >
+          <div class="col" >
             <Box
               title="Pending budgets"
               number="20"
@@ -66,7 +82,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-      <div class="container text-center py-4">
+      <div class="col-12 text-center py-4">
         <div class="row">
           <div class="col-4">
             {/*Aqui vai ser o boxsecond*/}
@@ -82,13 +98,18 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+      <div class="col-12">
+            {/*Aqui vai ser o boxsecond*/}
+            <BoxThird title="Managers" />
+          </div>
     </div>
   );
 };
 
+
 function Box(props) {
   return (
-    <div className="box-container bg-white col-auto rounded d-flex px-4 py-4">
+    <div className="box-container bg-white col-auto rounded d-flex px-4 py-4 shadow">
       <div className="col-10">
         <span className="box-title d-flex justify-content-start">
           <strong>
@@ -114,7 +135,7 @@ function Box(props) {
 function BoxTable(props) {
   return (
     <div
-      className="box-container bg-white col-auto rounded d-flex"
+      className="box-container bg-white col-auto rounded d-flex shadow"
       style={{ height: 360 + "px" }}
     >
       <div className="col-12">
@@ -125,8 +146,7 @@ function BoxTable(props) {
         </span>
         {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
         <table
-          className="container-fluid text-start mainblue-bg py-4 rounded"
-          style={{ height: 290 + "px" }}
+          className="container-fluid text-start mainblue-bg py-4 rounded col-11"
         >
           <thead>
             <th className="ps-3 py-2 text-white">Budget Nº</th>
@@ -137,7 +157,7 @@ function BoxTable(props) {
             {rows.map((row, rowIndex) => (
               <tr className="rounded" key={rowIndex}>
                 {row.map((data, colIndex) => (
-                  <td className="ps-3 py-1 border-bottom" key={colIndex}>
+                  <td className="ps-3 py-1 border-bottom" key={colIndex} style={{height: 40 + "px"}}>
                     {data}
                   </td>
                 ))}
@@ -153,7 +173,7 @@ function BoxTable(props) {
 function BoxManager(props) {
   return (
     <div
-      className="box-container bg-white col-auto rounded d-flex"
+      className="box-container bg-white col-auto rounded d-flex shadow"
       style={{ height: 360 + "px" }}
     >
       <div className="col-12">
@@ -173,7 +193,7 @@ function BoxManager(props) {
 function BoxProgress(props) {
   return (
     <div
-      className="box-container bg-white col-auto rounded d-flex"
+      className="box-container bg-white col-auto rounded d-flex shadow"
       style={{ height: 360 + "px" }}
     >
       <div className="col-12">
@@ -261,6 +281,22 @@ const managersData = [
   },
 ];
 
+const boxProductsContent = [
+  "1", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'New',
+  "2", 'Adobe Photoshop', '20/10/2024', "Department", '2', 'New',
+  "3", 'Adobe Photoshop', '20/10/2024', "Department", '3', 'New',
+  "4", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'Working',
+  "5", 'Adobe Photoshop', '20/10/2024', "Department", '1', 'Working',
+];
+
+// Split the boxProductsContent array into rows of 3 items each
+const rows4 = [];
+const itemsPerRowTwo = 6;
+
+for (let i = 0; i < boxProductsContent.length; i += itemsPerRowTwo) {
+  rows4.push(boxProductsContent.slice(i, i + itemsPerRowTwo));
+}
+
 const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
   <div className="mb-3">
     <div className="d-flex justify-content-between">
@@ -334,8 +370,8 @@ const UserStatus = ({ userData }) => {
           style={{ width: "60px", height: "60px", borderRadius: "50%" }}
         />
         <div className="d-flex flex-column align-items-start">
-          <h5 className="mb-0">{userData[1]}</h5>
-          <h6 className="mb-0">{userData[0]}</h6>
+          <h5 className="mb-0">{userData[0]}</h5>
+          <h6 className="mb-0">{userData[1]}</h6>
         </div>
       </div>
       <div className="d-flex align-items-center">
@@ -365,6 +401,41 @@ const ManagersList = ({ managers }) => {
     </div>
   );
 };
+
+function BoxThird() {
+  return <div className="box-container bg-white col-auto rounded d-flex shadow">
+      <div className="col-12 mainblue-bg rounded">
+          {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
+          <table className='container-fluid text-start mainblue-bg py-4 rounded table3'>
+              <thead className='text-white'>
+                  <th className="ps-3 py-2">Ticket Nº</th>
+                  <th className="ps-3 py-2">Title</th>
+                  <th className="ps-3 py-2">Date</th>
+                  <th className="ps-3 py-2">Department</th>
+                  <th className="ps-3 py-2">Priority</th>
+                  <th className="ps-3 py-2">Status</th>
+              </thead>
+              <tbody className='bg-white'>
+              {rows3.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                          {row.map((data, colIndex) => (
+                             <td
+                             key={colIndex}
+                             style={{ 
+                                 color: colIndex === 5 ? '#FFD56D' : 'inherit',
+                                 padding: '10px 0 10px 1%' 
+                             }}
+                         >
+                              {data}
+                            </td>
+                          ))}
+                      </tr>
+                  ))}
+              </tbody>
+          </table>
+      </div>
+  </div>
+}
 
 let result = createDataArrays(data);
 let resultado = calculatePercentages(result);

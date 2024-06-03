@@ -1,19 +1,29 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-var BudgetStatus = sequelize.define('budgetStatus', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('budgetStatus', {
     idBudgetStatus: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      budgetStatusDescript: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-module.exports = BudgetStatus;
+    budgetStatusDescript: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    }
+  }, {
+    sequelize,
+    tableName: 'budgetStatus',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "budgetStatuses_pkey",
+        unique: true,
+        fields: [
+          { name: "idBudgetStatus" },
+        ]
+      },
+    ]
+  });
+};

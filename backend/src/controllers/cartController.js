@@ -1,17 +1,18 @@
 const express = require("express");
-var Admin = require("../model/admin");
+//var Admin = require("../model/admin");
+//var sequelize = require("../model/database");
 var Buyer = require("../model/buyer");
-var Product = require("../model/products");
-var Licenses = require("../model/lincenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-var sequelize = require("../model/database");
-const Department = require("../model/adminDepartment");
+//var Product = require("../model/products");
+//var Licenses = require("../model/lincenses");
+//var Tickets = require("../model/tickets");
+//var Message = require("../model/message");
+//var Budgets = require("../model/budgets");
+
+//const Department = require("../model/adminDepartment");
 const Cart = require("../model/cart");
 const Cart = require("../model/carting");
 const controllers = {};
-sequelize.sync();
+//sequelize.sync();
 
 controllers.cart_list = async (req, res) => {
   const data = await Cart.findAll({ include: [Buyer] });
@@ -41,8 +42,14 @@ controllers.cart_update = async (req, res) => {
 
 controllers.cart_detail = async (req, res) => {
   let idReceived = req.params.id;
-  const data = await Cart.findOne({ where: { idCart: idReceived } });
+  const data = await Cart.findOne({ where: { idCart: idReceived }, include: [Buyer] });
   res.json(data);
+};
+
+controllers.cart_delete = async (req, res) => {
+  let idReceived = req.params.id;
+  await Cart.destroy({ where: { id: idReceived } });
+  res.json({ message: "Excluído com sucesso!" });
 };
 
 module.exports = controllers;

@@ -4,6 +4,9 @@ import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
 import AdminDashboard from './adminDashboard';
 import AdminClientList from './adminClientList';
+import AdminClientDashboard from './adminClientDashboard';
+import AdminProductList from './adminProductList';
+import AdminProductDashboard from './adminProductDashboard';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -97,7 +100,7 @@ const Menu = () => {
         </div>
       </div>
       <div className="col-10 h-25 bg-white">
-        <div className="d-flex align-self-end sticky-top flex-row-reverse px-4 py-2 me-3">
+        <div className="d-flex align-self-end flex-row-reverse px-4 py-2 me-3">
           <div>
             <div>
               <span className="username-text">Utilizador</span>

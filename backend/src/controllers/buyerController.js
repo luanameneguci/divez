@@ -1,15 +1,14 @@
 const express = require("express");
+//var sequelize = require("../model/database");
 var Admin = require("../model/admin");
 var Buyer = require("../model/buyer");
-var Product = require("../model/products");
-var Licenses = require("../model/lincenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-var sequelize = require("../model/database");
-const Department = require("../model/adminDepartment");
+//var Product = require("../model/products");
+//var Tickets = require("../model/tickets");
+//var Message = require("../model/message");
+//var Budgets = require("../model/budgets");
+//const Department = require("../model/adminDepartment");
 const controllers = {};
-sequelize.sync();
+//sequelize.sync();
 
 controllers.buyer_list = async (req, res) => {
     const data = await Buyer.findAll();
@@ -46,5 +45,10 @@ controllers.buyer_create = async (req, res) => {
     res.json(data);
   };
   
+  controllers.buyer_delete = async (req, res) => {
+    let idReceived = req.params.id;
+    await Buyer.destroy({ where: { id: idReceived } });
+    res.json({ message: "Excluído com sucesso!" });
+  };
 
   module.exports = controllers;

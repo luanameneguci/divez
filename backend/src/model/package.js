@@ -24,6 +24,5 @@ var Package = sequelize.define('package', {
 {
 timestamps: false,
 });
-Package.belongsToMany(Product, { through: 'PackageProduct' });
-Product.belongsToMany(Package, { through: 'PackageProduct' });
+
 module.exports = Package;

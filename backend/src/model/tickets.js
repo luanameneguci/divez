@@ -1,85 +1,105 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-// importa o modelo – chave forasteira idBuyer
-var Buyer = require('./buyer');
-var TicketStatus = require('./ticketStatus');
-var TicketDepartment = require('./ticketDepartment');
-var Manager = require('./manager');
-
-var Ticket = sequelize.define('ticket', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('tickets', {
     idTicket: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      ticketName: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      ticketDescript: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        max: 300,
-      },
-      ticketData: {
-        type: Sequelize.DATE,
-        notNull: true,
-        notEmpty: true,
-        isDate: true,
-      },
-      ticketPriority: {
-        type: Sequelize.INTEGER,
-        notNull: true,
-        notEmpty: true,
-        isNumeric: true,
-      },
-
-      idBuyer: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Buyer,
-          key: "idBuyer",
-        },
-      },
-      idTicketstatus: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: TicketStatus,
-          key: "idTicketStatus",
-        },
-      },
-      idTicketDepartment: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: TicketDepartment,
-          key: "idTicketDepartment",
-        },
-      },
-      idManager: {
-        type: Sequelize.INTEGER,
-        // referência a outro modelo
-        references: {
-          model: Manager,
-          key: "idManager",
-        },
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-Ticket.belongsTo(Buyer, {foreignKey: 'idBuyer' });
-Buyer.hasMany(Ticket, {foreignKey: 'idBuyer' });
-Ticket.belongsTo(TicketStatus, {foreignKey: 'idTicketStatus' });
-TicketStatus.hasMany(Ticket, {foreignKey: 'idTicketStatus' });
-Ticket.belongsTo(TicketDepartment, {foreignKey: 'idTicketDepartment' });
-TicketDepartment.hasMany(Ticket, {foreignKey: 'idTicketStatus' });
-Ticket.belongsTo(Manager, {foreignKey: 'idManager' });
-Manager.hasMany(Ticket, {foreignKey: 'idManager' });
-
-module.exports = Ticket;
+    ticketName: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    ticketDescript: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    ticketData: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    ticketPriority: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    idBuyer: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'buyers',
+        key: 'idBuyer'
+      }
+    },
+    idTicketstatus: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ticketStatus',
+        key: 'idTicketStatus'
+      }
+    },
+    idTicketDepartment: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ticketDepartments',
+        key: 'idTicketDepartment'
+      }
+    },
+    idManager: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'managers',
+        key: 'idManager'
+      }
+    },
+    buyerIdBuyer: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'buyers',
+        key: 'idBuyer'
+      }
+    },
+    ticketStatusIdTicketStatus: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ticketStatus',
+        key: 'idTicketStatus'
+      }
+    },
+    ticketDepartmentIdTicketDepartment: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ticketDepartments',
+        key: 'idTicketDepartment'
+      }
+    },
+    managerIdManager: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'managers',
+        key: 'idManager'
+      }
+    }
+  }, {
+    sequelize,
+    tableName: 'tickets',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "tickets_pkey",
+        unique: true,
+        fields: [
+          { name: "idTicket" },
+        ]
+      },
+    ]
+  });
+};

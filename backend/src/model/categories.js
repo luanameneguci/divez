@@ -2,13 +2,13 @@ const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var sequelize = require('./database');
 const Product = require('./products');
 
-var Categorie = sequelize.define('categorie', {
-    idCategorie: {
+var Category = sequelize.define('category', {
+    idCategory: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      categorieName: {
+      categoryName: {
         type: Sequelize.STRING,
         notNull: true,
         notEmpty: true,
@@ -18,6 +18,5 @@ var Categorie = sequelize.define('categorie', {
 {
 timestamps: false,
 });
-Categorie.belongsToMany(Product, { through: 'ProductCategorie' });
-Product.belongsToMany(Categorie, { through: 'ProductCategorie' });
-module.exports = Categorie;
+
+module.exports = Category;
