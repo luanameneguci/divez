@@ -67,6 +67,7 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow4) {
 }
 
 const AdminClientDashboard = () => {
+
   return (
     <div className="dashboard-content bg-light w-100">
       <h2 className="title m-3">Client Name</h2>
@@ -100,6 +101,7 @@ const AdminClientDashboard = () => {
               image={notificationicon}
             />
           </div>
+
         </div>
         <div className="col-12 d-flex my-4 rounded">
           <div className="col mx-3 rounded shadow">
@@ -137,6 +139,7 @@ function Box(props) {
 }
 
 function ClientProductsBox() {
+
   return (
     <div className="box-container bg-white roundbg d-flex h-100 position-relative">
       <div className="col-12">
@@ -197,9 +200,11 @@ function ClientProductsBox() {
       </div>
     </div>
   );
+
 }
 
 function ClientBudgetsBox() {
+
   return (
     <div className="box-container bg-white roundbg d-flex h-100">
       <div className="col-12">
@@ -248,3 +253,4 @@ function ClientBudgetsBox() {
 }
 
 export default AdminClientDashboard;
+

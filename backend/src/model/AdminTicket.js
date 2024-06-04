@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "AdminTicket_pkey",
-        unique: true,
+        unique: false,
         fields: [
           { name: "adminIdAdmin" },
           { name: "ticketIdTicket" },

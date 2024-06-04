@@ -1,22 +1,29 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-const Product = require('./products');
-
-var Category = sequelize.define('category', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('categories', {
     idCategory: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      categoryName: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-        isAlpha: true,
-      },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
-
-module.exports = Category;
+    categoryName: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    }
+  }, {
+    sequelize,
+    tableName: 'categories',
+    schema: 'public',
+    timestamps: true,
+    indexes: [
+      {
+        name: "categories_pkey",
+        unique: true,
+        fields: [
+          { name: "idCategory" }
+        ]
+      },
+    ]
+  });
+};

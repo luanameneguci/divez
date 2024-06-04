@@ -1,12 +1,11 @@
 const express = require("express");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var BudgetStatus = require("../model/budgetStatus")(sequelize, DataTypes);
 
-const controllers = {};
 sequelize.sync();
+
+const controllers = {};
 
 controllers.budgetStatus_list = async (req, res) => {
   const data = await BudgetStatus.findAll();

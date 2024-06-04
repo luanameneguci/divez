@@ -1,28 +1,34 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
-
-var Product = require('./products');
-
-var Package = sequelize.define('package', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('packages', {
     idPackage: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      packageName: {
-        type: Sequelize.STRING,
-        notNull: true,
-        notEmpty: true,
-      },
-      packagePrice: {
-        type: Sequelize.FLOAT,
-        notNull: true,
-        notEmpty: true,
-        isFloat: true,
-      },
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     },
-{
-timestamps: false,
-});
+    packageName: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    packagePrice: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
+    }
 
-module.exports = Package;
+  }, {
+    sequelize,
+    tableName: 'packages',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "packages_pkey",
+        unique: true,
+        fields: [
+          { name: "idPackage" },
+        ]
+      },
+    ]
+  });
+};
