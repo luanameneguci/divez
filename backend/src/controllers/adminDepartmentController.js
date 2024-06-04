@@ -1,21 +1,13 @@
 const express = require("express");
-var Admin = require("../model/admin");
-var Buyer = require("../model/buyer");
-var Product = require("../model/products");
-var Licenses = require("../model/licenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-const Department = require("../model/adminDepartment");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var AdminDepartment = require("../model/adminDepartment")(sequelize, DataTypes);
 sequelize.sync();
 
+const controllers = {};
+
 controllers.admin_department_list = async (req, res) => {
-  const data = await AdminDepartment.findAll({include:[Department]});
+  const data = await AdminDepartment.findAll({});
   res.json(data);
 };
 

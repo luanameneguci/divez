@@ -1,18 +1,11 @@
 const express = require("express");
-var Admin = require("../model/admin");
-var Buyer = require("../model/buyer");
-var Product = require("../model/products");
-var Licenses = require("../model/licenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-const Department = require("../model/adminDepartment");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var Message = require("../model/message")(sequelize, DataTypes);
+var Ticket = require("../model/tickets")(sequelize, DataTypes);
 sequelize.sync();
+
+const controllers = {};
 
 controllers.message_list = async (req, res) => {
   const data = await Message.findAll({include:[Ticket]});
@@ -21,7 +14,7 @@ controllers.message_list = async (req, res) => {
 
 controllers.message_create = async (req, res) => {
   const { messageText, idTicket } = req.body;
-  const message = await Admin.create({
+  const message = await Message.create({
     messageText, idTicket
   });
   res.json(message);

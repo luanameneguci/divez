@@ -1,11 +1,10 @@
 const express = require("express");
-var ManagerLicense = require("../model/ManagerLicense");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var ManagerLicense = require("../model/ManagerLicense")(sequelize, DataTypes);
 sequelize.sync();
+
+const controllers = {};
 
 controllers.ManagerLicense_list = async (req, res) => {
   const data = await ManagerLicense.findAll();

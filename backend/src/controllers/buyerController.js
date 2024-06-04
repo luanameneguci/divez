@@ -1,14 +1,11 @@
 const express = require("express");
-//var sequelize = require("../model/database");
-var Admin = require("../model/admin");
-var Buyer = require("../model/buyer");
-//var Product = require("../model/products");
-//var Tickets = require("../model/tickets");
-//var Message = require("../model/message");
-//var Budgets = require("../model/budgets");
-//const Department = require("../model/adminDepartment");
+const sequelize = require("../model/database");
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var Buyer = require("../model/buyer")(sequelize, DataTypes);
+
+sequelize.sync();
+
 const controllers = {};
-//sequelize.sync();
 
 controllers.buyer_list = async (req, res) => {
     const data = await Buyer.findAll();

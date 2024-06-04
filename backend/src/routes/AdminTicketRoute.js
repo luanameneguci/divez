@@ -9,7 +9,7 @@ router.post("/create", adminTicketController.adminTicket_create);
 
 router.put("/update/:id", adminTicketController.adminTicket_update);
 
-router.get("/:id", adminTicketControllerr.adminTicket_detail); 
+router.get("/:id", adminTicketController.adminTicket_detail); 
 
 router.delete("/delete/:id", adminTicketController.adminTicket_delete);
 

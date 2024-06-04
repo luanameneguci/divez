@@ -5,7 +5,7 @@ const billController = require("../controllers/billingController");
 
 router.get("/", billController.bill_list); 
 
-router.get("/:id", billController.admin_detail);
+router.get("/:id", billController.bill_detail);
 
 router.post("/create", billController.bill_create);
 

@@ -43,21 +43,21 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow4) {
 
 const AdminClientDashboard = () => {
     return (
-        <div className="dashboard-content bg-dark w-100"> {/*mudar para bg-light>*/}
-            <h4 className="title my-2">Client Name</h4> {/*Obter nome da base de dados com Props probably>*/}
-            <div className="container-fluid text-center">
-                <div className="row">
-                    <div className="col">
+        <div className="dashboard-content bg-light w-100">
+            <h4 className="title my-2">Product Name</h4>
+            <div className="container text-center">
+                <div className="row d-flex justify-content-between">
+                    <div className="col mx-1 bg-white roundbg">
                         <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
+                    <div className="col mx-1 bg-white roundbg">
+                        <Box title="Pending Sales" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
+                    <div className="col mx-1 bg-white roundbg">
+                        <Box title="Inactive Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
+                    <div className="col mx-1 bg-white roundbg">
+                        <Box title="Active Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
                 </div>
                 <div className="row my-6 my-4 rounded">
@@ -91,7 +91,7 @@ function ClientProductsBox() {
     return (
         <div className="box-container bg-white roundbg d-flex h-100">
             <div className="col-12">
-                <h2 className='text-start p-2'>Products</h2>
+                <h3 className='text-start p-3'>Products</h3>
                 <table className='container text-start'>
                     <thead className='text-white mainblue-bg'>
                         <tr>
@@ -128,7 +128,7 @@ function ClientProductsBox() {
                                                 padding: '10px 10px',
                                             }}
                                         >
-                                            <span style={{ ...spanStyle, padding: '4px 15px',  display: 'inline-block' }}>
+                                            <span style={{ ...spanStyle, padding: '4px 15px', display: 'inline-block' }}>
                                                 {data}
                                             </span>
                                         </td>
@@ -139,7 +139,7 @@ function ClientProductsBox() {
                     </tbody>
                 </table>
                 <div className="mt-2"> {/*Não consigo por esta porcaria bottom 0*/}
-                <button className='btn btn-outline-dark'>See more</button>
+                    <button className='btn btn-outline-dark'>See more</button>
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@ function ClientBudgetsBox() {
     return (
         <div className="box-container bg-white roundbg d-flex h-100">
             <div className="col-12">
-                <h2 className='text-start p-2'>Budgets</h2>
+                <h3 className='text-start p-3'>Budgets</h3>
 
                 <table className='container-fluid text-start py-4'>
                     <thead className='text-white mainblue-bg'>
@@ -170,7 +170,7 @@ function ClientBudgetsBox() {
                                     if (colIndex === 2) { // Check the value in the last column
                                         if (data === 'New') color = '#FFD56D'; //amarelo
                                         else if (data === 'Rejected') color = '#EB5757'; // vermelho
-                                        else if (data === 'Paid') color = '#27AE60'; // verde
+                                        else if (data === 'Paid') color = '#00B69B'; // verde
                                         else if (data === 'Waiting') color = '#2D9CDB'; //azul
                                     }
                                     return (

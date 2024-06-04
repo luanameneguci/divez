@@ -1,11 +1,10 @@
 const express = require("express");
-var AdminTicket = require("../model/AdminTicket");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var AdminTicket = require("../model/AdminTicket")(sequelize, DataTypes);
 sequelize.sync();
+
+const controllers = {};
 
 controllers.adminTicket_list = async (req, res) => {
   const data = await AdminTicket.findAll();

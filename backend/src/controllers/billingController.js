@@ -1,17 +1,11 @@
 const express = require("express");
-var sequelize = require("../model/database");
-var Admin = require("../model/admin");
-var Buyer = require("../model/buyer");
-var Product = require("../model/products");
-var Licenses = require("../model/lincenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-const Department = require("../model/adminDepartment");
-const Cart = require("../model/cart");
-const Bill = require("../model/billing");
+const sequelize = require("../model/database");
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var Bill = require("../model/billing")(sequelize, DataTypes);
+var Cart = require("../model/cart")(sequelize, DataTypes);
+sequelize.sync();
+
 const controllers = {};
-//sequelize.sync();
 
 controllers.bill_list = async (req, res) => {
   const data = await Bill.findAll({ include: [Cart] });
