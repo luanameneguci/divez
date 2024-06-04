@@ -3,6 +3,7 @@ import "../../App.css";
 import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
 
+import BuyerPurchasesList from "./buyerPurchases";
 import BuyerProductList from "./buyerProducts";
 import BuyerManagerList from "./buyerManagers";
 import AdminDashboard from "./buyerDashboard";
@@ -116,10 +117,14 @@ const Menu = () => {
             />
           </div>
         </div>
-
+ 
         <div className="mw-100 h-25 bg-light py-2 px-3">
           <div className="row">
+
             <BuyerShop />
+
+            <BuyerPurchasesList />
+
           </div>
         </div>
       </div>
