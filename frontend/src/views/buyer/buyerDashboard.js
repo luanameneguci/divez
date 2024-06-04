@@ -164,7 +164,7 @@ function BoxTable(props) {
         </span>
         {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
         <table
-          className="container-fluid text-start mainblue-bg py-4 rounded col-11"
+          className="container-fluid text-start bg-info py-4 rounded col-11"
         >
           <thead>
             <th className="ps-3 py-2 text-white">Budget Nº</th>
@@ -329,7 +329,7 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
     </div>
     <div className="progress">
       <div
-        className="progress-bar"
+        className="progress-bar bg-info"
         role="progressbar"
         style={{ width: `${percentage}%` }}
         aria-valuenow={percentage}
@@ -422,9 +422,9 @@ const ManagersList = ({ managers }) => {
 
 function BoxThird() {
   return <div className="box-container bg-white col-auto rounded d-flex shadow">
-      <div className="col-12 mainblue-bg rounded">
+      <div className="col-12 bg-info rounded">
           {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
-          <table className='container-fluid text-start mainblue-bg py-4 rounded table3'>
+          <table className='container-fluid text-start bg-info py-4 rounded table3'>
               <thead className='text-white'>
                   <th className="ps-3 py-2">Ticket Nº</th>
                   <th className="ps-3 py-2">Title</th>

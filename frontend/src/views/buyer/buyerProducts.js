@@ -2,47 +2,56 @@ import React from "react";
 import "../../App.css";
 
 const BuyerProductList = () => {
-
-   return (
-        <div className="dashboard-content bg-light w-100 h-100">
-            <div className='d-flex justify-content-between p-2'>
-                <h2 className="title my-2 ">Products</h2>
-            </div>
-             <BoxProgress props={result}/> 
-        </div>
-
-    ); 
-}
-
-const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
-    <div className="mb-3">
-      <div className="d-flex justify-content-between">
-        <p>
-          <strong>{nome}</strong>
-        </p>
-        <div className="d-flex">
-          <p>
-            {numeroAtivos} of {numeroTotal}
-          </p>
-        </div>
-      </div>  
-      <div className="progress">
-        <div
-          className="progress-bar"
-          role="progressbar"
-          style={{ width: `${percentage}%` }}
-          aria-valuenow={percentage}
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          {percentage}%
-        </div>
+  return (
+    <div className="dashboard-content bg-light w-100 h-100">
+      <div className="d-flex justify-content-between p-2">
+        <h2 className="title my-2 ">Products</h2>
       </div>
-      
+      <BoxProgress props={result} />
     </div>
   );
+};
+
+const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
+  <div className="mb-3">
+    <div className="d-flex justify-content-between">
+      <p>
+        <strong>{nome}</strong>
+      </p>
+      <div className="d-flex">
+        <p>
+          {numeroAtivos} of {numeroTotal}
+        </p>
+      </div>
+    </div>
+    <div className="progress">
+      <div
+        className="progress-bar bg-info"
+        role="progressbar"
+        style={{ width: `${percentage}%` }}
+        aria-valuenow={percentage}
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        {percentage}%
+      </div>
+    </div>
+  </div>
+);
 
 const ProgressDivs = ({ resultado }) => {
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "Outdated":
+        return "text-outdated";
+      case "Disabled":
+        return "text-disabled";
+      case "Updated":
+        return "text-updated";
+      default:
+        return "";
+    }
+  };
   return (
     <div className="col-12">
       <div className="w-100 d-flex p-3 border-bottom">
@@ -59,10 +68,14 @@ const ProgressDivs = ({ resultado }) => {
       </div>
       {resultado.map((item, index) => (
         <div className="d-flex col-12 p-3 border-bottom">
-          <div className="col-2 mx-2">{item[0]}</div>
-          <div className="col-2 mx-2">{item[3]}</div>
+          <div className="col-2 mx-2 d-flex ">
+            <h5 className="my-auto">{item[0]}</h5>
+          </div>
+          <div className="col-2 mx-2 d-flex">
+            <p className={`my-auto ${getStatusClass(item[3])}`}>{item[3]}</p>
+          </div>
           <div className="col-3 mx-2">
-           <ProgressDiv
+            <ProgressDiv
               key={index}
               numeroAtivos={item[2]}
               numeroTotal={item[1]}
@@ -128,19 +141,19 @@ let data = [
     nome: "Adobe photoshop",
     numeroTotal: 1000,
     numeroAtivos: 750,
-    status: "Updated",
+    status: "Outdated",
   },
   {
     nome: "Adobe Illustrator",
     numeroTotal: 900,
     numeroAtivos: 500,
-    status: "Updated",
+    status: "Outdated",
   },
   {
     nome: "Adobe Animate",
     numeroTotal: 900,
     numeroAtivos: 900,
-    status: "Updated",
+    status: "Disabled",
   },
   {
     nome: "Adobe After Effects",
@@ -206,7 +219,7 @@ function BoxProgress(props) {
     <div className="box-container bg-white col-auto rounded d-flex shadow">
       <div className="col-12">
         <div className="col-12">
-         <ProgressDivs resultado={resultado} />
+          <ProgressDivs resultado={resultado} />
         </div>
       </div>
     </div>
