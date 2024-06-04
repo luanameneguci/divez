@@ -1,9 +1,11 @@
 import React from 'react';
+import { useState } from 'react';
 import '../../App.css';
 import notificationicon from "../../images/notification.png";
+import Modal from 'react-bootstrap/Modal';
 
 const boxBudgetsContent = [
-    1, 'João Ratão', '13/06/2024', '20000', '1', 'New',
+    1, 'Maquina Pifou', '13/13/13', 'Design', '1', 'New',
     1, 'João Ratão', '13/06/2024', '20000', '1', 'New',
     1, 'João Ratão', '13/06/2024', '20000', '1', 'New',
     1, 'João Ratão', '13/06/2024', '20000', '1', 'New',
@@ -32,9 +34,10 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow) {
 }
 
 const AdminTicketList = () => {
+
     return (
         <div className="dashboard-content bg-light w-100">
-            <h4 className="title my-2">Product Name</h4>
+            <h4 className="title my-2">Tickets</h4>
             <div className="container text-center">
                 <div className="row d-flex justify-content-between">
                     <div className="col mx-1 bg-white roundbg">
@@ -56,7 +59,13 @@ const AdminTicketList = () => {
 }
 
 
-function TicketListBox() {
+function TicketListBox(props) {
+    const [show, setShow] = useState(false);
+    const [lgShow, setLgShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     return (
         <div className="box-container d-flex h-100">
             <div className="container bg-white px-0 roundbg">
@@ -95,8 +104,8 @@ function TicketListBox() {
                                         else if (data === 'Waiting') color = '#2D9CDB'; //azul
                                         return (
                                             <td key={colIndex} className={colIndex === 0 ? 'text-end' : 'ps-4'} style={{ color: colIndex === 5 ? color : 'inherit' }}>
-                                            {data} <a href="#" className='text-black'>...</a>
-                                        </td>
+                                                {data} <button className='removebtstyle' onClick={() => setLgShow(true)} >...</button>
+                                            </td>
                                         )
                                     }
                                     return (
@@ -109,6 +118,99 @@ function TicketListBox() {
                         ))}
                     </tbody>
                 </table>
+                {/*NOTA: Fazer com que toda a info venha do ticket ofc*/}
+                <Modal
+                    size="lg"
+                    show={lgShow}
+                    onHide={() => setLgShow(false)}
+                    aria-labelledby="ticketedit"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Ticket #number
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <form>
+                            <div className='container'>
+                                <div className="row mb-5">
+                                    <div className="col-3 text-body-secondary">
+                                        DATE
+                                    </div>
+                                    <div className="col-9">
+                                        19/5/2024
+                                    </div>
+                                </div>
+                                <div className="row mb-5">
+                                    <div className="col-3 text-body-secondary">
+                                        CATEGORY
+                                    </div>
+                                    <div className="col-9">
+                                        Chatbot
+                                    </div>
+                                </div>
+                                <div className="row mb-5">
+                                    <div className="col-3 text-body-secondary">
+                                        DESCRIPTION
+                                    </div>
+                                    <div className="col-9 ">
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                                    </div>
+                                </div>
+                                <div className="row mb-5">
+                                    <div className="col-3 text-body-secondary">
+                                        ATTACHMENTS
+                                    </div>
+                                    <div className="col-9">
+                                        <div className="row ">
+                                            <div className="col-4 d-flex flex-column text-center fw-medium">
+                                                Prints
+                                                <img src={notificationicon} className='ticket-print mx-auto mt-1'></img>
+                                            </div>
+                                            <div className="col-4 d-flex flex-column text-center fw-medium">
+                                                Prints
+                                                <img src={notificationicon} className='ticket-print mx-auto mt-1'></img>
+                                            </div>
+                                            <div className="col-4 d-flex flex-column text-center fw-medium">
+                                                Prints
+                                                <img src={notificationicon} className='ticket-print mx-auto mt-1'></img>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {/*NOTA: fazer com que ele troque de cores dependendo do texto (ainda não consigo fazer)*/}
+                                <div className="row mb-5">
+                                    <div className="col-3 text-body-secondary">
+                                        STATUS
+                                    </div>
+                                    <div className="col-9">
+                                        Waiting
+                                    </div>
+                                </div>
+                                <div className="row mb-5">
+                                    <div className="col-3 text-body-secondary">
+                                        DEPARTMENT
+                                    </div>
+                                    <div className="col-9">
+                                        Programming
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <div className="col-3 text-body-secondary">
+                                        CLIENT INFO
+                                    </div>
+                                    <div className="col-9">
+                                        Client Name
+                                        Client ID
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </Modal.Body>
+                </Modal>
                 <nav aria-label="..." className='ms-3'>
                     <ul className="pagination">
                         <li className="page-item"><a className="page-link" href="#">1</a></li>
@@ -123,7 +225,9 @@ function TicketListBox() {
                 </nav>
             </div>
         </div>
+
     );
+
 }
 
 function Box(props) {
@@ -147,6 +251,5 @@ function Box(props) {
         </div>
     );
 }
-
 
 export default AdminTicketList;

@@ -11,6 +11,7 @@ import AdminProductDashboard from './adminProductDashboard';
 import AdminSalesDashboard from './adminSalesDashboard';
 import ProductEdit from './productEdit';
 import AdminTicketList from './adminTicketList';
+import AdminSalesList from './adminSalesList';
 
 
 
@@ -127,7 +128,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <PackageAdd />
+            <AdminBudgetList />
           </div>
         </div>
       </div> 

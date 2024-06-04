@@ -2,7 +2,7 @@ import React from 'react';
 import '../../App.css';
 import notificationicon from "../../images/notification.png";
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
-import ProductGraph from '../../ProductGraph';
+import ProductGraph from '../../components/ProductGraph';
 
 const boxProductsContent = [
     notificationicon, 'Adobe Photoshop', '69', '20/10/2024', '1000', 'Updated',

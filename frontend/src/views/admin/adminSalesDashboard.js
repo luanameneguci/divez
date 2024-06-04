@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import notificationicon from "../../images/notification.png";
-import SalesGraph from '../../SalesGraph';
+import SalesGraph from '../../components/SalesGraph';
 
 
 const boxProductsContent = [

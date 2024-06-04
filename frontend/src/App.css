@@ -3,6 +3,11 @@ body {
   max-width: 1920px;
 }
 
+.removebtstyle {
+  border: none;
+  background: transparent;
+}
+
 a {
   text-decoration: none !important;
 }
@@ -129,6 +134,11 @@ a {
 .box-image {
   width: 50px;
   height: 50px;
+}
+
+.ticket-print {
+  width: 75px;
+  height: 75px;
 }
 
 .hover {
