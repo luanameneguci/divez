@@ -14,6 +14,7 @@ const itemsDataArray = [
     Review: 3.4,
     description:
       "A fitness tracking app to help you achieve your health goals.",
+      id: 1,
   },
   {
     nomeApp: "Adobe Illustrator",
@@ -26,6 +27,7 @@ const itemsDataArray = [
     Review: 4.8,
     description:
       "A fitness tracking app to help you achieve your health goals.",
+      id: 2,
   },
   {
     nomeApp: "Adobe Animate",
@@ -38,13 +40,14 @@ const itemsDataArray = [
     Version: "3.4.5",
     Review: 4.2,
     description: "Edit and enhance your photos with professional tools.",
+    id: 3,
   },
 ];
 
 const BuyerShop = () => {
   return (
     <div className="dashboard-content bg-light w-100">
-      <h4 className="title px-4 py-3">Shop</h4>
+      <h4 className="title mx-4 px-4 py-3">Shop</h4>
       <div className="container text-center py-4">
         <div className="row">
           <div className="col-12">
@@ -72,6 +75,7 @@ function createDataArraysItems(item) {
       item[i].Version,
       item[i].Review,
       item[i].description,
+      item[i].id,
     ];
     items.push(subArray);
   }

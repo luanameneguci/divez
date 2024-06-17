@@ -24,7 +24,7 @@ for (let i = 0; i < list.length; i += itemsPerRow) {
 const BuyerPurchasesList = () => {
     return (
         <div className="dashboard-content bg-light w-100 h-100">
-            <div className='d-flex justify-content-between p-2'>
+            <div className='d-flex justify-content-between p-2 mx-3'>
                 <h4 className="title my-2 ">Purchases</h4>
             </div>
             <Products />
@@ -34,7 +34,7 @@ const BuyerPurchasesList = () => {
 }
 
 function Products() {
-    return <div className="box-container bg-white col-auto rounded d-flex shadow">
+    return <div className="box-container bg-white col-auto rounded d-flex shadow mx-4">
     <div className="col-12 bg-info rounded">
         <table className='container-fluid text-start bg-info py-4 rounded table3'>
             <thead className='text-white'>

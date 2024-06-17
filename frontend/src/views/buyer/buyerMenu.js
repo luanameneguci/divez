@@ -121,8 +121,6 @@ const Menu = () => {
         <div className="mw-100 h-25 bg-light py-2 px-3">
           <div className="row">
 
-            <BuyerShop />
-
             <BuyerPurchasesList />
 
           </div>
