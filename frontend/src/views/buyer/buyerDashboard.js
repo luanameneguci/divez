@@ -71,7 +71,7 @@ const AdminDashboard = () => {
       .catch((error) => {
         alert(error);
       });
-  }, []); */}
+  }, []); 
   
   const pendingBudgets = budgetStatus.filter((budgetStatus) => budgetStatus.budgetStatusDescript === "Pending").length;
  */

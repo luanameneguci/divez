@@ -4,7 +4,7 @@ import "../../App.css";
 const BuyerProductList = () => {
   return (
     <div className="dashboard-content bg-light w-100 h-100">
-      <div className="d-flex justify-content-between p-2">
+      <div className="d-flex justify-content-between p-2 mx-3">
         <h2 className="title my-2 ">Products</h2>
       </div>
       <BoxProgress props={result} />
@@ -97,45 +97,6 @@ const ProgressDivs = ({ resultado }) => {
   );
 };
 
-/*function Products() {
-    return <div className="box-container col-auto roundbg d-flex">
-        <div className="col-12 bg-white rounded shadow">
-            <table className='container-fluid py-4'>
-                <thead className='text-black text-center border-bottom'>
-                    <th className="py- col-2">Name</th>
-                    <th className="py-2 col-2">Status</th>
-                    <th className="py-2 col-4">Installs</th>
-                    <th className="py-2 col-4"></th>
-                </thead>
-                <tbody className='text-center'>
-                    {rows.map((row, rowIndex) => (
-                        <tr key={rowIndex} className='border-bottom'>
-                            {row.map((data, colIndex) => (
-                                <td
-                                    key={colIndex}
-                                    className='border-product py-4'
-                                    style={{
-                                        color: colIndex === 6 ? '#FFD56D' : 'inherit',
-                                    }}
-                                >
-                                    {data}
-                                </td>
-
-                            ))}
-                            <td className='d-flex'>
-                            <button className='btn btn-outline-info hover m-3'>Add manager</button>
-                            <button className='btn btn-outline-info hover m-3'>Help</button>
-                            <button className='btn btn-outline-danger  m-3'>Cancel Subscription</button></td>
-
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </div>
-}*/
-
-// Example usage
 let data = [
   {
     nome: "Adobe photoshop",
@@ -216,7 +177,7 @@ function calculatePercentages(result) {
 
 function BoxProgress(props) {
   return (
-    <div className="box-container bg-white col-auto rounded d-flex shadow">
+    <div className="box-container bg-white col-auto rounded d-flex shadow mx-4">
       <div className="col-12">
         <div className="col-12">
           <ProgressDivs resultado={resultado} />
