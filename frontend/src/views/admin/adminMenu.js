@@ -12,6 +12,7 @@ import AdminSalesDashboard from './adminSalesDashboard';
 import ProductEdit from './productEdit';
 import AdminTicketList from './adminTicketList';
 import AdminSalesList from './adminSalesList';
+import AdminBudgetReply from './adminBudgetReply';
 
 
 
@@ -128,7 +129,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminBudgetList />
+            <AdminBudgetReply />
           </div>
         </div>
       </div> 
