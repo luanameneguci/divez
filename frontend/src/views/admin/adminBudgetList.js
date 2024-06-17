@@ -42,7 +42,7 @@ const AdminBudgetList = () => {
             <div className="container text-center">
                 <div className="row my-4">
                     <div className="col-12">
-                        <BudgetsListBox />
+                        <BudgetsListBox1 />
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@ const AdminBudgetList = () => {
     );
 }
 
-function BudgetsListBox() {
+function BudgetsListBox1() {
     const [show, setShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
     const handleClose = () => setShow(false);
