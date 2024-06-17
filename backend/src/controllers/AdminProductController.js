@@ -1,11 +1,10 @@
 const express = require("express");
-var AdminProduct = require("../model/AdminProduct");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var AdminProduct = require("../model/AdminProduct")(sequelize, DataTypes);
 sequelize.sync();
+
+const controllers = {};
 
 controllers.adminProduct_list = async (req, res) => {
   const data = await AdminProduct.findAll();

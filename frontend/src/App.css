@@ -151,6 +151,17 @@ a {
   transform: scale(1.05);
 }
 
+.text-outdated {
+  color: #ffd56d;
+}
+
+.text-disabled {
+  color: #eb5757;
+}
+
+.text-updated {
+  color: #00b69b;
+}
 /*
 Já cá estava, tirar isto tudo acho eu
 

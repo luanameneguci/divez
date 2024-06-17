@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import notificationicon from "../../images/notification.png";
-//import axios from "axios";
+
+
+/*import axios from "axios";*/
+
 
 var coiso = 100;
 
@@ -51,13 +54,13 @@ for (let i = 0; i < 18; i += itemsPerRow) {
 }
 
 const AdminDashboard = () => {
-  const [budgetStatus, setdataBudgetStatus] = useState([]);
-/*
-  useEffect(() => {
+ /*  const [budgetStatus, setdataBudgetStatus] = useState([]);
+
+  {/*useEffect(() => {
     const url = "http://localhost:8080/budgetStatus/list";
     axios
       .get(url)
-      .then((res) => {
+      then((res) => {  
         if (res.status === 200) {
           const dataBudgetStatus = res.data;
           setdataBudgetStatus(dataBudgetStatus);
@@ -68,64 +71,63 @@ const AdminDashboard = () => {
       .catch((error) => {
         alert(error);
       });
-  }, []); */
-  
-  const pendingBudgets = budgetStatus.filter((budgetStatus) => budgetStatus.budgetStatusDescript === "Pending").length;
+  }, []); */}
 
-  return (
-    <div className="dashboard-content h-100 bg-light w-100">
-      <h2 className="title py-3">Dashboard</h2>
-      <div class="col-12 text-center">
-        <div class="row" >
-          <div class="col" >
-            <Box
-              title="Pending budgets"
-              number={pendingBudgets}
-              image={notificationicon}
-         
-            />
-          </div>
-          <div class="col">
-            <Box
-              title="Active Licenses"
-              number="2000"
-              image={notificationicon}
-             
-            />
-          </div>
-          <div class="col">
-            <Box
-              title="Linked Users"
-              number="200"
-              image={notificationicon}
-           
-            />
-          </div>
+const pendingBudgets = budgetStatus.filter((budgetStatus) => budgetStatus.budgetStatusDescript === "Pending").length;
+return (
+  <div className="dashboard-content h-100 bg-light w-100">
+    <h2 className="title py-3">Dashboard</h2>
+    <div class="col-12 text-center">
+      <div class="row" >
+        <div class="col" >
+          <Box
+            title="Pending budgets"
+            number=""
+            image={notificationicon}
+
+          />
+        </div>
+        <div class="col">
+          <Box
+            title="Active Licenses"
+            number="2000"
+            image={notificationicon}
+
+          />
+        </div>
+        <div class="col">
+          <Box
+            title="Linked Users"
+            number="200"
+            image={notificationicon}
+
+          />
         </div>
       </div>
-      <div class="col-12 text-center py-4">
-        <div class="row">
-          <div class="col-4">
-            {/*Aqui vai ser o boxsecond*/}
-            <BoxTable title="Pending budgets" />
-          </div>
-          <div class="col-4">
-            {/*Aqui vai ser o boxsecond*/}
-            <BoxProgress title="Your most used licences" />
-          </div>
-          <div class="col-4">
-            {/*Aqui vai ser o boxsecond*/}
-            <BoxManager title="Managers" />
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-            {/*Aqui vai ser o boxsecond*/}
-            <BoxThird title="Managers" />
-          </div>
     </div>
-  );
-};
+    <div class="col-12 text-center py-4">
+      <div class="row">
+        <div class="col-4">
+          {/*Aqui vai ser o boxsecond*/}
+          <BoxTable title="Pending budgets" />
+        </div>
+        <div class="col-4">
+          {/*Aqui vai ser o boxsecond*/}
+          <BoxProgress title="Your most used licences" />
+        </div>
+        <div class="col-4">
+          {/*Aqui vai ser o boxsecond*/}
+          <BoxManager title="Managers" />
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      {/*Aqui vai ser o boxsecond*/}
+      <BoxThird title="Managers" />
+    </div>
+  </div>
+);
+
 
 
 function Box(props) {
@@ -164,7 +166,7 @@ function BoxTable(props) {
         </span>
         {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
         <table
-          className="container-fluid text-start mainblue-bg py-4 rounded col-11"
+          className="container-fluid text-start bg-info py-4 rounded col-11"
         >
           <thead>
             <th className="ps-3 py-2 text-white">Budget Nº</th>
@@ -175,7 +177,7 @@ function BoxTable(props) {
             {rows.map((row, rowIndex) => (
               <tr className="rounded" key={rowIndex}>
                 {row.map((data, colIndex) => (
-                  <td className="ps-3 py-1 border-bottom" key={colIndex} style={{height: 40 + "px"}}>
+                  <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
                     {data}
                   </td>
                 ))}
@@ -202,7 +204,7 @@ function BoxManager(props) {
         </span>
         <div>
           <ManagersList managers={managers} />
-        </div>  
+        </div>
       </div>
     </div>
   );
@@ -329,7 +331,7 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
     </div>
     <div className="progress">
       <div
-        className="progress-bar"
+        className="progress-bar bg-info"
         role="progressbar"
         style={{ width: `${percentage}%` }}
         aria-valuenow={percentage}
@@ -412,7 +414,7 @@ const ManagersList = ({ managers }) => {
   return (
     <div className="managers-list">
       {managers.map((manager, index) => (
-        <div className="d-flex justify-content-between border-bottom align-items-center" style={{height: 97 + "px"}}>
+        <div className="d-flex justify-content-between border-bottom align-items-center" style={{ height: 97 + "px" }}>
           <UserStatus userData={manager} />
         </div>
       ))}
@@ -422,36 +424,36 @@ const ManagersList = ({ managers }) => {
 
 function BoxThird() {
   return <div className="box-container bg-white col-auto rounded d-flex shadow">
-      <div className="col-12 mainblue-bg rounded">
-          {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
-          <table className='container-fluid text-start mainblue-bg py-4 rounded table3'>
-              <thead className='text-white'>
-                  <th className="ps-3 py-2">Ticket Nº</th>
-                  <th className="ps-3 py-2">Title</th>
-                  <th className="ps-3 py-2">Date</th>
-                  <th className="ps-3 py-2">Department</th>
-                  <th className="ps-3 py-2">Priority</th>
-                  <th className="ps-3 py-2">Status</th>
-              </thead>
-              <tbody className='bg-white'>
-              {rows3.map((row, rowIndex) => (
-                      <tr key={rowIndex}>
-                          {row.map((data, colIndex) => (
-                             <td
-                             key={colIndex}
-                             style={{ 
-                                 color: colIndex === 5 ? '#FFD56D' : 'inherit',
-                                 padding: '10px 0 10px 1%' 
-                             }}
-                         >
-                              {data}
-                            </td>
-                          ))}
-                      </tr>
-                  ))}
-              </tbody>
-          </table>
-      </div>
+    <div className="col-12 bg-info rounded">
+      {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
+      <table className='container-fluid text-start bg-info py-4 rounded table3'>
+        <thead className='text-white'>
+          <th className="ps-3 py-2">Ticket Nº</th>
+          <th className="ps-3 py-2">Title</th>
+          <th className="ps-3 py-2">Date</th>
+          <th className="ps-3 py-2">Department</th>
+          <th className="ps-3 py-2">Priority</th>
+          <th className="ps-3 py-2">Status</th>
+        </thead>
+        <tbody className='bg-white'>
+          {rows3.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((data, colIndex) => (
+                <td
+                  key={colIndex}
+                  style={{
+                    color: colIndex === 5 ? '#FFD56D' : 'inherit',
+                    padding: '10px 0 10px 1%'
+                  }}
+                >
+                  {data}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 }
 

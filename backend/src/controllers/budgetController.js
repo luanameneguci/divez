@@ -1,19 +1,12 @@
 const express = require("express");
-//var sequelize = require("../model/database");
-//var Admin = require("../model/admin");
-//var Buyer = require("../model/buyer");
-//var Product = require("../model/products");
-//var Licenses = require("../model/lincenses");
-//var Tickets = require("../model/tickets");
-//var Message = require("../model/message");
-//var Budgets = require("../model/budgets");
-//const Department = require("../model/adminDepartment");
-const Cart = require("../model/cart");
-const Bill = require("../model/billing");
-const Budget = require("../model/budgets");
-const BudgetStatus = require("../model/budgetStatus");
+const sequelize = require("../model/database");
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var Budget = require("../model/budget")(sequelize, DataTypes);
+var BudgetStatus = require("../model/budgetStatus")(sequelize, DataTypes);
+var Cart = require("../model/cart")(sequelize, DataTypes);
+sequelize.sync();
+
 const controllers = {};
-//sequelize.sync();
 
 controllers.budget_list = async (req, res) => {
   const data = await Budget.findAll({ include: [BudgetStatus, Cart] });
@@ -22,7 +15,7 @@ controllers.budget_list = async (req, res) => {
 
 controllers.budget_create = async (req, res) => {
   const { budgetName, budgetDescript, date, idBudgetStatus, idCart } = req.body;
-  const budget = await Bill.create({
+  const budget = await Budget.create({
     budgetName,
     budgetDescript,
     date,
@@ -40,7 +33,7 @@ controllers.budget_update = async (req, res) => {
     { where: { idBudget: idReceived } }
   );
 
-  res.json({ bill });
+  res.json({ budget });
 };
 
 controllers.budget_detail = async (req, res) => {

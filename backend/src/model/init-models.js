@@ -1,21 +1,22 @@
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var sequelize = require('./database');
+var DataTypes = require("sequelize").DataTypes;
 var _AdminBudget = require("./AdminBudget");
 var _AdminProduct = require("./AdminProduct");
 var _AdminTicket = require("./AdminTicket");
 var _CartProduct = require("./CartProduct");
+var _category = require("./categories");
 var _ManagerLicense = require("./ManagerLicense");
 var _admindepartments = require("./adminDepartment");
 var _admins = require("./admin");
 var _bills = require("./billing");
 var _budgetStatuses = require("./budgetStatus");
-var _budgets = require("./budgets");
+var _budgets = require("./budget");
 var _buyers = require("./buyer");
 var _carts = require("./cart");
 var _licenseUsers = require("./licenseUser");
 var _licenses = require("./licenses");
 var _managers = require("./manager");
 var _messages = require("./message");
+var _packages = require("./package");
 var _products = require("./products");
 var _ticketDepartments = require("./ticketDepartment");
 var _ticketStatus = require("./ticketStatus");
@@ -24,6 +25,8 @@ var _licenseStatus = require("./licenseStatus");
 var _ticketPrint = require("./ticketPrint");
 
 function initModels(sequelize) {
+  var budgetStatus = new _budgetStatuses(sequelize, DataTypes);
+  var budgets = new _budgets(sequelize, DataTypes);
   var AdminBudget = new _AdminBudget(sequelize, DataTypes);
   var AdminProduct = new _AdminProduct(sequelize, DataTypes);
   var AdminTicket = new _AdminTicket(sequelize, DataTypes);
@@ -34,8 +37,6 @@ function initModels(sequelize) {
   var buyers = new _buyers(sequelize, DataTypes);
   var carts = new _carts(sequelize, DataTypes);
   var bills = new _bills(sequelize, DataTypes);
-  var budgetStatus = new _budgetStatuses(sequelize, DataTypes);
-  var budgets = new _budgets(sequelize, DataTypes);
   var licenseStatus = new _licenseStatus(sequelize, DataTypes);
   var licenseUsers = new _licenseUsers(sequelize, DataTypes);
   var licenses = new _licenses(sequelize, DataTypes);
@@ -45,14 +46,16 @@ function initModels(sequelize) {
   var ticketPrint = new _ticketPrint(sequelize, DataTypes);
   var tickets = new _tickets(sequelize, DataTypes);
   var messages = new _messages(sequelize, DataTypes);
+  var category = new _category(sequelize, DataTypes);
+  var package = new _packages(sequelize, DataTypes);
   var products = new _products(sequelize, DataTypes);
 
   admins.belongsTo(adminDepartments, { foreignKey: "idDepartment" });
   adminDepartments.hasMany(admins, { foreignKey: "idDepartment" });
   bills.belongsTo(carts, { foreignKey: "idCart" });
   carts.hasMany(bills, { foreignKey: "idCart" });
-  budgets.belongsTo(budgetStatus, { foreignKey: "idBudgetStatus" });
   budgetStatus.hasMany(budgets, { foreignKey: "idBudgetStatus" });
+  budgets.belongsTo(budgetStatus, { foreignKey: "idBudgetStatus" });
   budgets.belongsTo(carts, { foreignKey: "IdCart" });
   carts.hasMany(budgets, { foreignKey: "idCart" });
   carts.belongsTo(buyers, { foreignKey: "idBuyer" });
@@ -92,6 +95,7 @@ function initModels(sequelize) {
     budgetStatus,
     budgets,
     buyers,
+    category,
     carts,
     licenseStatus,
     licenseUsers,
@@ -102,8 +106,10 @@ function initModels(sequelize) {
     ticketDepartments,
     ticketStatus,
     tickets,
+    package
   };
 }
+
 module.exports = initModels;
 module.exports.initModels = initModels;
 module.exports.default = initModels;

@@ -1,21 +1,16 @@
 const express = require("express");
-//var Admin = require("../model/admin");
-//var sequelize = require("../model/database");
-var License = require("../model/licenses");
-//var Product = require("../model/products");
-//var Licenses = require("../model/lincenses");
-//var Tickets = require("../model/tickets");
-//var Message = require("../model/message");
-//var Budgets = require("../model/budgets");
-
-//const Department = require("../model/adminDepartment");
-const Category = require("../model/categories");
+const sequelize = require("../model/database");
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var License = require("../model/licenses")(sequelize, DataTypes);
+var LicenseStatus = require("../model/licenseStatus")(sequelize, DataTypes);
+var LicenseUser = require("../model/licenseUser")(sequelize, DataTypes);
+var Bill= require("../model/billing")(sequelize, DataTypes);
+sequelize.sync();
 
 const controllers = {};
-//sequelize.sync();
 
 controllers.license_list = async (req, res) => {
-  const data = await License.findAll();
+  const data = await License.findAll({ include: [LicenseStatus, Buyer, Bill, LicenseUser] });
   res.json(data);
 };
 

@@ -1,21 +1,14 @@
 const express = require("express");
-var Ticket = require("../model/tickets");
-var Buyer = require("../model/buyer");
-var TicketStatus = require("../model/ticketStatus");
-var TicketDepartment = require("../model/ticketDepartment");
-var Manager = require("../model/manager");
-var Licenses = require("../model/licenses");
-var Tickets = require("../model/tickets");
-var Message = require("../model/message");
-var Budgets = require("../model/budgets");
-const Department = require("../model/adminDepartment");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+var Ticket = require("../model/tickets")(sequelize, DataTypes);
+var Buyer = require("../model/buyer")(sequelize, DataTypes);
+var TicketStatus = require("../model/ticketStatus")(sequelize, DataTypes);
+var TicketDepartment = require("../model/ticketDepartment")(sequelize, DataTypes);
+var Manager = require("../model/manager")(sequelize, DataTypes);
 sequelize.sync();
+
+const controllers = {};
 
 controllers.ticket_list = async (req, res) => {
   const data = await Ticket.findAll({include:[Buyer, TicketStatus, TicketDepartment, Manager]});

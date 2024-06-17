@@ -1,12 +1,9 @@
 const express = require("express");
-var Admin = require("../model/admin");
-const Department = require("../model/adminDepartment");
-var Sequelize = require("sequelize");
 const sequelize = require("../model/database");
-const initModels = require("../model/init-models");
-var models = initModels(sequelize);
-const controllers = {};
+const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+
 sequelize.sync();
+const controllers = {};
 
 controllers.admin_list = async (req, res) => {
   const data = await Admin.findAll({include:[Department]});
