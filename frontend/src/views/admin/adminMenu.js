@@ -14,7 +14,12 @@ import AdminTicketList from './adminTicketList';
 import AdminSalesList from './adminSalesList';
 import AdminBudgetReply from './adminBudgetReply';
 
-
+/*O que falta*/
+/*AdminTicketList - Modal está feio e não tem botão de enviar
+  AdminTicketChat - Falta fazer
+  AdminDashboard - Acho que estava à espera que o iuri fizesse algo e agr esqueci-me do que era
+  e muito mais
+*/
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -112,7 +117,7 @@ const Menu = () => {
         <div className="d-flex align-self-end flex-row-reverse px-4 py-2 me-3">
           <div>
             <div>
-              <span className="username-text">Utilizador</span>
+              <span className="username-text">Username</span>
             </div>
             <div className="account-type">
               <span className="account-text">Admin</span>
@@ -129,7 +134,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminBudgetReply />
+            <AdminTicketList />
           </div>
         </div>
       </div> 

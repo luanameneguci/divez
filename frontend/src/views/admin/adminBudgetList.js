@@ -62,8 +62,8 @@ function BudgetsListBox1() {
                 <table className='table text-start'>
                     <thead className='text-white'>
                         <tr>
-                            <th className="text-end pt-3">Budget Nº
-                                <input className="form-control w-75 ms-auto text-end" id="budgetnfilter" type="number" placeholder="Search.."></input>
+                            <th className="text-start pt-3">Budget Nº
+                                <input className="form-control w-75 text-start" id="budgetnfilter" type="number" placeholder="Search.."></input>
                             </th>
                             <th>Client
                                 <input className="form-control w-75" id="clientfilter" type="text" placeholder="Search.."></input>
@@ -71,7 +71,7 @@ function BudgetsListBox1() {
                             <th>Date
                                 <input className="form-control w-75" id="datefilter" type="text" placeholder="Search.."></input>
                             </th>
-                            <th>Amount</th>
+                            <th className='align-text-top pt-3'>Amount</th>
                             <th className='w-10'>Status
                                 <input className="form-control w-75" id="statusfilter" type="text" placeholder="Search.."></input>
                             </th>
@@ -90,7 +90,7 @@ function BudgetsListBox1() {
                                         else if (data === 'Waiting') color = '#2D9CDB'; //azul
                                     }
                                     return (
-                                        <td key={colIndex} className={colIndex === 0 ? 'text-end' : 'ps-4'} style={{ color: colIndex === 4 ? color : 'inherit' }}>
+                                        <td key={colIndex} className={ 'ps-3'} style={{ color: colIndex === 4 ? color : 'inherit' }}>
                                             {data}
                                         </td>
                                     );

@@ -1,4 +1,3 @@
-// src/ProductGraph.js
 import React, { useEffect, useRef } from 'react';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 
@@ -7,7 +6,6 @@ const ProductGraph = () => {
     const chartRef = useRef(null);
 
     useEffect(() => {
-        // Register the necessary components
         Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
         const ctx = canvasRef.current.getContext("2d");

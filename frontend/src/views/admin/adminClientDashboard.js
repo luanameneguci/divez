@@ -137,7 +137,7 @@ function ClientProductsBox() {
       <div className="col-12">
         <h3 className="text-start p-3">Products</h3>
         <table className="container text-start">
-          <thead className="text-white mainblue-bg">
+          <thead className="text-white bg-info">
             <tr>
               <th className="ps-4 py-2">Product Name</th>
               <th className="ps-4 py-2">Licences</th>
@@ -201,7 +201,7 @@ function ClientBudgetsBox() {
                 <h3 className='text-start p-3'>Budgets</h3>
 
                 <table className='container-fluid text-start py-4'>
-                    <thead className='text-white mainblue-bg'>
+                    <thead className='text-white bg-info'>
                         <tr>
                             <th className="ps-2 py-2">Budget Nº</th>
                             <th className="ps-3 py-2">Client</th>

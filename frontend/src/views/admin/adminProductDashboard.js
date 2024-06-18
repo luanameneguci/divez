@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../App.css';
 import notificationicon from "../../images/notification.png";
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 import ProductGraph from '../../components/ProductGraph';
 
 const boxProductsContent = [
@@ -12,7 +11,7 @@ const boxProductsContent = [
     notificationicon, 'Adobe Photoshop', '69', '20/10/2024', '1000', 'Updated',
 ];
 
-// Split the boxProductsContent array into rows of 3 items each
+// Split the boxProductsContent array into rows of 6 items each
 const rows3 = [];
 const itemsPerRow = 6;
 
@@ -62,7 +61,7 @@ const AdminProductDashboard = () => {
                 <div className="row my-4">
                     <div className="col-12 bg-white roundbg my-2">
                         <h2>Sales</h2>
-                        <ProductGraph />
+                        <ProductGraph title="Sales over the Year" />
                     </div>
                     <div className="col-12 bg-white roundbg my-2">
                         <LastSalesBox />
@@ -124,11 +123,8 @@ function LastSalesBox() {
                                     }
                                     if (colIndex === 0) {
                                         return (
-                                            < td key={colIndex}
-                                            className='listimage py-3 ps-2'
-                                            
-                                                colSpan={(colIndex === 0) ? 1 : 0}>
-                                                <img src={notificationicon}></img>
+                                            <td key={colIndex} className='listimage py-3 ps-2' colSpan={(colIndex === 0) ? 1 : 0}>
+                                                <img src={notificationicon} alt="notification" />
                                             </td>
                                         )
                                     } else {
@@ -146,7 +142,6 @@ function LastSalesBox() {
                                             </td>
                                         );
                                     }
-
                                 })}
                             </tr>
                         ))}
@@ -156,7 +151,8 @@ function LastSalesBox() {
                     <button className='btn btn-outline-dark'>See more</button>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
+
 export default AdminProductDashboard;

@@ -72,16 +72,22 @@ a {
 }
 /*end tabelas*/
 
+/* DatePicker ver as classes no f12 */
+.react-datepicker-wrapper {
+  width: 100%;
+}
 
-.fixed-bottom-buttons .btn-outline-success {
-  background-color: #00B69B;
+.react-datepicker__day--selected {
+  background-color: #10ccf4 !important; 
+
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #10ccf4 !important; 
   color: white;
 }
 
-.fixed-bottom-buttons .btn-outline-danger {
-  background-color: #DF0404;
-  color: white;
-}
+/*End datepicker*/
 
 .roundbg {
   border-radius: 15px;

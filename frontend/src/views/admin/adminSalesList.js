@@ -1,8 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
-import notificationicon from "../../images/notification.png";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
+/* A tabela está a filtrar corretamente, o datepicker está bue feio*/
 const boxBudgetsContent = [
     1, 'Maquina Pifou', '13/13/13', 'Design', '1',
     1, 'João Ratão', '13/06/2024', '20000', '1',
@@ -24,7 +25,6 @@ const boxBudgetsContent = [
     1, 'João Ratão', '13/06/2024', '20000', '2',
 ];
 
-// Split the boxBudgetsContent array into rows of 5 items each
 const rows = [];
 const itemsPerRow = 5;
 
@@ -33,7 +33,6 @@ for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow) {
 }
 
 const AdminSalesList = () => {
-
     return (
         <div className="dashboard-content bg-light w-100">
             <h4 className="title my-2">Sales</h4>
@@ -46,47 +45,100 @@ const AdminSalesList = () => {
     );
 }
 
-
 function SalesList(props) {
+    const [startDate, setStartDate] = useState(null);
+    const [saleId, setSaleId] = useState('');
+    const [client, setClient] = useState('');
+    const [amount, setAmount] = useState('');
+    const [price, setPrice] = useState('');
+
+    const handleDateChange = (date) => {
+        setStartDate(date);
+    };
+
+    const handleSaleIdChange = (e) => {
+        setSaleId(e.target.value);
+    };
+
+    const handleClientChange = (e) => {
+        setClient(e.target.value);
+    };
+
+    const handleAmountChange = (e) => {
+        setAmount(e.target.value);
+    };
+
+    const handlePriceChange = (e) => {
+        setPrice(e.target.value);
+    };
+
+    const filteredRows = rows.filter(row => {
+        const rowDate = new Date(row[2].split('/').reverse().join('-'));
+        return (
+            (!startDate || rowDate >= startDate) &&
+            (!saleId || row[0].toString().includes(saleId)) &&
+            (!client || row[1].toLowerCase().includes(client.toLowerCase())) &&
+            (!amount || row[3].toLowerCase().includes(amount.toLowerCase())) &&
+            (!price || row[4].toString().includes(price))
+        );
+    });
+
     return (
         <div className="box-container h-100">
-            <div className="container">
-                <div className="row w-75 mb-3">
-                    <div className="col-2">
-                        <h5>Filter By</h5>
-                    </div>
-                    <div className='col-4'>
-                    <input type="text" class="form-control" id="datatable-search-input" />
-
-                    </div>
-                </div>
-
-                <div id="datatable">
-                </div>
-            </div>
             <div className="container bg-white px-0 roundbg">
-                <table className='table text-start'>
+                <table id="datatable" className='table text-start'>
                     <thead className='text-white'>
                         <tr>
                             <th className="text-end pt-3">Sale ID
-                                <input className="form-control w-75 ms-auto text-end" id="ticketfilter" type="number"></input>
+                                <input
+                                    className="form-control w-75 ms-auto text-end"
+                                    id="ticketfilter"
+                                    type="number"
+                                    value={saleId}
+                                    onChange={handleSaleIdChange}
+                                />
                             </th>
                             <th>Client
-                                <input className="form-control w-75" id="titlefilter" type="text" placeholder="Search"></input>
+                                <input
+                                    className="form-control w-75"
+                                    id="titlefilter"
+                                    type="text"
+                                    placeholder="Search"
+                                    value={client}
+                                    onChange={handleClientChange}
+                                />
                             </th>
                             <th>Date
-                                <input className="form-control w-75" id="datefilter" type="text" placeholder="Search"></input>
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={handleDateChange}
+                                    className="form-control w-75"
+                                    placeholderText="Select Date"
+                                />
+                            </th>
+                            <th>Products
+                                <input
+                                    className="form-control w-75"
+                                    id="depfilter"
+                                    type="text"
+                                    placeholder="Search"
+                                    value={amount}
+                                    onChange={handleAmountChange}
+                                />
                             </th>
                             <th>Amount
-                                <input className="form-control w-75" id="depfilter" type="text" placeholder="Search"></input>
-                            </th>
-                            <th>Price
-                                <input className="form-control w-75" id="priofilter" type="number" ></input>
+                                <input
+                                    className="form-control w-75"
+                                    id="priofilter"
+                                    type="number"
+                                    value={price}
+                                    onChange={handlePriceChange}
+                                />
                             </th>
                         </tr>
                     </thead>
                     <tbody className='text-start'>
-                        {rows.map((row, rowIndex) => (
+                        {filteredRows.map((row, rowIndex) => (
                             <tr key={rowIndex} style={{ borderRadius: rowIndex === rows.length - 1 ? '0 0 15px 15px' : '0' }}>
                                 {row.map((data, colIndex) => {
                                     let color = 'inherit';
@@ -96,7 +148,7 @@ function SalesList(props) {
                                         else if (data === 'Paid') color = '#00B69B'; // verde
                                         else if (data === 'Waiting') color = '#2D9CDB'; //azul
                                         return (
-                                            <td key={colIndex} className={colIndex === 0 ? 'text-end' : 'ps-4'} style={{ color: colIndex === 5 ? color : 'inherit' }}>
+                                            <td key={colIndex} style={{ color: colIndex === 5 ? color : 'inherit' }}>
                                                 {data}
                                             </td>
                                         )
@@ -126,9 +178,7 @@ function SalesList(props) {
                 </nav>
             </div>
         </div>
-
     );
-
 }
 
 function Box(props) {
@@ -145,9 +195,6 @@ function Box(props) {
                         <h2>{props.number}</h2>
                     </strong>
                 </span>
-            </div>
-            <div>
-                <img src={props.image} alt="" className="box-image ms-3" />
             </div>
         </div>
     );
