@@ -15,9 +15,9 @@ import AdminSalesList from './adminSalesList';
 import AdminBudgetReply from './adminBudgetReply';
 
 /*O que falta*/
-/*AdminTicketList - Modal está feio e não tem botão de enviar
+/*AdminTicketList - Modal está melhor
   AdminTicketChat - Falta fazer
-  AdminDashboard - Acho que estava à espera que o iuri fizesse algo e agr esqueci-me do que era
+  AdminDashboard - As cenas que o iuri fez não estão a mostrar corretamente no meu ecrã não sei pq, não consigo copiar
   e muito mais
 */
 
@@ -134,7 +134,7 @@ const Menu = () => {
 
         <div className="col-auto h-100">
           <div className="row">
-            <AdminTicketList />
+            <AdminBudgetList />
           </div>
         </div>
       </div> 

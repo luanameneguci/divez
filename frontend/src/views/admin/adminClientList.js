@@ -107,7 +107,7 @@ function ClientList() {
                                     </td>
                                 ))}
                                 <td className="d-flex justify-content-center">
-                                    <button className='btn btn-outline-info me-2'>Edit</button>
+                                {/*<button className='btn btn-outline-info me-2'>Edit</button> Editar oq do cliente?*/}
                                     <button className='btn btn-outline-danger'>Delete</button>
                                 </td>
                             </tr>
