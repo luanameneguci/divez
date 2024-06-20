@@ -3,39 +3,38 @@ import notificationicon from "../images/notification.png";
 import Modal from 'react-bootstrap/Modal';
 
 const boxBudgetsContent = [
-    1, 'João Ratão', '13/06/2024', '20000', 'New',
-    1, 'João Ratão', '13/06/2024', '20000', 'New',
-    1, 'João Ratão', '13/06/2024', '20000', 'New',
-    1, 'João Ratão', '13/06/2024', '20000', 'Rejected',
-    1, 'João Ratão', '13/06/2024', '20000', 'Waiting',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Waiting',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Waiting',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Waiting',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Rejected',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Waiting',
-    1, 'João Ratão', '13/06/2024', '20000', 'Paid',
-    1, 'João Ratão', '13/06/2024', '20000', 'Rejected',
+    [1, 'João Ratão', '13/06/2024', '20000', 'New'],
+    [2, 'João Ratão', '13/06/2024', '20000', 'New'],
+    [3, 'João Ratão', '13/06/2024', '20000', 'New'],
+    [4, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
+    [5, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
+    [6, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [7, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [8, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [9, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
+    [10, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [11, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
+    [12, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [13, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
+    [14, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [15, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
+    [16, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [17, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [18, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
+    [19, 'João Ratão', '13/06/2024', '20000', 'Paid'],
+    [20, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
 ];
-
-const itemsPerRow = 5;
-const rows = [];
-for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow) {
-    rows.push(boxBudgetsContent.slice(i, i + itemsPerRow));
-}
 
 function BudgetsListBox() {
     const [show, setShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
+    const [selectedBudget, setSelectedBudget] = useState(null);
+
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (budget) => {
+        setSelectedBudget(budget);
+        setLgShow(true);
+    };
 
     // State variables for filter inputs
     const [budgetNumberFilter, setBudgetNumberFilter] = useState('');
@@ -44,11 +43,11 @@ function BudgetsListBox() {
     const [statusFilter, setStatusFilter] = useState('');
 
     // Filtering function
-    const filteredRows = rows.filter(row =>
+    const filteredRows = boxBudgetsContent.filter(row =>
         row[0].toString().includes(budgetNumberFilter) &&
-        row[1].toString().toLowerCase().includes(clientFilter.toLowerCase()) &&
-        row[2].toString().toLowerCase().includes(dateFilter.toLowerCase()) &&
-        row[4].toString().toLowerCase().includes(statusFilter.toLowerCase())
+        row[1].toLowerCase().includes(clientFilter.toLowerCase()) &&
+        row[2].includes(dateFilter) &&
+        row[4].toLowerCase().includes(statusFilter.toLowerCase())
     );
 
     return (
@@ -111,10 +110,10 @@ function BudgetsListBox() {
                                 {row.map((data, colIndex) => {
                                     let color = 'inherit';
                                     if (colIndex === 4) {
-                                        if (data === 'New') color = '#FFD56D'; //amarelo
+                                        if (data === 'New') color = '#FFD56D'; // amarelo
                                         else if (data === 'Rejected') color = '#EB5757'; // vermelho
                                         else if (data === 'Paid') color = '#00B69B'; // verde
-                                        else if (data === 'Waiting') color = '#2D9CDB'; //azul
+                                        else if (data === 'Waiting') color = '#2D9CDB'; // azul
                                     }
                                     return (
                                         <td key={colIndex} className={'ps-3'} style={{ color: colIndex === 4 ? color : 'inherit' }}>
@@ -123,7 +122,7 @@ function BudgetsListBox() {
                                     );
                                 })}
                                 <td className='text-center'>
-                                    <button className='btn btn-outline-warning' onClick={() => setLgShow(true)}>See more</button>
+                                    <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
                                 </td>
                             </tr>
                         ))}
@@ -131,11 +130,11 @@ function BudgetsListBox() {
                 </table>
                 <nav aria-label="..." className='ms-3'>
                     <ul className="pagination">
-                        <li className="page-item"><a class="page-link" href="#">1</a></li>
+                        <li className="page-item"><a className="page-link" href="#">1</a></li>
                         <li className="page-item active">
                             <a className="page-link" href="#">2</a>
                         </li>
-                        <li className="page-item"><a class="page-link" href="#">3</a></li>
+                        <li className="page-item"><a className="page-link" href="#">3</a></li>
                         <li className="page-item">
                             <a className="page-link" href="#">Next</a>
                         </li>
@@ -150,53 +149,54 @@ function BudgetsListBox() {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            Budget #number
+                            Budget #{selectedBudget ? selectedBudget[0] : ''}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <form>
-                            <div className='container'>
-                                <div className="row mb-5">
-                                    <div className="col-3 text-body-secondary">
-                                        CLIENT
+                        {selectedBudget && (
+                            <form>
+                                <div className='container'>
+                                    <div className="row mb-5">
+                                        <div className="col-3 text-body-secondary">
+                                            CLIENT
+                                        </div>
+                                        <div className="col-9">
+                                            {selectedBudget[1]}
+                                        </div>
                                     </div>
-                                    <div className="col-9">
-                                        João Ratão
+                                    <div className="row mb-5">
+                                        <div className="col-3 text-body-secondary">
+                                            DATE
+                                        </div>
+                                        <div className="col-9">
+                                            {selectedBudget[2]}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row mb-5">
-                                    <div className="col-3 text-body-secondary">
-                                        DATE
+                                    <div className="row mb-5">
+                                        <div className="col-3 text-body-secondary">
+                                            DESCRIPTION
+                                        </div>
+                                        <div className="col-9 ">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                                        </div>
                                     </div>
-                                    <div className="col-9">
-                                        19/5/2024
-                                    </div>
-                                </div>
-                                <div className="row mb-5">
-                                    <div className="col-3 text-body-secondary">
-                                        DESCRIPTION
-                                    </div>
-                                    <div className="col-9 ">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                                    </div>
-                                </div>
-                                <div className="row mb-5">
-                                    <div className="col-3 text-body-secondary">
-                                        PRODUTOS
-                                    </div>
-                                    <div className="col-9">
-                                        <div className="row ">
-                                            <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                Prints
-                                                <img src={notificationicon} className='ticket-print mx-auto mt-1'></img>
-                                            </div>
-                                            <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                Prints
-                                                <img src={notificationicon} className='ticket-print mx-auto mt-1'></img>
+                                    <div className="row mb-5">
+                                        <div className="col-3 text-body-secondary">
+                                            PRODUTOS
+                                        </div>
+                                        <div className="col-9">
+                                            <div className="row ">
+                                                <div className="col-4 d-flex flex-column text-center fw-medium">
+                                                    Prints
+                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints"></img>
+                                                </div>
+                                                <div className="col-4 d-flex flex-column text-center fw-medium">
+                                                    Prints
+                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints"></img>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {/* NOTA: fazer com que ele troque de cores dependendo do texto (ainda não consigo fazer) */}
                                     <div className="row mb-5">
                                         <div className="col-3 text-body-secondary">
                                             MARGIN
@@ -223,14 +223,13 @@ function BudgetsListBox() {
                                         </div>
                                     </div>
                                 </div>
-                        </form>
+                            </form>
+                        )}
                     </Modal.Body>
                 </Modal>
             </div>
         </div>
-            </div >
-        );
+    );
 }
 
 export default BudgetsListBox;
-
