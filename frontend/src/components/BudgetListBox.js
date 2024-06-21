@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import notificationicon from "../images/notification.png";
 import Modal from 'react-bootstrap/Modal';
+import '../App.css';
+
 
 const boxBudgetsContent = [
     [1, 'João Ratão', '13/06/2024', '20000', 'New'],
@@ -25,12 +27,10 @@ const boxBudgetsContent = [
     [20, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
 ];
 
-function BudgetsListBox() {
-    const [show, setShow] = useState(false);
+function BudgetsListBox({ numRowsToShow }) {
     const [lgShow, setLgShow] = useState(false);
     const [selectedBudget, setSelectedBudget] = useState(null);
 
-    const handleClose = () => setShow(false);
     const handleShow = (budget) => {
         setSelectedBudget(budget);
         setLgShow(true);
@@ -50,102 +50,159 @@ function BudgetsListBox() {
         row[4].toLowerCase().includes(statusFilter.toLowerCase())
     );
 
+    // Function to get status color based on status value
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 'New':
+                return '#FFD56D'; // yellow
+            case 'Rejected':
+                return '#EB5757'; // red
+            case 'Paid':
+                return '#00B69B'; // green
+            case 'Waiting':
+                return '#2D9CDB'; // blue
+            default:
+                return 'inherit'; // default color
+        }
+    };
+
     return (
-        <div className="box-container d-flex h-100">
+        <div className="box-container d-flex h-100 shadow">
             <div className="container bg-white px-0 roundbg">
-                <table className='table text-start'>
+                <table className='table text-start m-0'>
                     <thead className='text-white'>
                         <tr>
-                            <th className="text-start pt-3">
-                                Budget Nº
-                                <input
-                                    className="form-control w-75 text-start"
-                                    id="budgetnfilter"
-                                    type="number"
-                                    placeholder="Search.."
-                                    value={budgetNumberFilter}
-                                    onChange={(e) => setBudgetNumberFilter(e.target.value)}
-                                />
-                            </th>
-                            <th>
-                                Client
-                                <input
-                                    className="form-control w-75"
-                                    id="clientfilter"
-                                    type="text"
-                                    placeholder="Search.."
-                                    value={clientFilter}
-                                    onChange={(e) => setClientFilter(e.target.value)}
-                                />
-                            </th>
-                            <th>
-                                Date
-                                <input
-                                    className="form-control w-75"
-                                    id="datefilter"
-                                    type="text"
-                                    placeholder="Search.."
-                                    value={dateFilter}
-                                    onChange={(e) => setDateFilter(e.target.value)}
-                                />
-                            </th>
-                            <th className='align-text-top pt-3'>Amount</th>
-                            <th className='w-10'>
-                                Status
-                                <input
-                                    className="form-control w-75"
-                                    id="statusfilter"
-                                    type="text"
-                                    placeholder="Search.."
-                                    value={statusFilter}
-                                    onChange={(e) => setStatusFilter(e.target.value)}
-                                />
-                            </th>
-                            <th className='text-center'></th>
+                            {/* Depending on numRowsToShow, show the table differently */}
+                            {numRowsToShow === 5 ? (
+                                <>
+                                    <th>Budget</th>
+                                    <th>Title</th>
+                                    <th className='w-10'>Status</th>
+                                    <th className='text-center'>Action</th>
+                                </>
+                            ) : numRowsToShow === 6 ? (
+                                <>
+                                    <th style={{ width: '10%' }}>Budget</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th className='w-10'>Status</th>
+                                    <th className='text-center'>Action</th>
+                                </>
+                            ) : (
+                                <>
+                                    <th style={{ width: '10%' }} className="text-start pt-3">
+                                        Budget
+                                        <input
+                                            className="form-control w-50 text-start"
+                                            id="budgetnfilter"
+                                            type="number"
+                                            placeholder="Search.."
+                                            value={budgetNumberFilter}
+                                            onChange={(e) => setBudgetNumberFilter(e.target.value)}
+                                        />
+                                    </th>
+                                    <th>
+                                        Client
+                                        <input
+                                            className="form-control w-75"
+                                            id="clientfilter"
+                                            type="text"
+                                            placeholder="Search.."
+                                            value={clientFilter}
+                                            onChange={(e) => setClientFilter(e.target.value)}
+                                        />
+                                    </th>
+                                    <th>
+                                        Date
+                                        <input
+                                            className="form-control w-75"
+                                            id="datefilter"
+                                            type="text"
+                                            placeholder="Search.."
+                                            value={dateFilter}
+                                            onChange={(e) => setDateFilter(e.target.value)}
+                                        />
+                                    </th>
+                                    <th className='align-text-top pt-3'>Amount</th>
+                                    <th className='w-10'>
+                                        Status
+                                        <input
+                                            className="form-control w-75"
+                                            id="statusfilter"
+                                            type="text"
+                                            placeholder="Search.."
+                                            value={statusFilter}
+                                            onChange={(e) => setStatusFilter(e.target.value)}
+                                        />
+                                    </th>
+                                    <th className='text-center align-text-top pt-3'>Action</th>
+                                </>
+                            )}
                         </tr>
                     </thead>
                     <tbody className='text-start'>
-                        {filteredRows.map((row, rowIndex) => (
+                        {filteredRows.slice(0, numRowsToShow).map((row, rowIndex) => (
                             <tr key={rowIndex} style={{ borderRadius: rowIndex === filteredRows.length - 1 ? '0 0 15px 15px' : '0' }}>
-                                {row.map((data, colIndex) => {
-                                    let color = 'inherit';
-                                    if (colIndex === 4) {
-                                        if (data === 'New') color = '#FFD56D'; // amarelo
-                                        else if (data === 'Rejected') color = '#EB5757'; // vermelho
-                                        else if (data === 'Paid') color = '#00B69B'; // verde
-                                        else if (data === 'Waiting') color = '#2D9CDB'; // azul
-                                    }
-                                    return (
-                                        <td key={colIndex} className={'ps-3'} style={{ color: colIndex === 4 ? color : 'inherit' }}>
-                                            {data}
+                                {numRowsToShow === 5 && (
+                                    <>
+                                        <td style={{ width: '10%' }} className='ps-3'>{row[0]}</td>
+                                        <td>{row[1]}</td>
+                                        <td className='w-10' style={{ color: getStatusColor(row[4]) }}>{row[4]}</td>
+                                        <td className='text-center'>
+                                            <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
                                         </td>
-                                    );
-                                })}
-                                <td className='text-center'>
-                                    <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
-                                </td>
+                                    </>
+                                )}
+                                {numRowsToShow === 6 && (
+                                    <>
+                                        <td style={{ width: '10%' }} className='ps-3'>{row[0]}</td>
+                                        <td>{row[1]}</td>
+                                        <td>{row[2]}</td>
+                                        <td>{row[3]}</td>
+                                        <td className='w-10' style={{ color: getStatusColor(row[4]) }}>{row[4]}</td>
+                                        <td className='text-center'>
+                                            <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
+                                        </td>
+                                    </>
+                                )}
+                                {numRowsToShow === 20 && (
+                                    <>
+                                        <td style={{ width: '20%' }} className='ps-3'>{row[0]}</td>
+                                        <td>{row[1]}</td>
+                                        <td>{row[2]}</td>
+                                        <td>{row[3]}</td>
+                                        <td className='w-10' style={{ color: getStatusColor(row[4]) }}>{row[4]}</td>
+                                        <td className='text-center'>
+                                            <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
+                                        </td>
+                                    </>
+                                )}
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <nav aria-label="..." className='ms-3'>
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item active">
-                            <a className="page-link" href="#">2</a>
-                        </li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-                {/*NOTA: Fazer com que toda a info venha do ticket ofc*/}
+                {numRowsToShow === 20 && (
+                    <nav aria-label="..." className='ms-3'>
+                        <ul className="pagination">
+                            <li className="page-item"><a className="page-link" href="#">1</a></li>
+                            <li className="page-item active">
+                                <a className="page-link" href="#">2</a>
+                            </li>
+                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                            <li className="page-item">
+                                <a className="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                )}
+
+                {/* Modal for displaying selected budget details */}
                 <Modal
                     size="lg"
                     show={lgShow}
                     onHide={() => setLgShow(false)}
-                    aria-labelledby="ticketedit"
+                    aria-labelledby="budgetDetails"
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>
@@ -176,16 +233,16 @@ function BudgetsListBox() {
                                         <div className="col-3 text-body-secondary">
                                             DESCRIPTION
                                         </div>
-                                        <div className="col-9 ">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                                        <div className="col-9">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                                         </div>
                                     </div>
                                     <div className="row mb-5">
                                         <div className="col-3 text-body-secondary">
-                                            PRODUTOS
+                                            PRODUCTS
                                         </div>
                                         <div className="col-9">
-                                            <div className="row ">
+                                            <div className="row">
                                                 <div className="col-4 d-flex flex-column text-center fw-medium">
                                                     Prints
                                                     <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints"></img>
@@ -210,7 +267,7 @@ function BudgetsListBox() {
                                         <div className="col-3 text-body-secondary">
                                             REPLY
                                         </div>
-                                        <div className="col-9 ">
+                                        <div className="col-9">
                                             <textarea className="form-control" placeholder="Reply" id="descriptioninput" rows="3"></textarea>
                                         </div>
                                     </div>

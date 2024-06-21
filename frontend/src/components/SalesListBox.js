@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-
+import '../App.css';
 
 const salesContent = [
     1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', '1',
-    2, 'Chatbot Avariou', '13/06/2024', 'Programming', '3', 
+    2, 'Chatbot Avariou', '17/03/2022', 'Programming', '3', 
     3, 'Não sei', '13/06/2024', 'Design', '2', 
     4, 'João Ratão', '13/06/2024', '20000', '1', 
     5, 'João Ratão', '13/06/2024', '20000', '1', 
@@ -69,8 +69,17 @@ function SalesListBox() {
         );
     });
 
+    // Custom function to parse the date string into a Date object
+    const parseDate = (str) => {
+        const parts = str.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1; // Months are zero-indexed in JavaScript Date
+        const year = parseInt(parts[2], 10);
+        return new Date(year, month, day);
+    };
+
     return (
-        <div className="box-container h-100">
+        <div className="box-container h-100 shadow">
             <div className="container bg-white px-0 roundbg">
                 <table id="datatable" className='table text-start'>
                     <thead className='text-white'>
@@ -98,8 +107,10 @@ function SalesListBox() {
                                 <DatePicker
                                     selected={startDate}
                                     onChange={handleDateChange}
-                                    className="form-control w-75"
+                                    dateFormat="dd/MM/yyyy" // Set the date format here
                                     placeholderText="Select Date"
+                                    className="form-control w-75"
+                                    parseDate={parseDate} // Custom parse function
                                 />
                             </th>
                             <th>Products

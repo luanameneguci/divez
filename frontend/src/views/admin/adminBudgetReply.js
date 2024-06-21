@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../App.css';
 
+/* não tenho a certeza como fazer isto com a base de dados, não sei pq mas não estava a conseguir juntar
+mas provavelmente era burrice*/
 const budgetProducts = [
     {
         nome: "Adobe Animate",
@@ -21,7 +23,7 @@ const budgetDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing el
 
 const AdminBudgetReply = () => {
     return (
-        <div className="dashboard-content bg-light w-100 p-2x">
+        <div className="container bg-light w-100 p-2x">
             <div className="container">
                 <div className="box-container bg-white roundbg h-100 p-4 shadow">
                     <div className="row">

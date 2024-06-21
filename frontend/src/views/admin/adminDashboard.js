@@ -10,39 +10,41 @@ var numRowsToShow = 6;
 
 const AdminDashboard = () => {
     return (
-        <div className="dashboard-content bg-light w-100">
+        <div className="container bg-light w-100">
             <h4 className="title my-2">Product Name</h4>
             <div className="container text-center">
-                <div className="row d-flex justify-content-between">
-                    <div className="col mx-1 bg-white roundbg">
+                <div className="d-flex justify-content-between">
+                    <div className="col mx-1">
                         <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col mx-1 bg-white roundbg">
+                    <div className="col mx-1">
                         <Box title="Pending Sales" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col mx-1 bg-white roundbg">
+                    <div className="col mx-1">
                         <Box title="Inactive Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
-                    <div className="col mx-1 bg-white roundbg">
+                    <div className="col mx-1">
                         <Box title="Active Licences" number="20" image={notificationicon} evolution="10" />
                     </div>
                 </div>
                 <div class="row my-3">
                     <div class="col-4">
+                        {/*Size fixed*/}
                         <BoxProgress />
 
                     </div>
                     <div class="col-8">
-                        <TicketListBox numRowsToShow={numRowsToShow} showSearchInputs={false}/>
+                        {/*Underneat the last row, has a extra row?*/}
+                        <TicketListBox numRowsToShow={numRowsToShow}/>
                     </div>
                 </div>
                 <div class="row my-3">
                     <div class="col-4">
-                        {/*Aqui vai ser o boxsecond*/}
+                        {/*Pie chart*/}
 
                     </div>
                     <div class="col-8">
-                        <BudgetListBox />
+                        <BudgetListBox numRowsToShow={numRowsToShow}/>
                     </div>
                 </div>
             </div>
@@ -50,9 +52,5 @@ const AdminDashboard = () => {
 
     );
 }
-
-
-
-
 
 export default AdminDashboard;

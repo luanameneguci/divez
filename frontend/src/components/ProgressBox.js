@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import notificationicon from "../images/notification.png";
+import React from 'react';
+import '../App.css';
+
 
 
 // Componente que mostra a Lista de Tickets
@@ -41,7 +41,7 @@ function ProgressDivs({ resultado }) {
     return (
         <div>
             {resultado.map((item, index) => (
-                <div key={index}>
+                <div key={index} className='py-3'>
                     <div className="d-flex justify-content-between pt-1">
                         <span>{item[0]}</span>
                         <span>{item.percentage}%</span>
@@ -64,7 +64,7 @@ function ProgressDivs({ resultado }) {
 
 function ProgressBox() {
     return (
-        <div className="box-container bg-white col-auto rounded d-flex shadow" style={{ height: 320 + "px" }}>
+        <div className="box-container bg-white col-auto roundbg d-flex shadow pb-3 shadow">
             <div className="col-12">
                 <span className="box-title d-flex justify-content-start pt-3 ps-3 pb-3">
                     <strong>

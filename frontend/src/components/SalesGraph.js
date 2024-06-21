@@ -1,6 +1,8 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import '../App.css';
+
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -61,7 +63,7 @@ const SalesGraph = () => {
     };
 
     return (
-        <div style={{ width: "100%", maxWidth: "900px", margin: 'auto' }}>
+        <div className='shadow' style={{ width: "100%", maxWidth: "900px", margin: 'auto' }}>
             <Bar data={data} options={options} />
         </div>
     );
