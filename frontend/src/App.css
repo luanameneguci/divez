@@ -157,6 +157,15 @@ a {
   transform: scale(1.05);
 }
 
+.hover1 {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hover1:hover {
+  transform: scale(1.05);
+}
+
 .text-outdated {
   color: #ffd56d;
 }
