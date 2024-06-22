@@ -7,7 +7,7 @@ import BuyerMenu from './views/buyer/buyerMenu';
 function App() {
   return (
     <div>
-      <AdminMenu />
+      <BuyerMenu />
     </div>
 
   );
