@@ -1,17 +1,17 @@
 import React from 'react';
 import '../../App.css';
 import notificationicon from "../../images/notification.png";
-import Box from '../../components/Box';
-import TicketListBox from '../../components/TicketListBox';
-import BoxProgress from '../../components/ProgressBox';
-import BudgetListBox from '../../components/BudgetListBox';
+import Box from '../../components/admin/Box';
+import TicketListBox from '../../components/admin/TicketListBox';
+import BoxProgress from '../../components/admin/ProgressBox';
+import BudgetListBox from '../../components/admin/BudgetListBox';
 
 var numRowsToShow = 6;
 
 const AdminDashboard = () => {
     return (
         <div className="container bg-light w-100">
-            <h4 className="title my-2">Product Name</h4>
+            <h3 className="title my-2">Dashboard</h3>
             <div className="container text-center">
                 <div className="d-flex justify-content-between">
                     <div className="col mx-1">

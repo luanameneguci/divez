@@ -1,6 +1,8 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 import Select from 'react-select';
+import { BrowserRouter as Link } from 'react-router-dom';
+
 
 {/*Não esquecer de fazer uma cena como a "notificação que aparece quando adicionamos um filme na ficha 7 (aquele alert informativo)
 function SendUpdate() {
@@ -111,7 +113,7 @@ const ProductEdit = () => {
                     <button type="button" class="btn btn-outline-success">Save</button>
                 </div>
                 <div className="col-6">
-                    <button type="button" class="btn btn-outline-danger">Cancel</button>
+                    <Link to='/products' class="btn btn-outline-danger">Cancel</Link>
                 </div>
             </div>
 

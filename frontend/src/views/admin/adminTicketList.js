@@ -1,8 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import notificationicon from "../../images/notification.png";
-import TicketListBox from '../../components/TicketListBox';
-import Box from '../../components/Box';
+import TicketListBox from '../../components/admin/TicketListBox';
 
 var numRowsToShow = 20;
 

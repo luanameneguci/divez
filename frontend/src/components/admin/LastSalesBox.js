@@ -1,6 +1,6 @@
 import React from 'react';
-import '../App.css';
-import notificationicon from "../images/notification.png";
+import '../../App.css';
+import notificationicon from "../../images/notification.png";
 
 
 const boxProductsContent = [
@@ -64,6 +64,7 @@ function LastSalesBox() {
                                         return (
                                             <td
                                                 key={colIndex}
+                                                className='align-middle'
                                                 colSpan={(colIndex === 0) ? 1 : 0}
                                                 style={{
                                                     padding: '10px',
@@ -80,7 +81,7 @@ function LastSalesBox() {
                         ))}
                     </tbody>
                 </table>
-                <div className="mt-2">
+                <div className="my-2">
                     <button className='btn btn-outline-dark'>See more</button>
                 </div>
             </div>

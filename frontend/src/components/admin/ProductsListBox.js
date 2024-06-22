@@ -1,5 +1,5 @@
 // Componente que mostra as caixas no cimo das páginas
-import '../App.css';
+import '../../App.css';
 
 // For testing, swap with db data
 const boxProductsContent = [
