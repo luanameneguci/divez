@@ -11,7 +11,7 @@ import BuyerBudgetList from "./buyerBudgetList";
 import BuyerPurchasesList from "./buyerPurchases";
 import BuyerProductList from "./buyerProducts";
 import BuyerManagerList from "./buyerManagers";
-import AdminDashboard from "./buyerDashboard";
+import BuyerDashboard from "./buyerDashboard";
 import BuyerShop from "./buyerShop";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -127,11 +127,7 @@ const Menu = () => {
         <div className="mw-100 h-25 bg-light py-2 px-3">
           <div className="row">
 
-<<<<<<< Updated upstream
-            <BuyerShop />
-=======
             <BuyerProductItem />
->>>>>>> Stashed changes
 
           </div>
         </div>
