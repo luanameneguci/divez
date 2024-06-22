@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../../App.css';
 import Modal from 'react-bootstrap/Modal';
-import notificationicon from "../images/notification.png";
+import notificationicon from "../../images/notification.png";
 
 // For testing, swap with db data
 const ticketboxcontent = [

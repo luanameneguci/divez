@@ -1,35 +1,27 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../../App.css';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
-const clientList = [
-    ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-    ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Client'],
-    ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-    ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-    ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-    ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Manager'],
-];
-
-function ClientListBox() {
+function ManagersList({ managersList }) {
     const [nameFilter, setNameFilter] = useState('');
     const [nifFilter, setNifFilter] = useState('');
     const [mailFilter, setMailFilter] = useState('');
-    const [accountTypeFilter, setAccountTypeFilter] = useState('');
+    const [productsFilter, setProductsFilter] = useState('');
 
     // Filtering function
-    const filteredRows = clientList.filter(row =>
+    const filteredRows = managersList.filter(row =>
         row[0].toLowerCase().includes(nameFilter.toLowerCase()) &&
         row[1].includes(nifFilter) &&
         row[2].toLowerCase().includes(mailFilter.toLowerCase()) &&
-        row[3].toLowerCase().includes(accountTypeFilter.toLowerCase())
+        row[3].toLowerCase().includes(productsFilter.toLowerCase())
     );
 
     /* Futuro
     // Delete client function
     const deleteClient = (index) => {
-        const updatedList = [...clientList];
+        const updatedList = [...managersList];
         updatedList.splice(index, 1);
-        setClientList(updatedList);
+        setManagersList(updatedList);
     };*/
 
     return (
@@ -64,13 +56,13 @@ function ClientListBox() {
                                 onChange={(e) => setMailFilter(e.target.value)}
                             />
                         </th>
-                        <th className="ps-3 py-2">Account Type
+                        <th className="ps-3 py-2">OutraInfoQualquer
                             <input
                                 className="form-control w-75"
                                 type="text"
                                 placeholder="Search"
-                                value={accountTypeFilter}
-                                onChange={(e) => setAccountTypeFilter(e.target.value)}
+                                value={productsFilter}
+                                onChange={(e) => setProductsFilter(e.target.value)}
                             />
                         </th>
                         <th className="py-2 align-text-top text-center pt-2">Action</th>
@@ -84,10 +76,10 @@ function ClientListBox() {
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[2]}</td>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[3]}</td>
                             <td className="d-flex justify-content-center">
-                                <button
-                                    className='btn btn-outline-danger'
-                                    //onClick={() => deleteClient(index)} futuro
-                                >
+                                <Link to="/#" className="btn btn-outline-info me-2">
+                                    Add
+                                </Link>
+                                <button className='btn btn-outline-danger'>
                                     Delete
                                 </button>
                             </td>
@@ -99,4 +91,4 @@ function ClientListBox() {
     );
 }
 
-export default ClientListBox;
+export default ManagersList;

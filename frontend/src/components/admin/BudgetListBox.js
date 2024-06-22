@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import notificationicon from "../images/notification.png";
+import notificationicon from "../../images/notification.png";
 import Modal from 'react-bootstrap/Modal';
-import '../App.css';
+import '../../App.css';
 
 
 const boxBudgetsContent = [
@@ -279,6 +279,9 @@ function BudgetsListBox({ numRowsToShow }) {
                                             <input type="number" className="form-control" id="budgetprice" placeholder="Price" />
                                         </div>
                                     </div>
+                                </div>
+                                <div className='col-12 text-center'>
+                                    <button className='btn btn-success'>Send</button>
                                 </div>
                             </form>
                         )}

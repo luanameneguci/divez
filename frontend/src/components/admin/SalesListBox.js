@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import '../App.css';
+import '../../App.css';
 
 const salesContent = [
     1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', '1',

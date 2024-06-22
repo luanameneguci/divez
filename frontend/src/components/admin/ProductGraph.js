@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
-import '../App.css';
+import '../../App.css';
 
 
 const ProductGraph = () => {
@@ -67,7 +67,7 @@ const ProductGraph = () => {
     }, []);
 
     return (
-        <div className="box-container bg-white roundbg d-flex shadow" style={{height: '500px'}}>
+        <div className="box-container p-3 roundbg d-flex shadow" style={{height: '500px'}}>
             <div className="col-12">
             <canvas ref={canvasRef} style={{ width: "100%", margin: "auto"}}></canvas>
             </div>

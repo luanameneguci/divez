@@ -1,9 +1,9 @@
 import React from "react";
 import "../../App.css";
 import notificationicon from "../../images/notification.png";
-import Box from '../../components/Box';
-import ProductsListBox from '../../components/ProductsListBox';
-import BudgetListBox from '../../components/BudgetListBox';
+import Box from '../../components/admin/Box';
+import ProductsListBox from '../../components/admin/ProductsListBox';
+import BudgetListBox from '../../components/admin/BudgetListBox';
 
 const numRowsToShow = 5;
 

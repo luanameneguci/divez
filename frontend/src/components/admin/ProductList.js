@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../../App.css';
+import { BrowserRouter as Link } from 'react-router-dom';
+
 
 const list = [
     'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
@@ -113,7 +115,9 @@ function ProductList() {
                                         <td
                                             key={colIndex}
                                         >
+                                            <Link to='/product'>
                                             <img src={data} alt="Product" className="me-3" style={{ width: '70px', height: '70px' }} />
+                                            </Link>
                                         </td>
                                     ) : (
                                         <td
@@ -126,7 +130,7 @@ function ProductList() {
                                 ))}
                                 {/**/}
                                 <td className="d-flex justify-content-center p-4">
-                                    <button className='btn btn-outline-info me-2'>Edit</button>
+                                    <Link to='/editproduct' className='btn btn-outline-info me-2'>Edit</Link>
                                     <button className='btn btn-outline-danger'
                                     //onClick={() => deleteProduct(rowIndex)} futuro
                                     >Delete

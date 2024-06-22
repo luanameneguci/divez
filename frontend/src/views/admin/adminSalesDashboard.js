@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../App.css';
 import notificationicon from "../../images/notification.png";
-import Box from '../../components/Box';
-import SalesGraph from '../../components/SalesGraph';
+import Box from '../../components/admin/Box';
+import SalesGraph from '../../components/admin/SalesGraph';
 
 
 const AdminSalesDashboard = () => {

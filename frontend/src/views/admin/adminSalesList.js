@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import SalesListBox from '../../components/SalesListBox';
+import SalesListBox from '../../components/admin/SalesListBox';
 
 
 const AdminSalesList = () => {

@@ -1,4 +1,4 @@
-import '../App.css';
+import '../../App.css';
 
 // Show top screen boxes
 function Box(props) {

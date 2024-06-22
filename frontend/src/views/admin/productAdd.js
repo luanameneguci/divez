@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import ProductAdd from '../../components/ProductAdd';
+import ProductAdd from '../../components/admin/ProductAdd';
 
 const AddProduct = () => {
     return (
