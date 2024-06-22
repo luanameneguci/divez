@@ -87,7 +87,7 @@ const FileUpload = () => {
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow m-4">
+      <div className="bg-white p-4 roundbg shadow m-4">
         <p className="my-auto">
           <b>1. FAQ</b>
         </p>
@@ -98,7 +98,7 @@ const FileUpload = () => {
           id="button-1"
           onClick={handleButtonClick}
           style={getButtonStyle(1)}
-          className="hover rounded py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
         >
           <b style={{ pointerEvents: "none" }}>Installation</b>
         </button>
@@ -106,7 +106,7 @@ const FileUpload = () => {
           id="button-2"
           onClick={handleButtonClick}
           style={getButtonStyle(2)}
-          className="hover rounded py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
         >
           <b style={{ pointerEvents: "none" }}>Licenses</b>
         </button>
@@ -114,7 +114,7 @@ const FileUpload = () => {
           id="button-3"
           onClick={handleButtonClick}
           style={getButtonStyle(3)}
-          className="hover rounded py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
         >
           <b style={{ pointerEvents: "none" }}>Payment</b>
         </button>
@@ -607,13 +607,13 @@ const FileUpload = () => {
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded shadow m-4">
+      <div className="bg-white p-4 roundbg shadow m-4">
         <p className="my-auto">
           <b>2. Tickets</b>
         </p>
       </div>
 
-      <div className="file-upload mx-auto col-10 text-center bg-white shadow rounded p-4">
+      <div className="file-upload mx-auto col-10 text-center bg-white shadow roundbg p-4">
         <form>
           <h5 class="mb-4 text-center col-10 mx-auto mt-3">
             <b>
@@ -625,17 +625,17 @@ const FileUpload = () => {
           <div className="col-12 d-flex justify-content-around my-5 mx-auto">
             <input
               type="submit"
-              className="hover rounded py-3 px-4 border-0 mx-4 shadow col-2"
+              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
               value="Installation"
             />
             <input
               type="submit"
-              className="hover rounded py-3 px-4 border-0 mx-4 shadow col-2"
+              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
               value="Licenses"
             />
             <input
               type="submit"
-              className="hover rounded py-3 px-4 border-0 mx-4 shadow col-2"
+              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
               value="Payment"
             />
           </div>
@@ -652,7 +652,7 @@ const FileUpload = () => {
             {isUploadVisible && (
               <div>
                 <button
-                  className="file-upload-btn bg-info border-0 rounded p-3 hover my-3"
+                  className="file-upload-btn bg-info border-0 roundbg p-3 hover my-3"
                   style={{ color: "white" }}
                   type="button"
                   onClick={() =>
@@ -663,7 +663,7 @@ const FileUpload = () => {
                 </button>
 
                 <div
-                  className="image-upload-wrap text-center col-6 mx-auto border-2 rounded border-secondary position-relative d-flex justify-content-center"
+                  className="image-upload-wrap text-center col-6 mx-auto border-2 roundbg border-secondary position-relative d-flex justify-content-center"
                   style={{ height: "15vh", borderStyle: "dashed" }}
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
@@ -689,7 +689,7 @@ const FileUpload = () => {
           {file && (
             <div className="file-upload-content">
               <img
-                className="file-upload-image rounded"
+                className="file-upload-image roundbg"
                 src={imagePreview}
                 alt="Uploaded"
               />
@@ -697,7 +697,7 @@ const FileUpload = () => {
                 <button
                   type="button"
                   onClick={removeUpload}
-                  className="remove-image bg-danger border-0 rounded p-3 hover mt-3"
+                  className="remove-image bg-danger border-0 roundbg p-3 hover mt-3"
                 >
                   Remove <span className="image-title">{file.name}</span>
                 </button>

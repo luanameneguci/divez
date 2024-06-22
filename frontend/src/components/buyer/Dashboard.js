@@ -25,7 +25,15 @@ const BuyerDashboard = () => {
     rows.push(tablecontent.slice(i, i + itemsPerRow));
   }
 
-  const managersData = [
+  let data = [
+    { nome: "Adobe Photoshop", numeroTotal: 1000, numeroAtivos: 750 },
+    { nome: "Adobe Illustrator", numeroTotal: 900, numeroAtivos: 500 },
+    { nome: "Adobe Animate", numeroTotal: 900, numeroAtivos: 900 },
+    { nome: "Adobe After Effects", numeroTotal: 800, numeroAtivos: 500 },
+];
+
+
+  const managerData  = [
     {
       nome: "João Ratão",
       nomeApp: "Adobe Photoshop",
@@ -51,12 +59,10 @@ const BuyerDashboard = () => {
       photo: "https://img.icons8.com/?size=100&id=13677&format=png&color=000000",
     },
   ];
-  
-  const managers = managersData.slice(0, 4);
-  
+
   return (
     <div>
-      <div className="dashboard-content h-100 bg-light w-100">
+      <div className="bg-light w-100">
         <h2 className="title py-3">Dashboard</h2>
         <div className="col-12 text-center">
           <div className="row">
@@ -78,10 +84,10 @@ const BuyerDashboard = () => {
             <BoxTable title="Pending budgets" rows={rows} />
           </div>
           <div className="col-4">
-            <BoxProgress title="Your most used licences" />
+            <BoxProgress title="Your most used licences" data={data}/>
           </div>
           <div className="col-4">
-            <BoxManager title="Managers" managers={managers} />
+          <BoxManager title="Managers" managers={managerData} />
           </div>
         </div>
       </div>

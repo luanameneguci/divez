@@ -177,7 +177,7 @@ function calculatePercentages(result) {
 
 function BoxProgress(props) {
   return (
-    <div className="box-container bg-white col-auto rounded d-flex shadow mx-4">
+    <div className="box-container bg-white col-auto roundbg d-flex shadow mx-4">
       <div className="col-12">
         <div className="col-12">
           <ProgressDivs resultado={resultado} />

@@ -104,8 +104,7 @@ const items = createDataArraysItems(itemsDataArray);
 // ItemStatus component
 const ItemStatus = ({ items, result }) => {
   return (
-
-    <div className="my-3 m-3 shadow roundbg">
+    <div className="my-3 m-3 shadow roundbg ">
       <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg">
         <div className="col-12 row">
           <div className="col-2">
@@ -190,10 +189,16 @@ const ItemStatus = ({ items, result }) => {
           </div>
         </div>
       </div>
-      <div className="box-container bg-white col-auto roundbg d-flex shadow" style={{ height: "360px" }}>
-        <div className="col-12">
-          <div className="px-3">
-            <PackageDivs resultado={result} />
+      <div>
+        <div
+          className="box-container bg-white col-auto roundbg d-flex shadow"
+          style={{ height: 360 + "px" }}
+        >
+          <div className="col-12">
+            {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
+            <div className="px-3">
+              <PackageDivs resultado={result} />
+            </div>
           </div>
         </div>
       </div>
