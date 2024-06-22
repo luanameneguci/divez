@@ -34,9 +34,9 @@ const BuyerPurchasesList = () => {
 }
 
 function Products() {
-    return <div className="box-container bg-white col-auto rounded d-flex shadow mx-4">
-    <div className="col-12 bg-info rounded">
-        <table className='container-fluid text-start bg-info py-4 rounded table3'>
+    return <div className="box-container bg-white col-auto roundbg d-flex shadow mx-4">
+    <div className="col-12 bg-info roundbg">
+        <table className='container-fluid text-start bg-info py-4 roundbg table3'>
             <thead className='text-white'>
                 <th className="ps-3 py-2">ID</th>
                 <th className="ps-3 py-2">Product</th>

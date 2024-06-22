@@ -89,8 +89,8 @@ function createDataArraysItems(item) {
 
 const ItemStatus = ({ itemData }) => {
   return (
-    <div className="my-3 m-3 shadow rounded ">
-      <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded">
+    <div className="my-3 m-3 shadow roundbg ">
+      <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg">
         <div className="col-12 row">
           <div className="col-2">
             <img src={itemData[1]} alt={`${itemData[0]}`} className="mr-3" />
@@ -174,7 +174,7 @@ const ItemStatus = ({ itemData }) => {
       </div>
       <div>
         <div
-          className="box-container bg-white col-auto rounded d-flex shadow"
+          className="box-container bg-white col-auto roundbg d-flex shadow"
           style={{ height: 360 + "px" }}
         >
           <div className="col-12">

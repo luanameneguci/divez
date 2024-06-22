@@ -91,7 +91,7 @@ const BuyerPayment = () => {
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="bg-white rounded shadow">
+              <div className="bg-white roundbg shadow">
                 <div className=" p-4">
                   <div className="row">
                     <div className="col-lg-7">
@@ -130,7 +130,7 @@ const BuyerPayment = () => {
                       </div>
                     </div>
                     <div className="col-lg-5">
-                      <div className="card bg-info text-white rounded-3">
+                      <div className="card bg-info text-white roundbg-3">
                         <div className="card-body">
                           <div className="d-flex justify-content-between align-items-center mb-4">
                             <h5 className="mb-0">Card details</h5>
@@ -268,7 +268,7 @@ const ShoppingCart = ({ items }) => {
                 <div>
                   <img
                     src={item.image}
-                    className="img-fluid rounded-3"
+                    className="img-fluid roundbg-3"
                     alt="Shopping item"
                     style={{ width: "65px" }}
                   />

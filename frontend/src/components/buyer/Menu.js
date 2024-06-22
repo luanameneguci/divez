@@ -93,7 +93,7 @@ const Menu = () => {
             </div>
           </div>
 
-          <div className="mw-100 h-25 bg-light py-2 px-3">
+          <div className="mw-100 bg-light py-2 px-3">
             <div className="row">
                 {/*Corrigir rotas*/}
               <Routes>

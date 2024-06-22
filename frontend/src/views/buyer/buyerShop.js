@@ -84,8 +84,8 @@ function createDataArraysItems(item) {
 
 const ItemStatus = ({ itemData }) => {
   return (
-    <div className="my-3 m-3 shadow rounded hover ">
-      <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded">
+    <div className="my-3 m-3 shadow roundbg hover ">
+      <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg">
         <div className="col-12 row">
           <div className="col-2">
             <img src={itemData[1]} alt={`${itemData[0]}`} className="mr-3" />
