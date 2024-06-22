@@ -1,12 +1,12 @@
 const express = require("express");
-const sequelize = require("../model/database");
+const sequelize = require("../models/database");
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var Ticket = require("../model/tickets")(sequelize, DataTypes);
-var Buyer = require("../model/buyer")(sequelize, DataTypes);
-var TicketStatus = require("../model/ticketStatus")(sequelize, DataTypes);
-var TicketDepartment = require("../model/ticketDepartment")(sequelize, DataTypes);
-var Manager = require("../model/manager")(sequelize, DataTypes);
-sequelize.sync();
+var Ticket = require("../models/tickets");
+var Buyer = require("../models/buyer");
+var TicketStatus = require("../models/ticketStatus");
+var TicketDepartment = require("../models/ticketDepartment");
+var Manager = require("../models/manager");
+
 
 const controllers = {};
 

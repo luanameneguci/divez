@@ -1,11 +1,11 @@
 const express = require("express");
-const sequelize = require("../model/database");
+const sequelize = require("../models/database");
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var License = require("../model/licenses")(sequelize, DataTypes);
-var LicenseStatus = require("../model/licenseStatus")(sequelize, DataTypes);
-var LicenseUser = require("../model/licenseUser")(sequelize, DataTypes);
-var Bill= require("../model/billing")(sequelize, DataTypes);
-sequelize.sync();
+var License = require("../models/licenses");
+var LicenseStatus = require("../models/licenseStatus");
+var LicenseUser = require("../models/licenseUser");
+var Bill= require("../models/bills");
+
 
 const controllers = {};
 

@@ -1,8 +1,8 @@
 const express = require("express");
-const sequelize = require("../model/database");
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const sequelize = require("../models/database");
+const { DataTypes } = require('sequelize');
+var Admin = require("../models/admins");
 
-sequelize.sync();
 const controllers = {};
 
 controllers.admin_list = async (req, res) => {

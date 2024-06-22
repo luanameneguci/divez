@@ -1,21 +1,21 @@
 const express = require("express");
-const sequelize = require("../model/database");
-var initModels = require("../model/init-models");
-var models = initModels(sequelize);
+const sequelize = require("../models/database");
+const { DataTypes } = require('sequelize');
+var AdminBudget = require("../models/AdminBudget");
+var initModels = require("../models/init-models");
 
-sequelize.sync();
 
 const controllers = {};
 
 
 controllers.adminBudget_list = async (req, res) => {
-  const data = await models.AdminBudget.findAll();
+  const data = await AdminBudget.findAll();
   res.json(data);
 };
 
 controllers.adminBudget_create = async (req, res) => {
   const { adminIdAdmin, budgetIdBudget } = req.body;
-  const adminBudget = await models.AdminBudget.create({
+  const adminBudget = await AdminBudget.create({
    adminIdAdmin, budgetIdBudget
   });
   res.json(adminBudget);
@@ -24,7 +24,7 @@ controllers.adminBudget_create = async (req, res) => {
 controllers.adminBudget_update = async (req, res) => {
   let idReceived = req.params.id;
   const { adminIdAdmin, budgetIdBudget } = req.body;
-  const adminBudget = await models.AdminBudget.update(
+  const adminBudget = await AdminBudget.update(
     { adminIdAdmin, budgetIdBudget },
     { where: { adminIdAdmin: idReceived } }
   );
@@ -35,13 +35,13 @@ controllers.adminBudget_update = async (req, res) => {
 controllers.adminBudget_detail = async (req, res) => {
   let idReceived = req.params.id;
 
-  const data = await models.AdminBudget.findOne({ where: { adminIdAdmin: idReceived } });
+  const data = await AdminBudget.findOne({ where: { adminIdAdmin: idReceived } });
   res.json(data);
 };
 
 controllers.adminBudget_delete = async (req, res) => {
   let idReceived = req.params.id;
-  await models.AdminBudget.destroy({ where: { id: idReceived } });
+  await AdminBudget.destroy({ where: { id: idReceived } });
   res.json({ message: "Excluído com sucesso!" });
 };
 

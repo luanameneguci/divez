@@ -1,8 +1,7 @@
 const express = require("express");
-const sequelize = require("../model/database");
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var AdminDepartment = require("../model/adminDepartment")(sequelize, DataTypes);
-sequelize.sync();
+const sequelize = require("../models/database");
+const { DataTypes } = require('sequelize');
+var AdminDepartment = require("../models/adminDepartments");
 
 const controllers = {};
 
@@ -43,4 +42,4 @@ controllers.admin_department_delete = async (req, res) => {
   res.json({ message: "Excluído com sucesso!" });
 };
 
-module.exports = controllers;
+module.exports = controllers; 
