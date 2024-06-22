@@ -85,10 +85,6 @@ function calculatePercentages(result) {
     return resultado;
 }
 
-
-
-
-
 const result = createDataArrays(data);
 const resultado = calculatePercentages(result);
 

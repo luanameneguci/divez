@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../../App.css";
 import Rating from "@mui/material/Rating";
 
@@ -44,20 +44,7 @@ const itemsDataArray = [
   },
 ];
 
-const BuyerShop = () => {
-  return (
-    <div className="dashboard-content bg-light w-100">
-      <h4 className="title mx-4 px-4 py-3">Shop</h4>
-      <div className="container text-center py-4">
-        <div className="row">
-          <div className="col-12">
-            <ItemList items={items} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+let items = createDataArraysItems(itemsDataArray);
 
 function createDataArraysItems(item) {
   // Initialize the result array
@@ -84,8 +71,8 @@ function createDataArraysItems(item) {
 
 const ItemStatus = ({ itemData }) => {
   return (
-    <div className="my-3 m-3 shadow rounded hover ">
-      <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded">
+    <div className="my-3 m-3 shadow roundbg hover ">
+      <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg">
         <div className="col-12 row">
           <div className="col-2">
             <img src={itemData[1]} alt={`${itemData[0]}`} className="mr-3" />
@@ -173,7 +160,20 @@ const ItemList = ({ items }) => {
   );
 };
 
-let items = createDataArraysItems(itemsDataArray);
+const BuyerShop = () => {
+  return (
+    <div className="dashboard-content bg-light w-100">
+      <h4 className="title mx-4 px-4 py-3">Shop</h4>
+      <div className="container text-center py-4">
+        <div className="row">
+          <div className="col-12">
+            <ItemList items={items} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default BuyerShop;
 
