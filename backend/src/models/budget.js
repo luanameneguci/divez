@@ -47,6 +47,6 @@ const BudgetStatus = require("./budgetStatus");
 
   BudgetStatus.hasMany(Budget, { foreignKey: 'idBudgetStatus' });
   Budget.belongsTo(BudgetStatus, { foreignKey: 'idBudgetStatus' });
-  Cart.hasMany(Cart, { foreignKey: 'idCart' });
+  Cart.hasMany(Budget, { foreignKey: 'idCart' });
   Budget.belongsTo(Cart, { foreignKey: 'idCart' });
 module.exports = Budget;

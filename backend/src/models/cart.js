@@ -38,4 +38,5 @@ var Cart = sequelize.define(
 Buyer.hasOne(Cart, { foreignKey: 'idBuyer' });
 Cart.belongsTo(Buyer, { foreignKey: 'idBuyer' });
 
+
 module.exports = Cart;
