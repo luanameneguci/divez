@@ -24,7 +24,7 @@ function ClientListBox({ clientList }) {
         };*/
 
     return (
-        <div className="container bg-white px-0 roundbg shadow">
+        <div className="container bg-white px-0 roundbg shadow h-100">
             <table className='table text-start'>
                 <thead className='text-white'>
                     <tr>

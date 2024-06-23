@@ -11,7 +11,7 @@ var numRowsToShow = 6;
 const AdminDashboard = () => {
     return (
         <div className="container bg-light w-100">
-            <h3 className="title my-2">Dashboard</h3>
+            <h3 className="title my-2 mx-4">Dashboard</h3>
             <div className="container text-center">
                 <div className="d-flex justify-content-between">
                     <div className="col mx-1">

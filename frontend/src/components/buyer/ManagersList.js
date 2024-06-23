@@ -25,7 +25,7 @@ function ManagersList({ managersList }) {
     };*/
 
     return (
-        <div className="container bg-white px-0 roundbg shadow">
+        <div className="container bg-white px-0 roundbg shadow h-100">
             <table className='table text-start'>
                 <thead className='text-white'>
                     <tr>
@@ -68,7 +68,7 @@ function ManagersList({ managersList }) {
                         <th className="py-2 align-text-top text-center pt-2">Action</th>
                     </tr>
                 </thead>
-                <tbody className='text-start'>
+                <tbody className='text-start roundbg'>
                     {filteredRows.map((row, index) => (
                         <tr key={index}>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[0]}</td>

@@ -66,10 +66,10 @@ function BudgetsListBox({ numRowsToShow }) {
     };
 
     return (
-        <div className="box-container d-flex h-100 shadow">
-            <div className="container bg-white px-0 roundbg">
-                <table className='table text-start m-0'>
-                    <thead className='text-white'>
+        <div className="box-container d-flex px-0">
+            <div className="container px-0 roundbg shadow h-100">
+                <table className='table text-start'>
+                    <thead className='text-white pt-2'>
                         <tr>
                             {/* Depending on numRowsToShow, show the table differently */}
                             {numRowsToShow === 5 ? (

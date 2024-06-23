@@ -37,34 +37,51 @@ function calculatePercentages(result) {
     return resultado;
 }
 
-function ProgressDivs({ resultado }) {
-    return (
-        <div>
-            {resultado.map((item, index) => (
-                <div key={index} className='py-3'>
-                    <div className="d-flex justify-content-between pt-1">
-                        <span>{item[0]}</span>
-                        <span>{item.percentage}%</span>
-                    </div>
-                    <div className="progress">
-                        <div
-                            className="progress-bar progress-bar-striped bg-info progress-bar-animated rounded"
-                            role="progressbar"
-                            style={{ width: item.percentage + "%" }}
-                            aria-valuenow={item.percentage}
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                        ></div>
-                    </div>
-                </div>
-            ))}
+const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
+    <div className="mb-3">
+      <div className="d-flex justify-content-between">
+        <p>
+          <strong>{nome}</strong>
+        </p>
+        <div className="d-flex">
+          <p>
+            {numeroAtivos} of {numeroTotal}
+          </p>
         </div>
+      </div>
+      <div className="progress">
+        <div
+          className="progress-bar bg-info"
+          role="progressbar"
+          style={{ width: `${percentage}%` }}
+          aria-valuenow={percentage}
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {percentage}%
+        </div>
+      </div>
+    </div>
+  );
+  const ProgressDivs = ({ resultado }) => {
+    return (
+      <div>
+        {resultado.map((item, index) => (
+          <ProgressDiv
+            key={index}
+            nome={item[0]}
+            numeroAtivos={item[2]}
+            numeroTotal={item[1]}
+            percentage={item.percentage}
+          />
+        ))}
+      </div>
     );
-}
+  };
 
 function ProgressBox() {
     return (
-        <div className="box-container bg-white col-auto roundbg d-flex shadow pb-3 shadow">
+        <div className="box-container bg-white col-auto roundbg d-flex shadow pb-3 shadow h-100">
             <div className="col-12">
                 <span className="box-title d-flex justify-content-start pt-3 ps-3 pb-3">
                     <strong>

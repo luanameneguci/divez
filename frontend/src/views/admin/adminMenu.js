@@ -89,7 +89,7 @@ const Menu = () => {
               </div>
             </div>
             <div className="w-100 bg-light">
-              <div className="row">
+              <div className="row dashboard-content">
                 <Routes>
                   <Route path="/" element={<AdminDashboard />} />
                   <Route path="/clients" element={<AdminClientList />} />

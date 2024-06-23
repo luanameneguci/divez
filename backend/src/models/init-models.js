@@ -22,40 +22,42 @@ var TicketStatus = require("../models/ticketStatus");
 var Ticket = require("../models/tickets");
 
 
+(async () => {
+    try {
+await AdminBudget.sync();
+await AdminProduct.sync();
+await AdminTicket.sync();
+await CartProduct.sync();
+await Department.sync();
+await BudgetStatus.sync();
+await ManagerLicense.sync();
+await LicenseStatus.sync();
+await LicenseUser.sync();
+await TicketDepartment.sync();
+await TicketStatus.sync();
+await Package.sync();
+await Product.sync();
+await Category.sync();
 
-AdminBudget.sync();
-AdminProduct.sync();
-AdminTicket.sync();
-CartProduct.sync();
-Department.sync();
-BudgetStatus.sync();
-ManagerLicense.sync();
-LicenseStatus.sync();
-LicenseUser.sync();
-TicketDepartment.sync();
-TicketStatus.sync();
-Package.sync();
-Product.sync();
-Category.sync();
+await Admin.sync();
 
-Admin.sync();
+await Buyer.sync();
 
-Buyer.sync();
+await Cart.sync();
 
-Cart.sync();
-
-Manager.sync();
-
-/*
-Bill.sync();
-
-Budget.sync();
-
-License.sync();
-
-Ticket.sync(); 
-
-*/
+await Manager.sync();
 
 
+await Bill.sync();
 
+await Budget.sync();
+
+await License.sync();
+
+await Ticket.sync(); 
+
+console.log("All models were synchronized successfully.");
+} catch (error) {
+  console.error("An error occurred while syncing models:", error);
+}
+})();

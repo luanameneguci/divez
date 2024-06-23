@@ -94,7 +94,7 @@ const Menu = () => {
           </div>
 
           <div className="mw-100 h-25 bg-light py-2 px-3">
-            <div className="row">
+            <div className="row dashboard-content">
                 {/*Corrigir rotas*/}
               <Routes>
                 <Route path="/" element={<BuyerDashboard />} />

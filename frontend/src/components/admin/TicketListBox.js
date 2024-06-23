@@ -57,8 +57,8 @@ function TicketListBox({ numRowsToShow }) {
 
     return (
         <div className="box-container d-flex px-0">
-            <div className="container px-0">
-                <table className='table text-start shadow'>
+            <div className="container px-0 roundbg shadow h-100">
+                <table className='table text-start'>
                     <thead className='text-white pt-2'>
                         <tr>
                             {/* Show filters only on tables with 20 numRowsToShow */}

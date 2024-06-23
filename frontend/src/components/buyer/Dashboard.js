@@ -67,7 +67,7 @@ const BuyerDashboard = () => {
         <div className="col-12 text-center">
           <div className="row">
             <div className="col">
-              <Box title="Pending budgets" number="" image={notificationicon} />
+              <Box title="Pending budgets" number="300" image={notificationicon} />
             </div>
             <div className="col">
               <Box title="Active Licenses" number="2000" image={notificationicon} />
