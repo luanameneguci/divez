@@ -4,7 +4,7 @@ const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var License = require("../models/licenses");
 var LicenseStatus = require("../models/licenseStatus");
 var LicenseUser = require("../models/licenseUser");
-var Bill= require("../models/bills");
+/* var Bill= require("../models/bills"); */
 
 
 const controllers = {};

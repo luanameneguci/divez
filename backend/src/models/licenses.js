@@ -5,8 +5,6 @@ var Bill = require("./bills");
 var LicenseStatus = require("./licenseStatus");
 var LicenseUser = require("./licenseUser");
 const { licenseUser_delete } = require("../controllers/licenseUserController");
-LicenseStatus.sync();
-Bill.sync();
 
 var License = sequelize.define(
   "license",
@@ -59,12 +57,16 @@ var License = sequelize.define(
     freezeTableName: true
   }
 );
-License.belongsTo(Buyer);
 Buyer.hasMany(License);
-License.belongsTo(Bill);
+License.belongsTo(Buyer);
+
 Bill.hasMany(License);
-License.belongsTo(LicenseStatus);
+License.belongsTo(Bill);
+
 LicenseStatus.hasMany(License);
-License.belongsTo(LicenseUser);
+License.belongsTo(LicenseStatus);
+
 LicenseUser.hasMany(License);
+License.belongsTo(LicenseUser);
+
 module.exports = License;

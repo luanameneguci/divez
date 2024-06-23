@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 var sequelize = require("./database");
-var Buyer = require("./buyer");
+const Buyer = require("./buyer");
 
 var Cart = sequelize.define(
   "cart",
@@ -21,7 +21,7 @@ var Cart = sequelize.define(
     },
     idBuyer: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+
       references: {
         model: Buyer,
         key: "idBuyer",
@@ -35,7 +35,7 @@ var Cart = sequelize.define(
 );
 
 
-Cart.belongsTo(Buyer);
-Buyer.hasOne(Cart);
+Buyer.hasOne(Cart, { foreignKey: 'idBuyer' });
+Cart.belongsTo(Buyer, { foreignKey: 'idBuyer' });
 
 module.exports = Cart;

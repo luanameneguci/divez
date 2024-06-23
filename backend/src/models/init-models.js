@@ -5,6 +5,7 @@ var AdminTicket = require("../models/AdminTicket");
 var CartProduct = require("../models/CartProduct");
 var ManagerLicense = require("../models/ManagerLicense");
 var Admin = require("../models/admins");
+var Buyer = require("../models/buyer");
 var Cart = require("../models/cart");
 var Bill = require("../models/bills");
 var BudgetStatus = require("../models/budgetStatus");
@@ -20,6 +21,8 @@ var TicketDepartment = require("../models/ticketDepartment");
 var TicketStatus = require("../models/ticketStatus");
 var Ticket = require("../models/tickets");
 
+
+
 AdminBudget.sync();
 AdminProduct.sync();
 AdminTicket.sync();
@@ -29,18 +32,30 @@ BudgetStatus.sync();
 ManagerLicense.sync();
 LicenseStatus.sync();
 LicenseUser.sync();
-Category.sync();
-Admin.sync();
-Cart.sync();
-Bill.sync();
-Budget.sync();
-License.sync();
-Manager.sync();
-Package.sync();
-Product.sync();
 TicketDepartment.sync();
 TicketStatus.sync();
-Ticket.sync();
+Package.sync();
+Product.sync();
+Category.sync();
+
+Admin.sync();
+
+Buyer.sync();
+
+Cart.sync();
+
+Manager.sync();
+
+/*
+Bill.sync();
+
+Budget.sync();
+
+License.sync();
+
+Ticket.sync(); 
+
+*/
 
 
 

@@ -1,0 +1,217 @@
+import React, { useState, useEffect } from "react";
+import "../../App.css";
+import Rating from "@mui/material/Rating";
+
+const productVersion = 1.3;
+
+const itemsDataArray = [
+  {
+    nomeApp: "Adobe Photoshop",
+    photo: "https://img.icons8.com/?size=100&id=13677&format=png&color=000000",
+    price: 4.99,
+    Packages: "Adobe Essencials",
+    Category: "Photography",
+    ActiveInstall: 1000000,
+    Version: "1.2.3",
+    Review: 3.4,
+    description:
+      "A fitness tracking app to help you achieve your health goals.",
+    id: 1,
+    numeroTotal: 1000,
+    numeroAtivos: 750,
+  },
+];
+
+const BuyerProductItem = () => {
+  const [items, setItems] = useState([]);
+  const [resultado, setResultado] = useState([]);
+
+  useEffect(() => {
+    let itemsArray = createDataArraysItems(itemsDataArray);
+    let resultArray = createDataArrays(itemsDataArray);
+    let resultadoArray = calculatePercentages(resultArray);
+    setItems(itemsArray);
+    setResultado(resultadoArray);
+  }, []);
+
+  return (
+    <div className="dashboard-content bg-light w-100">
+      <div className="container text-center py-4">
+        <div className="row">
+          <div className="col-12">
+            <ItemList items={items} resultado={resultado} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+function createDataArraysItems(item) {
+  // Initialize the result array
+  let items = [];
+
+  // Loop through the data and create sub-arrays
+  for (let i = 0; i < item.length; i++) {
+    let subArray = [
+      item[i].nomeApp,
+      item[i].photo,
+      item[i].price,
+      item[i].Packages,
+      item[i].Category,
+      item[i].ActiveInstall,
+      item[i].Version,
+      item[i].Review,
+      item[i].description,
+      item[i].id,
+      item[i].numeroTotal,
+      item[i].numeroAtivos,
+    ];
+    items.push(subArray);
+  }
+  return items;
+}
+
+const ItemStatus = ({ itemData, resultado }) => {
+  return (
+    <div>
+      <div className="col-12 d-flex">
+        <div className="col-2">
+          <img src={itemData[1]} alt={`${itemData[0]}`} className="mr-3" />
+        </div>
+        <div className="col-7 mt-3 justify-content-start">
+          <h2 className="mb-0 text-start">
+            <strong>{itemData[0]}</strong>
+          </h2>
+          <div className="col-6 d-flex justify-content-start">
+            <Rating
+              name="read-only"
+              value={itemData[7]}
+              readOnly
+              precision={0.5}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="my-3">
+        <div className="container">
+          <div className="row">
+            <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded shadow me-3">
+              <div className="col-md-12 row">
+                <div className="col-6 text-start">
+                  <h5>
+                    <strong>Product version:</strong> {productVersion}
+                  </h5>
+                  <h5>
+                    <strong>Your version:</strong> {itemData[6]}
+                  </h5>
+                </div>
+                <div className="col-6 text-end mt-auto">
+                  <button
+                    type="submit"
+                    className="btn bg-info btn-block btn-lg text-white hover1"
+                  >
+                    <strong>Update</strong>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded shadow">
+              <div className="col-md-12 row">
+                <ProgressDivs resultado={resultado} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded shadow"></div>
+    </div>
+  );
+};
+
+const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
+  <div className="mb-3">
+    <div className="d-flex justify-content-between">
+      <p>
+        <strong>Installations</strong>
+      </p>
+      <div className="d-flex">
+        <p>
+          {numeroAtivos} of {numeroTotal}
+        </p>
+      </div>
+    </div>
+    <div className="progress">
+      <div
+        className="progress-bar bg-info"
+        role="progressbar"
+        style={{ width: `${percentage}%` }}
+        aria-valuenow={percentage}
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        {percentage}%
+      </div>
+    </div>
+  </div>
+);
+
+const ItemList = ({ items, resultado }) => {
+  return (
+    <div className="items-list d-flex flex-wrap justify-content-between">
+      {items.map((item, index) => (
+        <div className="col-12" key={index}>
+          <ItemStatus itemData={item} resultado={resultado} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const ProgressDivs = ({ resultado }) => {
+  return (
+    <div>
+      {resultado.map((item, index) => (
+        <ProgressDiv
+          key={index}
+          nome={item[0]}
+          numeroAtivos={item[2]}
+          numeroTotal={item[1]}
+          percentage={item[3]}
+        />
+      ))}
+    </div>
+  );
+};
+
+function createDataArrays(data) {
+  // Initialize the result array
+  let result = [];
+
+  // Loop through the data and create sub-arrays
+  for (let i = 0; i < data.length; i++) {
+    let subArray = [data[i].nomeApp, data[i].numeroTotal, data[i].numeroAtivos];
+    result.push(subArray);
+  }
+
+  return result;
+}
+
+function calculatePercentages(result) {
+  // Initialize the result array
+  let resultado = [];
+
+  // Loop through the data and create sub-arrays with percentage
+  for (let i = 0; i < result.length; i++) {
+    let item = result[i];
+    let percentage = (item[2] / item[1]) * 100;
+    // Create a new array with the original values and the calculated percentage
+    let newItem = [...item, percentage.toFixed(0)];
+    resultado.push(newItem);
+  }
+
+  // Return the result array
+  return resultado;
+}
+
+export default BuyerProductItem;

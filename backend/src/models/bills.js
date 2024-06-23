@@ -29,7 +29,8 @@ var Bill = sequelize.define(
     freezeTableName: true
   }
 );
-Bill.belongsTo(Cart);
-Cart.hasMany(Bill);
+
+Cart.hasMany(Bill, { foreignKey: 'idCart' });
+Bill.belongsTo(Cart, { foreignKey: 'idCart' });
 
 module.exports = Bill;

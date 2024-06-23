@@ -1,75 +1,16 @@
 import React from "react";
 import "../../App.css";
 import notificationicon from "../../images/notification.png";
+import Box from '../../components/admin/Box';
+import ProductsListBox from '../../components/admin/ProductsListBox';
+import BudgetListBox from '../../components/admin/BudgetListBox';
 
-const boxProductsContent = [
-  "Adobe Photoshop",
-  "1000",
-  "Updated",
-  "IntelliJ IDEA",
-  "250",
-  "Outdated",
-  "Adobe Photoshop",
-  "30000",
-  "Updated",
-  "Visual Studio Code",
-  "3500",
-  "Outdated",
-  "Visual Studio Code",
-  "3500",
-  "Outdated",
-];
-
-// Split the box3content array into rows of 6 items each
-const rows3 = [];
-const itemsPerRow = 3;
-
-for (let i = 0; i < boxProductsContent.length; i += itemsPerRow) {
-  rows3.push(boxProductsContent.slice(i, i + itemsPerRow));
-}
-
-const boxBudgetsContent = [
-  1,
-  "Basic Adobe Apps",
-  "New",
-  1,
-  "Basic Adobe Apps",
-  "Paid",
-  1,
-  "Basic Adobe Apps",
-  "Rejected",
-  1,
-  "Basic Adobe Apps",
-  "Waiting",
-  1,
-  "Basic Adobe Apps",
-  "New",
-  1,
-  "Basic Adobe Apps",
-  "New",
-  1,
-  "Basic Adobe Apps",
-  "New",
-  1,
-  "Basic Adobe Apps",
-  "New",
-  1,
-  "Basic Adobe Apps",
-  "New",
-];
-
-// Split the box4content array into rows of 3 items each
-const rows4 = [];
-const itemsPerRow4 = 3;
-
-for (let i = 0; i < boxBudgetsContent.length; i += itemsPerRow4) {
-  rows4.push(boxBudgetsContent.slice(i, i + itemsPerRow4));
-}
+const numRowsToShow = 5;
 
 const AdminClientDashboard = () => {
 
   return (
-    <div className="dashboard-content bg-light w-100">
+    <div className="container bg-light w-100">
       <h2 className="title m-3">Client Name</h2>
       <div className="text-center">
         <div className="d-flex justify-content-between">
@@ -105,10 +46,13 @@ const AdminClientDashboard = () => {
         </div>
         <div className="col-12 d-flex my-4 rounded">
           <div className="col mx-3 rounded shadow">
-            <ClientProductsBox />
+            <ProductsListBox />
           </div>
           <div className="col mx-3 rounded shadow">
-            <ClientBudgetsBox />
+            <div className="col-12">
+              <h3 className='text-start p-3'>Budgets</h3>
+              <BudgetListBox numRowsToShow={numRowsToShow}/>
+            </div>
           </div>
         </div>
       </div>
@@ -116,26 +60,20 @@ const AdminClientDashboard = () => {
   );
 };
 
+<<<<<<< Updated upstream
+=======
 function Box(props) {
-  return (
-    <div className="box-container bg-white col-auto rounded d-flex px-4 py-4 admin-box-maxw">
-      <div className="col-10">
-        <span className="box-title d-flex justify-content-start">
-          <strong>
-            <h6>{props.title}</h6>
-          </strong>
-        </span>
-        <span className="box-number d-flex justify-content-start pt-2">
-          <strong>
-            <h2>{props.number}</h2>
-          </strong>
-        </span>
-      </div>
-      <div>
-        <img src={props.image} alt="" className="box-image ms-3" />
-      </div>
-    </div>
-  );
+    return (
+        <div className="box-container bg-white col-auto roundbg d-flex px-4 py-4 admin-box-maxw">
+            <div className="col-10">
+                <span className="box-title d-flex justify-content-start"><strong><h6>{props.title}</h6></strong></span>
+                <span className="box-number d-flex justify-content-start pt-2"><strong><h2>{props.number}</h2></strong></span>
+            </div>
+            <div>
+                <img src={props.image} alt="" className="box-image ms-3" />
+            </div>
+        </div>
+    );
 }
 
 function ClientProductsBox() {
@@ -200,57 +138,55 @@ function ClientProductsBox() {
       </div>
     </div>
   );
-
 }
 
 function ClientBudgetsBox() {
+    return (
+        <div className="box-container bg-white roundbg d-flex h-100">
+            <div className="col-12">
+                <h3 className='text-start p-3'>Budgets</h3>
 
-  return (
-    <div className="box-container bg-white roundbg d-flex h-100">
-      <div className="col-12">
-        <h3 className="text-start p-3">Budgets</h3>
-
-        <table className="container-fluid text-start py-4">
-          <thead className="text-white mainblue-bg">
-            <tr>
-              <th className="ps-2 py-2">Budget Nº</th>
-              <th className="ps-3 py-2">Client</th>
-              <th className="ps-3 py-2">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows4.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {row.map((data, colIndex) => {
-                  let color = "inherit";
-                  if (colIndex === 2) {
-                    // Check the value in the last column
-                    if (data === "New") color = "#FFD56D"; //amarelo
-                    else if (data === "Rejected") color = "#EB5757"; // vermelho
-                    else if (data === "Paid") color = "#00B69B"; // verde
-                    else if (data === "Waiting") color = "#2D9CDB"; //azul
-                  }
-                  return (
-                    <td
-                      key={colIndex}
-                      style={{
-                        color: color,
-                        padding: "10px 3%",
-                        width: "33.33%",
-                      }}
-                    >
-                      {data}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+                <table className='container-fluid text-start py-4'>
+                    <thead className='text-white mainblue-bg'>
+                        <tr>
+                            <th className="ps-2 py-2">Budget Nº</th>
+                            <th className="ps-3 py-2">Client</th>
+                            <th className="ps-3 py-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows4.map((row, rowIndex) => (
+                            <tr key={rowIndex}>
+                                {row.map((data, colIndex) => {
+                                    let color = 'inherit';
+                                    if (colIndex === 2) { // Check the value in the last column
+                                        if (data === 'New') color = '#FFD56D'; //amarelo
+                                        else if (data === 'Rejected') color = '#EB5757'; // vermelho
+                                        else if (data === 'Paid') color = '#00B69B'; // verde
+                                        else if (data === 'Waiting') color = '#2D9CDB'; //azul
+                                    }
+                                    return (
+                                        <td
+                                            key={colIndex}
+                                            style={{
+                                                color: color,
+                                                padding: '10px 3%',
+                                                width: '33.33%'
+                                            }}
+                                        >
+                                            {data}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 }
 
+>>>>>>> Stashed changes
 export default AdminClientDashboard;
 
