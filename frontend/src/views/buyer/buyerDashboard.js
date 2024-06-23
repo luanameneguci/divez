@@ -1,12 +1,7 @@
 // BuyerDashboard.js
-
 import React from "react";
-import notificationicon from "../../images/notification.png";
-import Box from "../../components/buyer/Box";
-import BoxTable from "../../components/buyer/BoxTable";
-import BoxManager from "../../components/buyer/BoxManager";
-import BoxProgress from "../../components/buyer/BoxProgress";
-import BoxThird from "../../components/buyer/BoxThird";
+import Dashboard from "../../components/buyer/Dashboard";
+
 
 const BuyerDashboard = () => {
   const tablecontent = [
@@ -87,50 +82,12 @@ function calculatePercentages(result) {
     return resultado;
 }
 
-
-
-
-
 const result = createDataArrays(data);
 const resultado = calculatePercentages(result);
 
   return (
-    <div className="container bg-light w-100">
-            <h3 className="title my-2">Dashboard</h3>
-            <div className="container text-center">
-                <div className="d-flex justify-content-between">
-                    <div className="col mx-1">
-                        <Box title="Pending tickets" number="20" image={notificationicon} evolution="10" />
-                    </div>
-                    <div className="col mx-1">
-                        <Box title="Pending Sales" number="20" image={notificationicon} evolution="10" />
-                    </div>
-                    <div className="col mx-1">
-                        <Box title="Inactive Licences" number="20" image={notificationicon} evolution="10" />
-                    </div>
-                    <div className="col mx-1">
-                        <Box title="Active Licences" number="20" image={notificationicon} evolution="10" />
-                    </div>
-                </div>
-      <div className="col-12 text-center py-4">
-        <div className="row">
-          <div className="col-4">
-            <BoxTable title="Pending budgets" rows={rows} />
-          </div>
-          <div className="col-4">
-            <BoxProgress title="Your most used licences" resultado={resultado} />
-          </div>
-          <div className="col-4">
-            <BoxManager title="Managers" managers={managers} />
-          </div>
-        </div>
-      </div>
-      <div className="col-12">
-        <BoxThird title="Managers" />
-      </div>
-    </div>
-    </div>
-  );
+    <Dashboard />
+  )
 };
 
 export default BuyerDashboard;

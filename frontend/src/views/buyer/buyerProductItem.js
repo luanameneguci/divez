@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState , useEffect} from "react";
 import "../../App.css";
 import Rating from "@mui/material/Rating";
+import ManagersList from "../../components/buyer/ManagersList";
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
 const productVersion = 1.3;
+
+const managersList = [
+  ["Luana Meneguci", "123456789", "luanameneguci@gmail.com", "Client"],
+  ["Andre Pascoal", "123456789", "luanameneguci@gmail.com", "Client"],
+  ["Luana Meneguci", "123456789", "luanameneguci@gmail.com", "Client"],
+  ["Luana Meneguci", "123456789", "luanameneguci@gmail.com", "Client"],
+  ["Luana Meneguci", "123456789", "luanameneguci@gmail.com", "Client"],
+  ["Luana Meneguci", "321321321", "luanameneguci@gmail.com", "Manager"],
+];
 
 const itemsDataArray = [
   {
@@ -35,8 +46,8 @@ const BuyerProductItem = () => {
   }, []);
 
   return (
-    <div className="dashboard-content bg-light w-100">
-      <div className="container text-center py-4">
+    <div className="bg-light w-100">
+      <div className="container text-center pt-4">
         <div className="row">
           <div className="col-12">
             <ItemList items={items} resultado={resultado} />
@@ -96,7 +107,7 @@ const ItemStatus = ({ itemData, resultado }) => {
       <div className="my-3">
         <div className="container">
           <div className="row">
-            <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded shadow me-3">
+            <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg shadow me-3">
               <div className="col-md-12 row">
                 <div className="col-6 text-start">
                   <h5>
@@ -109,14 +120,15 @@ const ItemStatus = ({ itemData, resultado }) => {
                 <div className="col-6 text-end mt-auto">
                   <button
                     type="submit"
-                    className="btn bg-info btn-block btn-lg text-white hover1"
+                    className="btn btn-block btn-lg text-info hover1"
+                    style={{backgroundColor: "#C8F2FE"}}
                   >
                     <strong>Update</strong>
                   </button>
                 </div>
               </div>
             </div>
-            <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded shadow">
+            <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg shadow">
               <div className="col-md-12 row">
                 <ProgressDivs resultado={resultado} />
               </div>
@@ -124,7 +136,26 @@ const ItemStatus = ({ itemData, resultado }) => {
           </div>
         </div>
       </div>
-      <div className="col d-flex align-items-center p-3 justify-content-between flex-column bg-white rounded shadow"></div>
+      <div className="col d-flex align-items-center justify-content-between flex-column bg-white roundbg shadow my-3">
+        <div className="col-12 px-4 d-flex py-3 justify-content-between">
+          <h2 className=" text-start">Managers</h2>
+          <button
+            type="submit"
+            className="btn btn-block btn-lg text-info hover1"
+            style={{backgroundColor: "#C8F2FE"}}
+          >
+            <strong>Add manager</strong>
+          </button>
+        </div>
+
+        <ManagersList managersList={managersList} />
+      </div>
+      <div className="col d-flex align-items-center justify-content-between flex-column bg-white roundbg shadow my-3">
+        <div className="col-12 px-4 py-3">
+        <h3 className=" text-start">Need any  help with this product?</h3>
+        <p className="text-start">Check our <Link className="text-info" to="/faq">FAQ</Link>. </p>
+        </div>
+      </div>
     </div>
   );
 };

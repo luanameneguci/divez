@@ -26,7 +26,7 @@ function BoxThird({ title }) {
               <h4>{title}</h4>
             </strong>
           </span>
-          <table className="container-fluid text-start bg-info py-4 roundbg col-11">
+          <table className="container-fluid text-start bg-info py-4 roundbg col-12">
             <thead>
               <tr>
                 <th className="ps-3 py-2 text-white">Ticket Nº</th>

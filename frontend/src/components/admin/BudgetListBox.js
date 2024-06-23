@@ -3,7 +3,6 @@ import notificationicon from "../../images/notification.png";
 import Modal from 'react-bootstrap/Modal';
 import '../../App.css';
 
-
 const boxBudgetsContent = [
     [1, 'João Ratão', '13/06/2024', '20000', 'New'],
     [2, 'João Ratão', '13/06/2024', '20000', 'New'],
