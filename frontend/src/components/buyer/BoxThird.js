@@ -39,28 +39,29 @@ const box3content = [
   "New",
 ];
 
-// Split the box3content array into rows of 6 items each
+// Divida o array box3content em linhas de 6 itens cada
 const rows3 = [];
-const itemsPerRow2 = 6;
-for (let i = 0; i < box3content.length; i += itemsPerRow2) {
-  rows3.push(box3content.slice(i, i + itemsPerRow2));
+const itensPerLine2 = 6;
+for (let i = 0; i < box3content.length; i += itensPerLine2) {
+  rows3.push(box3content.slice(i, i + itensPerLine2));
 }
 
-// Function to get status color based on status value
+// Função para obter a cor do status com base no valor do status
 const getStatusColor = (status) => {
   switch (status) {
-    case "New":
-      return "#FFD56D"; // yellow
-    case "Unsolved":
-      return "#EB5757"; // red
-    case "Solved":
-      return "#00B69B"; // green
-    case "Waiting":
-      return "#2D9CDB"; // blue
+    case "Novo":
+      return "#FFD56D"; // amarelo
+    case "Não resolvido":
+      return "#EB5757"; // vermelho
+    case "Resolvido":
+      return "#00B69B"; // verde
+    case "Aguardando":
+      return "#2D9CDB"; // azul
     default:
-      return "inherit"; // default color
+      return "inherit"; // cor padrão
   }
 };
+
 
 function BoxThird({ title }) {
   return (

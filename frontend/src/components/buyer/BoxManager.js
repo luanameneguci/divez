@@ -22,9 +22,9 @@ function BoxManager({ title, managers }) {
 }
 
 function createDataArraysManager(manager) {
-  // Initialize the result array
+  // Inicia o array managers
   let managers = [];
-  // Loop through the data and create sub-arrays
+  // Percorre os dados e cria sub-arrays
   for (let i = 0; i < manager.length && managers.length < 3; i++) {
     let subArray = [
       manager[i].nome,

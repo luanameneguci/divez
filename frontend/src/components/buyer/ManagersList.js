@@ -4,14 +4,18 @@ import { Modal } from 'react-bootstrap';
 import Select from 'react-select';
 
 function ManagersList({ managersList, productList }) {
+    // Estados para os filtros de entrada
     const [nameFilter, setNameFilter] = useState('');
     const [nifFilter, setNifFilter] = useState('');
     const [mailFilter, setMailFilter] = useState('');
     const [productsFilter, setProductsFilter] = useState('');
+    
+    // Estado para controlar os dados do modal
     const [modalData, setModalData] = useState(null);
+    // Estado para controlar a visibilidade do modal
     const [lgShow, setLgShow] = useState(false);
 
-    // Filtering function
+    // Função de filtragem dos dados
     const filteredRows = managersList.filter(row =>
         row[0].toLowerCase().includes(nameFilter.toLowerCase()) &&
         row[1].includes(nifFilter) &&
@@ -19,15 +23,18 @@ function ManagersList({ managersList, productList }) {
         row[3].toLowerCase().includes(productsFilter.toLowerCase())
     );
 
+    // Função para mostrar o modal com os detalhes do gerente selecionado
     const handleShow = (row) => {
-        setModalData(row[2]); // Save the email from the row
+        setModalData(row[2]); // Salva o e-mail da linha
         setLgShow(true);
     };
 
+    // Função para fechar o modal
     const handleClose = () => {
         setLgShow(false);
-        setModalData(null);
+        setModalData(null); // Limpa os dados do modal
     };
+
 
     /* Future
     // Delete client function

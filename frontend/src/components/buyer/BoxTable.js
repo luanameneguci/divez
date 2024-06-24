@@ -1,19 +1,19 @@
 // components/BoxTable.js
 import React from "react";
 
-// Function to get status color based on status value
+// Função para obter a cor do status com base no valor do status
 const getStatusColor = (status) => {
   switch (status) {
     case "New":
-      return "#FFD56D"; // yellow
+      return "#FFD56D"; // amarelo
     case "Rejected":
-      return "#EB5757"; // red
+      return "#EB5757"; // vermelho
     case "Paid":
-      return "#00B69B"; // green
+      return "#00B69B"; // verde
     case "Waiting":
-      return "#2D9CDB"; // blue
+      return "#2D9CDB"; // azul
     default:
-      return "inherit"; // default color
+      return "inherit"; // cor padrão
   }
 };
 

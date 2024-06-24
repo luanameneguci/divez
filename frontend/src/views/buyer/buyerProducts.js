@@ -196,10 +196,10 @@ let data = [
 ];
 
 function createDataArrays(data) {
-    // Initialize the result array
+    // Inicia o array de resultados
     let result = [];
 
-    // Loop through the data and create sub-arrays
+    // Percorre os dados e criar sub-arrays
     for (let i = 0; i < data.length; i++) {
         let subArray = [
             data[i].nome,
@@ -210,27 +210,27 @@ function createDataArrays(data) {
         result.push(subArray);
     }
 
-    // Return the result containing a maximum of 4 sub-arrays
+     // Devolve o resultado contendo no máximo 4 sub-arrays
     return result;
 }
 
 function calculatePercentages(result) {
-    // Initialize the result array
+    // Inicializa o array de resultados
     let resultado = [];
 
-    // Loop through the data and create sub-arrays with percentage
+    // Percorre os dados e cria sub-arrays com percentagem
     for (let i = 0; i < result.length; i++) {
         let item = result[i];
         let percentage = (item[2] / item[1]) * 100;
-        // Create a new object with the original values and the calculated percentage
+        // Cria um novo objeto com os valores originais e a percentagem calculada
         let newItem = {
             ...item,
-            percentage: percentage.toFixed(0), // Fix to 2 decimal places
+            percentage: percentage.toFixed(0), // Fixa a 2 casas decimais
         };
         resultado.push(newItem);
     }
 
-    // Return the result array
+    // Devolve o array de resultados
     return resultado;
 }
 

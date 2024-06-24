@@ -21,25 +21,37 @@ function BoxProgress({ title, data }) {
 
 
 function createDataArrays(data) {
+  // Inicia um array vazio para armazenar os subarrays resultantes.
     let result = [];
+    // Percorre os dados fornecidos (data) até que result contenha no máximo 4 subarrays.
     for (let i = 0; i < data.length && result.length < 4; i++) {
+      // Cria um novo array (subArray) com três elementos: nome, numeroTotal e numeroAtivos do objeto atual em data.
         let subArray = [data[i].nome, data[i].numeroTotal, data[i].numeroAtivos];
+        // Adiciona o subArray criado ao array result.
         result.push(subArray);
     }
+    // Retorna o array result que contém no máximo 4 subarrays, cada um representando dados de um objeto em data.
     return result;
 }
 
 function calculatePercentages(result) {
-    let resultado = [];
+  // Inicia um array vazio para armazenar os resultados finais com percentagens calculadas.
+  let resultado = [];
+   // Percorre cada item no array result fornecido.
     for (let i = 0; i < result.length; i++) {
+      // Obtém o item atual do array result.
         let item = result[i];
+        // Calcula a percentagem com base nos valores do segundo e terceiro elementos do item.
         let percentage = (item[2] / item[1]) * 100;
+        // Cria um novo objeto newItem que contém todos os elementos do item atual mais a percentagem formatada.
         let newItem = {
-            ...item,
-            percentage: percentage.toFixed(0),
+            ...item, // Copia todos os elementos do item atual
+            percentage: percentage.toFixed(0), // Adiciona a percentagem formatada como um novo elemento
         };
+        // Adiciona o newItem ao array resultado.
         resultado.push(newItem);
     }
+    // Retorna o array resultado que contém cada item original do array result com a percentagem calculada e formatada.
     return resultado;
 }
 
