@@ -7,6 +7,7 @@ import logo from "../../images/logo-navbar.svg";
 import notificationicon from "../../images/notification.png";
 
 // views import
+import ManagerProducts from "../manager/managerProducts";
 import AdminDashboard from "../../views/admin/adminDashboard";
 import AdminClientList from "../../views/admin/adminClientList";
 import AdminClientDashboard from "../../views/admin/adminClientDashboard";
