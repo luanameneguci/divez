@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import notificationicon from "../../images/notification.png";
+import DatePicker from 'react-datepicker';
 import Modal from 'react-bootstrap/Modal';
+import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
+import notificationicon from "../../images/notification.png";
 
+// Date format helper function
+const formatDateString = (dateString) => {
+    const [day, month, year] = dateString.split('/');
+    return new Date(`${year}-${month}-${day}`);
+};
+
+// Example data with correct date format
 const boxBudgetsContent = [
-    [1, 'João Ratão', '13/06/2024', '20000', 'New'],
+    [1, 'João Ratão', '15/06/2024', '20000', 'New'],
     [2, 'João Ratão', '13/06/2024', '20000', 'New'],
-    [3, 'João Ratão', '13/06/2024', '20000', 'New'],
+    [3, 'João Ratão', '22/07/2024', '20000', 'New'],
     [4, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
     [5, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
     [6, 'João Ratão', '13/06/2024', '20000', 'Paid'],
@@ -38,16 +47,19 @@ function BudgetsListBox({ numRowsToShow }) {
     // State variables for filter inputs
     const [budgetNumberFilter, setBudgetNumberFilter] = useState('');
     const [clientFilter, setClientFilter] = useState('');
-    const [dateFilter, setDateFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
+    const [selectedDate, setSelectedDate] = useState(null);
 
     // Filtering function
-    const filteredRows = boxBudgetsContent.filter(row =>
-        row[0].toString().includes(budgetNumberFilter) &&
-        row[1].toLowerCase().includes(clientFilter.toLowerCase()) &&
-        row[2].includes(dateFilter) &&
-        row[4].toLowerCase().includes(statusFilter.toLowerCase())
-    );
+    const filteredRows = boxBudgetsContent.filter(row => {
+        const rowDate = formatDateString(row[2]);
+        return (
+            row[0].toString().includes(budgetNumberFilter) &&
+            row[1].toLowerCase().includes(clientFilter.toLowerCase()) &&
+            (!selectedDate || rowDate >= selectedDate) &&
+            row[4].toLowerCase().includes(statusFilter.toLowerCase())
+        );
+    });
 
     // Function to get status color based on status value
     const getStatusColor = (status) => {
@@ -71,7 +83,6 @@ function BudgetsListBox({ numRowsToShow }) {
                 <table className='table text-start'>
                     <thead className='text-white pt-2'>
                         <tr>
-                            {/* Depending on numRowsToShow, show the table differently */}
                             {numRowsToShow === 5 ? (
                                 <>
                                     <th>Budget</th>
@@ -114,13 +125,12 @@ function BudgetsListBox({ numRowsToShow }) {
                                     </th>
                                     <th>
                                         Date
-                                        <input
+                                        <DatePicker
+                                            selected={selectedDate}
+                                            onChange={(date) => setSelectedDate(date)}
+                                            dateFormat="dd/MM/yyyy"
+                                            placeholderText="Select Date"
                                             className="form-control w-75"
-                                            id="datefilter"
-                                            type="text"
-                                            placeholder="Search.."
-                                            value={dateFilter}
-                                            onChange={(e) => setDateFilter(e.target.value)}
                                         />
                                     </th>
                                     <th className='align-text-top pt-3'>Amount</th>

@@ -83,11 +83,11 @@ const ProgressDivs = ({ resultado }) => {
             />
           </div>
           <div className="col-4 ms-auto">
-            <button className="btn btn-outline-info hover m-2">
+            <button className="col btn btn-outline-info hover m-2">
               Add manager
             </button>
-            <button className="btn btn-outline-info hover m-2">Help</button>
-            <button className="btn btn-outline-danger m-2">
+            <button className="col btn btn-outline-info hover m-2">Help</button>
+            <button className="col btn btn-outline-danger m-2">
               Cancel Subscription
             </button>
           </div>
