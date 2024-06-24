@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Shop from "../../views/buyer/buyerShop";
 
 const BuyerPayment = () => {
@@ -98,7 +98,10 @@ const BuyerPayment = () => {
                   <div className="row">
                     <div className="col-lg-7">
                       <h5 className="mb-3">
-                        <Link to="/shop" className="text-body d-flex align-center">
+                        <Link
+                          to="/shop"
+                          className="text-body d-flex align-center"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -266,7 +269,7 @@ const ShoppingCart = ({ items }) => {
         <div className="p-3 mb-3 shadow roundbg" key={index}>
           <div className="card-body">
             <div className="d-flex justify-content-between">
-              <div className="d-flex flex-row align-items-center">
+              <div className="d-flex flex-row align-items-center col-4">
                 <div>
                   <img
                     src={item.image}
@@ -280,7 +283,7 @@ const ShoppingCart = ({ items }) => {
                   <p className="small mb-0">{item.description}</p>
                 </div>
               </div>
-              <div className="d-flex flex-row align-items-center">
+              <div className="d-flex flex-row align-items-center col-3 text-center">
                 <div style={{ width: "50px" }}>
                   <h5 className="fw-normal mb-0">{item.quantity}</h5>
                 </div>
@@ -290,6 +293,14 @@ const ShoppingCart = ({ items }) => {
                 <a href="#!" style={{ color: "#cecece" }}>
                   <i className="fas fa-trash-alt"></i>
                 </a>
+              </div>
+              <div className="col-2 my-auto">
+                <button
+                  type="button"
+                  className="btn btn-danger hover shadow col-12 roundbg"
+                >
+                  Remove
+                </button>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ function ManagersList({ managersList, productList }) {
     };*/
 
     return (
-        <div className="container bg-white px-0 roundbg shadow h-100">
+        <div className="container bg-white px-0 roundbg shadow h-100 pb-1">
             <table className='table text-start'>
                 <thead className='text-white'>
                     <tr>

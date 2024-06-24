@@ -13,9 +13,9 @@ const formatDateString = (dateString) => {
 // Função getStatusClass para retornar classes CSS com base no status
 const getStatusClass = (status) => {
     switch (status) {
-        case "Rejected":
+        case "Unsolved":
             return "text-danger";
-        case "Paid":
+        case "Solved":
             return "text-success";
         case "Waiting":
             return "text-primary";
@@ -28,10 +28,10 @@ const getStatusClass = (status) => {
 
 // Conteúdo de exemplo para a tabela de tickets
 const ticketboxcontent = [
-    [1, 'Maquina Pifou', '13/12/2022', 'Paid'],
+    [1, 'Maquina Pifou', '13/12/2022', 'Solved'],
     [2, 'Chatbot Avariou', '15/06/2024', 'New'],
     [3, 'Não sei', '13/06/2024', 'Waiting'],
-    [4, 'João Ratão', '13/06/2024', 'Rejected'],
+    [4, 'João Ratão', '13/06/2024', 'Unsolved'],
     [5, 'João Ratão', '13/06/2024', 'New'],
     [6, 'João Ratão', '13/06/2024', 'New'],
     [7, 'João Ratão', '13/06/2024', 'New'],
@@ -46,10 +46,10 @@ const ticketboxcontent = [
     [16, 'João Ratão', '13/06/2024', 'New'],
     [17, 'João Ratão', '13/06/2024', 'New'],
     [18, 'João Ratão', '13/06/2024', 'New'],
-    [1, 'Maquina Pifou', '13/12/2022', 'Paid'],
+    [1, 'Maquina Pifou', '13/12/2022', 'Solved'],
     [2, 'Chatbot Avariou', '15/06/2024', 'New'],
     [3, 'Não sei', '13/06/2024', 'Waiting'],
-    [4, 'João Ratão', '13/06/2024', 'Rejected'],
+    [4, 'João Ratão', '13/06/2024', 'Unsolved'],
     [5, 'João Ratão', '13/06/2024', 'New'],
     [6, 'João Ratão', '13/06/2024', 'New'],
     [7, 'João Ratão', '13/06/2024', 'New'],
@@ -64,10 +64,10 @@ const ticketboxcontent = [
     [16, 'João Ratão', '13/06/2024', 'New'],
     [17, 'João Ratão', '13/06/2024', 'New'],
     [18, 'João Ratão', '13/06/2024', 'New'],
-    [1, 'Maquina Pifou', '13/12/2022', 'Paid'],
+    [1, 'Maquina Pifou', '13/12/2022', 'Solved'],
     [2, 'Chatbot Avariou', '15/06/2024', 'New'],
     [3, 'Não sei', '13/06/2024', 'Waiting'],
-    [4, 'João Ratão', '13/06/2024', 'Rejected'],
+    [4, 'João Ratão', '13/06/2024', 'Unsolved'],
     [5, 'João Ratão', '13/06/2024', 'New'],
     [6, 'João Ratão', '13/06/2024', 'New'],
     [7, 'João Ratão', '13/06/2024', 'New'],
@@ -128,9 +128,9 @@ const TicketListBox = () => {
         switch (status) {
             case 'New':
                 return '#FFD56D'; // amarelo
-            case 'Rejected':
+            case 'Unsolved':
                 return '#EB5757'; // vermelho
-            case 'Paid':
+            case 'Solved':
                 return '#00B69B'; // verde
             case 'Waiting':
                 return '#2D9CDB'; // azul
@@ -257,7 +257,7 @@ const TicketListBox = () => {
 const ManagerTicketList = () => {
     return (
         <div className="dashboard-content bg-light w-100">
-            <h4 className="title my-2">Tickets</h4>
+            <h4 className="title my-2 mx-4">Tickets</h4>
             <div className="container">
                 <div className="my-4">
                     <TicketListBox />

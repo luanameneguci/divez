@@ -11,9 +11,9 @@ import BoxThird from "../../components/buyer/BoxThird";
 const BuyerDashboard = () => {
   const tablecontent = [
     1, "Name Application", "New",
-    2, "Name Application", "New",
-    3, "Name Application", "New",
-    4, "Name Application", "New",
+    2, "Name Application", "Waiting",
+    3, "Name Application", "Rejected",
+    4, "Name Application", "Paid",
     5, "Name Application", "New",
     6, "Name Application", "New",
   ];
@@ -91,7 +91,7 @@ const BuyerDashboard = () => {
         </div>
       </div>
       <div className="col-12">
-        <BoxThird title="Managers" />
+        <BoxThird title="Tickets" />
       </div>
     </div>
   );

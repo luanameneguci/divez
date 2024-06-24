@@ -60,7 +60,7 @@ const AdminDashboard = () => {
                                     </strong>
                                 </span>
                                 <div className="px-3">
-                                    <Doughnut data={donutdata} style={{ height: '300px' }} />
+                                    <Doughnut data={donutdata} style={{ height: '300px' }}/>
                                 </div>
                             </div>
                         </div>
