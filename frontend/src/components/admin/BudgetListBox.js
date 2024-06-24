@@ -78,7 +78,7 @@ function BudgetsListBox({ numRowsToShow }) {
     };
 
     return (
-        <div className="box-container bg-white d-flex px-0">
+        <div className="container bg-white d-flex px-0 roundbg h-100 shadow">
             <div className="container px-0 roundbg h-100">
                 <table className='table text-start'>
                     <thead className='text-white pt-2'>
