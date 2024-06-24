@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import '../../App.css';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+import Select from 'react-select';
 
-function ManagersList({ managersList }) {
+function ManagersList({ managersList, productList }) {
     const [nameFilter, setNameFilter] = useState('');
     const [nifFilter, setNifFilter] = useState('');
     const [mailFilter, setMailFilter] = useState('');
     const [productsFilter, setProductsFilter] = useState('');
+    const [modalData, setModalData] = useState(null);
+    const [lgShow, setLgShow] = useState(false);
 
     // Filtering function
     const filteredRows = managersList.filter(row =>
@@ -16,7 +19,17 @@ function ManagersList({ managersList }) {
         row[3].toLowerCase().includes(productsFilter.toLowerCase())
     );
 
-    /* Futuro
+    const handleShow = (row) => {
+        setModalData(row[2]); // Save the email from the row
+        setLgShow(true);
+    };
+
+    const handleClose = () => {
+        setLgShow(false);
+        setModalData(null);
+    };
+
+    /* Future
     // Delete client function
     const deleteClient = (index) => {
         const updatedList = [...managersList];
@@ -76,9 +89,9 @@ function ManagersList({ managersList }) {
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[2]}</td>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[3]}</td>
                             <td className="d-flex justify-content-center">
-                                <Link to="/#" className="btn btn-outline-info me-2">
+                                <button onClick={() => handleShow(row)} className="btn btn-outline-info me-2">
                                     Add
-                                </Link>
+                                </button>
                                 <button className='btn btn-outline-danger'>
                                     Delete
                                 </button>
@@ -87,6 +100,45 @@ function ManagersList({ managersList }) {
                     ))}
                 </tbody>
             </table>
+            <Modal
+                size="lg"
+                show={lgShow}
+                onHide={handleClose}
+                aria-labelledby="addmanager"
+                style={{ padding: '10px' }}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Manager</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form>
+                        <div className="col">
+                            <div className="form-group mb-3">
+                                <label htmlFor="manageremailinput">E-mail</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    id="manageremailinput" 
+                                    placeholder="E-mail" 
+                                    value={modalData || ''} 
+                                    readOnly
+                                />
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="productsinput">Add Products</label>
+                                <Select
+                                    id="productsinput"
+                                    options={productList}
+                                    isMulti
+                                    placeholder="Choose Products..."
+                                    className="form-control p-0"
+                                />
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-info text-white">Add</button>
+                    </form>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }
