@@ -46,6 +46,42 @@ const ManagerProductList = () => {
             nome: "Adobe After Effects",
             status: "Updated",
         },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
+        {
+            nome: "Adobe After Effects",
+            status: "Updated",
+        },
     ];
 
     // Função para determinar a classe CSS com base no status do produto
@@ -72,21 +108,21 @@ const ManagerProductList = () => {
 
     // Mostra um alerta com o nome do produto atualizado
     const handleUpdate = (productName) => {
-        alert(`${productName} atualizado com sucesso`); 
+        alert(`${productName} updated successfully`); 
     };
 
     return (
         <div className="dashboard-content bg-light w-100 h-100">
             {/* Título */}
             <div className="d-flex justify-content-between p-2 mx-3">
-                <h2 className="title my-2">Produtos</h2>
+                <h2 className="title my-2">Products</h2>
             </div>
 
             {/* Lista de Produtos */}
             <div className="col-12 bg-white roundbg">
                 <div className="w-100 d-flex p-3 border-bottom">
                     <div className="col-3 mx-2">
-                        <h5>Nome</h5>
+                        <h5>Name</h5>
                     </div>
                     <div className="col-1 mx-2">
                         <h5>Status</h5>
@@ -115,15 +151,15 @@ const ManagerProductList = () => {
                                     className="col btn btn-outline-warning hover m-2"
                                     onClick={() => handleUpdate(item.nome)} // Chama a função handleUpdate ao clicar
                                 >
-                                    Atualizar
+                                    Update
                                 </button>
                             )}
 
                             {/* Vai para a pagina do Produto */}
-                            <Link to='/product' className="col btn btn-outline-success hover m-2">Ver mais</Link>
+                            <Link to='/product' className="col btn btn-outline-success hover m-2">See more</Link>
 
                             {/* Vai para a FAQ */}
-                            <Link to='/faq' className="col btn btn-outline-info hover m-2">Ajuda</Link>
+                            <Link to='/faq' className="col btn btn-outline-info hover m-2">Help</Link>
                         </div>
                     </div>
                 ))}

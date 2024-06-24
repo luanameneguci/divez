@@ -8,7 +8,7 @@ import ManagerMenu from './views/manager/managerMenu'; // Importa o menu do Mana
 function App() {
   return (
     <div>
-      <ManagerMenu />
+      <BuyerMenu />
     </div>
 
   );

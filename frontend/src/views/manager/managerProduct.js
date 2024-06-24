@@ -60,6 +60,7 @@ const BuyerProductItem = () => {
     // Update the Version to latestVersion for the item at index
     updatedItems[index].Version = latestVersion;
     // Update state with the new itemsDataArray
+    alert(`${updatedItems[index].nomeApp} updated successfully`); 
     setItemsDataArray(updatedItems);
   };
 
@@ -113,28 +114,6 @@ const AddManagerModal = ({ show, onHide, productName }) => (
   </Modal>
 );
 
-function createDataArraysItems(item) {
-  let items = [];
-
-  for (let i = 0; i < item.length; i++) {
-    let subArray = [
-      item[i].nomeApp,
-      item[i].photo,
-      item[i].price,
-      item[i].Packages,
-      item[i].Category,
-      item[i].ActiveInstall,
-      item[i].Version,
-      item[i].Review,
-      item[i].description,
-      item[i].id,
-      item[i].numeroTotal,
-      item[i].numeroAtivos,
-    ];
-    items.push(subArray);
-  }
-  return items;
-}
 
 const ItemStatus = ({ itemData, resultado, openModal, handleUpdateVersion }) => {
   return (
