@@ -6,7 +6,8 @@ import notificationicon from "../../images/notification.png";
 
 import ManagerProducts from "../../views/manager/managerProducts";
 import FAQ from "../../views/buyer/faq";
-
+import ManagerTicketList from "../../views/manager/managerTicketList";
+import ManagerProduct from "../../views/manager/managerProduct";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -25,6 +26,12 @@ const Menu = () => {
                 <Link to="/" className="navbar-link text-decoration-none active-true align-middle px-5 py-2">
                   <i className="fs-4 bi-house"></i>{" "}
                   <span className="ms-1 d-none d-sm-inline">Dashboard</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/tickets" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
+                  <i className="fs-4 bi-house"></i>{" "}
+                  <span className="ms-1 d-none d-sm-inline">Tickets</span>
                 </Link>
               </li>
               <li className="nav-item">
@@ -61,8 +68,9 @@ const Menu = () => {
                 {/*Corrigir rotas*/}
               <Routes>
                 <Route path="/" element={<ManagerProducts />} />
+                <Route path="/tickets" element={<ManagerTicketList />} />
+                <Route path="/product" element={<ManagerProduct />} />
                 <Route path="/faq" element={<FAQ />} />
-
               </Routes>
             </div>
           </div>
