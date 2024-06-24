@@ -1,6 +1,22 @@
 // components/BoxTable.js
 import React from "react";
 
+// Function to get status color based on status value
+const getStatusColor = (status) => {
+  switch (status) {
+    case "New":
+      return "#FFD56D"; // yellow
+    case "Rejected":
+      return "#EB5757"; // red
+    case "Paid":
+      return "#00B69B"; // green
+    case "Waiting":
+      return "#2D9CDB"; // blue
+    default:
+      return "inherit"; // default color
+  }
+};
+
 function BoxTable({ title, rows }) {
   return (
     <div className="box-container bg-white col-auto roundbg d-flex shadow" style={{ height: 360 + "px" }}>
@@ -21,11 +37,21 @@ function BoxTable({ title, rows }) {
           <tbody className="bg-white roundbg">
             {rows.map((row, rowIndex) => (
               <tr className="roundbg" key={rowIndex}>
-                {row.map((data, colIndex) => (
-                  <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
-                    {data}
-                  </td>
-                ))}
+                {row.map((data, colIndex) => {
+                  const isLastChild = colIndex === row.length - 1;
+                  return (
+                    <td
+                      className="ps-3 py-1 border-bottom"
+                      key={colIndex}
+                      style={{
+                        height: "40px",
+                        ...(isLastChild && { color: getStatusColor(row[2]) }),
+                      }}
+                    >
+                      {data}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

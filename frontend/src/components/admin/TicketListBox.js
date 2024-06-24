@@ -12,7 +12,7 @@ const formatDateString = (dateString) => {
 
 // For testing, swap with db data
 const ticketboxcontent = [
-    [1, 'Maquina Pifou', '13/12/2022', 'Design', '4', 'Paid'],
+    [1, 'Maquina Pifou', '13/12/2022', 'Design', '4', 'Solved'],
     [2, 'Chatbot Avariou', '15/06/2024', 'Programming', '3', 'New'],
     [3, 'Não sei', '13/06/2024', 'Design', '2', 'Waiting'],
     [4, 'João Ratão', '13/06/2024', '20000', '1', 'Rejected'],
@@ -156,7 +156,7 @@ function TicketListBox({ numRowsToShow }) {
                                     if (colIndex === 5) {
                                         if (data === 'New') color = '#FFD56D'; // yellow
                                         else if (data === 'Rejected') color = '#EB5757'; // red
-                                        else if (data === 'Paid') color = '#00B69B'; // green
+                                        else if (data === 'Solved') color = '#00B69B'; // green
                                         else if (data === 'Waiting') color = '#2D9CDB'; // blue
                                     }
                                     return (
