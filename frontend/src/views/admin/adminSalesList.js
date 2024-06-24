@@ -7,7 +7,7 @@ import SalesListBox from '../../components/admin/SalesListBox';
 const AdminSalesList = () => {
     return (
         <div className="dashboard-content bg-light w-100">
-            <h4 className="title my-2">Sales</h4>
+            <h4 className="title my-2 mx-4">Sales</h4>
             <div className="container">
                 <div className="row my-4">
                     <SalesListBox />

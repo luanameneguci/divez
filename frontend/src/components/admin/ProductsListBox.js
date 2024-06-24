@@ -31,18 +31,17 @@ const boxProductsContent = [
 // main function, returns table with data
   function ProductsListBox() {
     return (
-      <div className="box-container bg-white roundbg d-flex h-100 position-relative" shadow>
-        <div className="col-12">
-          <h3 className="text-start p-3">Products</h3>
-          <table className="container text-start">
-            <thead className="text-white bg-info">
-              <tr>
-                <th className="ps-4 py-2">Product Name</th>
-                <th className="ps-4 py-2">Licences</th>
-                <th className="ps- py-2">Status</th>
+      <div className="container bg-white d-flex px-0 roundbg h-100 shadow">
+        <div className="container px-0 roundbg h-100">
+          <table className="table text-start">
+            <thead className="text-white pt-2">
+              <tr className='col-12'>
+                <th className="ps-4 py-2 col-4">Product Name</th>
+                <th className="ps-4 py-2 col-2">Licences</th>
+                <th className="ps- py-2 col-2">Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='roundbg'>
               {rows3.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   {row.map((data, colIndex) => {
@@ -89,7 +88,7 @@ const boxProductsContent = [
             </tbody>
           </table>
           <div className='text-center'>
-                  <button className="btn btn-outline-dark hover my-4">See more</button>
+                  <button className="btn btn-info text-white hover my-4"><strong>See more</strong></button>
                   </div>
             
         </div>

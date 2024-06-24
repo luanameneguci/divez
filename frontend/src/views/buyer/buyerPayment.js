@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import Shop from "../../views/buyer/buyerShop";
 
 const BuyerPayment = () => {
   const items = [
@@ -96,7 +98,7 @@ const BuyerPayment = () => {
                   <div className="row">
                     <div className="col-lg-7">
                       <h5 className="mb-3">
-                        <a href="#!" className="text-body d-flex align-center">
+                        <Link to="/shop" className="text-body d-flex align-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -111,7 +113,7 @@ const BuyerPayment = () => {
                             />
                           </svg>
                           Continue shopping
-                        </a>
+                        </Link>
                       </h5>
                       <hr />
 
@@ -130,7 +132,7 @@ const BuyerPayment = () => {
                       </div>
                     </div>
                     <div className="col-lg-5">
-                      <div className="card bg-info text-white roundbg-3">
+                      <div className="p-3 bg-info text-white roundbg">
                         <div className="card-body">
                           <div className="d-flex justify-content-between align-items-center mb-4">
                             <h5 className="mb-0">Card details</h5>
@@ -261,14 +263,14 @@ const ShoppingCart = ({ items }) => {
   return (
     <div>
       {items.map((item, index) => (
-        <div className="card mb-3 shadow" key={index}>
+        <div className="p-3 mb-3 shadow roundbg" key={index}>
           <div className="card-body">
             <div className="d-flex justify-content-between">
               <div className="d-flex flex-row align-items-center">
                 <div>
                   <img
                     src={item.image}
-                    className="img-fluid roundbg-3"
+                    className="img-fluid roundbg"
                     alt="Shopping item"
                     style={{ width: "65px" }}
                   />

@@ -82,7 +82,7 @@ const Menu = () => {
                 <span className="username-text">Utilizador</span>
               </div>
               <div className="account-type">
-                <span className="account-text">Admin</span>
+                <span className="account-text">Client</span>
               </div>
             </div>
             <div className="my-auto me-3">
@@ -92,6 +92,21 @@ const Menu = () => {
                 className="notification-icon"
               />
             </div>
+            <div className="mx-3">
+                  <Link to="/checkout" className="text-black">
+                    <img
+                      className="me-2"
+                      src="https://img.icons8.com/?size=100&id=CE7rP-35_XQR&format=png&color=000000"
+                      style={{ height: 30 + "px" }}
+                    />
+                  </Link>
+                  <Link to="/budgets" className="text-black">
+                    <img
+                      src="https://img.icons8.com/?size=100&id=nwhUUqONScaC&format=png&color=000000"
+                      style={{ height: 30 + "px" }}
+                    />
+                  </Link>
+                </div>
           </div>
 
           <div className="mw-100 h-25 bg-light py-2 px-3">

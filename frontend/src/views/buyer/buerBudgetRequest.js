@@ -61,9 +61,6 @@ const BuyerBudgetReply = () => {
                             <label htmlFor="productpriceinput">Asking price</label>
                             <input type="number" className="form-control" id="productpriceinput" placeholder="Asking price" />
                             <div className="row d-flex mt-3 justify-content-end">
-                            <div className="col-6">
-                                    <button type="button" className="btn btn-info text-white hover shadow col-12">Accept</button>
-                                </div>
                                 <div className="col-6">
                                     <button type="button" className="btn btn-info text-white hover shadow col-12">Send</button>
                                 </div>

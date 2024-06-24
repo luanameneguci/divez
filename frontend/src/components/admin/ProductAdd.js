@@ -54,7 +54,7 @@ const packagesList = [
 const ProductAdd = () => {
     return (
         <div className="container p-2 bg-light">
-            <div className="box-container bg-white roundbg d-flex h-100 p-2 mt-2 shadow">
+            <div className="box-container bg-white roundbg d-flex h-100 p-2 mt-2 shadow mx-5">
                 <div className="col-12">
                     <h2 className='text-start p-3'>New Product</h2>
                     <form>
@@ -100,16 +100,19 @@ const ProductAdd = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="row d-flex flex-row m-3">
+                        <div className='col-8'></div>
+                <div className="col-2">
+                    <button type="button" class="btn btn-outline-success col-12 hover">Add</button>
+                </div>
+                <div className="col-2">
+                    <button type="button" class="btn btn-outline-danger col-12 hover">Cancel</button>
                 </div>
             </div>
-            <div className="row fixed-bottom-buttons d-flex flex-row m-3">
-                <div className="col-6">
-                    <button type="button" class="btn btn-outline-success">Add</button>
                 </div>
-                <div className="col-6">
-                    <button type="button" class="btn btn-outline-danger">Cancel</button>
-                </div>
+                
             </div>
+
 
         </div>
     );

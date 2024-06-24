@@ -54,8 +54,8 @@ function ProductList() {
 
     return (
         <div className="box-container roundbg col-auto d-flex">
-            <div className="container roundbg">
-                <table className='table roundbg container-fluid roundbg py-4 border border-light shadow'>
+            <div className="container roundbg bg-white shadow px-0">
+                <table className='table roundbg container-fluid roundbg pb-4 border border-light'>
                     <thead className='text-white'>
                         <tr>
                             <th className="py-2 align-text-top pt-2 ps-4">Image</th>
@@ -128,11 +128,9 @@ function ProductList() {
                                         </td>
                                     )
                                 ))}
-                                {/**/}
                                 <td className="d-flex justify-content-center p-4">
-                                    <Link to='/product' className='btn btn-outline-warning me-2'>+</Link>
-                                    <Link to='/editproduct' className='btn btn-outline-info me-2'>Edit</Link>
-                                    <button className='btn btn-outline-danger'
+                                    <Link to='/editproduct' className='btn btn-outline-info me-2 hover'>Edit</Link>
+                                    <button className='btn btn-outline-danger hover'
                                     //onClick={() => deleteProduct(rowIndex)} futuro
                                     >Delete
                                     </button>

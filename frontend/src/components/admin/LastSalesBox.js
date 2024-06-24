@@ -21,7 +21,7 @@ for (let i = 0; i < boxProductsContent.length; i += itemsPerRow) {
 
 function LastSalesBox() {
     return (
-        <div className="box-container d-flex shadow">
+        <div className="box-container d-flex">
             <div className="container bg-white px-0 roundbg">
                 <table className='table text-start'>
                     <thead className='text-white pt-2'>
@@ -82,7 +82,7 @@ function LastSalesBox() {
                     </tbody>
                 </table>
                 <div className="my-2">
-                    <button className='btn btn-outline-dark'>See more</button>
+                <button className="btn btn-info text-white hover"><strong>See more</strong></button>
                 </div>
             </div>
         </div>

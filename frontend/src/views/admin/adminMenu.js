@@ -1,72 +1,105 @@
 // npms import
-import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 
 // images import
-import logo from '../../images/logo-navbar.svg';
-import notificationicon from '../../images/notification.png';
+import logo from "../../images/logo-navbar.svg";
+import notificationicon from "../../images/notification.png";
 
 // views import
-import ManagerProducts from '../../views/manager/managerProducts';
-
+import AdminDashboard from "../../views/admin/adminDashboard";
+import AdminClientList from "../../views/admin/adminClientList";
+import AdminClientDashboard from "../../views/admin/adminClientDashboard";
+import AdminProductDashboard from "../../views/admin/adminProductDashboard";
+import AdminProductList from "../../views/admin/adminProductList";
+import AdminTicketList from "../../views/admin/adminTicketList";
+import AdminSalesList from "../../views/admin/adminSalesList";
+import AdminBudgetList from "../../views/admin/adminBudgetList";
+import PackageAdd from "../../views/admin/packageAdd";
+import ProductAdd from "../../views/admin/productAdd";
+import ProductEdit from "../../views/admin/productEdit";
+import AdminBudgetReply from "../../views/admin/adminBudgetReply";
+import AdminSalesDashboard from "../../views/admin/adminSalesDashboard";
 
 // styles import
 import "../../App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Menu = () => {
   return (
     <Router>
       <div className="App">
-        <div className="row flex-nowrap">
-          <div className="col-auto col-md-3 col-xl-2 px-sm-3 px-0 bg-white">
+        <div className="row flex-nowrap px-0 mx-0 bg-light">
+          <div className="col-auto col-md-3 col-xl-2 px-sm-3 px-0 bg-white fixed-top">
             <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
               <a href="/" className="d-flex align-items-center pb-3 mx-auto">
                 <img src={logo} alt="logo divez" className="header-logo" />
               </a>
-              <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+              <ul
+                className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                id="menu"
+              >
                 <li className="nav-item">
-                  <Link to="/" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
-                    <i className="fs-4 bi-house"></i> 
+                  <Link
+                    to="/"
+                    className="navbar-link text-decoration-none text-black align-middle px-5 py-2"
+                  >
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Dashboard</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/clients" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
-                    <i className="fs-4 bi-house"></i> 
+                  <Link
+                    to="/clients"
+                    className="navbar-link text-decoration-none text-black align-middle px-5 py-2"
+                  >
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Clients</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/products" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
-                    <i className="fs-4 bi-house"></i> 
+                  <Link
+                    to="/products"
+                    className="navbar-link text-decoration-none text-black align-middle px-5 py-2"
+                  >
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Products</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/tickets" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
-                    <i className="fs-4 bi-house"></i> 
+                  <Link
+                    to="/tickets"
+                    className="navbar-link text-decoration-none text-black align-middle px-5 py-2"
+                  >
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Tickets</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/sales" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
-                    <i className="fs-4 bi-house"></i> 
+                  <Link
+                    to="/sales"
+                    className="navbar-link text-decoration-none text-black align-middle px-5 py-2"
+                  >
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Sales</span>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/budgets" className="navbar-link text-decoration-none text-black align-middle px-5 py-2">
-                    <i className="fs-4 bi-house"></i> 
+                  <Link
+                    to="/budgets"
+                    className="navbar-link text-decoration-none text-black align-middle px-5 py-2"
+                  >
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">Budgets</span>
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="col-10 h-25 bg-white">
-            <div className="d-flex align-self-end flex-row-reverse px-4 py-2 me-3">
+          <div className="col-auto col-md-3 col-xl-2 px-sm-3 px-0"></div>
+          <div className="col-10 h-25 bg-white px-0">
+            <div className="d-flex align-self-end sticky-top flex-row-reverse bg-white px-5 py-2">
               <div>
                 <div>
                   <span className="username-text">Username</span>
@@ -76,7 +109,11 @@ const Menu = () => {
                 </div>
               </div>
               <div className="my-auto me-3">
-                <img src={notificationicon} alt="notifications button" className="notification-icon" />
+                <img
+                  src={notificationicon}
+                  alt="notifications button"
+                  className="notification-icon"
+                />
               </div>
             </div>
             <div className="w-100 bg-light">

@@ -79,7 +79,7 @@ function SalesListBox() {
     };
 
     return (
-        <div className="box-container px-0 h-100 shadow">
+        <div className="box-container px-0 h-100 shadow roundbg">
             <div className="container bg-white px-0 roundbg">
                 <table id="datatable" className='table text-start'>
                     <thead className='text-white'>
