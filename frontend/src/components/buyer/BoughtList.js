@@ -1,15 +1,14 @@
 function BoughtList({rows}) {
-    return <div className="box-container bg-white col-auto roundbg d-flex shadow mx-4">
-    <div className="col-12 bg-info roundbg">
-        <table className='container-fluid text-start bg-info py-4 roundbg table3'>
-            <thead className='text-white'>
+    return <div className="container bg-white roundbg shadow h-100 px-0 pb-3">
+        <table className='col-12 text-start bg-info roundbg'>
+            <thead className='text-white roundbg'>
                 <th className="ps-3 py-2">ID</th>
                 <th className="ps-3 py-2">Product</th>
                 <th className="ps-3 py-2">Date</th>
                 <th className="ps-3 py-2">Amount</th>
                 <th className="ps-3 py-2">Price</th>
             </thead>
-            <tbody className='bg-white'>
+            <tbody className='bg-white roundbg'>
             {rows.map((row, rowIndex) => (
                     <tr key={rowIndex}>
                         {row.map((data, colIndex) => (
@@ -28,7 +27,6 @@ function BoughtList({rows}) {
             </tbody>
         </table>
     </div>
-</div>
 }
 
 export default BoughtList;

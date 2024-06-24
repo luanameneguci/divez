@@ -56,7 +56,7 @@ function ManagersList({ managersList }) {
                                 onChange={(e) => setMailFilter(e.target.value)}
                             />
                         </th>
-                        <th className="ps-3 py-2">OutraInfoQualquer
+                        <th className="ps-3 py-2">Products
                             <input
                                 className="form-control w-75"
                                 type="text"

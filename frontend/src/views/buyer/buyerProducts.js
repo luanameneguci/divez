@@ -82,12 +82,12 @@ const ProgressDivs = ({ resultado }) => {
               percentage={item.percentage}
             />
           </div>
-          <div className="col-4 ms-auto">
-            <button className="btn btn-outline-info hover m-2">
+          <div className="col-4 ms-5 row h-50 my-auto">
+            <button className="col-4 btn btn-outline-info hover me-3">
               Add manager
             </button>
-            <button className="btn btn-outline-info hover m-2">Help</button>
-            <button className="btn btn-outline-danger m-2">
+            <button className="col-2 btn btn-outline-info hover me-3">Help</button>
+            <button className="col-5 btn btn-outline-danger">
               Cancel Subscription
             </button>
           </div>

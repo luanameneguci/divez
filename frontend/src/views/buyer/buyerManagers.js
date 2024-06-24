@@ -4,12 +4,12 @@ import ManagersList from '../../components/buyer/ManagersList';
 
 const BuyerManagersList = () => {
     const managersList = [
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Manager'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
     ];
     
 

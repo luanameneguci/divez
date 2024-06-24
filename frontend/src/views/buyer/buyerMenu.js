@@ -14,6 +14,7 @@ import BuyerProductList from "../../views/buyer/buyerProducts";
 import BuyerManagerList from "../../views/buyer/buyerManagers";
 import BuyerDashboard from "../../views/buyer/buyerDashboard";
 import Shop from "../../views/buyer/buyerShop";
+import BuyerBudgetReply from "./buerBudgetRequest";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -107,6 +108,7 @@ const Menu = () => {
                 <Route path="/checkout" element={<BuyerPayment />} />
                 <Route path="/productitem" element={<BuyerProductItem />} />
                 <Route path="/shopitem" element={<BuyerShopItem />} />
+                <Route path="/budgetrequest" element={<BuyerBudgetReply />}/>
               </Routes>
             </div>
           </div>

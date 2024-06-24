@@ -98,7 +98,7 @@ const FileUpload = () => {
           id="button-1"
           onClick={handleButtonClick}
           style={getButtonStyle(1)}
-          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-3 text-center"
         >
           <b style={{ pointerEvents: "none" }}>Installation</b>
         </button>
@@ -106,7 +106,7 @@ const FileUpload = () => {
           id="button-2"
           onClick={handleButtonClick}
           style={getButtonStyle(2)}
-          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-3 text-center"
         >
           <b style={{ pointerEvents: "none" }}>Licenses</b>
         </button>
@@ -114,7 +114,7 @@ const FileUpload = () => {
           id="button-3"
           onClick={handleButtonClick}
           style={getButtonStyle(3)}
-          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-3 text-center"
         >
           <b style={{ pointerEvents: "none" }}>Payment</b>
         </button>

@@ -67,7 +67,7 @@ function BudgetList({ numRowsToShow }) {
     };
 
     return (
-        <div className="box-container d-flex h-100 shadow">
+        <div className="box-container d-flex h-100 shadow roundbg">
             <div className="container bg-white px-0 roundbg">
                 <table className='table text-start m-0'>
                     <thead className='text-white'>
