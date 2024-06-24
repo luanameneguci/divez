@@ -88,6 +88,7 @@ function SalesListBox() {
                                 <input
                                     className="form-control w-75"
                                     id="ticketfilter"
+                                    placeholder="Search"
                                     type="number"
                                     value={saleId}
                                     onChange={handleSaleIdChange}
@@ -128,6 +129,7 @@ function SalesListBox() {
                                     className="form-control w-75"
                                     id="priofilter"
                                     type="number"
+                                    placeholder="Search"
                                     value={price}
                                     onChange={handlePriceChange}
                                 />

@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import '../../App.css';
 import Modal from 'react-bootstrap/Modal';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import notificationicon from "../../images/notification.png";
+
+// Date format helper function
+const formatDateString = (dateString) => {
+    const [day, month, year] = dateString.split('/');
+    return new Date(`${year}-${month}-${day}`);
+};
 
 // For testing, swap with db data
 const ticketboxcontent = [
@@ -25,7 +32,6 @@ const ticketboxcontent = [
     [18, 'João Ratão', '13/06/2024', '20000', '2', 'New'],
 ];
 
-// main function, returns table with data
 function TicketListBox({ numRowsToShow }) {
     const [lgShow, setLgShow] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState(null);
@@ -33,7 +39,8 @@ function TicketListBox({ numRowsToShow }) {
     // State for filters
     const [ticketId, setTicketId] = useState('');
     const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(null); // Changed to null for DatePicker
+
     const [department, setDepartment] = useState('');
     const [priority, setPriority] = useState('');
     const [status, setStatus] = useState('');
@@ -44,14 +51,15 @@ function TicketListBox({ numRowsToShow }) {
     };
 
     // Filtering the tickets based on input values
-    const filteredTickets = ticketboxcontent.filter(ticket => {
+    const filteredRows = ticketboxcontent.filter(row => {
+        const rowDate = formatDateString(row[2]);
         return (
-            (ticketId === '' || ticket[0].toString().includes(ticketId)) &&
-            (title === '' || ticket[1].toLowerCase().includes(title.toLowerCase())) &&
-            (date === '' || ticket[2].includes(date)) &&
-            (department === '' || ticket[3].toLowerCase().includes(department.toLowerCase())) &&
-            (priority === '' || ticket[4].toString().includes(priority)) &&
-            (status === '' || ticket[5].toLowerCase().includes(status.toLowerCase()))
+            row[0].toString().includes(ticketId.toString()) &&
+            row[1].toLowerCase().includes(title.toLowerCase()) &&
+            (!date || rowDate >= date) && // Compare rowDate with selected date
+            row[3].toLowerCase().includes(department.toLowerCase()) &&
+            row[4].toString().includes(priority.toString()) &&
+            row[5].toLowerCase().includes(status.toLowerCase())
         );
     });
 
@@ -96,12 +104,12 @@ function TicketListBox({ numRowsToShow }) {
                                     </th>
                                     <th>
                                         Date
-                                        <input
+                                        <DatePicker
+                                            selected={date}
+                                            onChange={(date) => setDate(date)}
+                                            dateFormat="dd/MM/yyyy"
                                             className="form-control w-75"
-                                            type="text"
-                                            placeholder="Search"
-                                            value={date}
-                                            onChange={(e) => setDate(e.target.value)}
+                                            placeholderText="Select date"
                                         />
                                     </th>
                                     <th>
@@ -141,7 +149,7 @@ function TicketListBox({ numRowsToShow }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredTickets.slice(0, numRowsToShow).map((ticket, rowIndex) => (
+                        {filteredRows.slice(0, numRowsToShow).map((ticket, rowIndex) => (
                             <tr key={rowIndex}>
                                 {ticket.map((data, colIndex) => {
                                     let color = 'inherit';

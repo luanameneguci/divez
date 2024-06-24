@@ -7,19 +7,7 @@ import logo from '../../images/logo-navbar.svg';
 import notificationicon from '../../images/notification.png';
 
 // views import
-import AdminDashboard from '../../views/admin/adminDashboard';
-import AdminClientList from '../../views/admin/adminClientList';
-import AdminClientDashboard from '../../views/admin/adminClientDashboard';
-import AdminProductDashboard from '../../views/admin/adminProductDashboard';
-import AdminProductList from '../../views/admin/adminProductList';
-import AdminTicketList from '../../views/admin/adminTicketList';
-import AdminSalesList from '../../views/admin/adminSalesList';
-import AdminBudgetList from '../../views/admin/adminBudgetList';
-import PackageAdd from '../../views/admin/packageAdd';
-import ProductAdd from '../../views/admin/productAdd';
-import ProductEdit from '../../views/admin/productEdit';
-import AdminBudgetReply from '../../views/admin/adminBudgetReply';
-import AdminSalesDashboard from '../../views/admin/adminSalesDashboard';
+import ManagerProducts from '../../views/manager/managerProducts';
 
 
 // styles import
@@ -94,19 +82,7 @@ const Menu = () => {
             <div className="w-100 bg-light">
               <div className="row dashboard-content">
                 <Routes>
-                  <Route path="/" element={<AdminDashboard />} />
-                  <Route path="/clients" element={<AdminClientList />} />
-                  <Route path="/products" element={<AdminProductList />} />
-                  <Route path="/tickets" element={<AdminTicketList />} />
-                  <Route path="/sales" element={<AdminSalesList />} />
-                  <Route path="/sale" element={<AdminSalesDashboard />} />
-                  <Route path="/budgets" element={<AdminBudgetList />} />
-                  <Route path="/client" element={<AdminClientDashboard />} />
-                  <Route path="/addproduct" element={<ProductAdd />} />
-                  <Route path="/editproduct" element={<ProductEdit />} />
-                  <Route path="/addpackage" element={<PackageAdd />} />
-                  <Route path="/product" element={<AdminProductDashboard />} />
-                  <Route path="/budgetreply" element={<AdminBudgetReply />} />
+                  <Route path="/" element={<ManagerProducts />} />
                 </Routes>
               </div>
             </div>

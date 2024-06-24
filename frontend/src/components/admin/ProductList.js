@@ -45,7 +45,7 @@ function ProductList() {
         );
     });
 
-    /* Futuro
+    /* Futuro tbm vai precisar de apagar da db
     const deleteProduct = (index) => {
         const updatedList = [...rows];
         updatedList.splice(index, 1);
@@ -116,7 +116,7 @@ function ProductList() {
                                             key={colIndex}
                                         >
                                             <Link to='/product'>
-                                            <img src={data} alt="Product" className="me-3" style={{ width: '70px', height: '70px' }} />
+                                                <img src={data} alt="Product" className="me-3" style={{ width: '70px', height: '70px' }} />
                                             </Link>
                                         </td>
                                     ) : (
@@ -130,6 +130,7 @@ function ProductList() {
                                 ))}
                                 {/**/}
                                 <td className="d-flex justify-content-center p-4">
+                                    <Link to='/product' className='btn btn-outline-warning me-2'>+</Link>
                                     <Link to='/editproduct' className='btn btn-outline-info me-2'>Edit</Link>
                                     <button className='btn btn-outline-danger'
                                     //onClick={() => deleteProduct(rowIndex)} futuro
