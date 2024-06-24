@@ -1,6 +1,8 @@
 import React from "react";
 import "../../App.css";
 import Rating from "@mui/material/Rating";
+import { Link } from 'react-router-dom';
+
 
 const itemsDataArray = [
   {
@@ -14,7 +16,7 @@ const itemsDataArray = [
     Review: 3.4,
     description:
       "A fitness tracking app to help you achieve your health goals.",
-      id: 1,
+    id: 1,
   },
   {
     nomeApp: "Adobe Illustrator",
@@ -27,7 +29,7 @@ const itemsDataArray = [
     Review: 4.8,
     description:
       "A fitness tracking app to help you achieve your health goals.",
-      id: 2,
+    id: 2,
   },
   {
     nomeApp: "Adobe Animate",
@@ -71,11 +73,15 @@ function createDataArraysItems(item) {
 
 const ItemStatus = ({ itemData }) => {
   return (
+
     <div className="my-3 m-3 shadow roundbg hover ">
       <div className="col-12 d-flex align-items-center p-3 justify-content-between flex-column bg-white roundbg">
         <div className="col-12 row">
+
           <div className="col-2">
-            <img src={itemData[1]} alt={`${itemData[0]}`} className="mr-3" />
+            <Link to="/shopitem" className="text-black">
+              <img src={itemData[1]} alt={`${itemData[0]}`} className="mr-3" />
+            </Link>
           </div>
           <div className="col-10">
             <div className="col-12 row ms-2">
@@ -86,15 +92,19 @@ const ItemStatus = ({ itemData }) => {
               </div>
               <div className="col-4 mb-2 mt-3 d-flex justify-content-end">
                 <div>
-                  <img
-                    className="me-2"
-                    src="https://img.icons8.com/?size=100&id=CE7rP-35_XQR&format=png&color=000000"
-                    style={{ height: 30 + "px" }}
-                  />
-                  <img
-                    src="https://img.icons8.com/?size=100&id=nwhUUqONScaC&format=png&color=000000"
-                    style={{ height: 30 + "px" }}
-                  />
+                  <Link to="/checkout" className="text-black">
+                    <img
+                      className="me-2"
+                      src="https://img.icons8.com/?size=100&id=CE7rP-35_XQR&format=png&color=000000"
+                      style={{ height: 30 + "px" }}
+                    />
+                  </Link>
+                  <Link to="/shopitem" className="text-black">
+                    <img
+                      src="https://img.icons8.com/?size=100&id=nwhUUqONScaC&format=png&color=000000"
+                      style={{ height: 30 + "px" }}
+                    />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -113,10 +123,10 @@ const ItemStatus = ({ itemData }) => {
             </div>
           </div>
           <div className="col-12 my-3 d-flex justify-content-start">
-              <p className="mb-0" style={{ minHeight: 48 + "px", textAlign: "justify" }}>
-                {itemData[8]}
-              </p>
-            </div>
+            <p className="mb-0" style={{ minHeight: 48 + "px", textAlign: "justify" }}>
+              {itemData[8]}
+            </p>
+          </div>
         </div>
         <div className="col-12 row my-3 ">
           <div className="col-6 d-flex justify-content-start">

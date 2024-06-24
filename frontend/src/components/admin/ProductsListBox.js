@@ -82,11 +82,16 @@ const boxProductsContent = [
                       </td>
                     );
                   })}
+                  
                 </tr>
               ))}
+              
             </tbody>
           </table>
-            <button className="btn btn-outline-dark hover position-absolute bottom-0 start-50 translate-middle-x my-4">See more</button>
+          <div className='text-center'>
+                  <button className="btn btn-outline-dark hover my-4">See more</button>
+                  </div>
+            
         </div>
       </div>
     );

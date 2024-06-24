@@ -18,6 +18,9 @@ import AdminBudgetList from '../../views/admin/adminBudgetList';
 import PackageAdd from '../../views/admin/packageAdd';
 import ProductAdd from '../../views/admin/productAdd';
 import ProductEdit from '../../views/admin/productEdit';
+import AdminBudgetReply from '../../views/admin/adminBudgetReply';
+import AdminSalesDashboard from '../../views/admin/adminSalesDashboard';
+
 
 // styles import
 import "../../App.css";
@@ -96,12 +99,14 @@ const Menu = () => {
                   <Route path="/products" element={<AdminProductList />} />
                   <Route path="/tickets" element={<AdminTicketList />} />
                   <Route path="/sales" element={<AdminSalesList />} />
+                  <Route path="/sale" element={<AdminSalesDashboard />} />
                   <Route path="/budgets" element={<AdminBudgetList />} />
                   <Route path="/client" element={<AdminClientDashboard />} />
                   <Route path="/addproduct" element={<ProductAdd />} />
                   <Route path="/editproduct" element={<ProductEdit />} />
                   <Route path="/addpackage" element={<PackageAdd />} />
                   <Route path="/product" element={<AdminProductDashboard />} />
+                  <Route path="/budgetreply" element={<AdminBudgetReply />} />
                 </Routes>
               </div>
             </div>

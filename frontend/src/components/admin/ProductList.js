@@ -53,9 +53,9 @@ function ProductList() {
     };*/
 
     return (
-        <div className="box-container col-auto d-flex">
-            <div className="container">
-                <table className='table container-fluid py-4 border border-light shadow'>
+        <div className="box-container roundbg col-auto d-flex">
+            <div className="container roundbg">
+                <table className='table roundbg container-fluid roundbg py-4 border border-light shadow'>
                     <thead className='text-white'>
                         <tr>
                             <th className="py-2 align-text-top pt-2 ps-4">Image</th>

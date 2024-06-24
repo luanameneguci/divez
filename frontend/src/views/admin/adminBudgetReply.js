@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import React from 'react';
-=======
 import React, { useState } from 'react';
->>>>>>> Stashed changes
 import '../../App.css';
 
 /* não tenho a certeza como fazer isto com a base de dados, não sei pq mas não estava a conseguir juntar

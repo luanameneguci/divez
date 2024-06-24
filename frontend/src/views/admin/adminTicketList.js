@@ -7,11 +7,11 @@ var numRowsToShow = 20;
 
 const AdminTicketList = () => {
     return (
-        <div className="dashboard-content bg-s w-100">
+        <div className="dashboard-content bg-light w-100">
             <h4 className="title my-2">Tickets</h4>
-            <div className="container text-center">
-                <div className="row my-4">
-                <TicketListBox numRowsToShow={numRowsToShow} showSearchInputs={true}/>
+            <div className="container">
+                <div className="my-4">
+                    <TicketListBox numRowsToShow={numRowsToShow} showSearchInputs={true} />
                 </div>
             </div>
         </div>

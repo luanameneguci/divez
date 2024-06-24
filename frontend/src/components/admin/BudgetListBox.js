@@ -66,8 +66,8 @@ function BudgetsListBox({ numRowsToShow }) {
     };
 
     return (
-        <div className="box-container d-flex px-0">
-            <div className="container px-0 roundbg shadow h-100">
+        <div className="box-container bg-white d-flex px-0">
+            <div className="container px-0 roundbg h-100">
                 <table className='table text-start'>
                     <thead className='text-white pt-2'>
                         <tr>
@@ -142,7 +142,7 @@ function BudgetsListBox({ numRowsToShow }) {
                     </thead>
                     <tbody className='text-start'>
                         {filteredRows.slice(0, numRowsToShow).map((row, rowIndex) => (
-                            <tr key={rowIndex} style={{ borderRadius: rowIndex === filteredRows.length - 1 ? '0 0 15px 15px' : '0' }}>
+                            <tr key={rowIndex}>
                                 {numRowsToShow === 5 && (
                                     <>
                                         <td style={{ width: '10%' }} className='ps-3'>{row[0]}</td>

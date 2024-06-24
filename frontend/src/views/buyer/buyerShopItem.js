@@ -20,18 +20,18 @@ const ItemsIncluded = [
 
 const Package = [
   {
-    NamePackage: "Package1",
-    Price: 50.0,
+    NamePackage: "Must Have",
+    Price: 30.0,
     include: ItemsIncluded,
   },
   {
-    NamePackage: "Package2",
+    NamePackage: "Full Adobe",
     Price: 45.0,
     include: ItemsIncluded,
   },
   {
-    NamePackage: "Package3",
-    Price: 30.0,
+    NamePackage: "Basic Adobe",
+    Price: 20.0,
     include: ItemsIncluded,
   },
 ];
@@ -52,6 +52,11 @@ const itemsDataArray = [
     id: 1,
   },
 ];
+
+const imgElements = createImgElements(ItemsIncluded);
+const result = createDataArrays(Package);
+const items = createDataArraysItems(itemsDataArray);
+
 
 // Function to create array of items
 function createDataArraysItems(item) {
@@ -96,10 +101,6 @@ function createDataArrays(Package) {
   }
   return result;
 }
-
-const imgElements = createImgElements(ItemsIncluded);
-const result = createDataArrays(Package);
-const items = createDataArraysItems(itemsDataArray);
 
 // ItemStatus component
 const ItemStatus = ({ items, result }) => {
@@ -182,22 +183,20 @@ const ItemStatus = ({ items, result }) => {
           </div>
         </div>
         <div className="col-12 row">
-          <div className="col-6 d-flex justify-content-end">
-            <p className="mb-0">
-              <strong>Packages: </strong>
-            </p>
-          </div>
+          <p className="my-1 fs-5">
+            <strong>Packages: </strong>
+          </p>
         </div>
-      </div>
-      <div>
-        <div
-          className="box-container bg-white col-auto roundbg d-flex shadow"
-          style={{ height: 360 + "px" }}
-        >
-          <div className="col-12">
-            {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
-            <div className="px-3">
-              <PackageDivs resultado={result} />
+
+        <div className="col-12">
+          <div
+            className="col-12 p-2"
+          >
+            <div className="col-12">
+              {/*Aqui vai ser o conteudo de cada um individual (tipo <adminDashboard />*/}
+              <div>
+                <PackageDivs resultado={result} />
+              </div>
             </div>
           </div>
         </div>
@@ -209,7 +208,7 @@ const ItemStatus = ({ items, result }) => {
 // PackageDivs component
 const PackageDivs = ({ resultado }) => {
   return (
-    <div>
+    <div className="row d-flex justify-content-center">
       {resultado.map((item, index) => (
         <PackageDiv
           key={index}
@@ -224,17 +223,23 @@ const PackageDivs = ({ resultado }) => {
 
 // PackageDiv component
 const PackageDiv = ({ nomeApp, price, include }) => (
-  <div className="mb-3">
-    <div className="d-flex justify-content-between">
+
+
+  <div className="packageshoplist col-3 py-3 mx-3 border border-dark border-3 roundbg">
+    <div>
       <p>
         <strong>{nomeApp}</strong>
       </p>
-      <p>{price}</p>
-      {include.map((item, index) => (
-        <img key={index} src={item.photo} alt={`Photo ${index + 1}`} />
-      ))}
+      <p>{price}€</p>
+      <div className="mx-5">
+        {include.map((item, index) => (
+          <img key={index} src={item.photo} alt={`Photo ${index + 1}`} />
+        ))}
+      </div>
+
     </div>
   </div>
+
 );
 
 // ItemList component
@@ -268,7 +273,7 @@ const BuyerShop = ({ items, result, imgElements }) => {
 
 
 const BuyerShopItem = () => {
-  return <BuyerShop />;
+  return <BuyerShop items={items} result={result} imgElements={imgElements} />;
 };
 
 export default BuyerShopItem;
