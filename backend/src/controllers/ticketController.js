@@ -15,7 +15,7 @@ controllers.ticket_list = async (req, res) => {
     const tickets = await Ticket.findAll({
       include: [
         { model: Buyer, as: 'buyer' },
-        { model: TicketStatus, as: 'ticketStatus' }, // Inclua o TicketStatus na consulta
+        { model: TicketStatus, as: 'ticketStatus' },
         { model: TicketDepartment, as: 'ticketDepartment' },
         { model: Manager, as: 'manager' }
       ]
@@ -68,6 +68,18 @@ controllers.ticket_findByBuyer = async (req, res) => {
   const data = await Ticket.findAll({ where: { idBuyer: idReceived } });
 
   res.json(data);
+};
+
+controllers.ticket_findByTicketStatus = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const count = await Ticket.count({ where: { idTicketstatus: id } });
+    res.json({ success: true, count });
+  } catch (error) {
+    console.error('Error counting tickets by status:', error);
+    res.status(500).json({ success: false, message: 'Error counting tickets by status', error: error.message });
+  }
 };
 
 controllers.ticket_delete = async (req, res) => {

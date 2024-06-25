@@ -15,6 +15,8 @@ router.post("/create", budgetController.budget_create);
 
 router.put("/update/:id", budgetController.budget_update);
 
+router.get('/countByStatus/:id', budgetController.budget_findByBudgetStatus);
+
 router.delete("/delete/:id", budgetController.budget_delete);
 
 module.exports = router;

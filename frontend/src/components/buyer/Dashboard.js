@@ -18,6 +18,8 @@ const BuyerDashboard = () => {
   const rows = useTablePendingBudgets();
   const idCart = useBuyerCart();
   const tableManager = BuyerManagersTable();
+  const rows3 = useTableTickets();
+  const nameProduct = FillMostUsedTable();
 
   let data = [
     { nome: "Adobe Photoshop", numeroTotal: 1000, numeroAtivos: 750 },
@@ -70,12 +72,30 @@ const BuyerDashboard = () => {
         </div>
       </div>
       <div className="col-12">
-        <BoxThird title="Tickets" />
+        <BoxThird title="Tickets" rows3={rows3}/>
       </div>
     </div>
   );
 };
+function FillMostUsedTable(){
+  const [productName, setProductName] = useState("");
+  async function fetchTopProducts() {
+    try {
+      const response = await fetch('http://localhost:8080/product/topProducts');
+      const products = await response.json();
+      products.forEach(product => {
+        setProductName(product.productName);
+      });
+      
+    } catch (error) {
+      console.error('Error fetching top products:', error);
+    }
+  }
 
+  fetchTopProducts();
+  console.log(productName);
+  return productName;
+}
 /*find buyer active licenses*/
 function useBuyerActiveLicenses() {
   const [activeLicenses, setActiveLicenses] = useState(0);
@@ -143,6 +163,7 @@ function useBuyerPendingBudgets() {
         const res = await axios.get(url);
         if (res.status === 200) {
           const data3 = res.data;
+        
           const pendingCount = data3.filter(
             (budget) => budget.idBudgetStatus === 1
           ).length;
@@ -275,7 +296,45 @@ function useTablePendingBudgets() {
   for (let i = 0; i < tableContent.length; i += itemsPerRow) {
     rows.push(tableContent.slice(i, i + itemsPerRow));
   }
+ 
   return rows;
+}
+
+/*preencher tabela de tickets*/
+function useTableTickets() {
+  
+  const [tableTicketContent, setTableTicketContent] = useState([]);
+
+  useEffect(() => {
+    const fetchTableTicketContent = async () => {
+      try {
+        const url = "http://localhost:8080/ticket/findByBuyer/1";
+        const res = await axios.get(url);
+        if (res.status === 200) {
+          const data = res.data;
+       
+          setTableTicketContent(data);
+        } else {
+          alert("Error Web Service!");
+        }
+      } catch (error) {
+        alert(error);
+      }
+    };
+
+    fetchTableTicketContent();
+    
+  }, []);
+
+  // Split the tableContent array into rows of 3 items each
+  const rows3 = [];
+  const itemsPerRow = 6;
+  for (let i = 0; i < tableTicketContent.length; i += itemsPerRow) {
+    rows3.push(tableTicketContent.slice(i, i + itemsPerRow));
+  }
+  
+  return rows3;
+  
 }
 
 /*preencher tabela de managers*/

@@ -13,6 +13,8 @@ router.put("/update/:id", licenseController.license_update);
 
 router.get("/:id", licenseController.license_detail); 
 
+router.get('/countByStatus/:id', licenseController.license_findByLicenseStatus);
+
 router.delete("/delete/:id", licenseController.license_delete);
 
 module.exports = router;

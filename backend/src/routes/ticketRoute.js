@@ -13,6 +13,8 @@ router.put("/update/:id", ticketController.ticket_update);
 
 router.get("/:id", ticketController.ticket_detail); 
 
+router.get('/status/:id', ticketController.ticket_findByTicketStatus);
+
 router.delete("/delete/:id", ticketController.ticket_delete);
 
 module.exports = router;

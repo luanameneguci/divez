@@ -11,4 +11,6 @@ router.post("/create", billController.bill_create);
 
 router.put("/update/:id", billController.bill_update);
 
+router.get("/lastBillId", billController.bill_getLastBillId);
+
 module.exports = router;
