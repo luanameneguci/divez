@@ -743,6 +743,7 @@ const FileUpload = () => {
                 className="file-upload-image roundbg"
                 src={imagePreview}
                 alt="Uploaded"
+                style={{ width: "100px" }}
               />
               <div className="image-title-wrap">
                 <button

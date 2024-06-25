@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import notificationicon from "../../images/notification.png";
+import { Link } from 'react-router-dom';
 
 // Date format helper function
 const formatDateString = (dateString) => {
@@ -36,21 +35,23 @@ function TicketListBox({ numRowsToShow }) {
     const [lgShow, setLgShow] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState(null);
 
-    // State for filters
+    // Estados para os filtros
     const [ticketId, setTicketId] = useState('');
     const [title, setTitle] = useState('');
     const [date, setDate] = useState(null); // Changed to null for DatePicker
-
     const [department, setDepartment] = useState('');
     const [priority, setPriority] = useState('');
     const [status, setStatus] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(1); // Estado para controlar a página atual
+    const [itemsPerPage, setItemsPerPage] = useState(5); // Número de itens por página
 
     const handleShow = (ticket) => {
         setSelectedTicket(ticket);
         setLgShow(true);
     };
 
-    // Filtering the tickets based on input values
+    // Filtra as linhas com base nos filtros definidos nos estados
     const filteredRows = ticketboxcontent.filter(row => {
         const rowDate = formatDateString(row[2]);
         return (
@@ -63,13 +64,30 @@ function TicketListBox({ numRowsToShow }) {
         );
     });
 
+    // Lógica de paginação
+    const indexOfLastItem = currentPage * itemsPerPage; // Índice do último item da página
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Índice do primeiro item da página
+    const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem); // Itens da página atual
+
+    // Função para mudar de página
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // UI de paginação
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredRows.length / itemsPerPage); i++) {
+        pageNumbers.push(
+            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                <button className="page-link" onClick={() => paginate(i)}>{i}</button>
+            </li>
+        );
+    }
+
     return (
         <div className="container d-flex px-0 roundbg h-100 pb-3 bg-white shadow">
             <div className="container px-0 roundbg h-100">
                 <table className='table text-start my-0'>
                     <thead className='text-white pt-2'>
                         <tr>
-                            {/* Show filters only on tables with 20 numRowsToShow */}
                             {numRowsToShow < 20 ? (
                                 <>
                                     <th style={{ width: '10%' }}>Ticket</th>
@@ -143,13 +161,12 @@ function TicketListBox({ numRowsToShow }) {
                                         />
                                     </th>
                                     <th className='text-center align-text-top pt-3'>Action</th>
-
                                 </>
                             )}
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredRows.slice(0, numRowsToShow).map((ticket, rowIndex) => (
+                        {currentItems.map((ticket, rowIndex) => (
                             <tr key={rowIndex}>
                                 {ticket.map((data, colIndex) => {
                                     let color = 'inherit';
@@ -166,117 +183,19 @@ function TicketListBox({ numRowsToShow }) {
                                     );
                                 })}
                                 <td className='text-center'>
-                                    <button className='btn btn-outline-warning' onClick={() => handleShow(ticket)}>See more</button>
+                                    <Link to='/ticketreply' className='btn btn-outline-warning' onClick={() => handleShow(ticket)}>See more</Link>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                {/* Show table page switcher if numRowsToShow === 20 */}
                 {numRowsToShow === 20 && (
-                    <nav aria-label="..." className='ms-3'>
+                    <nav aria-label="..." className='mt-3 mb-0 d-flex justify-content-center'>
                         <ul className="pagination">
-                            <li className="page-item"><a className="page-link" href="#">1</a></li>
-                            <li className="page-item active">
-                                <a className="page-link" href="#">2</a>
-                            </li>
-                            <li className="page-item"><a className="page-link" href="#">3</a></li>
-                            <li className="page-item">
-                                <a className="page-link" href="#">Next</a>
-                            </li>
+                            {pageNumbers}
                         </ul>
                     </nav>
                 )}
-                {/* Modal for displaying selected ticket details */}
-                <Modal
-                    size="lg"
-                    show={lgShow}
-                    onHide={() => setLgShow(false)}
-                    aria-labelledby="ticketedit"
-                    style={{ padding: '10px' }}
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            Ticket #{selectedTicket ? selectedTicket[0] : ''}
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {selectedTicket && (
-                            <form>
-                                <div className='container'>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">CLIENT INFO</div>
-                                        <div className="col-4">Client Name Client ID</div>
-                                        <div className="col-5 text-end">
-                                            <button className='btn btn-info text-white me-2'>Change</button>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">DATE</div>
-                                        <div className="col-9">{selectedTicket[2]}</div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">CATEGORY</div>
-                                        <div className="col-9">{selectedTicket[3]}</div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">DESCRIPTION</div>
-                                        <div className="col-9">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                        </div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">ATTACHMENTS</div>
-                                        <div className="col-9">
-                                            <div className="row">
-                                                <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                    Prints
-                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints" />
-                                                </div>
-                                                <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                    Prints
-                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints" />
-                                                </div>
-                                                <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                    Prints
-                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">STATUS</div>
-                                        <div className="col-4">{selectedTicket[5]}</div>
-                                        <div className="col-5 text-end">
-                                            <button className='btn btn-info text-white me-2'>Change</button>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">PRIORITY</div>
-                                        <div className="col-4">{selectedTicket[4]}</div>
-                                        <div className="col-5 text-end">
-                                            <button className='btn btn-info text-white me-2'>Change</button>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">DEPARTMENT</div>
-                                        <div className="col-4">{selectedTicket[3]}</div>
-                                        <div className="col-5 text-end">
-                                            <button className='btn btn-info text-white me-2'>Change</button>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-4">
-                                        <div className="col-3 text-body-secondary">CLIENT INFO</div>
-                                        <div className="col-4">Client Name Client ID</div>
-                                        <div className="col-5 text-end">
-                                            <button className='btn btn-info text-white me-2'>Change</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        )}
-                    </Modal.Body>
-                </Modal>
             </div>
         </div>
     );

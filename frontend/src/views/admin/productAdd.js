@@ -1,11 +1,81 @@
 import React from 'react';
 import '../../App.css';
-import ProductAdd from '../../components/admin/ProductAdd';
+import Select from 'react-select';
 
-const AddProduct = () => {
+const categoriesList = [
+    "Programing", "Design", "Animation", "etc"
+];
+
+//Provavelmente vai ser preciso trocar os values para o id dos packages
+const packagesList = [
+    { value: 'Adobe', label: 'Adobe' },
+    { value: 'Essencial Programming', label: 'Essencial Programming' },
+    { value: 'Animation Basics', label: 'Animation Basics' }
+]
+
+
+const ProductAdd = () => {
     return (
-        <ProductAdd />
+        <div className="container p-2 bg-light">
+            <div className="box-container bg-white roundbg d-flex h-100 p-2 mt-2 shadow mx-5">
+                <div className="col-12">
+                    <h2 className='text-start p-3'>New Product</h2>
+                    <form>
+                        <div className="row mx-1">
+                            <div className="col-6">
+                                <div className="form-group mb-3">
+                                    <label htmlFor="productnameinput">Product Name</label>
+                                    <input type="text" className="form-control" id="productnameinput" placeholder="Name" />
+                                </div>
+                                <div className="form-group mb-3">
+                                    <label htmlFor="productpriceinput">Unit Price</label>
+                                    <input type="number" className="form-control" id="productpriceinput" placeholder="Unit Price" />
+                                </div>
+                                <div className="form-group mb-3">
+                                    <label htmlFor="descriptioninput">Description</label>
+                                    <textarea className="form-control" id="descriptioninput" rows="2" maxLength="75"></textarea>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="form-group mb-3">
+                                    <label htmlFor="categoryinput">Category</label>
+                                    <select id="categoryinput" className="form-control">
+                                        <option>Choose category...</option>
+                                        {categoriesList.map((category, index) => (
+                                            <option key={index}>{category}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="form-group mb-3">
+                                    <label htmlFor="imagelinkinput">Image</label>
+                                    <input type="text" className="form-control" id="imagelinkinput" placeholder="Image" />
+                                </div>
+                                <div className="form-group mb-3">
+                                    <label htmlFor="packagesinput">Packages</label>
+                                    <Select
+                                        id="packagesinput"
+                                        options={packagesList}
+                                        isMulti
+                                        placeholder="Choose packages..."
+                                        className="form-control p-0"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div className="row d-flex flex-row m-3">
+                        <div className='col-8'></div>
+                        <div className="col-2">
+                            <button type="button" class="btn btn-outline-success col-12 hover">Add</button>
+                        </div>
+                        <div className="col-2">
+                            <button type="button" class="btn btn-outline-danger col-12 hover">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
-export default AddProduct;
+export default ProductAdd;

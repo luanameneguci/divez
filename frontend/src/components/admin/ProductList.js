@@ -1,59 +1,50 @@
-import React, { useState } from 'react';
-import '../../App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
+const ProductList = () => {
+    const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productFilter, setProductFilter] = useState('');
 
-const list = [
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 2', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-    'https://img.icons8.com/?size=100&id=13631&format=png&color=000000', 'Software 1', 'PackagesList', 'Category', 'Price', 'Description',
-];
+    useEffect(() => {
+        // Fetch data from backend API using Axios
+        axios.get('http://localhost:8080/product')
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(error => console.error('Error fetching products', error));
+    }, []);
 
-// Split the list array into rows of 6 items each
-const rows = [];
-const itemsPerRow = 6;
+    // Handle filter change
+    const handleProductFilterChange = (e) => setProductFilter(e.target.value.toLowerCase());
 
-for (let i = 0; i < list.length; i += itemsPerRow) {
-    rows.push(list.slice(i, i + itemsPerRow));
-}
+    // Filter products based on search filter
+    const filteredProducts = products.filter(product =>
+        product.productName.toLowerCase().includes(productFilter)
+    );
 
-function ProductList() {
-    const [product, setProduct] = useState('');
-    const [packages, setPackages] = useState('');
-    const [category, setCategory] = useState('');
-    const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
+    // Pagination
+    const itemsPerPage = 5;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
-    const handleProductChange = (e) => setProduct(e.target.value);
-    const handlePackagesChange = (e) => setPackages(e.target.value);
-    const handleCategoryChange = (e) => setCategory(e.target.value);
-    const handlePriceChange = (e) => setPrice(e.target.value);
-    const handleDescriptionChange = (e) => setDescription(e.target.value);
+    // Pagination function
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    const filteredRows = rows.filter(row => {
-        return (
-            (!product || row[1].toLowerCase().includes(product.toLowerCase())) &&
-            (!packages || row[2].toLowerCase().includes(packages.toLowerCase())) &&
-            (!category || row[3].toLowerCase().includes(category.toLowerCase())) &&
-            (!price || row[4].toLowerCase().includes(price.toLowerCase())) &&
-            (!description || row[5].toLowerCase().includes(description.toLowerCase()))
+    // Pagination number links
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredProducts.length / itemsPerPage); i++) {
+        pageNumbers.push(
+            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                <button className="page-link" onClick={() => paginate(i)}>{i}</button>
+            </li>
         );
-    });
-
-    /* Futuro tbm vai precisar de apagar da db
-    const deleteProduct = (index) => {
-        const updatedList = [...rows];
-        updatedList.splice(index, 1);
-        setRows(updatedList);
-    };*/
+    }
 
     return (
-        <div className="box-container roundbg col-auto d-flex">
+        <div className="box-container px-3 roundbg col-auto d-flex">
             <div className="container roundbg bg-white shadow px-0">
                 <table className='table roundbg container-fluid roundbg pb-4 border border-light'>
                     <thead className='text-white'>
@@ -64,81 +55,41 @@ function ProductList() {
                                     className="form-control w-75"
                                     type="text"
                                     placeholder="Search"
-                                    value={product}
-                                    onChange={handleProductChange}
+                                    value={productFilter}
+                                    onChange={handleProductFilterChange}
                                 />
                             </th>
-                            <th className="py-2">Packages
-                                <input
-                                    className="form-control w-75 "
-                                    type="text"
-                                    placeholder="Search"
-                                    value={packages}
-                                    onChange={handlePackagesChange}
-                                />
-                            </th>
-                            <th className="py-2">Category
-                                <input
-                                    className="form-control w-75 "
-                                    type="text"
-                                    placeholder="Search"
-                                    value={category}
-                                    onChange={handleCategoryChange}
-                                />
-                            </th>
-                            <th className="py-2">Price
-                                <input
-                                    className="form-control w-75 "
-                                    type="text"
-                                    placeholder="Search"
-                                    value={price}
-                                    onChange={handlePriceChange}
-                                />
-                            </th>
-                            <th className="py-2">Description
-                                <input
-                                    className="form-control w-75 "
-                                    type="text"
-                                    placeholder="Search"
-                                    value={description}
-                                    onChange={handleDescriptionChange}
-                                />
-                            </th>
-                            <th className="align-text-top pt-2 ps-1">Action</th>
+                            <th className="py-2 align-text-top">Version</th>
+                            <th className="py-2 align-text-top">Price</th>
+                            <th className="py-2 align-text-top">Description</th>
+                            <th className="pt-2 align-text-top text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody className='border border-product'>
-                        {filteredRows.map((row, rowIndex) => (
-                            <tr key={rowIndex} className='p-3'>
-                                {row.map((data, colIndex) => (
-                                    colIndex === 0 ? (
-                                        <td
-                                            key={colIndex}
-                                        >
-                                            <Link to='/product'>
-                                                <img src={data} alt="Product" className="me-3" style={{ width: '70px', height: '70px' }} />
-                                            </Link>
-                                        </td>
-                                    ) : (
-                                        <td
-                                            key={colIndex}
-                                            className="align-text-top"
-                                        >
-                                            {data}
-                                        </td>
-                                    )
-                                ))}
+                        {currentProducts.map(product => (
+                            <tr key={product.idProduct} className="align-text-top">
+                                <td>
+                                    <Link to={`/productedit/${product.idProduct}`}>
+                                        <img src={product.image} alt="product" style={{ width: '70px', height: '70px' }} />
+                                    </Link>
+                                </td>
+                                <td>{product.productName}</td>
+                                <td>{product.productVersion}</td>
+                                <td>{product.productPrice}</td>
+                                <td>{product.productDescript}</td>
                                 <td className="d-flex justify-content-center p-4">
-                                    <Link to='/editproduct' className='btn btn-outline-info me-2 hover'>Edit</Link>
-                                    <button className='btn btn-outline-danger hover'
-                                    //onClick={() => deleteProduct(rowIndex)} futuro
-                                    >Delete
-                                    </button>
+                                    <Link to={"/productedit/" + product.idProduct} className='btn btn-outline-info me-2 hover'>Edit</Link>
+                                    <button className='btn btn-outline-danger hover'>Delete</button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <nav aria-label="...">
+                    <ul className="pagination justify-content-center">
+                        {pageNumbers}
+                    </ul>
+                </nav>
             </div>
         </div>
     );

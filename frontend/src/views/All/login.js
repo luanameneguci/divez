@@ -35,7 +35,7 @@ const Login = () => {
                           pattern="^[^0-9]*$"
                         />
                         <label class="form-label" for="form2Example11">
-                          Username
+                          Email
                         </label>
                       </div>
 

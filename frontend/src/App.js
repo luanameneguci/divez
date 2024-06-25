@@ -9,7 +9,7 @@ import Menu from './views/All/menu';
 function App() {
   return (
     <div>
-      <BuyerMenu />
+      <AdminMenu />
     </div>
 
   );
