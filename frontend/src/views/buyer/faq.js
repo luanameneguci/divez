@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import Select from 'react-select';
+
 
 const FileUpload = () => {
   // Hooks de estado para gerir o ficheiro selecionado e a sua pré-visualização
@@ -66,6 +68,13 @@ const FileUpload = () => {
     };
   };
 
+  // Guarda as categorias dos tickets para usar no select
+  const options = [
+    { value: 'instalation', label: 'Instalation' },
+    { value: 'licenses', label: 'Licenses' },
+    { value: 'payment', label: 'Payment' }
+  ]
+
   return (
     <section class="bsb-faq-3 py-3 py-md-5 py-xl-8">
       <div class="container">
@@ -98,7 +107,7 @@ const FileUpload = () => {
           id="button-1"
           onClick={handleButtonClick}
           style={getButtonStyle(1)}
-          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-3 text-center"
         >
           <b style={{ pointerEvents: "none" }}>Installation</b>
         </button>
@@ -106,7 +115,7 @@ const FileUpload = () => {
           id="button-2"
           onClick={handleButtonClick}
           style={getButtonStyle(2)}
-          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-3 text-center"
         >
           <b style={{ pointerEvents: "none" }}>Licenses</b>
         </button>
@@ -114,7 +123,7 @@ const FileUpload = () => {
           id="button-3"
           onClick={handleButtonClick}
           style={getButtonStyle(3)}
-          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
+          className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-3 text-center"
         >
           <b style={{ pointerEvents: "none" }}>Payment</b>
         </button>
@@ -135,7 +144,7 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqAccountCollapse1"
                     >
-                      What is an account?
+                      How do I install the application?
                     </button>
                   </h2>
                   <div
@@ -145,10 +154,15 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        An account is a personal or organizational record that
-                        allows you to access and manage various services, often
-                        requiring authentication through a username and
-                        password.
+                        <strong>Step 1:</strong> Download the installer from the
+                        official website.
+                        <br />
+                        <strong>Step 2:</strong> Run the installer and follow
+                        the on-screen instructions.
+                        <br />
+                        <strong>Step 3:</strong> Once installation is complete,
+                        launch the application from the start menu or desktop
+                        shortcut.
                       </p>
                     </div>
                   </div>
@@ -163,7 +177,7 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqAccountCollapse2"
                     >
-                      How do I create an account?
+                      The installer won't run on my computer. What should I do?
                     </button>
                   </h2>
                   <div
@@ -173,10 +187,17 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        To create an account, visit the website or application
-                        and look for a "Sign Up" or "Create Account" button.
-                        Follow the instructions to enter your information and
-                        create a username and password.
+                        Ensure your operating system meets the minimum system
+                        requirements.
+                        <br />
+                        Right-click the installer file and select "Run as
+                        administrator."
+                        <br />
+                        Disable any antivirus software temporarily, as it might
+                        be blocking the installer.
+                        <br />
+                        Download the installer again to ensure it's not
+                        corrupted.
                       </p>
                     </div>
                   </div>
@@ -191,7 +212,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqAccountCollapse3"
                     >
-                      How do I secure my account?
+                      I'm getting an error message saying "Insufficient
+                      permissions." How can I fix this?
                     </button>
                   </h2>
                   <div
@@ -201,11 +223,11 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        To secure your account, use a robust and unique
-                        password, enable two-factor authentication if available,
-                        and be cautious about sharing your login information.
-                        Regularly update your password and avoid using easily
-                        guessable information like birthdays or names.
+                        Run the installer as an administrator by right-clicking
+                        on the installer and selecting "Run as administrator."
+                        <br />
+                        Ensure you are logged in as a user with administrative
+                        rights
                       </p>
                     </div>
                   </div>
@@ -220,7 +242,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqAccountCollapse4"
                     >
-                      What should I do if I forget my password?
+                      The installation process gets stuck at a certain point and
+                      doesn't progress. What can I do?
                     </button>
                   </h2>
                   <div
@@ -230,10 +253,15 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        If you forget your password, most websites and services
-                        offer a "Forgot Password" or "Reset Password" option.
-                        Follow the steps to reset your password, often involving
-                        an email or SMS verification.
+                        Cancel the installation and restart your computer.
+                        <br />
+                        Make sure there are no other installations or updates
+                        running in the background.
+                        <br />
+                        Try disabling your antivirus software temporarily and
+                        attempt the installation again.
+                        <br />
+                        Ensure you have enough disk space and memory available.
                       </p>
                     </div>
                   </div>
@@ -248,7 +276,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqAccountCollapse5"
                     >
-                      What should I do if my account is compromised or hacked?
+                      The application crashes immediately after launching. What
+                      should I do?
                     </button>
                   </h2>
                   <div
@@ -258,10 +287,15 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        If you suspect your account has been compromised, change
-                        your password immediately. Contact the service provider
-                        for further assistance, and consider enabling two-factor
-                        authentication for added security.
+                        Check for any available updates for the application and
+                        install them.
+                        <br />
+                        Ensure your graphics drivers and other system drivers
+                        are up to date.
+                        <br />
+                        Run the application as an administrator.
+                        <br />
+                        If the problem persists, reinstall the application.
                       </p>
                     </div>
                   </div>
@@ -287,7 +321,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqOrderCollapse1"
                     >
-                      Do I need to create an account to place an order?
+                      I purchased a license, but the application still shows as
+                      unlicensed. What should I do?
                     </button>
                   </h2>
                   <div
@@ -297,9 +332,14 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        You can order as a guest if you create an account.
-                        However, creating an account allows for faster checkout
-                        and order tracking.
+                        <strong>Step 1:</strong> Double-check the license key or
+                        activation code you entered for typos or errors.
+                        <br />
+                        <strong>Step 2:</strong> Ensure you followed the correct
+                        activation process provided by the software vendor.
+                        <br />
+                        <strong>Step 3:</strong> Contact customer support with
+                        proof of purchase to verify and resolve the issue.
                       </p>
                     </div>
                   </div>
@@ -314,7 +354,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqOrderCollapse2"
                     >
-                      Can I change or cancel my order after it's been placed?
+                      My license key is being rejected as invalid. What could be
+                      the issue?
                     </button>
                   </h2>
                   <div
@@ -324,9 +365,15 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        Orders can be modified or canceled within a short time
-                        after placing them. Contact our customer support as soon
-                        as possible to make any changes.
+                        <strong>Reasons:</strong> Ensure the license key matches
+                        the product version you are installing.
+                        <br />
+                        <strong>Check:</strong> Verify if the license key has
+                        expired or if it is for a different product or edition.
+                        <br />
+                        <strong>Support:</strong> Contact the vendor's support
+                        team for assistance in validating or reissuing the
+                        license key.
                       </p>
                     </div>
                   </div>
@@ -341,7 +388,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqOrderCollapse3"
                     >
-                      What payment methods do you accept?
+                      I need to transfer my license to a new computer. How can I
+                      do this?
                     </button>
                   </h2>
                   <div
@@ -351,10 +399,15 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        We accept various payment methods, including
-                        credit/debit cards, PayPal, and other online payment
-                        options. You can choose your preferred payment method
-                        during the checkout process.
+                        <strong>Procedure:</strong> Deactivate the license on
+                        the old computer if required by the software.
+                        <br />
+                        <strong>Activation:</strong> Install the software on the
+                        new computer and activate it using your existing license
+                        key.
+                        <br />
+                        <strong>Support:</strong> Some vendors may require you
+                        to contact support to manage license transfers.
                       </p>
                     </div>
                   </div>
@@ -369,7 +422,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqOrderCollapse4"
                     >
-                      Is my payment information secure?
+                      I accidentally exceeded the number of allowed
+                      installations with my license. What now?
                     </button>
                   </h2>
                   <div
@@ -379,10 +433,17 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        Yes, we take security seriously. We use
-                        industry-standard encryption to protect your payment
-                        information, and we do not store your payment details on
-                        our servers.
+                        <strong>Resolution:</strong> Check if your license
+                        allows for multiple installations or if it's tied to a
+                        specific number of devices.
+                        <br />
+                        <strong>Support:</strong> Contact the vendor's support
+                        team to explain the situation and request assistance in
+                        resolving the issue.
+                        <br />
+                        <strong>Upgrade:</strong> Consider upgrading your
+                        license to accommodate additional installations if
+                        needed.
                       </p>
                     </div>
                   </div>
@@ -397,7 +458,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqOrderCollapse5"
                     >
-                      How do I track the status of my order?
+                      My software is showing as pirated or unauthorized, but I
+                      purchased a legitimate license. How can I fix this?
                     </button>
                   </h2>
                   <div
@@ -407,10 +469,17 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        You can track your order by logging into your account
-                        (if you have one) and accessing the order history. We'll
-                        also send you email updates as your order progresses
-                        through the fulfillment process.
+                        <strong>Verification:</strong> Provide proof of
+                        purchase, such as receipts or order confirmation emails,
+                        to the software vendor.
+                        <br />
+                        <strong>Resolution:</strong> Contact customer support
+                        immediately to rectify the licensing status and resolve
+                        any issues with activation.
+                        <br />
+                        <strong>Legal:</strong> Avoid using or distributing
+                        pirated software, as it may lead to legal consequences
+                        and security risks.
                       </p>
                     </div>
                   </div>
@@ -436,7 +505,7 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqRefundCollapse1"
                     >
-                      How do I request a refund or exchange?
+                      What payment methods do you accept?
                     </button>
                   </h2>
                   <div
@@ -446,23 +515,12 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        To request a refund or exchange, please follow these
-                        steps:
+                        We accept several payment methods, including credit
+                        cards (Visa, MasterCard, American Express), PayPal, bank
+                        transfers, and sometimes digital wallets like Apple Pay
+                        or Google Pay. Please check our payment page or contact
+                        support for the latest information on accepted methods.
                       </p>
-                      <ul>
-                        <li>
-                          Contact our customer support team within 30 days of
-                          the purchase.
-                        </li>
-                        <li>
-                          Provide your order number and a detailed reason for
-                          the request.
-                        </li>
-                        <li>
-                          Wait for our customer support team to assess your
-                          request and provide further instructions.
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -476,7 +534,7 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqRefundCollapse2"
                     >
-                      What items are eligible for a refund or exchange?
+                      Is my payment information secure?
                     </button>
                   </h2>
                   <div
@@ -486,18 +544,13 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        Eligible items for a refund or exchange must meet the
-                        following criteria:
+                        Yes, we take security seriously. We use
+                        industry-standard encryption protocols to ensure your
+                        payment information is protected. Additionally, we
+                        comply with PCI-DSS (Payment Card Industry Data Security
+                        Standard) requirements for handling payment data
+                        securely.
                       </p>
-                      <ul>
-                        <li>
-                          They are in their original condition, unused, and in
-                          their original packaging.
-                        </li>
-                        <li>
-                          The request is made within the specified timeframe.
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -511,7 +564,7 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqRefundCollapse3"
                     >
-                      What if I receive a damaged or defective item?
+                      I encountered an error during payment. What should I do?
                     </button>
                   </h2>
                   <div
@@ -521,10 +574,16 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        If you receive a damaged or defective item, please
-                        contact our customer support team immediately. We will
-                        guide you on the return process and offer a refund or
-                        replacement, as appropriate.
+                        <strong>Retry:</strong> Refresh the page and try
+                        completing the payment again.
+                        <br />
+                        <strong>Check Details:</strong> Ensure the payment
+                        details (credit card number, expiration date, CVV) are
+                        entered correctly.
+                        <br />
+                        <strong>Contact Support:</strong> If the issue persists,
+                        contact our support team with details of the error
+                        message or screenshot for assistance.
                       </p>
                     </div>
                   </div>
@@ -539,7 +598,7 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqRefundCollapse4"
                     >
-                      Who covers the shipping costs for exchanges?
+                      When will my credit card be charged?
                     </button>
                   </h2>
                   <div
@@ -549,10 +608,11 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        Shipping costs for returning the item for an exchange
-                        and sending the new item are usually the responsibility
-                        of the customer, unless the exchange is due to an error
-                        on our part.
+                        Your credit card will typically be charged immediately
+                        upon completing the payment process. In some cases,
+                        especially for subscriptions or pre-orders, charges may
+                        occur at specific intervals or when the product or
+                        service is delivered.
                       </p>
                     </div>
                   </div>
@@ -567,8 +627,8 @@ const FileUpload = () => {
                       aria-expanded="false"
                       aria-controls="faqRefundCollapse5"
                     >
-                      Can I change my mind and cancel my refund or exchange
-                      request?
+                      Can I get a refund if I change my mind after making a
+                      payment?
                     </button>
                   </h2>
                   <div
@@ -578,11 +638,16 @@ const FileUpload = () => {
                   >
                     <div class="accordion-body">
                       <p>
-                        If you change your mind about a refund or exchange
-                        request, please contact our customer support team as
-                        soon as possible. We will do our best to accommodate
-                        your request, but once a refund or exchange is
-                        processed, it may not be reversible.
+                        <strong>Policy Review:</strong> Review our refund policy on our website
+                        or contact customer support for details.
+                        <br />
+                        <strong>Conditions:</strong> Refunds may be available within a certain
+                        timeframe or under specific conditions outlined in our
+                        policy.
+                        <br />
+                        <strong>Process:</strong> To request a refund, contact our support team
+                        with your purchase details, reason for the refund, and
+                        any required documentation.
                       </p>
                     </div>
                   </div>
@@ -623,21 +688,7 @@ const FileUpload = () => {
           </h5>
 
           <div className="col-12 d-flex justify-content-around my-5 mx-auto">
-            <input
-              type="submit"
-              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
-              value="Installation"
-            />
-            <input
-              type="submit"
-              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
-              value="Licenses"
-            />
-            <input
-              type="submit"
-              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
-              value="Payment"
-            />
+            <Select options={options} />
           </div>
 
           <div className="form-group col-10 mx-auto">
@@ -692,6 +743,7 @@ const FileUpload = () => {
                 className="file-upload-image roundbg"
                 src={imagePreview}
                 alt="Uploaded"
+                style={{ width: "100px" }}
               />
               <div className="image-title-wrap">
                 <button

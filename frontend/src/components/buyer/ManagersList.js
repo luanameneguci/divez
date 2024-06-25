@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import '../../App.css';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+import Select from 'react-select';
 
-function ManagersList({ managersList }) {
+function ManagersList({ managersList, productList }) {
+    // Estados para os filtros de entrada
     const [nameFilter, setNameFilter] = useState('');
     const [nifFilter, setNifFilter] = useState('');
     const [mailFilter, setMailFilter] = useState('');
     const [productsFilter, setProductsFilter] = useState('');
+    
+    // Estado para controlar os dados do modal
+    const [modalData, setModalData] = useState(null);
+    // Estado para controlar a visibilidade do modal
+    const [lgShow, setLgShow] = useState(false);
 
-    // Filtering function
+    // Função de filtragem dos dados
     const filteredRows = managersList.filter(row =>
         row[0].toLowerCase().includes(nameFilter.toLowerCase()) &&
         row[1].includes(nifFilter) &&
@@ -16,7 +23,20 @@ function ManagersList({ managersList }) {
         row[3].toLowerCase().includes(productsFilter.toLowerCase())
     );
 
-    /* Futuro
+    // Função para mostrar o modal com os detalhes do gerente selecionado
+    const handleShow = (row) => {
+        setModalData(row[2]); // Salva o e-mail da linha
+        setLgShow(true);
+    };
+
+    // Função para fechar o modal
+    const handleClose = () => {
+        setLgShow(false);
+        setModalData(null); // Limpa os dados do modal
+    };
+
+
+    /* Future
     // Delete client function
     const deleteClient = (index) => {
         const updatedList = [...managersList];
@@ -25,7 +45,7 @@ function ManagersList({ managersList }) {
     };*/
 
     return (
-        <div className="container bg-white px-0 roundbg shadow h-100">
+        <div className="container bg-white px-0 roundbg shadow h-100 pb-1">
             <table className='table text-start'>
                 <thead className='text-white'>
                     <tr>
@@ -56,7 +76,7 @@ function ManagersList({ managersList }) {
                                 onChange={(e) => setMailFilter(e.target.value)}
                             />
                         </th>
-                        <th className="ps-3 py-2">OutraInfoQualquer
+                        <th className="ps-3 py-2">Products
                             <input
                                 className="form-control w-75"
                                 type="text"
@@ -76,9 +96,9 @@ function ManagersList({ managersList }) {
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[2]}</td>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[3]}</td>
                             <td className="d-flex justify-content-center">
-                                <Link to="/#" className="btn btn-outline-info me-2">
+                                <button onClick={() => handleShow(row)} className="btn btn-outline-info me-2">
                                     Add
-                                </Link>
+                                </button>
                                 <button className='btn btn-outline-danger'>
                                     Delete
                                 </button>
@@ -87,6 +107,45 @@ function ManagersList({ managersList }) {
                     ))}
                 </tbody>
             </table>
+            <Modal
+                size="lg"
+                show={lgShow}
+                onHide={handleClose}
+                aria-labelledby="addmanager"
+                style={{ padding: '10px' }}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Manager</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form>
+                        <div className="col">
+                            <div className="form-group mb-3">
+                                <label htmlFor="manageremailinput">E-mail</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    id="manageremailinput" 
+                                    placeholder="E-mail" 
+                                    value={modalData || ''} 
+                                    readOnly
+                                />
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="productsinput">Add Products</label>
+                                <Select
+                                    id="productsinput"
+                                    options={productList}
+                                    isMulti
+                                    placeholder="Choose Products..."
+                                    className="form-control p-0"
+                                />
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-info text-white">Add</button>
+                    </form>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }

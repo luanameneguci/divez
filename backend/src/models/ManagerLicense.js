@@ -1,16 +1,25 @@
 const Sequelize = require("sequelize");
 var sequelize = require("./database");
+const Manager = require("./manager");
+const License = require("./licenses");
+
 
 var ManagerLicense =  sequelize.define('ManagerLicense', {
     managerIdManager: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      primaryKey: true
+      references: {
+        model: Manager,
+        key: "idManager",
+      },
     },
     licenseIdLicense: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      primaryKey: true
+      references: {
+        model: License,
+        key: "idLicense",
+      },
     }
   }, {
     timestamps: false,

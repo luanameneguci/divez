@@ -28,21 +28,24 @@ const boxBudgetsContent = [
 ];
 
 function BudgetList({ numRowsToShow }) {
+    // Estado para controlar se o modal de detalhes está visível
     const [lgShow, setLgShow] = useState(false);
+    // Estado para armazenar o orçamento selecionado para exibir detalhes
     const [selectedBudget, setSelectedBudget] = useState(null);
 
+    // Função para mostrar o modal com os detalhes do orçamento selecionado
     const handleShow = (budget) => {
         setSelectedBudget(budget);
         setLgShow(true);
     };
 
-    // State variables for filter inputs
+    // Variáveis de estado para os filtros de entrada
     const [budgetNumberFilter, setBudgetNumberFilter] = useState('');
     const [clientFilter, setClientFilter] = useState('');
     const [dateFilter, setDateFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
 
-    // Filtering function
+    // Função de filtragem dos dados
     const filteredRows = boxBudgetsContent.filter(row =>
         row[0].toString().includes(budgetNumberFilter) &&
         row[1].toLowerCase().includes(clientFilter.toLowerCase()) &&
@@ -50,24 +53,24 @@ function BudgetList({ numRowsToShow }) {
         row[4].toLowerCase().includes(statusFilter.toLowerCase())
     );
 
-    // Function to get status color based on status value
+    // Função para obter a cor do status com base no valor do status
     const getStatusColor = (status) => {
         switch (status) {
             case 'New':
-                return '#FFD56D'; // yellow
+                return '#FFD56D'; // amarelo
             case 'Rejected':
-                return '#EB5757'; // red
+                return '#EB5757'; // vermelho
             case 'Paid':
-                return '#00B69B'; // green
+                return '#00B69B'; // verde
             case 'Waiting':
-                return '#2D9CDB'; // blue
+                return '#2D9CDB'; // azul
             default:
-                return 'inherit'; // default color
+                return 'inherit'; // cor padrão
         }
     };
 
     return (
-        <div className="box-container d-flex h-100 shadow">
+        <div className="box-container d-flex h-100 shadow roundbg">
             <div className="container bg-white px-0 roundbg">
                 <table className='table text-start m-0'>
                     <thead className='text-white'>

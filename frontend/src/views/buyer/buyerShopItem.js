@@ -2,7 +2,6 @@ import React from "react";
 import Rating from "@mui/material/Rating";
 import "../../App.css";
 
-// Sample data for items and packages
 const ItemsIncluded = [
   {
     id: 1,
@@ -58,7 +57,7 @@ const result = createDataArrays(Package);
 const items = createDataArraysItems(itemsDataArray);
 
 
-// Function to create array of items
+// Função para criar array de items
 function createDataArraysItems(item) {
   let items = [];
 
@@ -80,14 +79,14 @@ function createDataArraysItems(item) {
   return items;
 }
 
-// Function to create img elements
+// Função para criar as imagens dos elementos
 function createImgElements(photos) {
   return photos.map((photo, index) => (
     <img key={index} src={photo.photo} alt={`Photo ${index + 1}`} />
   ));
 }
 
-// Function to create array of packages
+// Função para criar Arrays de Data
 function createDataArrays(Package) {
   let result = [];
 

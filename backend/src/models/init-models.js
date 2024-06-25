@@ -22,6 +22,7 @@ var TicketStatus = require("../models/ticketStatus");
 var Ticket = require("../models/tickets");
 
 (async () => {
+
   try {
     await AdminBudget.sync({ alter: true });
     await AdminProduct.sync({ alter: true });

@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
-import '../../App.css';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ClientListBox({ clientList }) {
-    const [nameFilter, setNameFilter] = useState('');
-    const [nifFilter, setNifFilter] = useState('');
-    const [mailFilter, setMailFilter] = useState('');
-    const [accountTypeFilter, setAccountTypeFilter] = useState('');
+    const [nameFilter, setNameFilter] = useState(''); // Estado para filtro por nome
+    const [nifFilter, setNifFilter] = useState(''); // Estado para filtro por NIF
+    const [mailFilter, setMailFilter] = useState(''); // Estado para filtro por email
+    const [accountTypeFilter, setAccountTypeFilter] = useState(''); // Estado para filtro por tipo de conta
+    const [currentPage, setCurrentPage] = useState(1); // Estado para página atual
+    const [itemsPerPage] = useState(5); // Número de itens por página
 
-    // Filtering function
+    // Função para filtrar os itens da lista de clientes
     const filteredRows = clientList.filter(row =>
-        row[0].toLowerCase().includes(nameFilter.toLowerCase()) &&
-        row[1].includes(nifFilter) &&
-        row[2].toLowerCase().includes(mailFilter.toLowerCase()) &&
-        row[3].toLowerCase().includes(accountTypeFilter.toLowerCase())
+        row[0].toLowerCase().includes(nameFilter.toLowerCase()) && // Filtrar por nome (case-insensitive)
+        row[1].includes(nifFilter) && // Filtrar por NIF
+        row[2].toLowerCase().includes(mailFilter.toLowerCase()) && // Filtrar por email (case-insensitive)
+        row[3].toLowerCase().includes(accountTypeFilter.toLowerCase()) // Filtrar por tipo de conta (case-insensitive)
     );
-    /* Futuro
-        // Delete client function
-        const deleteClient = (index) => {
-            const updatedList = [...clientList];
-            updatedList.splice(index, 1);
-            setClientList(updatedList);
-        };*/
 
+    // Paginação
+    const indexOfLastItem = currentPage * itemsPerPage; // Índice do último item da página atual
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Índice do primeiro item da página atual
+    const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem); // Itens a serem exibidos na página atual
+
+    // Função para mudar de página
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // UI da paginação
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredRows.length / itemsPerPage); i++) {
+        pageNumbers.push(
+            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                <button onClick={() => paginate(i)} className="page-link">{i}</button>
+            </li>
+        );
+    }
+
+    // Retorna a tabela com os clientes
     return (
         <div className="container bg-white px-0 roundbg shadow h-100">
             <table className='table text-start'>
@@ -68,7 +81,7 @@ function ClientListBox({ clientList }) {
                     </tr>
                 </thead>
                 <tbody className='text-start'>
-                    {filteredRows.map((row, index) => (
+                    {currentItems.map((row, index) => (
                         <tr key={index}>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[0]}</td>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[1]}</td>
@@ -86,6 +99,11 @@ function ClientListBox({ clientList }) {
                     ))}
                 </tbody>
             </table>
+            <nav aria-label="...">
+                <ul className="pagination pb-2 justify-content-center">
+                    {pageNumbers}
+                </ul>
+            </nav>
         </div>
     );
 }

@@ -1,6 +1,22 @@
 // components/BoxTable.js
 import React from "react";
 
+// Função para obter a cor do status com base no valor do status
+const getStatusColor = (status) => {
+  switch (status) {
+    case "New":
+      return "#FFD56D"; // amarelo
+    case "Rejected":
+      return "#EB5757"; // vermelho
+    case "Paid":
+      return "#00B69B"; // verde
+    case "Waiting":
+      return "#2D9CDB"; // azul
+    default:
+      return "inherit"; // cor padrão
+  }
+};
+
 function BoxTable({ title, rows }) {
   return (
     <div className="box-container bg-white col-auto roundbg d-flex shadow" style={{ height: 360 + "px" }}>
@@ -21,6 +37,7 @@ function BoxTable({ title, rows }) {
           <tbody className="bg-white roundbg">
             {rows.map((row, rowIndex) => (
               <tr className="roundbg" key={rowIndex}>
+
                 {row.map((data, colIndex) => (
                   <React.Fragment key={colIndex}>
                   <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
@@ -34,6 +51,22 @@ function BoxTable({ title, rows }) {
                   </td>     
                   </React.Fragment>             
                 ))}                
+
+                {row.map((data, colIndex) => {
+                  const isLastChild = colIndex === row.length - 1;
+                  return (
+                    <td
+                      className="ps-3 py-1 border-bottom"
+                      key={colIndex}
+                      style={{
+                        height: "40px",
+                        ...(isLastChild && { color: getStatusColor(row[2]) }),
+                      }}
+                    >
+                      {data}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           

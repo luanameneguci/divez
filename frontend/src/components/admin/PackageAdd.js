@@ -2,30 +2,16 @@ import React from 'react';
 import Select from 'react-select';
 import '../../App.css';
 
-const categoriesList = [
-    "Programming", "Design", "Animation", "etc"
-];
+// Meter uma verificação se o nome do pacote que estamos a tentar adicionar já existe
 
-const CategoryOptions = ({ dataCategories }) => {
-    return dataCategories.map((data, index) => (
-        <option key={index} value={index}>
-            {data}
-        </option>
-    ));
-};
-
-const packagesList = [
-    { value: 'Adobe', label: 'Adobe' },
-    { value: 'Essential Programming', label: 'Essential Programming' },
-    { value: 'Animation Basics', label: 'Animation Basics' }
-];
-
+// Lista de produtos disponíveis para seleção - trocar por produtos da db
 const productList = [
     { value: 'Photoshop', label: 'Photoshop' },
     { value: 'Figma', label: 'Figma' },
     { value: 'VS Code', label: 'VS Code' }
 ];
 
+// Componente para adicionar um novo pacote
 const PackageAdd = () => {
     return (
         <div className="dashboard-content bg-light w-100 p-2 mt-4">
@@ -68,7 +54,7 @@ const PackageAdd = () => {
             </div>
             <div className="row fixed-bottom-buttons d-flex flex-row m-3">
                 <div className="col-6">
-                <button type="button" className="btn btn-outline-danger">Create</button>
+                    <button type="button" className="btn btn-outline-danger">Create</button>
                 </div>
                 <div className="col-6">
                     <button type="button" className="btn btn-outline-danger">Cancel</button>

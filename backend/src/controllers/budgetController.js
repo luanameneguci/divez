@@ -4,13 +4,30 @@ const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var Budget = require("../models/budget");
 var BudgetStatus = require("../models/budgetStatus");
 var Cart = require("../models/cart");
+var Buyer = require("../models/buyer");
 
 const controllers = {};
 
 controllers.budget_list = async (req, res) => {
-  const data = await Budget.findAll({ include: [BudgetStatus, Cart] });
-  res.json(data);
+  try {
+    const data = await Budget.findAll({
+      include: [
+        { model: BudgetStatus },
+        {
+          model: Cart,
+          include: [
+            { model: Buyer, attributes: ['idBuyer', 'buyerName'] } // Include Buyer model inside Cart and select specific attributes
+          ]
+        }
+      ]
+    });
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching budgets:', error);
+    res.status(500).json({ error: 'Failed to fetch budgets' });
+  }
 };
+
 
 controllers.budget_create = async (req, res) => {
   const { budgetName, budgetDescript, date, idBudgetStatus, idCart } = req.body;
@@ -37,7 +54,7 @@ controllers.budget_update = async (req, res) => {
 
 controllers.budget_detail = async (req, res) => {
   let idReceived = req.params.id;
-  const data = await Budget.findOne({ where: { idBudget: idReceived }, include: [BudgetStatus, Cart]  });
+  const data = await Budget.findOne({ where: { idBudget: idReceived }, include: [BudgetStatus, Cart] });
   res.json(data);
 };
 

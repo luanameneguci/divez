@@ -1,28 +1,39 @@
 // BuyerDashboard.js
 import React from "react";
-import Dashboard from "../../components/buyer/Dashboard";
+import notificationicon from "../../images/notification.png";
 
+import Box from "../../components/buyer/Box";
+import BoxTable from "../../components/buyer/BoxTable";
+import BoxManager from "../../components/buyer/BoxManager";
+import BoxProgress from "../../components/buyer/BoxProgress";
+import BoxThird from "../../components/buyer/BoxThird";
 
 const BuyerDashboard = () => {
   const tablecontent = [
     1, "Name Application", "New",
-    2, "Name Application", "New",
-    3, "Name Application", "New",
-    4, "Name Application", "New",
+    2, "Name Application", "Waiting",
+    3, "Name Application", "Rejected",
+    4, "Name Application", "Paid",
     5, "Name Application", "New",
     6, "Name Application", "New",
   ];
-
 
   // Split the tablecontent array into rows of 3 items each
   const rows = [];
   const itemsPerRow = 3;
   for (let i = 0; i < tablecontent.length; i += itemsPerRow) {
     rows.push(tablecontent.slice(i, i + itemsPerRow));
-
   }
 
-  const managersData = [
+  let data = [
+    { nome: "Adobe Photoshop", numeroTotal: 1000, numeroAtivos: 750 },
+    { nome: "Adobe Illustrator", numeroTotal: 900, numeroAtivos: 500 },
+    { nome: "Adobe Animate", numeroTotal: 900, numeroAtivos: 900 },
+    { nome: "Adobe After Effects", numeroTotal: 800, numeroAtivos: 500 },
+];
+
+
+  const managerData  = [
     {
       nome: "João Ratão",
       nomeApp: "Adobe Photoshop",
@@ -48,46 +59,42 @@ const BuyerDashboard = () => {
       photo: "https://img.icons8.com/?size=100&id=13677&format=png&color=000000",
     },
   ];
-
-  const managers = managersData.slice(0, 4);
-
-  let data = [
-    { nome: "Adobe Photoshop", numeroTotal: 1000, numeroAtivos: 750 },
-    { nome: "Adobe Illustrator", numeroTotal: 900, numeroAtivos: 500 },
-    { nome: "Adobe Animate", numeroTotal: 900, numeroAtivos: 900 },
-    { nome: "Adobe After Effects", numeroTotal: 800, numeroAtivos: 500 },
-];
-
-
-  function createDataArrays(data) {
-    let result = [];
-    for (let i = 0; i < data.length && result.length < 4; i++) {
-        let subArray = [data[i].nome, data[i].numeroTotal, data[i].numeroAtivos];
-        result.push(subArray);
-    }
-    return result;
-}
-
-function calculatePercentages(result) {
-    let resultado = [];
-    for (let i = 0; i < result.length; i++) {
-        let item = result[i];
-        let percentage = (item[2] / item[1]) * 100;
-        let newItem = {
-            ...item,
-            percentage: percentage.toFixed(0),
-        };
-        resultado.push(newItem);
-    }
-    return resultado;
-}
-
-const result = createDataArrays(data);
-const resultado = calculatePercentages(result);
-
   return (
-    <Dashboard />
-  )
+    <div>
+      <div className="bg-light w-100">
+        <h2 className="title py-3">Dashboard</h2>
+        <div className="col-12 text-center">
+          <div className="row">
+            <div className="col">
+              <Box title="Pending budgets" number="300" image={notificationicon} />
+            </div>
+            <div className="col">
+              <Box title="Active Licenses" number="2000" image={notificationicon} />
+            </div>
+            <div className="col">
+              <Box title="Linked Users" number="200" image={notificationicon} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-12 text-center py-4">
+        <div className="row">
+          <div className="col-4">
+            <BoxTable title="Pending budgets" rows={rows} />
+          </div>
+          <div className="col-4">
+            <BoxProgress title="Your most used licences" data={data}/>
+          </div>
+          <div className="col-4">
+          <BoxManager title="Managers" managers={managerData} />
+          </div>
+        </div>
+      </div>
+      <div className="col-12">
+        <BoxThird title="Tickets" />
+      </div>
+    </div>
+  );
 };
 
 export default BuyerDashboard;
