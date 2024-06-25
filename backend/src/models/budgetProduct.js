@@ -3,7 +3,7 @@ var sequelize = require("./database");
 const Budget = require("./budget");
 const Product = require("./products");
 
-var BudgetProduct = sequelize.define("AdminProduct", {
+var BudgetProduct = sequelize.define("BudgetProduct", {
   budgetIdBudget: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -19,6 +19,10 @@ var BudgetProduct = sequelize.define("AdminProduct", {
         model: Product,
         key: "idProduct",
       },
+    },
+    productQuantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     }
   }, {
     timestamps: false,
