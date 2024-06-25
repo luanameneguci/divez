@@ -13,11 +13,12 @@ const list = [
     1, 'Software 1', '01-02-2024', 'Amount', 'Price',
 ];
 
-// Split the box3content array into rows of 6 items each
 const rows = [];
 const itemsPerRow = 5;
 
+// Itera sobre a lista 'list' com incrementos de 'itemsPerRow' para criar linhas de dados.
 for (let i = 0; i < list.length; i += itemsPerRow) {
+     // Extrai um subarray da 'list' com 'itemsPerRow' elementos e adiciona à matriz 'rows'.
     rows.push(list.slice(i, i + itemsPerRow));
 }
 

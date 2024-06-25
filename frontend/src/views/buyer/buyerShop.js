@@ -49,10 +49,10 @@ const itemsDataArray = [
 let items = createDataArraysItems(itemsDataArray);
 
 function createDataArraysItems(item) {
-  // Initialize the result array
+  // Inicio o array items
   let items = [];
 
-  // Loop through the data and create sub-arrays
+  // Percorre os dados e cria sub-arrays
   for (let i = 0; i < item.length && items.length < 3; i++) {
     let subArray = [
       item[i].nomeApp,

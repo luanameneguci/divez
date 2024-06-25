@@ -178,6 +178,11 @@ a {
   color: #00b69b;
 }
 
+.Gradient {
+  background:linear-gradient(rgb(0, 204, 255),transparent);
+  background-color:blue /*this your primary color*/
+}
+
 /*
 Já cá estava, tirar isto tudo acho eu
 

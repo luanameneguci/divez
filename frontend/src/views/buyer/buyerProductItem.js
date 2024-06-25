@@ -34,16 +34,24 @@ const itemsDataArray = [
 ];
 
 const BuyerProductItem = () => {
+  // Declaração de dois estados: 'items' e 'resultado', ambos inicializados como arrays vazios.
   const [items, setItems] = useState([]);
   const [resultado, setResultado] = useState([]);
 
+  // Utilização do hook useEffect para executar código após o componente ser montado.
   useEffect(() => {
+    // Criação de um array de itens a partir de 'itemsDataArray' utilizando a função 'createDataArraysItems'.
     let itemsArray = createDataArraysItems(itemsDataArray);
+    // Criação de um array de resultados a partir de 'itemsDataArray' utilizando a função 'createDataArrays'.
     let resultArray = createDataArrays(itemsDataArray);
+    // Cálculo das percentagens a partir do 'resultArray' utilizando a função 'calculatePercentages'.
     let resultadoArray = calculatePercentages(resultArray);
+    // Atualização do estado 'items' com 'itemsArray'.
     setItems(itemsArray);
+    // Atualização do estado 'resultado' com 'resultadoArray'.
     setResultado(resultadoArray);
-  }, []);
+  }, []); // O array vazio como segundo argumento significa que este useEffect só é executado uma vez, após a montagem do componente.
+
 
   return (
     <div className="bg-light w-100">
@@ -59,10 +67,10 @@ const BuyerProductItem = () => {
 };
 
 function createDataArraysItems(item) {
-  // Initialize the result array
+  // Inicia o array items
   let items = [];
 
-  // Loop through the data and create sub-arrays
+  // Faz loop nos componentes dentro do array item
   for (let i = 0; i < item.length; i++) {
     let subArray = [
       item[i].nomeApp,
@@ -216,7 +224,7 @@ const ProgressDivs = ({ resultado }) => {
 };
 
 function createDataArrays(data) {
-  // Initialize the result array
+  // Inicia o array result
   let result = [];
 
   // Loop through the data and create sub-arrays
@@ -229,19 +237,19 @@ function createDataArrays(data) {
 }
 
 function calculatePercentages(result) {
-  // Initialize the result array
+  // Inicio o array resultado
   let resultado = [];
 
-  // Loop through the data and create sub-arrays with percentage
+  // Faz loop no array result e preenche um sub-array com percentagens
   for (let i = 0; i < result.length; i++) {
     let item = result[i];
     let percentage = (item[2] / item[1]) * 100;
-    // Create a new array with the original values and the calculated percentage
+    // Cria um array com os vaores iniciais e o valor da percentagem calculada
     let newItem = [...item, percentage.toFixed(0)];
     resultado.push(newItem);
   }
 
-  // Return the result array
+  // Retorno o valor de resultado
   return resultado;
 }
 
