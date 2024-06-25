@@ -1,19 +1,32 @@
-const express = require("express");
-const sequelize = require("../models/database");
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var Ticket = require("../models/tickets");
-var Buyer = require("../models/buyer");
-var TicketStatus = require("../models/ticketStatus");
-var TicketDepartment = require("../models/ticketDepartment");
-var Manager = require("../models/manager");
+// ticketController.js
 
+const express = require("express");
+const router = express.Router();
+const Ticket = require("../models/tickets");
+const Buyer = require("../models/buyer");
+const TicketStatus = require("../models/ticketStatus"); // Import TicketStatus model
+const TicketDepartment = require("../models/ticketDepartment");
+const Manager = require("../models/manager");
 
 const controllers = {};
 
 controllers.ticket_list = async (req, res) => {
-  const data = await Ticket.findAll({include:[Buyer, TicketStatus, TicketDepartment, Manager]});
-  res.json(data);
+  try {
+    const tickets = await Ticket.findAll({
+      include: [
+        { model: Buyer, as: 'buyer' },
+        { model: TicketStatus, as: 'ticketStatus' }, // Inclua o TicketStatus na consulta
+        { model: TicketDepartment, as: 'ticketDepartment' },
+        { model: Manager, as: 'manager' }
+      ]
+    });
+    res.json(tickets);
+  } catch (error) {
+    console.error('Error fetching tickets:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
+
 
 controllers.ticket_create = async (req, res) => {
   const { ticketName, ticketDescript, ticketData, ticketPriority, idBuyer, idTicketStatus, idTicketDepartment, idManager } = req.body;

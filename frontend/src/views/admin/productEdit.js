@@ -8,35 +8,72 @@ const EditProduct = () => {
     const [product, setProduct] = useState({
         productName: '',
         productPrice: '',
-        productVersion: '',
         productDescript: '',
         image: '',
     });
-    const [isLoading, setIsLoading] = useState(true);
+    const [editedProduct, setEditedProduct] = useState({
+        productName: '',
+        productPrice: '',
+        productDescript: '',
+        image: '',
+    });
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Define loadProduct function outside of useEffect
+    const loadProduct = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/product/${idProduct}`);
+            const data = response.data;
+            setProduct(data);
+            setEditedProduct(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching product details:', error);
+            setError(error);
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/product/${idProduct}`);
-                const data = response.data;
-                setProduct({
-                    productName: data.productName,
-                    productPrice: data.productPrice,
-                    productVersion: data.productVersion,
-                    productDescript: data.productDescript,
-                    image: data.image,
-                });
-                setIsLoading(false);
-            } catch (error) {
-                console.error('Error fetching product details:', error);
-                setError(error);
-                setIsLoading(false);
-            }
+        loadProduct(); // Call loadProduct initially when component mounts
+    }, [idProduct]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setEditedProduct({
+            ...editedProduct,
+            [name]: value,
+        });
+    };
+
+    const handleSave = async () => {
+        const url = `http://localhost:8080/product/update/${idProduct}`;
+
+        const data = {
+            productName: editedProduct.productName,
+            productPrice: editedProduct.productPrice,
+            productDescript: editedProduct.productDescript,
+            image: editedProduct.image,
         };
 
-        fetchProduct();
-    }, [idProduct]);
+        try {
+            const response = await axios.put(url, data);
+            console.log('Response from server:', response); // Log the entire response object for debugging
+
+            if (response.data && response.data.success === true) {
+                setProduct(response.data.data); // Update local state with updated data
+                alert(response.data.message || 'Product updated successfully!');
+                loadProduct(); // Reload product details after successful update
+            } else {
+                let errorMessage = response.data && response.data.message ? response.data.message : 'Unknown error';
+                alert('Failed to update product: ' + errorMessage);
+            }
+        } catch (error) {
+            console.error('Error updating product:', error);
+            alert('Failed to update product.');
+        }
+    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -61,8 +98,10 @@ const EditProduct = () => {
                                             type="text"
                                             className="form-control"
                                             id="productnameinput"
+                                            name="productName"
                                             placeholder="Name"
-                                            value={product.productName}
+                                            value={editedProduct.productName}
+                                            onChange={handleChange}
                                         />
                                     </div>
                                     <div className="form-group mb-3">
@@ -71,8 +110,10 @@ const EditProduct = () => {
                                             type="number"
                                             className="form-control"
                                             id="productpriceinput"
+                                            name="productPrice"
                                             placeholder="Unit Price"
-                                            value={product.productPrice}
+                                            value={editedProduct.productPrice}
+                                            onChange={handleChange}
                                         />
                                     </div>
                                     <div className="form-group mb-3">
@@ -80,9 +121,11 @@ const EditProduct = () => {
                                         <textarea
                                             className="form-control"
                                             id="descriptioninput"
+                                            name="productDescript"
                                             rows="2"
                                             maxLength="75"
-                                            value={product.productDescript}
+                                            value={editedProduct.productDescript}
+                                            onChange={handleChange}
                                         ></textarea>
                                     </div>
                                 </div>
@@ -93,8 +136,10 @@ const EditProduct = () => {
                                             type="text"
                                             className="form-control"
                                             id="imagelinkinput"
+                                            name="image"
                                             placeholder="Image"
-                                            value={product.image}
+                                            value={editedProduct.image}
+                                            onChange={handleChange}
                                         />
                                     </div>
                                 </div>
@@ -103,7 +148,7 @@ const EditProduct = () => {
                         <div className="row d-flex flex-row m-3">
                             <div className='col-8'></div>
                             <div className="col-2">
-                                <button type="button" className="btn btn-outline-success col-12 hover">Save</button>
+                                <button type="button" className="btn btn-outline-success col-12 hover" onClick={handleSave}>Save</button>
                             </div>
                             <div className="col-2">
                                 <button type="button" className="btn btn-outline-danger col-12 hover">Cancel</button>

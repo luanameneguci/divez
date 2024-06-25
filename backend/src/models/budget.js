@@ -1,6 +1,7 @@
 var Sequelize = require("sequelize");
 var sequelize = require("./database");
 const Cart = require("./cart");
+
 const BudgetStatus = require("./budgetStatus");
   var Budget = sequelize.define("budget",
     {
