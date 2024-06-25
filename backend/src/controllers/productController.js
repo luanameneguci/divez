@@ -11,6 +11,33 @@ controllers.product_list = async (req, res) => {
   res.json(data);
 };
 
+controllers.top_products = async (req, res) => {try {
+  const query = `
+    SELECT
+      p.idProduct,
+      p.productName,
+      COUNT(l.idProduct) AS total_count,
+      SUM(CASE WHEN l.licenseStatus = 'active' THEN 1 ELSE 0 END) AS active_count
+    FROM
+      product p
+    JOIN
+      licenses l ON p.idProduct = l.idProduct
+    GROUP BY
+      p.idProduct, p.productName
+    ORDER BY
+      total_count DESC
+    LIMIT 4;
+  `;
+
+  const result = await pool.query(query);
+  res.json(result.rows);
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+}
+
+
 controllers.product_create = async (req, res) => {
   const { productName, productPrice, productVersion, productDescript, installations, image } = req.body;
   const product = await Product.create({
