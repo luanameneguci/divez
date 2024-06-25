@@ -117,6 +117,7 @@ const Menu = () => {
                 <Route path="/product" element={<ProductAdd />} />
                 <Route path="/productedit/:idProduct" element={<ProductEdit />} />
                 <Route path="/budgetreply/:idBudget" element={<AdminBudgetReply />} />
+                <Route path="/ticketreply/:idTicket" element={<AdminTicketReply />} />
                 <Route path="/ticketreply" element={<AdminTicketReply />} />
                 <Route path="/sales" element={<AdminSalesDashboard />} />
               </Routes>

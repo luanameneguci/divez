@@ -36,16 +36,24 @@ controllers.ticket_create = async (req, res) => {
   res.json(ticket);
 };
 
+// Example from your provided code snippet
 controllers.ticket_update = async (req, res) => {
-  let idReceived = req.params.id;
-  const { ticketName, ticketDescript, ticketData, ticketPriority, idBuyer, idTicketStatus, idTicketDepartment, idManager } = req.body;
-  const ticket = await Ticket.update(
-    { ticketName, ticketDescript, ticketData, ticketPriority, idBuyer, idTicketStatus, idTicketDepartment, idManager },
-    { where: { idTicket: idReceived } }
-  );
+  const idReceived = req.params.id;
+  const { ticketName, ticketDescript, ticketDate, ticketPriority, idTicketStatus, idTicketDepartment } = req.body;
 
-  res.json({ ticket });
+  try {
+      const updatedTicket = await Ticket.update(
+          { ticketName, ticketDescript, ticketDate, ticketPriority, idTicketStatus, idTicketDepartment },
+          { where: { idTicket: idReceived } }
+      );
+
+      res.json({ success: true, updatedTicket });
+  } catch (error) {
+      console.error('Error updating ticket:', error);
+      res.status(500).json({ success: false, error: 'Failed to update ticket' });
+  }
 };
+
 
 controllers.ticket_detail = async (req, res) => {
   let idReceived = req.params.id;

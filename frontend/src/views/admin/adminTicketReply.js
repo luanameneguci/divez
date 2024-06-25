@@ -1,85 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import '../../App.css';
 
-const ticketsList = [
-    {
-        client: "Johnny Mousão",
-        img: "https://img.icons8.com/?size=100&id=FK8AfMKCrwOU&format=png&color=000000",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed elit sodales, convallis purus at, pellentesque purus. Mauris at nunc.",
-        date: "19/06/2024"
-    },
-    {
-        client: "Johnny Mousão",
-        img: "https://img.icons8.com/?size=100&id=FK8AfMKCrwOU&format=png&color=000000",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed elit sodales, convallis purus at, pellentesque purus. Mauris at nunc.",
-        date: "19/06/2024"
-    },
-    {
-        client: "Johnny Mousão",
-        img: "https://img.icons8.com/?size=100&id=FK8AfMKCrwOU&format=png&color=000000",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed elit sodales, convallis purus at, pellentesque purus. Mauris at nunc.",
-        date: "19/06/2024"
-    },
-];
-
-const priorityList = [
-    { value: 1, label: '1' },
-    { value: 2, label: '2' },
-    { value: 3, label: '3' }
-];
-
-const departmentList = [
-    { value: 'Programming', label: 'Programming' },
-    { value: 'Finance', label: 'Finance' },
-    { value: 'Design', label: 'Design' }
-];
-
-const statusList = [
-    { value: 'New', label: 'New' },
-    { value: 'Solved', label: 'Solved' },
-    { value: 'Waiting', label: 'Waiting' },
-    { value: 'Rejected', label: 'Rejected'}
-];
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
 
 const AdminTicketReply = () => {
-    const [department, setDepartment] = useState('');
-    const [priority, setPriority] = useState('');
-    const [status, setStatus] = useState('');
+    const { idTicket } = useParams();
+    const [ticket, setTicket] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [departmentOptions, setDepartmentOptions] = useState([]);
+    const [statusOptions, setStatusOptions] = useState([]);
+    const [department, setDepartment] = useState();
+    const [priority, setPriority] = useState();
+    const [status, setStatus] = useState();
+    const [reply, setReply] = useState('');
 
-    const handleAccept = () => {
-        // Implement logic for accepting the ticket
-        console.log('Accepted');
+    useEffect(() => {
+        const loadTicketData = async () => {
+            try {
+                setIsLoading(true);
+                // Fetch ticket details
+                const ticketResponse = await axios.get(`http://localhost:8080/ticket/${idTicket}`);
+                setTicket(ticketResponse.data);
+
+                // Fetch department options
+                const departmentResponse = await axios.get('http://localhost:8080/ticketdepartment');
+                setDepartmentOptions(departmentResponse.data);
+
+                // Fetch status options
+                const statusResponse = await axios.get('http://localhost:8080/ticketstatus');
+                setStatusOptions(statusResponse.data);
+
+                // Set initial values based on fetched data
+                setDepartment(ticketResponse.data.idTicketDepartment);
+                setPriority(ticketResponse.data.ticketPriority);
+                setStatus(ticketResponse.data.idTicketStatus);
+
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching ticket:', error);
+                setIsLoading(false);
+            }
+        };
+
+        if (idTicket) {
+            loadTicketData();
+        }
+    }, [idTicket]);
+
+    const handleSave = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8080/ticket/update/${idTicket}`, {
+                ticketName: ticket.ticketName,
+                ticketDescript: ticket.ticketDescription,
+                ticketDate: ticket.ticketDate,
+                ticketPriority: priority,
+                idTicketStatus: status,
+                idTicketDepartment: department,
+            });
+            alert('Ticket updated:', response.data);
+            console.log('Ticket updated:', response.data);
+            // Optionally, update local state or UI after successful save
+        } catch (error) {
+            alert('Error saving ticket:', error);
+            console.error('Error saving ticket:', error);
+            // Handle error (e.g., show error message to user)
+        }
     };
 
-    const handleSend = () => {
-        // Implement logic for sending a reply
-        console.log('Sent');
+    const handleReject = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8080/ticket/update/${idTicket}`, {
+                idTicketStatus: 2,
+            });
+            alert('Ticket rejected!');
+        } catch (error) {
+            alert('Error rejecting ticket:', error);
+        }
     };
 
-    const handleRefuse = () => {
-        // Implement logic for refusing the ticket
-        console.log('Refused');
-    };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!ticket) {
+        return <div>No ticket found</div>;
+    }
 
     return (
         <div className="container bg-light w-100 p-2x">
             <div className="container">
                 <div className="box-container bg-white roundbg h-100 p-4 shadow">
                     <div className="row border-bottom">
-                        <h4 className='text-start'>Ticket #</h4>
-                        <p className='text-start my-0'>{ticketsList[0].client}</p>
-                        <p className='text-start mt-1'>{ticketsList[0].date}</p>
+                        <h4 className='text-start'>Ticket #{ticket.idTicket}</h4>
+                        <p className='text-start my-0'>
+                            {ticket.buyer && ticket.buyer.buyerName}
+                            {ticket.buyer && ticket.manager && ' '}
+                            {ticket.manager && ticket.manager.managerName}
+                        </p>
+                        <p className='text-start mt-1'>{formatDate(ticket.ticketDate)}</p>
                     </div>
                     <div className="row m-2 border-bottom">
-                        <img src={ticketsList[0].img} alt="Client" className="img-fluid" style={{ width: '200px', height: '200px' }} />
+                        {ticket.ticketPrint ? (
+                            <img
+                                src={ticket.ticketPrint}
+                                alt="Client"
+                                style={{ width: '200px', height: '200px' }}
+                            />
+                        ) : (
+                            <p>User did not upload images</p>
+                        )}
                     </div>
                     <div className='row mt-3'>
                         <h6 className='text-start'>Description</h6>
                         <div className='row'>
-                            <span>{ticketsList[0].description}</span>
+                            <span>{ticket.ticketDescription}</span>
                         </div>
                     </div>
-                    <form action="" className='row d-flex mt-4'>
+                    <form className='row d-flex mt-4'>
                         <div className="row d-flex justify-content-between">
                             <div className='col-4'>
                                 <label htmlFor="departmentSelect">Department</label>
@@ -90,8 +136,8 @@ const AdminTicketReply = () => {
                                     onChange={(e) => setDepartment(e.target.value)}
                                 >
                                     <option value="">Select Department</option>
-                                    {departmentList.map((dept) => (
-                                        <option key={dept.value} value={dept.value}>{dept.label}</option>
+                                    {departmentOptions.map(dep => (
+                                        <option key={dep.idTicketDepartment} value={dep.idTicketDepartment.toString()}>{dep.departmentDescript}</option>
                                     ))}
                                 </select>
                             </div>
@@ -104,9 +150,9 @@ const AdminTicketReply = () => {
                                     onChange={(e) => setPriority(e.target.value)}
                                 >
                                     <option value="">Select Priority</option>
-                                    {priorityList.map((prio) => (
-                                        <option key={prio.value} value={prio.value}>{prio.label}</option>
-                                    ))}
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
                             <div className='col-4'>
@@ -118,26 +164,33 @@ const AdminTicketReply = () => {
                                     onChange={(e) => setStatus(e.target.value)}
                                 >
                                     <option value="">Select Status</option>
-                                    {statusList.map((stat) => (
-                                        <option key={stat.value} value={stat.value}>{stat.label}</option>
+                                    {statusOptions.map(stat => (
+                                        <option key={stat.idTicketStatus} value={stat.idTicketStatus.toString()}>{stat.statusDescript}</option>
                                     ))}
                                 </select>
                             </div>
                         </div>
-                        <div className=" mb-3 col-8">
+                        <div className="mb-3 col-8 mt-2">
                             <label htmlFor="descriptioninput">Reply</label>
-                            <textarea className="form-control" id="descriptioninput" rows="3" maxLength="250"></textarea>
+                            <textarea
+                                className="form-control"
+                                id="descriptioninput"
+                                rows="3"
+                                maxLength="250"
+                                value={reply}
+                                onChange={(e) => setReply(e.target.value)}
+                            ></textarea>
                         </div>
-                        <div className=" mb-3 col">
+                        <div className="mb-3 col">
                             <div className="row d-flex mt-3 justify-content-end">
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-success hover shadow col-12" onClick={handleAccept}>Save</button>
+                                    <button type="button" className="btn btn-success hover shadow col-12" onClick={handleSave}>Save</button>
                                 </div>
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-info text-white hover shadow col-12" onClick={handleSend}>Send Reply</button>
+                                    <button type="button" className="btn btn-info text-white hover shadow col-12">Send Reply</button>
                                 </div>
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-danger hover shadow col-12" onClick={handleRefuse}>Refuse</button>
+                                    <button type="button" className="btn btn-danger hover shadow col-12" onClick={handleReject}>Reject</button>
                                 </div>
                             </div>
                         </div>
