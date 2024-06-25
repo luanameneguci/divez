@@ -24,13 +24,9 @@ var Ticket = require("../models/tickets");
 
 (async () => {
     try {
-await AdminBudget.sync();
-await AdminProduct.sync();
-await AdminTicket.sync();
-await CartProduct.sync();
+
 await Department.sync();
 await BudgetStatus.sync();
-await ManagerLicense.sync();
 await LicenseStatus.sync();
 await LicenseUser.sync();
 await TicketDepartment.sync();
@@ -55,6 +51,12 @@ await Budget.sync();
 await License.sync();
 
 await Ticket.sync(); 
+
+await AdminBudget.sync();
+await AdminProduct.sync();
+await AdminTicket.sync();
+await CartProduct.sync();
+await ManagerLicense.sync();
 
 console.log("All models were synchronized successfully.");
 } catch (error) {

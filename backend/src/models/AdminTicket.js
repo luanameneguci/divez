@@ -1,16 +1,24 @@
 const Sequelize = require('sequelize');
 var sequelize = require("./database");
+const Admin = require("./admins");
+const Ticket = require("./tickets");
 
   var AdminTicket = sequelize.define("AdminTicket", {
     adminIdAdmin: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      primaryKey: true
+      references: {
+        model: Admin,
+        key: "idAdmin",
+      },
     },
     ticketIdTicket: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      primaryKey: true
+      references: {
+        model: Ticket,
+        key: "idTicket",
+      },
     }
   }, {
     timestamps: false,
@@ -19,3 +27,4 @@ var sequelize = require("./database");
 
 
   module.exports = AdminTicket;
+  
