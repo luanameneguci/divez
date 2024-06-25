@@ -41,6 +41,6 @@ var Manager = sequelize.define('manager',
   });
 
   Manager.belongsTo(Buyer, { foreignKey: 'idBuyer' });
-  Buyer.belongsTo(Manager, { foreignKey: 'idBuyer' });
+  Buyer.hasMany(Manager, { foreignKey: 'idBuyer' });
 
 module.exports = Manager;

@@ -217,7 +217,7 @@ function useBuyerManagers() {
 
 /*find buyer tickets*/
 function useBuyerTickets() {
-  const [dataBuyerTickets, setDataBuyerTickets] = useState([]);
+  const [buyerTickets, setBuyerTickets] = useState([]);
 
   useEffect(() => {
     const fetchBuyerTickets = async () => {
@@ -226,7 +226,7 @@ function useBuyerTickets() {
         const res = await axios.get(url);
         if (res.status === 200) {
           const data = res.data;
-          setDataBuyerTickets(data);
+          setBuyerTickets(data);
         } else {
           alert("Error Web Service!");
         }
@@ -238,10 +238,8 @@ function useBuyerTickets() {
     fetchBuyerTickets();
   }, []);
 
-  return dataBuyerTickets;
+  return buyerTickets;
 }
-
-/*preencher tabela de tickets*/
 
 /*preencher tabela de pending budgets*/
 function useTablePendingBudgets() {

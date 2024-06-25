@@ -47,26 +47,12 @@ function BoxTable({ title, rows }) {
                     {data.budgetName}
                   </td>    
                   <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
-                    {data.budgetName}
+                    {data.idBudgetStatus}
                   </td>     
                   </React.Fragment>             
                 ))}                
 
-                {row.map((data, colIndex) => {
-                  const isLastChild = colIndex === row.length - 1;
-                  return (
-                    <td
-                      className="ps-3 py-1 border-bottom"
-                      key={colIndex}
-                      style={{
-                        height: "40px",
-                        ...(isLastChild && { color: getStatusColor(row[2]) }),
-                      }}
-                    >
-                      {data}
-                    </td>
-                  );
-                })}
+
               </tr>
             ))}
           

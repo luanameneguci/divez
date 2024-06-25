@@ -3,11 +3,6 @@
 import './App.css';
 import BuyerDashboard from './components/buyer/Dashboard';
 
-
-
-
-
-
 import Login from "./views/All/login";
 
 import AdminMenu from "./views/admin/adminMenu"; // Importa o menu do Admin
@@ -20,7 +15,7 @@ function App() {
   return (
     <div>
 
-      <AdminMenu />
+      <BuyerDashboard />
 
     </div>
   );

@@ -70,5 +70,17 @@ var Ticket = sequelize.define('ticket', {
     
   });
 
+  Ticket.belongsTo(Manager, { foreignKey: 'idManager' });
+  Manager.hasMany(Manager, { foreignKey: 'idManager' });
+
+  Ticket.belongsTo(Buyer, { foreignKey: 'idBuyer' });
+  Buyer.hasMany(Ticket, { foreignKey: 'idBuyer' });
+
+  Ticket.belongsTo(TicketDepartment, { foreignKey: 'idTicketDepartment' });
+  TicketDepartment.hasMany(Ticket, { foreignKey: 'idTicketDepartment' });
+
+  Ticket.belongsTo(TicketStatus, { foreignKey: 'idTicketStatus' });
+  TicketStatus.hasMany(Ticket, { foreignKey: 'idTicketStatus' });
+
   module.exports = Ticket;
 
