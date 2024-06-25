@@ -9,7 +9,7 @@ var Category = sequelize.define(
       primaryKey: true,
     },
     categoryName: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING(255),
       allowNull: false,
       primaryKey: true,
     },

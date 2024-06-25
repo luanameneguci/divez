@@ -20,6 +20,10 @@ var Ticket = sequelize.define('ticket', {
       type: Sequelize.STRING(255),
       allowNull: true
     },
+    ticketPrint: {
+      type: Sequelize.STRING(255),
+      allowNull: true
+    },
     ticketData: {
       type: Sequelize.DATE,
       allowNull: true
