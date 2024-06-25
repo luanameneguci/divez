@@ -3,10 +3,12 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import '../../App.css';
 
-
+// Registrar os componentes necessários do Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+// Componente que representa o gráfico de vendas
 const SalesGraph = () => {
+    // Dados a serem exibidos no gráfico
     const data = {
         labels: ["01/12", "02/12", "03/12", "04/12", "05/12", "06/12", "07/12", "08/12", "09/12", "10/12", "11/12", "12/12"],
         datasets: [
@@ -37,6 +39,7 @@ const SalesGraph = () => {
         ]
     };
 
+    // Opções de configuração do gráfico
     const options = {
         plugins: {
             legend: {
@@ -50,18 +53,19 @@ const SalesGraph = () => {
         scales: {
             x: {
                 grid: {
-                    display: false,
+                    display: false, // Oculta a grid no eixo x
                 },
             },
             y: {
                 grid: {
-                    display: false,
+                    display: false, // Oculta a grid no eixo y
 
                 }
             }
         }
     };
 
+    // Renderização do componente
     return (
         <div className='shadow' style={{ width: "100%", maxWidth: "900px", margin: 'auto' }}>
             <Bar data={data} options={options} />

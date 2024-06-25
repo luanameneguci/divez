@@ -1,61 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import '../../App.css';
 
-/* não tenho a certeza como fazer isto com a base de dados, não sei pq mas não estava a conseguir juntar
-mas provavelmente era burrice*/
-const budgetProducts = [
-    {
-        nome: "Adobe Animate",
-        img: "https://img.icons8.com/?size=100&id=FK8AfMKCrwOU&format=png&color=000000",
-        amount: 10,
-    },
-    {
-        nome: "Adobe Photoshop",
-        img: "https://img.icons8.com/?size=100&id=13677&format=png&color=000000",
-        amount: 10,
-    },
-    {
-        nome: "Adobe Illustrator",
-        img: "https://img.icons8.com/?size=100&id=13631&format=png&color=000000",
-        amount: 10,
-    },
-];
-
-const budgetDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed elit sodales, convallis purus at, pellentesque purus. Mauris at nunc.";
-
-
 const AdminBudgetReply = () => {
+    const { idBudget } = useParams();
+    const [budget, setBudget] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const loadBudget = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/budget/${idBudget}`);
+                setBudget(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching budget:', error);
+                setError(error);
+                setIsLoading(false);
+            }
+        };
+
+        loadBudget();
+    }, [idBudget]);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error loading budget: {error.message}</div>;
+    }
+
     return (
         <div className="container bg-light w-100 p-2x">
-        <div className="container">
-            <div className="box-container bg-white roundbg h-100 p-4 shadow">
-                <div className="row border-bottom">
-                    <h4 className='text-start'>Budget Nº 123</h4>
-                    <p className='text-start'>Items on this budget: 3</p>
-                </div>
-                <div className="row m-2 border-bottom">
-                    <div className='col-5'>
-                        <p><strong>Product</strong></p>
+            <div className="container">
+                <div className="box-container bg-white roundbg h-100 p-4 shadow">
+                    <div className="row border-bottom">
+                        <h4 className='text-start'>Budget #{budget.idBudget}</h4>
+                        <p className='text-start'>Items:</p>
                     </div>
-                    <div className='col-3'>
-                    <p><strong>Ammout</strong></p>
-                    </div>
-                </div>
-                <div className="col-12">
-                    {budgetProducts.map((product, index) => (
-                        <div className="row border-bottom m-2">
-                            <div key={index} className="d-flex align-items-center">
-                                <img src={product.img} alt={product.nome} className="me-3 col-1" style={{ width: '70px', height: '70px' }} />
-                                <span className='fw-semibold col-4'>{product.nome}</span>
-                                <span className='col-5 ms-4'><strong>{product.amount}</strong></span>
-                            </div>
+                    <div className="row m-2 border-bottom">
+                        <div className='col-5'>
+                            <p><strong>Product</strong></p>
                         </div>
-                    ))}
-                </div>
+                        <div className='col-3'>
+                            <p><strong>Amount</strong></p>
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        {budget.cart && (
+                            <div className="row border-bottom m-2">
+                                <div className="d-flex align-items-center">
+                                    <span className='fw-semibold col-4'>Cart Price: {budget.cart.cartPrice}</span>
+                                    <span className='col-5 ms-4'><strong>License Number: {budget.cart.licenseNumber}</strong></span>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                     <div className='row mt-3'>
                         <h6 className='text-start'>Description</h6>
                         <div className='row'>
-                            <span>{budgetDescription}</span>
+                            <span>{budget.budgetDescript}</span>
                         </div>
                     </div>
                     <form action="" className='row d-flex mt-4'>
@@ -67,7 +74,7 @@ const AdminBudgetReply = () => {
                             <label htmlFor="productpriceinput">Price</label>
                             <input type="number" className="form-control" id="productpriceinput" placeholder="Price" />
                             <div className="row d-flex mt-3 justify-content-end">
-                            <div className="col-4">
+                                <div className="col-4">
                                     <button type="button" className="btn btn-success hover shadow col-12">Accept</button>
                                 </div>
                                 <div className="col-4">
@@ -78,12 +85,11 @@ const AdminBudgetReply = () => {
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default AdminBudgetReply;

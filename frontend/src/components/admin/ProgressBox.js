@@ -1,9 +1,7 @@
 import React from 'react';
 import '../../App.css';
 
-
-
-// Componente que mostra a Lista de Tickets
+// Componente instalações ativas
 let data = [
     { nome: "Programming", numeroTotal: 1000, numeroAtivos: 750 },
     { nome: "Finance", numeroTotal: 900, numeroAtivos: 500 },
@@ -11,9 +9,11 @@ let data = [
     { nome: "Support", numeroTotal: 800, numeroAtivos: 500 },
 ];
 
+// Cria arrays de dados a partir da lista inicial
 const result = createDataArrays(data);
 const resultado = calculatePercentages(result);
 
+// Função para criar arrays de dados
 function createDataArrays(data) {
     let result = [];
     for (let i = 0; i < data.length && result.length < 4; i++) {
@@ -23,6 +23,7 @@ function createDataArrays(data) {
     return result;
 }
 
+// Função para calcular as porcentagens
 function calculatePercentages(result) {
     let resultado = [];
     for (let i = 0; i < result.length; i++) {
@@ -37,6 +38,7 @@ function calculatePercentages(result) {
     return resultado;
 }
 
+// Componente que representa uma barra de progresso individual
 const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
     <div className="mb-3">
       <div className="d-flex justify-content-between">
@@ -62,8 +64,10 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
         </div>
       </div>
     </div>
-  );
-  const ProgressDivs = ({ resultado }) => {
+);
+
+// Componente que renderiza várias barras de progresso
+const ProgressDivs = ({ resultado }) => {
     return (
       <div>
         {resultado.map((item, index) => (
@@ -77,8 +81,9 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
         ))}
       </div>
     );
-  };
+};
 
+// Componente principal que dá display às barras de progresso
 function ProgressBox() {
     return (
         <div className="box-container bg-white col-auto roundbg d-flex shadow pb-3 shadow h-100">

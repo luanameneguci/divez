@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import Select from 'react-select';
+
 
 const FileUpload = () => {
   // Hooks de estado para gerir o ficheiro selecionado e a sua pré-visualização
@@ -65,6 +67,13 @@ const FileUpload = () => {
       color: activeDiv === buttonId ? "white" : "black",
     };
   };
+
+  // Guarda as categorias dos tickets para usar no select
+  const options = [
+    { value: 'instalation', label: 'Instalation' },
+    { value: 'licenses', label: 'Licenses' },
+    { value: 'payment', label: 'Payment' }
+  ]
 
   return (
     <section class="bsb-faq-3 py-3 py-md-5 py-xl-8">
@@ -679,21 +688,7 @@ const FileUpload = () => {
           </h5>
 
           <div className="col-12 d-flex justify-content-around my-5 mx-auto">
-            <input
-              type="submit"
-              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
-              value="Installation"
-            />
-            <input
-              type="submit"
-              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
-              value="Licenses"
-            />
-            <input
-              type="submit"
-              className="hover roundbg py-3 px-4 border-0 mx-4 shadow col-2"
-              value="Payment"
-            />
+            <Select options={options} />
           </div>
 
           <div className="form-group col-10 mx-auto">
@@ -748,6 +743,7 @@ const FileUpload = () => {
                 className="file-upload-image roundbg"
                 src={imagePreview}
                 alt="Uploaded"
+                style={{ width: "100px" }}
               />
               <div className="image-title-wrap">
                 <button

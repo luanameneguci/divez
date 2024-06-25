@@ -20,6 +20,8 @@ import ProductAdd from "../../views/admin/productAdd";
 import ProductEdit from "../../views/admin/productEdit";
 import AdminBudgetReply from "../../views/admin/adminBudgetReply";
 import AdminSalesDashboard from "../../views/admin/adminSalesDashboard";
+import AdminTicketReply from "../../views/admin/adminTicketReply";
+
 
 // styles import
 import "../../App.css";
@@ -113,8 +115,9 @@ const Menu = () => {
                 <Route path="/budgets" element={<AdminBudgetList />} />
                 <Route path="/package" element={<PackageAdd />} />
                 <Route path="/product" element={<ProductAdd />} />
-                <Route path="/productedit" element={<ProductEdit />} />
-                <Route path="/budgetreply" element={<AdminBudgetReply />} />
+                <Route path="/productedit/:idProduct" element={<ProductEdit />} />
+                <Route path="/budgetreply/:idBudget" element={<AdminBudgetReply />} />
+                <Route path="/ticketreply" element={<AdminTicketReply />} />
                 <Route path="/sales" element={<AdminSalesDashboard />} />
               </Routes>
             </div>

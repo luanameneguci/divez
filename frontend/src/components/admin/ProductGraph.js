@@ -2,25 +2,25 @@ import React, { useEffect, useRef } from 'react';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 import '../../App.css';
 
-
 const ProductGraph = () => {
-    const canvasRef = useRef(null);
-    const chartRef = useRef(null);
+    const canvasRef = useRef(null); // Referência para o elemento canvas
+    const chartRef = useRef(null); // Referência para o gráfico Chart.js
 
     useEffect(() => {
+        // Registrar os componentes necessários do Chart.js
         Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
-        const ctx = canvasRef.current.getContext("2d");
+        const ctx = canvasRef.current.getContext("2d"); // Obter o contexto 2D do canvas
 
         const xValues = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const yValues = [100, 120, 163, 636, 183, 283, 974, 458, 763, 163, 385, 579];
 
         if (chartRef.current) {
-            chartRef.current.destroy();
+            chartRef.current.destroy(); // Destruir o gráfico existente antes de criar um novo
         }
 
         chartRef.current = new Chart(ctx, {
-            type: 'line',
+            type: 'line', // Tipo do gráfico
             data: {
                 labels: xValues,
                 datasets: [{
@@ -34,25 +34,25 @@ const ProductGraph = () => {
                     x: {
                         grid: {
                             display: true,
-                            color: "rgba(255,255,255,50)", // Background line color
-                            lineWidth: 1, // Width of the background lines
-                            drawBorder: false, // Whether to draw the border of the chart area
-                            drawOnChartArea: true // Whether to draw lines inside the chart area
+                            color: "rgba(255,255,255,50)", // Cor das linhas de fundo
+                            lineWidth: 1, // Largura das linhas de fundo
+                            drawBorder: false, // Desenhar a borda da área do gráfico
+                            drawOnChartArea: true // Desenhar linhas dentro da área do gráfico
                         },
                         ticks: {
-                            maxRotation: 0, // Rotates the text to be horizontal
-                            minRotation: 0, // Ensures text is horizontal
-                            autoSkip: true, // Automatically skip ticks if they overlap
-                            maxTicksLimit: 12 // Maximum number of ticks to display
+                            maxRotation: 0, // Girar o texto para ser horizontal
+                            minRotation: 0, // Garante que o texto seja horizontal
+                            autoSkip: true, // Skipa automaticamente ticks se eles se sobrepuserem
+                            maxTicksLimit: 12 // Número máximo de ticks a serem exibidos
                         }
                     },
                     y: {
                         grid: {
                             display: true,
-                            color: "rgba(0,0,0,0.1)", // Background line color
-                            lineWidth: 1, // Width of the background lines
-                            drawBorder: false, // Whether to draw the border of the chart area
-                            drawOnChartArea: true // Whether to draw lines inside the chart area
+                            color: "rgba(0,0,0,0.1)", // Cor das linhas de fundo
+                            lineWidth: 1, // Largura das linhas de fundo
+                            drawBorder: false, // Desenhar a borda da área do gráfico
+                            drawOnChartArea: true // Desenhar linhas dentro da área do gráfico
                         }
                     }
                 }
@@ -61,7 +61,7 @@ const ProductGraph = () => {
 
         return () => {
             if (chartRef.current) {
-                chartRef.current.destroy();
+                chartRef.current.destroy(); // Destruir o gráfico ao desmontar o componente
             }
         };
     }, []);
@@ -69,7 +69,7 @@ const ProductGraph = () => {
     return (
         <div className="box-container p-3 roundbg d-flex" style={{height: '500px'}}>
             <div className="col-12">
-            <canvas ref={canvasRef} style={{ width: "100%", margin: "auto"}}></canvas>
+                <canvas ref={canvasRef} style={{ width: "100%", margin: "auto"}}></canvas>
             </div>
         </div>
     );
@@ -77,7 +77,7 @@ const ProductGraph = () => {
 
 export default ProductGraph;
 
-/*exemplo com bd
+/* Exemplo com db
 // src/ProductGraph.js
 import React, { useEffect, useRef, useState } from 'react';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
@@ -88,21 +88,21 @@ const ProductGraph = () => {
     const [monthlyData, setMonthlyData] = useState({ labels: [], profits: [] });
 
     useEffect(() => {
-        // Register the necessary components
+        // Registrar os componentes necessários
         Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
-        // Fetch data from the API
+        // Buscar dados da API
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/monthly-profits'); // Replace with your API endpoint
+                const response = await fetch('/api/monthly-profits'); // Substituir pelo endpoint da sua API
                 const data = await response.json();
                 
-                const labels = data.map(item => item.month); // Assuming data format is [{ month: "January", profit: 500 }, ...]
+                const labels = data.map(item => item.month); // Supondo que o formato dos dados seja [{ month: "January", profit: 500 }, ...]
                 const profits = data.map(item => item.profit);
 
                 setMonthlyData({ labels, profits });
             } catch (error) {
-                console.error("Error fetching data: ", error);
+                console.error("Erro ao buscar dados: ", error);
             }
         };
 
@@ -150,7 +150,7 @@ const ProductGraph = () => {
 export default ProductGraph;
 */
 
-/* backend
+/* Backend
 // server.js
 const express = require('express');
 const app = express();
@@ -162,12 +162,12 @@ app.get('/api/monthly-profits', (req, res) => {
         { month: "March", profit: 1500 },
         { month: "April", profit: 2000 },
         { month: "May", profit: 2500 },
-        // Add more data as needed
+        // Adicionar mais dados conforme necessário
     ];
     res.json(monthlyProfits);
 });
 
 const port = 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
 
 */

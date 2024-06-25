@@ -31,7 +31,7 @@ const Login = () => {
                           placeholder="Email address"
                           required
                         />
-                        <label className="form-label" htmlFor="form2Example11">
+                        <label class="form-label" for="form2Example11">
                           Email
                         </label>
                       </div>
