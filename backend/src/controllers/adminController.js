@@ -2,11 +2,17 @@ const express = require("express");
 const sequelize = require("../models/database");
 const { DataTypes } = require('sequelize');
 var Admin = require("../models/admins");
+const Department = require("../models/adminDepartments");
 
 const controllers = {};
 
 controllers.admin_list = async (req, res) => {
-  const data = await Admin.findAll({include:[Department]});
+  const data = await Admin.findAll({
+    include: [{
+      model: Department,
+      attributes: ['adminDepartmentDescript']
+    }]
+  });
   res.json(data);
 };
 
