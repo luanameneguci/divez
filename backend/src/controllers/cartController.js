@@ -45,4 +45,12 @@ controllers.cart_delete = async (req, res) => {
   res.json({ message: "Excluído com sucesso!" });
 };
 
+controllers.cart_findByBuyerId = async (req, res) => {
+  let idReceived = req.params.id;
+
+  const data = await Cart.findOne({ where: { idBuyer: idReceived } });
+
+  res.json(data);
+};
+
 module.exports = controllers;

@@ -40,6 +40,7 @@ var Manager = sequelize.define('manager',
     freezeTableName: true
   });
 
-  Manager.belongsTo(Buyer);
+  Manager.belongsTo(Buyer, { foreignKey: 'idBuyer' });
+  Buyer.belongsTo(Manager, { foreignKey: 'idBuyer' });
 
 module.exports = Manager;

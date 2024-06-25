@@ -5,6 +5,8 @@ const licenseController = require("../controllers/licenseController");
 
 router.get("/", licenseController.license_list); 
 
+router.get("/findByBuyer/:id", licenseController.license_findByBuyerId); 
+
 router.post("/create", licenseController.license_create);
 
 router.put("/update/:id", licenseController.license_update);

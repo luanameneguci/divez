@@ -3,7 +3,7 @@ const router = express.Router();
 
 const licenseUserController = require("../controllers/licenseUserController");
 
-router.get("/", licenseUserController.licenseUser_list); 
+router.get("/", licenseUserController.licenseUser_list);  
 
 router.post("/create", licenseUserController.licenseUser_create);
 

@@ -69,10 +69,12 @@ const ProgressDiv = ({ nome, numeroAtivos, numeroTotal, percentage }) => (
       </div>
     </div>
   );
+  
   const ProgressDivs = ({ resultado }) => {
+    const limitedData = resultado.slice(0, 4);
     return (
       <div>
-        {resultado.map((item, index) => (
+        {limitedData.map((item, index) => (
           <ProgressDiv
             key={index}
             nome={item[0]}

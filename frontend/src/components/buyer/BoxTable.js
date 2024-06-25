@@ -22,12 +22,21 @@ function BoxTable({ title, rows }) {
             {rows.map((row, rowIndex) => (
               <tr className="roundbg" key={rowIndex}>
                 {row.map((data, colIndex) => (
+                  <React.Fragment key={colIndex}>
                   <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
-                    {data}
-                  </td>
-                ))}
+                    {data.idBudget}
+                  </td>    
+                  <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
+                    {data.budgetName}
+                  </td>    
+                  <td className="ps-3 py-1 border-bottom" key={colIndex} style={{ height: 40 + "px" }}>
+                    {data.budgetName}
+                  </td>     
+                  </React.Fragment>             
+                ))}                
               </tr>
             ))}
+          
           </tbody>
         </table>
       </div>

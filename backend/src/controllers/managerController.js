@@ -37,6 +37,14 @@ controllers.manager_detail = async (req, res) => {
   res.json(data);
 };
 
+controllers.manager_findByBuyer = async (req, res) => {
+  let idReceived = req.params.id;
+
+  const data = await Manager.findAll({ where: { idBuyer: idReceived } });
+
+  res.json(data);
+};
+
 controllers.manager_delete = async (req, res) => {
   let idReceived = req.params.id;
   await Manager.destroy({ where: { id: idReceived } });

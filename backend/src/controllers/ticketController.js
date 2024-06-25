@@ -41,6 +41,14 @@ controllers.ticket_detail = async (req, res) => {
   res.json(data);
 };
 
+controllers.ticket_findByBuyer = async (req, res) => {
+  let idReceived = req.params.id;
+
+  const data = await Ticket.findAll({ where: { idBuyer: idReceived } });
+
+  res.json(data);
+};
+
 controllers.ticket_delete = async (req, res) => {
   let idReceived = req.params.id;
   await Ticket.destroy({ where: { id: idReceived } });

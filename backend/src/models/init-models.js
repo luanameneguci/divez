@@ -21,43 +21,33 @@ var TicketDepartment = require("../models/ticketDepartment");
 var TicketStatus = require("../models/ticketStatus");
 var Ticket = require("../models/tickets");
 
-
 (async () => {
-    try {
-await AdminBudget.sync();
-await AdminProduct.sync();
-await AdminTicket.sync();
-await CartProduct.sync();
-await Department.sync();
-await BudgetStatus.sync();
-await ManagerLicense.sync();
-await LicenseStatus.sync();
-await LicenseUser.sync();
-await TicketDepartment.sync();
-await TicketStatus.sync();
-await Package.sync();
-await Product.sync();
-await Category.sync();
+  try {
+    await AdminBudget.sync({ alter: true });
+    await AdminProduct.sync({ alter: true });
+    await AdminTicket.sync({ alter: true });
+    await CartProduct.sync({ alter: true });
+    await Department.sync({ alter: true });
+    await BudgetStatus.sync({ alter: true });
+    await ManagerLicense.sync({ alter: true });
+    await LicenseStatus.sync({ alter: true });
+    await LicenseUser.sync({ alter: true });
+    await TicketDepartment.sync({ alter: true });
+    await TicketStatus.sync({ alter: true });
+    await Package.sync({ alter: true });
+    await Product.sync({ alter: true });
+    await Category.sync({ alter: true });
+    await Admin.sync({ alter: true });
+    await Buyer.sync({ alter: true });
+    await Cart.sync({ alter: true });
+    await Manager.sync({ alter: true });
+    await Bill.sync({ alter: true });
+    await Budget.sync({ alter: true });
+    await License.sync({ alter: true });
+    await Ticket.sync({ alter: true });
 
-await Admin.sync();
-
-await Buyer.sync();
-
-await Cart.sync();
-
-await Manager.sync();
-
-
-await Bill.sync();
-
-await Budget.sync();
-
-await License.sync();
-
-await Ticket.sync(); 
-
-console.log("All models were synchronized successfully.");
-} catch (error) {
-  console.error("An error occurred while syncing models:", error);
-}
+    console.log("All models were synchronized successfully.");
+  } catch (error) {
+    console.error("An error occurred while syncing models:", error);
+  }
 })();

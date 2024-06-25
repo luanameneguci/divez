@@ -5,6 +5,8 @@ const ticketController = require("../controllers/ticketController");
 
 router.get("/", ticketController.ticket_list); 
 
+router.get("/findByBuyer/:id", ticketController.ticket_findByBuyer); 
+
 router.post("/create", ticketController.ticket_create);
 
 router.put("/update/:id", ticketController.ticket_update);

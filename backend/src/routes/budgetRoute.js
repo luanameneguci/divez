@@ -9,6 +9,8 @@ router.get("/", budgetController.budget_list);
 
 router.get("/:id", budgetController.budget_detail);
 
+router.get("/findByCart/:id", budgetController.budget_findByCartId); 
+
 router.post("/create", budgetController.budget_create);
 
 router.put("/update/:id", budgetController.budget_update);

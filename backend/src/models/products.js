@@ -32,6 +32,7 @@ var Product = sequelize.define('product', {
       type: Sequelize.STRING(255),
       allowNull: true
     }
+    
   }, {
     timestamps: false,
     freezeTableName: true

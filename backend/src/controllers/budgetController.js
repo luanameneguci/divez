@@ -41,6 +41,14 @@ controllers.budget_detail = async (req, res) => {
   res.json(data);
 };
 
+controllers.budget_findByCartId = async (req, res) => {
+  let idReceived = req.params.id;
+
+  const data = await Budget.findAll({ where: { idCart: idReceived } });
+
+  res.json(data);
+};
+
 controllers.budget_delete = async (req, res) => {
   let idReceived = req.params.id;
   await Budget.destroy({ where: { id: idReceived } });
