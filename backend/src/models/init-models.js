@@ -20,17 +20,13 @@ var Product = require("../models/products");
 var TicketDepartment = require("../models/ticketDepartment");
 var TicketStatus = require("../models/ticketStatus");
 var Ticket = require("../models/tickets");
+var BudgetProduct = require("../models/budgetProduct");
 
 (async () => {
 
   try {
-    await AdminBudget.sync({ alter: true });
-    await AdminProduct.sync({ alter: true });
-    await AdminTicket.sync({ alter: true });
-    await CartProduct.sync({ alter: true });
     await Department.sync({ alter: true });
     await BudgetStatus.sync({ alter: true });
-    await ManagerLicense.sync({ alter: true });
     await LicenseStatus.sync({ alter: true });
     await LicenseUser.sync({ alter: true });
     await TicketDepartment.sync({ alter: true });
@@ -40,12 +36,18 @@ var Ticket = require("../models/tickets");
     await Category.sync({ alter: true });
     await Admin.sync({ alter: true });
     await Buyer.sync({ alter: true });
-    await Cart.sync({ alter: true });
     await Manager.sync({ alter: true });
+    await Cart.sync({ alter: true });
     await Bill.sync({ alter: true });
     await Budget.sync({ alter: true });
     await License.sync({ alter: true });
     await Ticket.sync({ alter: true });
+    await AdminBudget.sync({ alter: true });
+    await AdminProduct.sync({ alter: true });
+    await AdminTicket.sync({ alter: true });
+    await CartProduct.sync({ alter: true });
+    await ManagerLicense.sync({ alter: true });
+    await BudgetProduct.sync({ alter: true});
 
     console.log("All models were synchronized successfully.");
   } catch (error) {
