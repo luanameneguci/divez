@@ -101,13 +101,8 @@ const AdminTicketReply = () => {
                 <div className="box-container bg-white roundbg h-100 p-4 shadow">
                     <div className="row border-bottom">
                         <h4 className='text-start'>Ticket #{ticket.idTicket}</h4>
-                        <p className='text-start my-0'>
-                            {ticket.buyer && ticket.buyer.buyerName}
-                            {ticket.buyer && ticket.manager && ' '}
-                            {ticket.manager && ticket.manager.managerName}
-                        </p>
                         <p className='text-start mt-1'>{formatDate(ticket.ticketDate)}</p>
-                    </div>
+                        </div>
                     <div className="row m-2 border-bottom">
                         {ticket.ticketPrint ? (
                             <img
