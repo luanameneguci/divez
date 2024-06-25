@@ -23,7 +23,7 @@ function ManagersList({ managersList, productList }) {
         row[3].toLowerCase().includes(productsFilter.toLowerCase())
     );
 
-    // Função para mostrar o modal com os detalhes do gerente selecionado
+    // Função para mostrar o modal com os detalhes do gerente selecionado   
     const handleShow = (row) => {
         setModalData(row[2]); // Salva o e-mail da linha
         setLgShow(true);

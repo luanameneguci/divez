@@ -66,6 +66,19 @@ controllers.budget_findByCartId = async (req, res) => {
   res.json(data);
 };
 
+controllers.budget_findByBudgetStatus = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const count = await Budget.count({ where: { idBudgetStatus: id } });
+    res.json({ success: true, count });
+  } catch (error) {
+    console.error('Error counting Budget by status:', error);
+    res.status(500).json({ success: false, message: 'Error counting Budget by status', error: error.message });
+  }
+};
+
+
 controllers.budget_delete = async (req, res) => {
   let idReceived = req.params.id;
   await Budget.destroy({ where: { id: idReceived } });

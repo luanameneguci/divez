@@ -42,6 +42,18 @@ controllers.license_detail = async (req, res) => {
   res.json(data);
 };
 
+controllers.license_findByLicenseStatus = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const count = await License.count({ where: { idLicenseStatus: id } });
+    res.json({ success: true, count });
+  } catch (error) {
+    console.error('Error counting license by status:', error);
+    res.status(500).json({ success: false, message: 'Error counting license by status', error: error.message });
+  }
+};
+
 controllers.license_delete = async (req, res) => {
     let idReceived = req.params.id;
     await License.destroy({ where: { id: idReceived } });

@@ -65,7 +65,7 @@ const AdminBudgetReply = () => {
                             <span>{budget.budgetDescript}</span>
                         </div>
                     </div>
-                    <form action="" className='row d-flex mt-4'>
+                    <form action="https://usebasin.com/f/8a781ebd5951" method="POST" target='_blank' className='row d-flex mt-4'>
                         <div className=" mb-3 col-8">
                             <label htmlFor="descriptioninput">Reply</label>
                             <textarea className="form-control" id="descriptioninput" rows="3" maxLength="250"></textarea>
@@ -75,10 +75,10 @@ const AdminBudgetReply = () => {
                             <input type="number" className="form-control" id="productpriceinput" placeholder="Price" />
                             <div className="row d-flex mt-3 justify-content-end">
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-success hover shadow col-12">Accept</button>
+                                    <button type="submit" className="btn btn-success hover shadow col-12">Accept</button>
                                 </div>
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-info text-white hover shadow col-12">Send</button>
+                                    <button type="submit" className="btn btn-info text-white hover shadow col-12">Send</button>
                                 </div>
                                 <div className="col-4">
                                     <button type="button" className="btn btn-danger hover shadow col-12">Refuse</button>

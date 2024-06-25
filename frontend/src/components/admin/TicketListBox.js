@@ -3,7 +3,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { format } from 'date-fns';
 
 function TicketListBox({ numRowsToShow }) {
     const [tickets, setTickets] = useState([]);
@@ -114,7 +113,6 @@ function TicketListBox({ numRowsToShow }) {
                                         <DatePicker
                                             selected={dateFilter}
                                             onChange={(date) => setDateFilter(date)}
-                                            dateFormat="dd/MM/yyyy"
                                             className="form-control w-75"
                                             placeholderText="Select date"
                                         />
@@ -159,7 +157,7 @@ function TicketListBox({ numRowsToShow }) {
                             <tr key={rowIndex}>
                                 <td className='ps-3' style={{ width: '10%' }}>{ticket.idTicket}</td>
                                 <td>{ticket.ticketName}</td>
-                                <td>{format(new Date(ticket.ticketData), 'dd/MM/yyyy')}</td>
+                                <td>{(new Date(ticket.ticketData), 'dd/MM/yyyy')}</td>
                                 <td>{ticket.ticketDepartment.departmentDescript}</td>
                                 <td>{ticket.ticketPriority}</td>
                                 <td style={{ color: getStatusColor(ticket.ticketStatus.statusDescript) }}>{ticket.ticketStatus.statusDescript}</td>

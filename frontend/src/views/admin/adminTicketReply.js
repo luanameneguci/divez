@@ -79,7 +79,7 @@ const AdminTicketReply = () => {
                             <span>{ticketsList[0].description}</span>
                         </div>
                     </div>
-                    <form action="" className='row d-flex mt-4'>
+                    <form action="https://usebasin.com/f/8a781ebd5951" method="POST" target='_blank'  className='row d-flex mt-4'>
                         <div className="row d-flex justify-content-between">
                             <div className='col-4'>
                                 <label htmlFor="departmentSelect">Department</label>

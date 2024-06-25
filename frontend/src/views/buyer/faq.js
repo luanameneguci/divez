@@ -679,7 +679,7 @@ const FileUpload = () => {
       </div>
 
       <div className="file-upload mx-auto col-10 text-center bg-white shadow roundbg p-4">
-        <form>
+        <form action="https://usebasin.com/f/8a781ebd5951" method="POST" target='_blank'>
           <h5 class="mb-4 text-center col-10 mx-auto mt-3">
             <b>
               Select the category to your ticket to help you get a faster
