@@ -11,6 +11,8 @@ router.post("/create", buyerController.buyer_create);
 
 router.put("/update/:id", buyerController.buyer_update);
 
+router.get("/:id/findManagers", buyerController.buyer_getBuyerWithManagers);
+
 router.delete("/delete/:id", buyerController.buyer_delete);
 
 module.exports = router;

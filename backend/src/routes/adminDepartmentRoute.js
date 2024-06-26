@@ -13,4 +13,4 @@ router.get("/:id", adminDepartmentController.admin_department_detail);
 
 router.delete("/delete/:id", adminDepartmentController.admin_department_delete);
 
-module.exports = router;
+module.exports = router; 

@@ -1,9 +1,9 @@
 const express = require("express");
-const sequelize = require("../model/database");
+const sequelize = require("../models/database");
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var Message = require("../model/message")(sequelize, DataTypes);
-var Ticket = require("../model/tickets")(sequelize, DataTypes);
-sequelize.sync();
+var Message = require("../models/message");
+var Ticket = require("../models/tickets");
+
 
 const controllers = {};
 

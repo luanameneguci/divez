@@ -1,19 +1,23 @@
-import './App.css';
-import AdminMenu from './views/admin/adminMenu';
 
-import BuyerShop from './views/buyer/buyerShop';
-import BuyerMenu from './views/buyer/buyerMenu';
-import BuyerDashboard from './views/buyer/buyerDashboard';
-import ManagerMenu from './views/manager/managerMenu';
-import ManagerDashboard from './views/manager/managerDashboard';
-import AdminDashboard from './views/admin/adminDashboard';
+
+import './App.css';
+import BuyerDashboard from './components/buyer/Dashboard';
+
+import Login from "./views/All/login";
+
+import AdminMenu from "./views/admin/adminMenu"; // Importa o menu do Admin
+import BuyerMenu from "./views/buyer/buyerMenu"; // Importa o menu do Comprador
+import ManagerMenu from "./views/manager/managerMenu"; // Importa o menu do Manager
+import Menu from "./views/All/menu";
 
 function App() {
+
   return (
     <div>
-      <BuyerMenu />
-    </div>
 
+      <AdminMenu />
+
+    </div>
   );
 }
 

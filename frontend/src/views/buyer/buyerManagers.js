@@ -1,70 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
+import ManagersList from '../../components/buyer/ManagersList';
+import Select from 'react-select';
+import { Modal } from 'react-bootstrap';
 
-const list = [
-    'Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client',
-    'Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client',
-    'Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client',
-    'Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client',
-    'Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client',
-    'Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client',
-];
+const BuyerManagersList = () => {
+    const [lgShow, setLgShow] = useState(false);
+    const [modal, setmodal] = useState(null);
 
-// Split the box3content array into rows of 6 items each
-const rows = [];
-const itemsPerRow = 4;
+    const managersList = [
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+        ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Adobe Photoshop'],
+    ];
 
-for (let i = 0; i < list.length; i += itemsPerRow) {
-    rows.push(list.slice(i, i + itemsPerRow));
-}
+    const productList = [
+        { value: 'Photoshop', label: 'Photoshop' },
+        { value: 'Figma', label: 'Figma' },
+        { value: 'VS Code', label: 'VS Code' }
+    ];
 
+    const handleShow = (modal) => {
+        setmodal(modal);
+        setLgShow(true);
+    };
 
-const BuyerManagerList = () => {
+    const handleClose = () => {
+        setLgShow(false);
+        setmodal(null);
+    };
+
     return (
-        <div className="dashboard-content w-100">
-            <h2 className="title my-3">Managers</h2>
-                    <ClientList />
+        <div className="container bg-light w-100 h-100">
+            <div className='d-flex justify-content-between p-2 mx-4'>
+                <h4 className="title my-2 mx-3">Managers</h4>
+                <button
+                    onClick={() => handleShow(modal)}
+                    className="btn btn-block btn-lg text-info hover1 mx-3"
+                    style={{ backgroundColor: "#C8F2FE" }}
+                >
+                    <strong>Add Manager</strong>
+                </button>
+            </div>
+            <ManagersList managersList={managersList} />
+            <Modal
+                size="mg"
+                show={lgShow}
+                onHide={handleClose}
+                aria-labelledby="addmanager"
+                style={{ padding: '10px' }}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Manager</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form>
+                        <div className="col">
+                            <div className="form-group mb-3">
+                                <label htmlFor="manageremailinput">E-mail</label>
+                                <input type="text" className="form-control" id="manageremailinput" placeholder="E-mail" />
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="packagesinput">Add Products</label>
+                                <Select
+                                    id="productsinput"
+                                    options={productList}
+                                    isMulti
+                                    placeholder="Choose Products..."
+                                    className="form-control p-0"
+                                />
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-info text-white">Add</button>
+                    </form>
+                </Modal.Body>
+            </Modal>
         </div>
-
     );
 }
 
-function ClientList() {
-    return <div className="col-12 rounded d-flex bg-white mx-auto">
-        <div className="col-12 ">
-            <table className='container-fluid text-start py-4 rounded'>
-                <thead className='text-black'>
-                    <th className="ps-3 py-2 col-2">Name</th>
-                    <th className="ps-3 py-2 col-2">NIF</th>
-                    <th className="ps-3 py-2 col-4">Mail</th>
-                    <th className="ps-3 py-2 col-2">Account Type</th>
-                    <th className="ps-3 py-2 col-2">Action</th>
-                </thead>
-                <tbody>
-                    {rows.map((row, rowIndex) => (
-                        <tr key={rowIndex} className='border-bottom'>
-                            {row.map((data, colIndex) => (
-                                <td
-                                key={colIndex}
-                                style={{ 
-                                    color: colIndex === 5 ? '#FFD56D' : 'inherit',
-                                    padding: '15px 0 15px 1%' 
-                                }}
-                            >
-                                    {data}
-                                </td>
-                                
-                            ))}
-                            <td className='px-3'><button className='btn btn-outline-info me-2 hover'>Edit</button>
-                            <button className='btn btn-outline-danger hover'>Delete</button></td>
-                            
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </div>
-}
-
-
-export default BuyerManagerList;
+export default BuyerManagersList;

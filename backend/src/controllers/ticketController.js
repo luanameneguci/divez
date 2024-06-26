@@ -1,19 +1,32 @@
+// ticketController.js
+
 const express = require("express");
-const sequelize = require("../model/database");
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var Ticket = require("../model/tickets")(sequelize, DataTypes);
-var Buyer = require("../model/buyer")(sequelize, DataTypes);
-var TicketStatus = require("../model/ticketStatus")(sequelize, DataTypes);
-var TicketDepartment = require("../model/ticketDepartment")(sequelize, DataTypes);
-var Manager = require("../model/manager")(sequelize, DataTypes);
-sequelize.sync();
+const router = express.Router();
+const Ticket = require("../models/tickets");
+const Buyer = require("../models/buyer");
+const TicketStatus = require("../models/ticketStatus"); // Import TicketStatus model
+const TicketDepartment = require("../models/ticketDepartment");
+const Manager = require("../models/manager");
 
 const controllers = {};
 
 controllers.ticket_list = async (req, res) => {
-  const data = await Ticket.findAll({include:[Buyer, TicketStatus, TicketDepartment, Manager]});
-  res.json(data);
+  try {
+    const tickets = await Ticket.findAll({
+      include: [
+        { model: Buyer, as: 'buyer' },
+        { model: TicketStatus, as: 'ticketStatus' },
+        { model: TicketDepartment, as: 'ticketDepartment' },
+        { model: Manager, as: 'manager' }
+      ]
+    });
+    res.json(tickets);
+  } catch (error) {
+    console.error('Error fetching tickets:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
+
 
 controllers.ticket_create = async (req, res) => {
   const { ticketName, ticketDescript, ticketData, ticketPriority, idBuyer, idTicketStatus, idTicketDepartment, idManager } = req.body;
@@ -23,22 +36,55 @@ controllers.ticket_create = async (req, res) => {
   res.json(ticket);
 };
 
+// Example from your provided code snippet
 controllers.ticket_update = async (req, res) => {
-  let idReceived = req.params.id;
-  const { ticketName, ticketDescript, ticketData, ticketPriority, idBuyer, idTicketStatus, idTicketDepartment, idManager } = req.body;
-  const ticket = await Ticket.update(
-    { ticketName, ticketDescript, ticketData, ticketPriority, idBuyer, idTicketStatus, idTicketDepartment, idManager },
-    { where: { idTicket: idReceived } }
-  );
+  const idReceived = req.params.id;
+  const { ticketName, ticketDescript, ticketDate, ticketPriority, idTicketStatus, idTicketDepartment } = req.body;
 
-  res.json({ ticket });
+  try {
+      const updatedTicket = await Ticket.update(
+          { ticketName, ticketDescript, ticketDate, ticketPriority, idTicketStatus, idTicketDepartment },
+          { where: { idTicket: idReceived } }
+      );
+
+      res.json({ success: true, updatedTicket });
+  } catch (error) {
+      console.error('Error updating ticket:', error);
+      res.status(500).json({ success: false, error: 'Failed to update ticket' });
+  }
 };
+
 
 controllers.ticket_detail = async (req, res) => {
   let idReceived = req.params.id;
 
   const data = await Ticket.findOne({ where: { idTicket: idReceived } });
   res.json(data);
+};
+
+controllers.ticket_findByBuyer = async (req, res) => {
+  let idReceived = req.params.id;
+
+  const data = await Ticket.findAll({ where: { idBuyer: idReceived }, include: [
+    { model: Buyer, as: 'buyer' },
+    { model: TicketStatus, as: 'ticketStatus' },
+    { model: TicketDepartment, as: 'ticketDepartment' },
+    { model: Manager, as: 'manager' }
+  ] });
+
+  res.json(data);
+};
+
+controllers.ticket_findByTicketStatus = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const count = await Ticket.count({ where: { idTicketstatus: id } });
+    res.json({ success: true, count });
+  } catch (error) {
+    console.error('Error counting tickets by status:', error);
+    res.status(500).json({ success: false, message: 'Error counting tickets by status', error: error.message });
+  }
 };
 
 controllers.ticket_delete = async (req, res) => {

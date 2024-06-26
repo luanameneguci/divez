@@ -5,7 +5,7 @@ module.exports = router;
 
 const budgetStatusController = require("../controllers/budgetStatusController");
 
-router.get("/list", budgetStatusController.budgetStatus_list); 
+router.get("/", budgetStatusController.budgetStatus_list); 
 
 router.get("/:id", budgetStatusController.budgetStatus_detail);
 
