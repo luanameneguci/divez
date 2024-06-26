@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
-var sequelize = require("./database");
+const sequelize = require("./database"); // Adjust the path as necessary
 
-var Product = sequelize.define('product', {
+const Product = sequelize.define('product', {
     idProduct: {
       autoIncrement: true,
       type: Sequelize.INTEGER,

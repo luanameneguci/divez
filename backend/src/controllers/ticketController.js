@@ -65,7 +65,12 @@ controllers.ticket_detail = async (req, res) => {
 controllers.ticket_findByBuyer = async (req, res) => {
   let idReceived = req.params.id;
 
-  const data = await Ticket.findAll({ where: { idBuyer: idReceived } });
+  const data = await Ticket.findAll({ where: { idBuyer: idReceived }, include: [
+    { model: Buyer, as: 'buyer' },
+    { model: TicketStatus, as: 'ticketStatus' },
+    { model: TicketDepartment, as: 'ticketDepartment' },
+    { model: Manager, as: 'manager' }
+  ] });
 
   res.json(data);
 };

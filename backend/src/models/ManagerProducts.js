@@ -29,6 +29,10 @@ const ManagerProduct = sequelize.define(
   }
 );
 
-Manager.hasMany(Product, { foreignKey: 'idManager' });
+Manager.hasMany(ManagerProduct, { foreignKey: 'managerIdManager' });
+ManagerProduct.belongsTo(Manager, { foreignKey: 'managerIdManager' });
+
+Product.hasMany(ManagerProduct, { foreignKey: 'productIdProduct' });
+ManagerProduct.belongsTo(Product, { foreignKey: 'productIdProduct' });
 
 module.exports = ManagerProduct;

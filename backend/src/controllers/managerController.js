@@ -3,6 +3,8 @@ const sequelize = require("../models/database");
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var Manager = require("../models/manager");
 var Buyer = require("../models/buyer");
+const Product = require("../models/products");
+const ManagerProduct = require("../models/ManagerProducts");
 
 const controllers = {};
 
@@ -40,7 +42,16 @@ controllers.manager_detail = async (req, res) => {
 controllers.manager_findByBuyer = async (req, res) => {
   let idReceived = req.params.id;
 
-  const data = await Manager.findAll({ where: { idBuyer: idReceived } });
+  const data = await Manager.findAll({ where: { idBuyer: idReceived }, include: [
+    { model: Buyer, as: 'buyer' },
+    { model: ManagerProduct, as: 'ManagerProducts', include: [
+      {
+        model: Product,
+        as: 'product',
+      }
+    ]},
+    
+  ] });
 
   res.json(data);
 };

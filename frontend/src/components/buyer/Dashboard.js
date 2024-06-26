@@ -11,15 +11,16 @@ import BoxThird from "./BoxThird";
 import BuyerManagersList from "../../views/buyer/buyerManagers";
 
 const BuyerDashboard = () => {
+  const numRowsToShow = 6;
+  const buyerId = 1;
+
   const dataManager = useBuyerManagers();
   const pendingBudgets = useBuyerPendingBudgets();
   const activeLicenses = useBuyerActiveLicenses();
   const linkedUsers = useBuyerLicenses();
   const rows = useTablePendingBudgets();
   const idCart = useBuyerCart();
-  const tableManager = BuyerManagersTable();
-  const rows3 = useTableTickets();
-  const nameProduct = FillMostUsedTable();
+  //const nameProduct = FillMostUsedTable();
 
   let data = [
     { nome: "Adobe Photoshop", numeroTotal: 1000, numeroAtivos: 750 },
@@ -67,35 +68,36 @@ const BuyerDashboard = () => {
             <BoxProgress title="Your most used licences" data={data} />
           </div>
           <div className="col-4">
-            <BoxManager title="Managers" managers={tableManager} />
+          <BoxManager buyerData={dataManager} />
           </div>
         </div>
       </div>
       <div className="col-12">
-        <BoxThird title="Tickets" rows3={rows3}/>
+        <BoxThird numRowsToShow={numRowsToShow} />
       </div>
     </div>
   );
 };
-function FillMostUsedTable(){
+
+/* function FillMostUsedTable() {
   const [productName, setProductName] = useState("");
   async function fetchTopProducts() {
     try {
-      const response = await fetch('http://localhost:8080/product/topProducts');
+      const response = await fetch("http://localhost:8080/product/topProducts");
       const products = await response.json();
-      products.forEach(product => {
+      products.forEach((product) => {
         setProductName(product.productName);
       });
-      
     } catch (error) {
-      console.error('Error fetching top products:', error);
+      console.error("Error fetching top products:", error);
     }
   }
 
   fetchTopProducts();
   console.log(productName);
   return productName;
-}
+} */
+
 /*find buyer active licenses*/
 function useBuyerActiveLicenses() {
   const [activeLicenses, setActiveLicenses] = useState(0);
@@ -111,12 +113,9 @@ function useBuyerActiveLicenses() {
             (license) => license.idLicenseStatus === 2
           ).length;
           setActiveLicenses(activeCount);
-        } else {
-          alert("Error Web Service!");
-        }
-      } catch (error) {
-        alert(error);
-      }
+        } 
+      } catch (error) 
+      {}
     };
 
     fetchActiveLicenses();
@@ -141,7 +140,7 @@ function useBuyerCart() {
           alert("Error Web Service!");
         }
       } catch (error) {
-        alert(error);
+       
       }
     };
 
@@ -163,7 +162,7 @@ function useBuyerPendingBudgets() {
         const res = await axios.get(url);
         if (res.status === 200) {
           const data3 = res.data;
-        
+
           const pendingCount = data3.filter(
             (budget) => budget.idBudgetStatus === 1
           ).length;
@@ -172,7 +171,7 @@ function useBuyerPendingBudgets() {
           alert("Error Web Service!");
         }
       } catch (error) {
-        alert(error);
+       
       }
     };
 
@@ -200,7 +199,7 @@ function useBuyerLicenses() {
           alert("Error Web Service!");
         }
       } catch (error) {
-        alert(error);
+       
       }
     };
 
@@ -210,31 +209,6 @@ function useBuyerLicenses() {
   return linkedUsers;
 }
 
-/*find buyer managers*/
-function useBuyerManagers() {
-  const [dataManager, setDataBuyerManager] = useState([]);
-
-  useEffect(() => {
-    const fetchBuyerManagers = async () => {
-      try {
-        const url = "http://localhost:8080/manager/findByBuyer/1";
-        const res = await axios.get(url);
-        if (res.status === 200) {
-          const data5 = res.data;
-          setDataBuyerManager(data5);
-        } else {
-          alert("Error Web Service!");
-        }
-      } catch (error) {
-        alert(error);
-      }
-    };
-
-    fetchBuyerManagers();
-  }, []);
-
-  return dataManager;
-}
 
 /*find buyer tickets*/
 function useBuyerTickets() {
@@ -252,7 +226,7 @@ function useBuyerTickets() {
           alert("Error Web Service!");
         }
       } catch (error) {
-        alert(error);
+       
       }
     };
 
@@ -281,7 +255,7 @@ function useTablePendingBudgets() {
           alert("Error Web Service!");
         }
       } catch (error) {
-        alert(error);
+       
       }
     };
 
@@ -296,63 +270,33 @@ function useTablePendingBudgets() {
   for (let i = 0; i < tableContent.length; i += itemsPerRow) {
     rows.push(tableContent.slice(i, i + itemsPerRow));
   }
- 
+
   return rows;
 }
 
-/*preencher tabela de tickets*/
-function useTableTickets() {
-  
-  const [tableTicketContent, setTableTicketContent] = useState([]);
+function useBuyerManagers(buyerId) {
+  const [dataManager, setDataBuyerManager] = useState([]);
 
   useEffect(() => {
-    const fetchTableTicketContent = async () => {
+    const fetchBuyerManagers = async () => {
       try {
-        const url = "http://localhost:8080/ticket/findByBuyer/1";
+        const url = `http://localhost:8080/buyer/1/findManagers`; // Use buyerId dynamically
         const res = await axios.get(url);
         if (res.status === 200) {
-          const data = res.data;
-       
-          setTableTicketContent(data);
-        } else {
-          alert("Error Web Service!");
+          setDataBuyerManager(res.data);
         }
       } catch (error) {
-        alert(error);
+        console.error('Error fetching buyer managers:', error);
+        // Handle error state if needed
       }
     };
 
-    fetchTableTicketContent();
-    
-  }, []);
+    fetchBuyerManagers();
+  }, [buyerId]);
 
-  // Split the tableContent array into rows of 3 items each
-  const rows3 = [];
-  const itemsPerRow = 6;
-  for (let i = 0; i < tableTicketContent.length; i += itemsPerRow) {
-    rows3.push(tableTicketContent.slice(i, i + itemsPerRow));
-  }
-  
-  return rows3;
-  
+  return dataManager;
 }
 
-/*preencher tabela de managers*/
-function BuyerManagersTable() {
-  const dataManager = useBuyerManagers();
-  const [tableManager, setTableManagers] = useState([]);
-
-  useEffect(() => {
-    if (dataManager.length > 0) {
-      const transformedData = dataManager.map((manager) => ({
-        nome: manager.managerName,
-        
-      }));
-      setTableManagers(transformedData);
-    }
-  }, [dataManager]);
-  return tableManager;
-}
 
 export default BuyerDashboard;
 
