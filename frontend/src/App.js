@@ -1,26 +1,25 @@
-import './App.css';
-import React, { useState } from 'react';
+// App.js
+import React, { useContext } from 'react';
 import BuyerDashboard from './components/buyer/Dashboard';
 import Login from "./views/All/login";
-import AdminMenu from "./views/admin/adminMenu"; // Importa o menu do Admin
-import BuyerMenu from "./views/buyer/buyerMenu"; // Importa o menu do Comprador
-import ManagerMenu from "./views/manager/managerMenu"; // Importa o menu do Manager
+import AdminMenu from "./views/admin/adminMenu";
+import BuyerMenu from "./views/buyer/buyerMenu";
+import ManagerMenu from "./views/manager/managerMenu";
 import Menu from "./views/All/menu";
-
-
+import { UserContext } from '../src/views/All/UserContext';
 
 function App() {
-const userRole = "buyer";
+  const { userRole, userId } = useContext(UserContext);
 
   // Function to render menu based on user role
   const renderMenu = () => {
     switch (userRole) {
       case "admin":
-        return <AdminMenu />;
+        return <AdminMenu userId={userId} />;
       case "buyer":
-        return <BuyerMenu />;
+        return <BuyerMenu userId={userId} />;
       case "manager":
-        return <ManagerMenu />;
+        return <ManagerMenu userId={userId} />;
       default:
         return <Menu />;
     }

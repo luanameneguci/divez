@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+// Login.js
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo-navbar.svg";
 import { Link } from "react-router-dom";
+import { UserContext } from './UserContext';
 import { Form, Button } from "react-bootstrap";
 
-
 const Login = () => {
+  const { setUserRole, setUserId } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("buyer");
@@ -16,7 +18,12 @@ const Login = () => {
   const [managers, setManagers] = useState([]);
   const navigate = useNavigate();
 
-  // Function to fetch admins from backend
+  useEffect(() => {
+    fetchAdmins();
+    fetchBuyers();
+    fetchManagers();
+  }, []);
+
   const fetchAdmins = async () => {
     try {
       const response = await axios.get("http://localhost:8080/admin");
@@ -26,7 +33,6 @@ const Login = () => {
     }
   };
 
-  // Function to fetch buyers from backend
   const fetchBuyers = async () => {
     try {
       const response = await axios.get("http://localhost:8080/buyer");
@@ -36,7 +42,6 @@ const Login = () => {
     }
   };
 
-  // Function to fetch managers from backend
   const fetchManagers = async () => {
     try {
       const response = await axios.get("http://localhost:8080/manager");
@@ -45,13 +50,6 @@ const Login = () => {
       console.error("Error fetching managers:", error);
     }
   };
-
-  // useEffect to fetch data on component mount
-  useEffect(() => {
-    fetchAdmins();
-    fetchBuyers();
-    fetchManagers();
-  }, []); // Empty dependency array ensures it runs only once on mount
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -62,15 +60,12 @@ const Login = () => {
 
     switch (accountType) {
       case "buyer":
-        console.log("Buyers:", buyers);
         foundUser = buyers.find((buyer) => buyer.buyerEmail === email.trim() && buyer.buyerPassword === password.trim());
         break;
       case "manager":
-        console.log("Managers:", managers);
         foundUser = managers.find((manager) => manager.managerEmail === email.trim() && manager.managerPassword === password.trim());
         break;
       case "admin":
-        console.log("Admins:", admins);
         foundUser = admins.find((admin) => admin.adminEmail === email.trim() && admin.adminPassword === password.trim());
         break;
       default:
@@ -79,12 +74,13 @@ const Login = () => {
 
     if (foundUser) {
       console.log("Successful login:", foundUser);
+      setUserRole(accountType);  // Set the user role in context
+      setUserId(foundUser.id);  // Set the user ID in context
       navigate("/dashboard"); // Redirect to dashboard on successful login
     } else {
       setError("Invalid email or password");
     }
   };
-
 
   return (
     <section className="gradient-form d-flex align-items-center" style={{ height: "100vh" }}>
@@ -216,6 +212,5 @@ const Login = () => {
     </section>
   );
 };
-
 
 export default Login;

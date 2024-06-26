@@ -28,7 +28,7 @@ import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
-const Menu = () => {
+const Menu = ({ userId }) => {
   const location = useLocation();
 
   const getNavItemClass = (path) => {
@@ -129,10 +129,10 @@ const Menu = () => {
   );
 };
 
-const AdminMenu = () => {
+const AdminMenu = ({ userId }) => {
   return (
     <Router>
-      <Menu />
+      <Menu userId={userId} />
     </Router>
   );
 };
