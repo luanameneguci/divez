@@ -44,12 +44,22 @@ controllers.budget_create = async (req, res) => {
 controllers.budget_update = async (req, res) => {
   let idReceived = req.params.id;
   const { budgetName, budgetDescript, date, idBudgetStatus, idCart } = req.body;
-  const budget = await Budget.update(
-    { budgetName, budgetDescript, date, idBudgetStatus, idCart },
-    { where: { idBudget: idReceived } }
-  );
 
-  res.json({ budget });
+  try {
+      const updatedBudget = await Budget.update(
+          { budgetName, budgetDescript, date, idBudgetStatus, idCart },
+          { where: { idBudget: idReceived } }
+      );
+
+      if (updatedBudget[0] === 0) {
+          return res.status(404).json({ success: false, message: 'Budget not found' });
+      }
+
+      res.json({ success: true, updatedBudget });
+  } catch (error) {
+      console.error('Error updating budget:', error);
+      res.status(500).json({ success: false, error: 'Failed to update budget' });
+  }
 };
 
 controllers.budget_detail = async (req, res) => {

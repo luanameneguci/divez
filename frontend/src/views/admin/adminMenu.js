@@ -107,7 +107,7 @@ const Menu = () => {
               <Routes>
                 <Route path="/dashboard" element={<AdminDashboard />} />
                 <Route path="/clients" element={<AdminClientList />} />
-                <Route path="/client" element={<AdminClientDashboard />} />
+                <Route path="/client/:clientId/:accountType" element={<AdminClientDashboard />} />
                 <Route path="/product-dashboard" element={<AdminProductDashboard />} />
                 <Route path="/products" element={<AdminProductList />} />
                 <Route path="/tickets" element={<AdminTicketList />} />

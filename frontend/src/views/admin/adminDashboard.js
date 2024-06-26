@@ -15,7 +15,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 const numRowsToShow = 6;
 
 const AdminDashboard = () => {
-  const [ticketsByStatus, setTicketsByStatus] = useState([]);
+  const [waitingTicketsCount, setWaitingTicketsCount] = useState(0);
   const [budgetCounts, setBudgetCounts] = useState({
     labels: ["Pending", "Rejected", "Approved", "Completed"],
     datasets: [
@@ -71,19 +71,19 @@ const AdminDashboard = () => {
   }, []);
 
   useEffect(() => {
-    // Function to fetch tickets by status ID
-    const fetchTicketsByStatus = async () => {
+    const fetchWaitingTicketsCount = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/ticket/status/1"
-        );
-        setTicketsByStatus(response.data.count); // Assuming your API response has a 'data' field with tickets
+        const response = await axios.get("http://localhost:8080/ticket/status/4");
+
+        const waitingTickets = response.data.count || 0;
+
+        setWaitingTicketsCount(waitingTickets);
       } catch (error) {
-        console.error("Error fetching tickets by status:", error);
+        console.error("Error fetching waiting tickets count:", error);
       }
     };
-    // Call the function to fetch tickets
-    fetchTicketsByStatus();
+
+    fetchWaitingTicketsCount();
   }, []);
 
   useEffect(() => {
@@ -111,8 +111,8 @@ const AdminDashboard = () => {
           <div className="d-flex justify-content-between">
             <div className="col mx-1">
               <Box
-                title="Pending tickets"
-                number={ticketsByStatus}
+                title="Waiting tickets"
+                number={waitingTicketsCount}
                 image={notificationicon}
                 evolution="10"
               />

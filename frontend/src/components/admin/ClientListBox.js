@@ -23,60 +23,6 @@ function ClientListBox({ clientList }) {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    /*const handleDelete = async (clientList, accountType, rowIndex) => {
-        const id = clientList[rowIndex][4]; // Assuming id is stored at index 4 in each row
-
-        const endpoint = accountType === 'Manager'
-            ? `http://localhost:8080/manager/delete/${id}`
-            : `http://localhost:8080/buyer/delete/${id}`;
-
-        axios.post(endpoint)
-            .then(response => {
-                if (response.data.message === "Deleted Successfully!") {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your client has been deleted.',
-                        'success'
-                    );
-                } else {
-                    Swal.fire(
-                        'Error!',
-                        'Failed to delete client.',
-                        'error'
-                    );
-                }
-            })
-            .catch(error => {
-                Swal.fire(
-                    'Error!',
-                    'Failed to delete client. Please try again later.',
-                    'error'
-                );
-            });
-    };
-
-    function OnDelete(clientList, accountType, rowIndex) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You will not be able to reverse this action',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                handleDelete(clientList, accountType, rowIndex); // Pass correct parameters here
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire(
-                    'Cancelled',
-                    'Client was not deleted',
-                    'error'
-                );
-            }
-        });
-    }*/
-    
-
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(filteredRows.length / itemsPerPage); i++) {
         pageNumbers.push(
@@ -138,10 +84,14 @@ function ClientListBox({ clientList }) {
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[2]}</td>
                             <td style={{ padding: '15px 0 15px 2%' }}>{row[3]}</td>
                             <td className="d-flex justify-content-center">
-                                <Link to="/client" className="btn btn-outline-info me-2">
+                                <Link
+                                    to={`/client/${row[4]}/${row[3]}`}
+                                    className="btn btn-outline-info me-2"
+                                >
                                     See more
                                 </Link>
-                                <button className='btn btn-outline-danger' /*onClick={() => OnDelete(clientList, row[3], indexOfFirstItem + index)}*/>
+
+                                <button className='btn btn-outline-danger'>
                                     Delete
                                 </button>
                             </td>
