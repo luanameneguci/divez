@@ -19,7 +19,7 @@ import BuyerBudgetReply from "./buerBudgetRequest";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
-const Menu = () => {
+const Menu = ({ userId }) => {
   const location = useLocation();
 
   const getNavItemClass = (path) => {
@@ -114,33 +114,33 @@ const Menu = () => {
           </div>
         </div>
 
-          <div className="mw-100 h-25 bg-light py-2 px-3">
-            <div className="row dashboard-content">
-                {/*Corrigir rotas*/}
-              <Routes>
-                <Route path="/dashboard" element={<BuyerDashboard />} />
-                <Route path="/managers" element={<BuyerManagerList />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/products" element={<BuyerProductList />} />
-                <Route path="/purchases" element={<BuyerPurchasesList />} />
-                <Route path="/budgets" element={<BuyerBudgetList />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/checkout" element={<BuyerPayment />} />
-                <Route path="/productitem" element={<BuyerProductItem />} />
-                <Route path="/shopitem" element={<BuyerShopItem />} />
-                <Route path="/budgetrequest" element={<BuyerBudgetReply />}/>
-              </Routes>
-            </div>
+        <div className="mw-100 h-25 bg-light py-2 px-3">
+          <div className="row dashboard-content">
+            {/*Corrigir rotas*/}
+            <Routes>
+              <Route path="/dashboard" element={<BuyerDashboard />} />
+              <Route path="/managers" element={<BuyerManagerList />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/products" element={<BuyerProductList />} />
+              <Route path="/purchases" element={<BuyerPurchasesList />} />
+              <Route path="/budgets" element={<BuyerBudgetList />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/checkout" element={<BuyerPayment />} />
+              <Route path="/productitem" element={<BuyerProductItem />} />
+              <Route path="/shopitem" element={<BuyerShopItem />} />
+              <Route path="/budgetrequest" element={<BuyerBudgetReply />} />
+            </Routes>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
-const BuyerMenu = () => {
+const BuyerMenu = ({ userId }) => {
   return (
     <Router>
-      <Menu />
+      <Menu userId={userId} />
     </Router>
   );
 };
