@@ -5,6 +5,7 @@ import logo from "../../images/logo-navbar.svg";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -83,6 +84,7 @@ const Login = () => {
       setError("Invalid email or password");
     }
   };
+
 
   return (
     <section className="gradient-form d-flex align-items-center" style={{ height: "100vh" }}>
@@ -214,5 +216,6 @@ const Login = () => {
     </section>
   );
 };
+
 
 export default Login;

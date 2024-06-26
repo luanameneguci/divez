@@ -1,31 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../App.css';
 import { Modal } from 'react-bootstrap';
 import Select from 'react-select';
+import axios from 'axios';
 
-function ManagersList({ managersList, productList }) {
+function ManagersList() {
     // Estados para os filtros de entrada
     const [nameFilter, setNameFilter] = useState('');
     const [nifFilter, setNifFilter] = useState('');
     const [mailFilter, setMailFilter] = useState('');
     const [productsFilter, setProductsFilter] = useState('');
     
+    // Estado para a lista de gerentes e produtos
+    const [managersList, setManagersList] = useState([]);
+    const [productList, setProductList] = useState([]);
+
     // Estado para controlar os dados do modal
     const [modalData, setModalData] = useState(null);
     // Estado para controlar a visibilidade do modal
     const [lgShow, setLgShow] = useState(false);
 
+    useEffect(() => {
+        // Fetch managers list from the URL
+        axios.get('http://localhost:8080/manager/findByBuyer/1')
+            .then(response => {
+                const managers = response.data.map(manager => {
+                    return {
+                        name: manager.managerName,
+                        nif: manager.managerNif,
+                        email: manager.managerEmail,
+                        products: manager.ManagerProducts.map(mp => mp.product.productName).join(', ')
+                    };
+                });
+                setManagersList(managers);
+            })
+            .catch(error => console.error('Error fetching managers:', error));
+
+        // Fetch product list from the URL (assuming a similar endpoint for products)
+        axios.get('http://localhost:8080/products') // Adjust the URL as necessary
+            .then(response => {
+                const products = response.data.map(product => ({
+                    label: product.productName,
+                    value: product.idProduct
+                }));
+                setProductList(products);
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    }, []);
+
     // Função de filtragem dos dados
     const filteredRows = managersList.filter(row =>
-        row[0].toLowerCase().includes(nameFilter.toLowerCase()) &&
-        row[1].includes(nifFilter) &&
-        row[2].toLowerCase().includes(mailFilter.toLowerCase()) &&
-        row[3].toLowerCase().includes(productsFilter.toLowerCase())
+        row.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
+        row.nif.includes(nifFilter) &&
+        row.email.toLowerCase().includes(mailFilter.toLowerCase()) &&
+        row.products.toLowerCase().includes(productsFilter.toLowerCase())
     );
 
     // Função para mostrar o modal com os detalhes do gerente selecionado   
     const handleShow = (row) => {
-        setModalData(row[2]); // Salva o e-mail da linha
+        setModalData(row.email); // Salva o e-mail da linha
         setLgShow(true);
     };
 
@@ -34,15 +67,6 @@ function ManagersList({ managersList, productList }) {
         setLgShow(false);
         setModalData(null); // Limpa os dados do modal
     };
-
-
-    /* Future
-    // Delete client function
-    const deleteClient = (index) => {
-        const updatedList = [...managersList];
-        updatedList.splice(index, 1);
-        setManagersList(updatedList);
-    };*/
 
     return (
         <div className="container bg-white px-0 roundbg shadow h-100 pb-1">
@@ -91,10 +115,10 @@ function ManagersList({ managersList, productList }) {
                 <tbody className='text-start roundbg'>
                     {filteredRows.map((row, index) => (
                         <tr key={index}>
-                            <td style={{ padding: '15px 0 15px 2%' }}>{row[0]}</td>
-                            <td style={{ padding: '15px 0 15px 2%' }}>{row[1]}</td>
-                            <td style={{ padding: '15px 0 15px 2%' }}>{row[2]}</td>
-                            <td style={{ padding: '15px 0 15px 2%' }}>{row[3]}</td>
+                            <td style={{ padding: '15px 0 15px 2%' }}>{row.name}</td>
+                            <td style={{ padding: '15px 0 15px 2%' }}>{row.nif}</td>
+                            <td style={{ padding: '15px 0 15px 2%' }}>{row.email}</td>
+                            <td style={{ padding: '15px 0 15px 2%' }}>{row.products}</td>
                             <td className="d-flex justify-content-center">
                                 <button onClick={() => handleShow(row)} className="btn btn-outline-info me-2">
                                     Add

@@ -1,6 +1,8 @@
 var Sequelize = require("sequelize");
 var sequelize = require("./database");
 const Buyer = require("./buyer");
+const CartProduct = require("./CartProduct");
+const Product = require("./products");
 
 var Cart = sequelize.define(
   "cart",
@@ -35,5 +37,8 @@ var Cart = sequelize.define(
 
 Buyer.hasOne(Cart, { foreignKey: 'idBuyer' });
 Cart.belongsTo(Buyer, { foreignKey: 'idBuyer' });
+
+Cart.belongsToMany(Product, { through: CartProduct, foreignKey: 'cartIdCart' });
+Product.belongsToMany(Cart, { through: CartProduct, foreignKey: 'productIdProduct' });
 
 module.exports = Cart;

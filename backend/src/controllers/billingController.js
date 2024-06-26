@@ -1,8 +1,11 @@
 const express = require("express");
 const sequelize = require("../models/database");
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
-var Bill = require("../models/bills");
-var Cart = require("../models/cart");
+const Bill = require("../models/bills");
+const Cart = require("../models/cart");
+const CartProduct = require("../models/CartProduct");
+const Product = require("../models/products");
+const Buyer = require("../models/buyer");
 
 
 const controllers = {};
@@ -36,6 +39,50 @@ controllers.bill_detail = async (req, res) => {
   let idReceived = req.params.id;
   const data = await Bill.findOne({ where: { idBill: idReceived } });
   res.json(data);
+};
+
+controllers.bill_getBillDetails = async (req, res) => {
+  try {
+    const idBuyer = req.params.idBuyer; // Extract idBuyer from the URL parameters
+
+    const bills = await Bill.findAll({
+      include: [
+        {
+          model: Cart,
+          where: { idBuyer }, // Filter by idBuyer
+          include: [
+            {
+              model: CartProduct,
+              include: [
+                {
+                  model: Product,
+                  attributes: ['productName', 'productPrice']
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+
+    const result = bills.map(bill => {
+      const cart = bill.cart;
+      const totalCartPrice = cart.CartProducts.reduce((total, cartProduct) => total + cartProduct.product.productPrice, 0);
+
+      return {
+        idBill: bill.idBill,
+        billDate: bill.billDate,
+        licenseNumber: cart.licenseNumber,
+        productNames: cart.CartProducts.map(cp => cp.product.productName),
+        totalPrice: totalCartPrice
+      };
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching bill details:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 controllers.bill_getLastBillId = async (req, res) => {
