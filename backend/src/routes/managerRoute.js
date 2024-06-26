@@ -7,6 +7,8 @@ router.get("/", managerController.manager_list);
 
 router.get("/findByBuyer/:id", managerController.manager_findByBuyer); 
 
+router.get("/ManagerAdmin", managerController.manager_login);
+
 router.post("/create", managerController.manager_create);
 
 router.put("/update/:id", managerController.manager_update);

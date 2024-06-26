@@ -22,12 +22,6 @@ const BuyerDashboard = () => {
   const idCart = useBuyerCart();
   //const nameProduct = FillMostUsedTable();
 
-  let data = [
-    { nome: "Adobe Photoshop", numeroTotal: 1000, numeroAtivos: 750 },
-    { nome: "Adobe Illustrator", numeroTotal: 900, numeroAtivos: 500 },
-    { nome: "Adobe Animate", numeroTotal: 900, numeroAtivos: 900 },
-    { nome: "Adobe After Effects", numeroTotal: 800, numeroAtivos: 500 },
-  ];
 
   return (
     <div>
@@ -65,7 +59,7 @@ const BuyerDashboard = () => {
             <BoxTable title="Pending budgets" rows={rows} />
           </div>
           <div className="col-4">
-            <BoxProgress title="Your most used licences" data={data} />
+            <BoxProgress />
           </div>
           <div className="col-4">
           <BoxManager buyerData={dataManager} />

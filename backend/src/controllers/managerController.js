@@ -32,6 +32,20 @@ controllers.manager_update = async (req, res) => {
   res.json({ manager });
 };
 
+controllers.manager_login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const manager = await Manager.findOne({ where: { managerEmail: email, managerPassword: password } });
+    if (manager) {
+      res.status(200).json({ success: true, message: "Manager login successful" });
+    } else {
+      res.status(401).json({ success: false, message: "Invalid email or password" });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: "An error occurred during login", error: error.message });
+  }
+};
+
 controllers.manager_detail = async (req, res) => {
   let idReceived = req.params.id;
 

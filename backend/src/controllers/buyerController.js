@@ -16,6 +16,20 @@ controllers.buyer_list = async (req, res) => {
   }
 };
 
+controllers.buyer_login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const buyer = await Buyer.findOne({ where: { buyerEmail: email, buyerPassword: password } });
+    if (buyer) {
+      res.status(200).json({ success: true, message: "Buyer login successful" });
+    } else {
+      res.status(401).json({ success: false, message: "Invalid email or password" });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: "An error occurred during login", error: error.message });
+  }
+};
+
 controllers.buyer_create = async (req, res) => {
   try {
     const { buyerName, buyerNif, buyerEmail, buyerPassword, buyerCompany } = req.body;

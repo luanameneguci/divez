@@ -141,5 +141,4 @@ controllers.license_findByBuyerId = async (req, res) => {
     res.status(500).json({ error: "Error retrieving licenses" });
   }
 };
-
 module.exports = controllers;

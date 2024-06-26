@@ -27,6 +27,28 @@ controllers.admin_create = async (req, res) => {
   res.json(admin);
 };
 
+controllers.admin_login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // Encontre o admin pelo email
+    const admin = await Admin.findOne({ where: { adminEmail: email } });
+
+    if (admin) {
+      // Verifique se a senha corresponde (assumindo que a senha é armazenada como texto simples)
+      if (admin.adminPassword === password) {
+        res.status(200).json({ success: true, message: "Login de admin bem-sucedido" });
+      } else {
+        res.status(401).json({ success: false, message: "Email ou senha incorretos" });
+      }
+    } else {
+      res.status(404).json({ success: false, message: "Admin não encontrado" });
+    }
+  } catch (error) {
+    console.error("Erro durante o login:", error);
+    res.status(500).json({ success: false, message: "Ocorreu um erro durante o login", error: error.message });
+  }
+};
+
 controllers.admin_update = async (req, res) => {
   let idReceived = req.params.id;
   const { adminName, adminEmail, adminPassword, idDepartment } = req.body;

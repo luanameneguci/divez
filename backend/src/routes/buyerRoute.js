@@ -7,6 +7,8 @@ router.get("/", buyerController.buyer_list);
 
 router.get("/:id", buyerController.buyer_detail);
 
+router.get("/BuyerLogin", buyerController.buyer_login);
+
 router.post("/create", buyerController.buyer_create);
 
 router.put("/update/:id", buyerController.buyer_update);

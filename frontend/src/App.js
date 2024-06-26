@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
 
-      <AdminMenu />
+      <Menu />
 
     </div>
   );
