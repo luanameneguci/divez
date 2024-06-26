@@ -68,7 +68,7 @@ app.use('/product',productRoutes)
 app.use('/ticketDepartment',ticketDepartmentRoutes)
 app.use('/ticketPrint',ticketPrintRoutes)
 app.use('/ticket',ticketRoutes)
-app.use('/ticketStatus',ticketStatusRoutes)  
+app.use('/ticketStatus',ticketStatusRoutes)
 app.use('/managerProduct',ManagerProductRoutes) 
 
 app.listen(app.get("port"), () => {

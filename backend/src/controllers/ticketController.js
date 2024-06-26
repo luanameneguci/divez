@@ -79,7 +79,7 @@ controllers.ticket_findByTicketStatus = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const count = await Ticket.count({ where: { idTicketstatus: id } });
+    const count = await Ticket.count({ where: { idTicketStatus: id } });
     res.json({ success: true, count });
   } catch (error) {
     console.error('Error counting tickets by status:', error);
