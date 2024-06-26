@@ -8,6 +8,10 @@ const AdminBudgetReply = () => {
     const [budget, setBudget] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [reply, setReply] = useState('');
+    const [statusOptions, setStatusOptions] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState('');
+    const [status, setStatus] = useState();
 
     useEffect(() => {
         const loadBudget = async () => {
@@ -25,6 +29,46 @@ const AdminBudgetReply = () => {
         loadBudget();
     }, [idBudget]);
 
+    useEffect(() => {
+        const loadBudgetStatus = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/budgetstatus');
+                setStatusOptions(response.data);
+            } catch (error) {
+                console.error('Error fetching budget status:', error);
+                setError(error);
+            }
+        };
+
+        loadBudgetStatus();
+    }, []);
+
+    const handleSaveReply = async () => {
+        try {
+            const response = await axios.post(`http://localhost:8080/budget/${idBudget}/reply`, {
+                replyContent: reply,
+            });
+            console.log('Reply saved:', response.data);
+            // Optionally update local state or UI after successful save
+        } catch (error) {
+            console.error('Error saving reply:', error);
+            // Handle error (e.g., show error message to user)
+        }
+    };
+
+    const handleUpdateStatus = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8080/budget/update/${idBudget}`, {
+                idBudgetStatus: selectedStatus,
+            });
+            console.log('Budget status updated:', response.data);
+            // Optionally update local state or UI after successful status update
+        } catch (error) {
+            console.error('Error updating budget status:', error);
+            // Handle error (e.g., show error message to user)
+        }
+    };
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -41,14 +85,16 @@ const AdminBudgetReply = () => {
                         <h4 className='text-start'>Budget #{budget.idBudget}</h4>
                         <p className='text-start'>Items:</p>
                     </div>
-                    <div className="row m-2 border-bottom">
-                        <div className='col-5'>
-                            <p><strong>Product</strong></p>
+                    {budget.cart && (
+                        <div className="row m-2 border-bottom">
+                            <div className='col-5'>
+                                <p><strong>Product</strong></p>
+                            </div>
+                            <div className='col-3'>
+                                <p><strong>Amount</strong></p>
+                            </div>
                         </div>
-                        <div className='col-3'>
-                            <p><strong>Amount</strong></p>
-                        </div>
-                    </div>
+                    )}
                     <div className="col-12">
                         {budget.cart && (
                             <div className="row border-bottom m-2">
@@ -65,23 +111,40 @@ const AdminBudgetReply = () => {
                             <span>{budget.budgetDescript}</span>
                         </div>
                     </div>
-                    <form action="https://usebasin.com/f/8a781ebd5951" method="POST" target='_blank' className='row d-flex mt-4'>
+                    <form className='row d-flex mt-4'>
                         <div className=" mb-3 col-8">
                             <label htmlFor="descriptioninput">Reply</label>
-                            <textarea className="form-control" id="descriptioninput" rows="3" maxLength="250"></textarea>
+                            <textarea
+                                className="form-control"
+                                id="descriptioninput"
+                                rows="3"
+                                maxLength="250"
+                                value={reply}
+                                onChange={(e) => setReply(e.target.value)}
+                            ></textarea>
                         </div>
                         <div className=" mb-3 col">
-                            <label htmlFor="productpriceinput">Price</label>
-                            <input type="number" className="form-control" id="productpriceinput" placeholder="Price" />
+                            <label htmlFor="statusSelect">Status</label>
+                            <select
+                                id="statusSelect"
+                                className="form-select"
+                                value={selectedStatus} // Use selectedStatus here, not status
+                                onChange={(e) => setSelectedStatus(e.target.value)} // Update setSelectedStatus, not setStatus
+                            >
+                                <option value="">Select Status</option>
+                                {statusOptions.map(stat => (
+                                    <option key={stat.idBudgetStatus} value={stat.idBudgetStatus.toString()}>{stat.budgetStatusDescript}</option>
+                                ))}
+                            </select> 
                             <div className="row d-flex mt-3 justify-content-end">
                                 <div className="col-4">
-                                    <button type="submit" className="btn btn-success hover shadow col-12">Accept</button>
+                                    <button type="button" className="btn btn-success hover shadow col-12" onClick={handleSaveReply}>Save Reply</button>
                                 </div>
                                 <div className="col-4">
-                                    <button type="submit" className="btn btn-info text-white hover shadow col-12">Send</button>
+                                    <button type="button" className="btn btn-info text-white hover shadow col-12">Send Reply</button>
                                 </div>
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-danger hover shadow col-12">Refuse</button>
+                                    <button type="button" className="btn btn-danger hover shadow col-12" onClick={handleUpdateStatus}>Refuse</button>
                                 </div>
                             </div>
                         </div>

@@ -1,31 +1,82 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // Import axios for making HTTP requests
 
 function ClientListBox({ clientList }) {
-    const [nameFilter, setNameFilter] = useState(''); // Estado para filtro por nome
-    const [nifFilter, setNifFilter] = useState(''); // Estado para filtro por NIF
-    const [mailFilter, setMailFilter] = useState(''); // Estado para filtro por email
-    const [accountTypeFilter, setAccountTypeFilter] = useState(''); // Estado para filtro por tipo de conta
-    const [currentPage, setCurrentPage] = useState(1); // Estado para página atual
-    const [itemsPerPage] = useState(5); // Número de itens por página
+    const [nameFilter, setNameFilter] = useState('');
+    const [nifFilter, setNifFilter] = useState('');
+    const [mailFilter, setMailFilter] = useState('');
+    const [accountTypeFilter, setAccountTypeFilter] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
 
-    // Função para filtrar os itens da lista de clientes
     const filteredRows = clientList.filter(row =>
-        row[0].toLowerCase().includes(nameFilter.toLowerCase()) && // Filtrar por nome (case-insensitive)
-        row[1].includes(nifFilter) && // Filtrar por NIF
-        row[2].toLowerCase().includes(mailFilter.toLowerCase()) && // Filtrar por email (case-insensitive)
-        row[3].toLowerCase().includes(accountTypeFilter.toLowerCase()) // Filtrar por tipo de conta (case-insensitive)
+        row[0].toLowerCase().includes(nameFilter.toLowerCase()) &&
+        row[1].includes(nifFilter) &&
+        row[2].toLowerCase().includes(mailFilter.toLowerCase()) &&
+        row[3].toLowerCase().includes(accountTypeFilter.toLowerCase())
     );
 
-    // Paginação
-    const indexOfLastItem = currentPage * itemsPerPage; // Índice do último item da página atual
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Índice do primeiro item da página atual
-    const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem); // Itens a serem exibidos na página atual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Função para mudar de página
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    // UI da paginação
+    /*const handleDelete = async (clientList, accountType, rowIndex) => {
+        const id = clientList[rowIndex][4]; // Assuming id is stored at index 4 in each row
+
+        const endpoint = accountType === 'Manager'
+            ? `http://localhost:8080/manager/delete/${id}`
+            : `http://localhost:8080/buyer/delete/${id}`;
+
+        axios.post(endpoint)
+            .then(response => {
+                if (response.data.message === "Deleted Successfully!") {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your client has been deleted.',
+                        'success'
+                    );
+                } else {
+                    Swal.fire(
+                        'Error!',
+                        'Failed to delete client.',
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Failed to delete client. Please try again later.',
+                    'error'
+                );
+            });
+    };
+
+    function OnDelete(clientList, accountType, rowIndex) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to reverse this action',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDelete(clientList, accountType, rowIndex); // Pass correct parameters here
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled',
+                    'Client was not deleted',
+                    'error'
+                );
+            }
+        });
+    }*/
+    
+
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(filteredRows.length / itemsPerPage); i++) {
         pageNumbers.push(
@@ -35,7 +86,6 @@ function ClientListBox({ clientList }) {
         );
     }
 
-    // Retorna a tabela com os clientes
     return (
         <div className="container bg-white px-0 roundbg shadow h-100">
             <table className='table text-start'>
@@ -91,7 +141,7 @@ function ClientListBox({ clientList }) {
                                 <Link to="/client" className="btn btn-outline-info me-2">
                                     See more
                                 </Link>
-                                <button className='btn btn-outline-danger'>
+                                <button className='btn btn-outline-danger' /*onClick={() => OnDelete(clientList, row[3], indexOfFirstItem + index)}*/>
                                     Delete
                                 </button>
                             </td>

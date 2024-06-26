@@ -22,7 +22,7 @@ function TicketListBox({ numRowsToShow }) {
     const [priorityFilter, setPriorityFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     useEffect(() => {
         loadTickets();

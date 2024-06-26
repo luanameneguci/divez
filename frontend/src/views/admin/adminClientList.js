@@ -1,28 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../App.css';
 import ClientListBox from '../../components/admin/ClientListBox';
 
 const AdminClientList = () => {
-    const clientList = [
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Manager'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Manager'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Andre Pascoal', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '123456789', 'luanameneguci@gmail.com', 'Client'],
-        ['Luana Meneguci', '321321321', 'luanameneguci@gmail.com', 'Manager'],
-    ];
+    const [clientList, setClientList] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [managerResponse, buyerResponse] = await Promise.all([
+                    axios.get('http://localhost:8080/manager'),
+                    axios.get('http://localhost:8080/buyer')
+                ]);
+
+                const managers = managerResponse.data.map(manager => [
+                    manager.managerName, 
+                    manager.managerNif, 
+                    manager.managerEmail, 
+                    'Manager',
+                    manager.idManager,
+                ]);
+
+                const buyers = buyerResponse.data.map(buyer => [
+                    buyer.buyerName, 
+                    buyer.buyerNif, 
+                    buyer.buyerEmail,
+                    'Buyer',
+                    buyer.idBuyer,
+                ]);
+
+                const combinedList = [...managers, ...buyers];
+                setClientList(combinedList);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div className="dashboard-content bg-light w-100">

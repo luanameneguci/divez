@@ -13,6 +13,6 @@ router.put("/update/:id", managerController.manager_update);
 
 router.get("/:id", managerController.manager_detail); 
 
-router.delete("/delete/:id", managerController.manager_delete);
+router.post("/delete/:id", managerController.manager_delete);
 
 module.exports = router;

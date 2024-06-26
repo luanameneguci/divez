@@ -32,10 +32,9 @@ var Product = sequelize.define('product', {
       type: Sequelize.STRING(255),
       allowNull: true
     }
-    
   }, {
-    timestamps: false,
+    timestamps: false, 
     freezeTableName: true
   });
 
-  module.exports = Product;
+module.exports = Product;

@@ -39,12 +39,25 @@ controllers.top_products = async (req, res) => {try {
 
 
 controllers.product_create = async (req, res) => {
-  const { productName, productPrice, productVersion, productDescript, installations, image } = req.body;
-  const product = await Product.create({
-    productName, productPrice, productVersion, productDescript, installations, image
-  });
-  res.json(product);
+  try {
+    const { productName, productPrice, productVersion, productDescript, installations, image } = req.body;
+
+    // Basic validation
+    if (!productName || !productPrice || !productVersion || !productDescript || !installations || !image) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const product = await Product.create({
+      productName, productPrice, productVersion, productDescript, installations, image
+    });
+
+    res.status(201).json(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
+
 
 controllers.product_update = async (req, res) => {
   let idReceived = req.params.id;

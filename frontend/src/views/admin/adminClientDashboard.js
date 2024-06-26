@@ -8,7 +8,6 @@ import BudgetListBox from '../../components/admin/BudgetListBox';
 const numRowsToShow = 5;
 
 const AdminClientDashboard = () => {
-
   return (
     <div className="container bg-light w-100">
       <h2 className="title m-3">Client Name</h2>
