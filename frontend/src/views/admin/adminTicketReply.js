@@ -45,7 +45,7 @@ const AdminTicketReply = () => {
 
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching ticket:', error);
+                console.error('Error loading ticket:', error);
                 setIsLoading(false);
             }
         };

@@ -1,92 +1,95 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker'; // Importa o componente DatePicker do pacote react-datepicker
-import 'react-datepicker/dist/react-datepicker.css'; // Importa os estilos CSS para o DatePicker
-import '../../App.css'; // Importa estilos específicos para esta componente
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import '../../App.css';
 
-// Dados de exemplo das vendas
-const salesContent = [
-    [1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', 1],
-    [2, 'Chatbot Avariou', '17/03/2022', 'Programming', 3],
-    [3, 'Não sei', '13/06/2024', 'Design', 2],
-    [4, 'João Ratão', '13/06/2024', 20000, 1],
-    [1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', 1],
-    [2, 'Chatbot Avariou', '17/03/2022', 'Programming', 3],
-    [3, 'Não sei', '13/06/2024', 'Design', 2],
-    [4, 'João Ratão', '13/06/2024', 20000, 1],
-    [1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', 1],
-    [2, 'Chatbot Avariou', '17/03/2022', 'Programming', 3],
-    [3, 'Não sei', '13/06/2024', 'Design', 2],
-    [4, 'João Ratão', '13/06/2024', 20000, 1],
-    [1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', 1],
-    [2, 'Chatbot Avariou', '17/03/2022', 'Programming', 3],
-    [3, 'Não sei', '13/06/2024', 'Design', 2],
-    [4, 'João Ratão', '13/06/2024', 20000, 1],
-    [1, 'Maquina Pifou', '15/06/2024', 'Amazon Prime', 1],
-    [2, 'Chatbot Avariou', '17/03/2022', 'Programming', 3],
-    [3, 'Não sei', '13/06/2024', 'Design', 2],
-    [4, 'João Ratão', '13/06/2024', 20000, 1],
-];
 
-// Para guardar o conteudo que vem da db
-const rows = salesContent;
-
-// Componente SalesListBox
 const SalesListBox = () => {
-    // Estados para controle de página, filtro de data, filtros de pesquisa e itens por página
-    const [currentPage, setCurrentPage] = useState(1); // Estado para página atual
-    const [startDate, setStartDate] = useState(null); // Estado para data de início do filtro
-    const [saleId, setSaleId] = useState(''); // Estado para filtro de ID de venda
-    const [client, setClient] = useState(''); // Estado para filtro de cliente
-    const [amount, setAmount] = useState(''); // Estado para filtro de quantidade
-    const [price, setPrice] = useState(''); // Estado para filtro de preço
-    const [itemsPerPage, setItemsPerPage] = useState(5); // Estado para quantidade de itens por página
+    const [currentPage, setCurrentPage] = useState(1);
+    const [startDate, setStartDate] = useState(null);
+    const [saleId, setSaleId] = useState('');
+    const [client, setClient] = useState('');
+    const [amount, setAmount] = useState('');
+    const [price, setPrice] = useState('');
+    const [itemsPerPage, setItemsPerPage] = useState(5);
 
-    // Função para lidar com a mudança de data no DatePicker
+    const [bills, setBills] = useState([]);
+    const [buyers, setBuyers] = useState([]);
+    const [cartProducts, setCartProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const billResponse = await axios.get('http://localhost:8080/billing');
+                setBills(billResponse.data);
+
+                const cartProductResponse = await axios.get('http://localhost:8080/cartProduct');
+                setCartProducts(cartProductResponse.data);
+
+                const buyerResponse = await axios.get('http://localhost:8080/buyer');
+                setBuyers(buyerResponse.data);
+
+                const productResponse = await axios.get('http://localhost:8080/product');
+                setProducts(productResponse.data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        };
+
+        loadData();
+    }, []);
+
     const handleDateChange = (date) => {
         setStartDate(date);
     };
 
-    // Função para lidar com a mudança no filtro de ID de venda
     const handleSaleIdChange = (e) => {
         setSaleId(e.target.value);
     };
 
-    // Função para lidar com a mudança no filtro de cliente
     const handleClientChange = (e) => {
         setClient(e.target.value);
     };
 
-    // Função para lidar com a mudança no filtro de quantidade
     const handleAmountChange = (e) => {
         setAmount(e.target.value);
     };
 
-    // Função para lidar com a mudança no filtro de preço
     const handlePriceChange = (e) => {
         setPrice(e.target.value);
     };
 
-    // Filtra as linhas com base nos filtros definidos pelo usuário
-    const filteredRows = rows.filter((row) => {
-        const rowDate = new Date(row[2].split('/').reverse().join('-')); // Converte a data para um formato manipulável
+    const filteredRows = bills.filter((bill) => {
+        // Find corresponding buyer
+        const buyer = buyers.find(buyer => buyer.idBuyer === bill.cart.idBuyer);
+
+        // Find corresponding cartProduct
+        const cartProduct = cartProducts.find(cp => cp.cartIdCart === bill.idCart);
+        const productId = cartProduct ? cartProduct.productIdProduct : null;
+
+        // Find corresponding product
+        const product = products.find(prod => prod.idProduct === productId);
+
+        // Date comparison
+        const rowDate = new Date(bill.billDate);
+
         return (
-            (!startDate || rowDate >= startDate) && // Filtra pela data (se definida)
-            (!saleId || row[0].toString().includes(saleId)) && // Filtra pelo ID de venda (se definido)
-            (!client || row[1].toLowerCase().includes(client.toLowerCase())) && // Filtra pelo cliente (se definido)
-            (!amount || row[3].toString().toLowerCase().includes(amount.toLowerCase())) && // Filtra pela quantidade (se definida)
-            (!price || row[4].toString().includes(price)) // Filtra pelo preço (se definido)
+            (!startDate || rowDate >= startDate) &&
+            (!saleId || bill.idBill.toString().includes(saleId)) &&
+            (!client || (buyer && buyer.buyerName.toLowerCase().includes(client.toLowerCase()))) &&
+            (!amount || bill.cart.licenseNumber.toString().toLowerCase().includes(amount.toLowerCase())) &&
+            (!price || product.productPrice.toString().includes(price))
         );
     });
 
-    // Lógica de paginação
-    const indexOfLastItem = currentPage * itemsPerPage; // Índice do último item na página atual
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Índice do primeiro item na página atual
-    const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem); // Itens a serem exibidos na página atual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredRows.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Função para mudar de página
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    // UI da paginação
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(filteredRows.length / itemsPerPage); i++) {
         pageNumbers.push(
@@ -96,58 +99,57 @@ const SalesListBox = () => {
         );
     }
 
-    // Renderização do componente
     return (
         <div className="box-container px-0 h-100 shadow roundbg">
             <div className="container bg-white px-0 roundbg">
                 <table id="datatable" className='table text-start'>
                     <thead className='text-white'>
                         <tr>
-                            <th className="pt-3">ID Venda
+                            <th className="pt-3">Sale ID
                                 <input
                                     className="form-control w-75"
                                     id="ticketfilter"
-                                    placeholder="Pesquisar"
+                                    placeholder="Search"
                                     type="number"
                                     value={saleId}
                                     onChange={handleSaleIdChange}
                                 />
                             </th>
-                            <th>Cliente
+                            <th>Client
                                 <input
                                     className="form-control w-75"
                                     id="titlefilter"
                                     type="text"
-                                    placeholder="Pesquisar"
+                                    placeholder="Search"
                                     value={client}
                                     onChange={handleClientChange}
                                 />
                             </th>
-                            <th>Data
+                            <th>Date
                                 <DatePicker
                                     selected={startDate}
                                     onChange={handleDateChange}
-                                    dateFormat="dd/MM/yyyy" // Define o formato da data
-                                    placeholderText="Selecionar Data"
+                                    dateFormat="dd/MM/yyyy"
+                                    placeholderText="Select Date"
                                     className="form-control w-75"
                                 />
                             </th>
-                            <th>Produtos
+                            <th>Products
                                 <input
                                     className="form-control w-75"
                                     id="depfilter"
                                     type="text"
-                                    placeholder="Pesquisar"
+                                    placeholder="Search"
                                     value={amount}
                                     onChange={handleAmountChange}
                                 />
                             </th>
-                            <th>Quantidade
+                            <th>Amount
                                 <input
                                     className="form-control w-75"
                                     id="priofilter"
                                     type="number"
-                                    placeholder="Pesquisar"
+                                    placeholder="Search"
                                     value={price}
                                     onChange={handlePriceChange}
                                 />
@@ -156,33 +158,27 @@ const SalesListBox = () => {
                         </tr>
                     </thead>
                     <tbody className='text-start'>
-                        {currentItems.map((row, rowIndex) => (
-                            <tr key={rowIndex} style={{ borderRadius: rowIndex === rows.length - 1 ? '0 0 15px 15px' : '0' }}>
-                                {row.map((data, colIndex) => {
-                                    let color = 'inherit';
-                                    if (colIndex === 5) {
-                                        if (data === 'Novo') color = '#FFD56D'; // amarelo
-                                        else if (data === 'Rejeitado') color = '#EB5757'; // vermelho
-                                        else if (data === 'Pago') color = '#00B69B'; // verde
-                                        else if (data === 'Aguardando') color = '#2D9CDB'; // azul
-                                        return (
-                                            <td key={colIndex} style={{ color: colIndex === 5 ? color : 'inherit' }}>
-                                                {data}
-                                            </td>
-                                        )
-                                    }
-                                    return (
-                                        <td key={colIndex} className={'ps-3'} style={{ color: colIndex === 5 ? color : 'inherit' }}>
-                                            {data}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        ))}
+                        {currentItems.map((bill, rowIndex) => {
+                            const buyer = buyers.find(buyer => buyer.idBuyer === bill.cart.idBuyer);
+                            const cartProduct = cartProducts.find(cp => cp.cartIdCart === bill.idCart);
+                            const productId = cartProduct ? cartProduct.productIdProduct : null;
+                            const product = products.find(prod => prod.idProduct === productId);
+
+                            return (
+                                <tr key={rowIndex} style={{ borderRadius: rowIndex === currentItems.length - 1 ? '0 0 15px 15px' : '0' }}>
+                                    <td>{bill.idBill}</td>
+                                    <td>{buyer ? buyer.buyerName : '-'}</td>
+                                    <td>{new Date(bill.billDate).toLocaleDateString('en-GB')}</td>
+                                    <td>{product ? product.productName : '-'}</td>
+                                    <td>{bill.cart.licenseNumber}</td>
+                                    <td>{/* Additional actions or details */}</td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
 
-                {/* Paginação */}
+                {/* Pagination */}
                 <nav aria-label="...">
                     <ul className="pagination pb-2 justify-content-center">
                         {pageNumbers}

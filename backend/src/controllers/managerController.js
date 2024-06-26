@@ -2,7 +2,7 @@ const express = require("express");
 const sequelize = require("../models/database");
 const { Sequelize, Op, Model, DataTypes } = require('sequelize');
 var Manager = require("../models/manager");
-
+var Buyer = require("../models/buyer");
 
 const controllers = {};
 

@@ -166,7 +166,7 @@ function TicketListBox({ numRowsToShow }) {
                             <tr key={rowIndex}>
                                 <td className='ps-3' style={{ width: '10%' }}>{ticket.idTicket}</td>
                                 <td>{ticket.ticketName}</td>
-                                <td>{(new Date(ticket.ticketData), 'dd/MM/yyyy')}</td>
+                                <td>{formatDate(ticket.ticketDate)}</td>
                                 <td>{ticket.ticketDepartment.departmentDescript}</td>
                                 <td>{ticket.ticketPriority}</td>
                                 <td style={{ color: getStatusColor(ticket.ticketStatus.statusDescript) }}>{ticket.ticketStatus.statusDescript}</td>
