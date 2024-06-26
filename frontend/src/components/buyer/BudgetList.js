@@ -1,298 +1,209 @@
-import React, { useState } from 'react';
-import '../../App.css';
-import notificationicon from "../../images/notification.png";
-import Modal from 'react-bootstrap/Modal';
+import React, { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
 
-const boxBudgetsContent = [
-    [1, 'Adobe', '15/06/2024', '12', 'New'],
-    [2, 'Photoshop', '23/02/2024', '5', 'Paid'],
-    [3, 'VS Code', '13/06/2024', '20000', 'New'],
-    [4, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
-    [5, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
-    [6, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [7, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [8, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [9, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
-    [10, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [11, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
-    [12, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [13, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
-    [14, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [15, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
-    [16, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [17, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [18, 'João Ratão', '13/06/2024', '20000', 'Waiting'],
-    [19, 'João Ratão', '13/06/2024', '20000', 'Paid'],
-    [20, 'João Ratão', '13/06/2024', '20000', 'Rejected'],
-];
 
 function BudgetList({ numRowsToShow }) {
-    // Estado para controlar se o modal de detalhes está visível
-    const [lgShow, setLgShow] = useState(false);
-    // Estado para armazenar o orçamento selecionado para exibir detalhes
-    const [selectedBudget, setSelectedBudget] = useState(null);
-
-    // Função para mostrar o modal com os detalhes do orçamento selecionado
-    const handleShow = (budget) => {
-        setSelectedBudget(budget);
-        setLgShow(true);
-    };
-
-    // Variáveis de estado para os filtros de entrada
-    const [budgetNumberFilter, setBudgetNumberFilter] = useState('');
-    const [clientFilter, setClientFilter] = useState('');
-    const [dateFilter, setDateFilter] = useState('');
+    const [budgets, setBudgets] = useState([]);
+    const [budgetIdFilter, setBudgetIdFilter] = useState('');
+    const [dateFilter, setDateFilter] = useState(null);
     const [statusFilter, setStatusFilter] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
 
-    // Função de filtragem dos dados
-    const filteredRows = boxBudgetsContent.filter(row =>
-        row[0].toString().includes(budgetNumberFilter) &&
-        row[1].toLowerCase().includes(clientFilter.toLowerCase()) &&
-        row[2].includes(dateFilter) &&
-        row[4].toLowerCase().includes(statusFilter.toLowerCase())
-    );
 
-    // Função para obter a cor do status com base no valor do status
+/*find buyer cart*/
+function useBuyerCart() {
+    const [idCart, setCartId] = useState(0);
+  
+    useEffect(() => {
+      const fetchCartId = async () => {
+        try {
+          const url = "http://localhost:8080/cart/findByBuyer/1";
+          const res = await axios.get(url);
+          if (res.status === 200) {
+            const data2 = res.data;
+            setCartId(data2.idCart);
+          } else {
+            alert("Error Web Service!");
+          }
+        } catch (error) {
+         
+        }
+      };
+  
+      fetchCartId();
+    }, []);
+  
+    return idCart;
+   
+  }
+  useBuyerPendingBudgets()
+  function useBuyerPendingBudgets() {
+    const idCart = useBuyerCart();
+    
+    useEffect(() => {
+      const fetchBudgets = async () => {
+        try {
+          const url = "http://localhost:8080/budget/findByCart/" + idCart;
+          const res = await axios.get(url);
+          if (res.status === 200) {
+            const data3 = res.data; 
+           
+            setBudgets(data3);
+            console.log(budgets);
+          } else {
+            alert("Error Web Service!");
+          }
+        } catch (error) {
+         
+        }
+      };
+  
+      if (idCart !== 0) {
+        fetchBudgets();
+      }
+    }, [idCart]);
+  
+  }
+    const filteredBudgets = budgets.filter(budget => {
+        const budgetDate = new Date(budget.date);
+        return (
+            budget.idBudget.toString().includes(budgetIdFilter) &&
+            
+            (!dateFilter || budgetDate >= dateFilter) &&
+           
+            budget.budgetStatus.budgetStatusDescript.toLowerCase().includes(statusFilter.toLowerCase())
+        );
+    });
+   
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentBudgets = filteredBudgets.slice(indexOfFirstItem, indexOfLastItem);
+    
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredBudgets.length / itemsPerPage); i++) {
+        pageNumbers.push(
+            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                <button className="page-link" onClick={() => paginate(i)}>{i}</button>
+            </li>
+        );
+    }
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'New':
-                return '#FFD56D'; // amarelo
+                return '#FFD56D'; // yellow
             case 'Rejected':
-                return '#EB5757'; // vermelho
-            case 'Paid':
-                return '#00B69B'; // verde
+                return '#EB5757'; // red
+            case 'Solved':
+                return '#00B69B'; // green
             case 'Waiting':
-                return '#2D9CDB'; // azul
+                return '#2D9CDB'; // blue
             default:
-                return 'inherit'; // cor padrão
+                return 'inherit';
         }
     };
 
     return (
-        <div className="box-container d-flex h-100 shadow roundbg">
-            <div className="container bg-white px-0 roundbg">
-                <table className='table text-start m-0'>
+        <div className="px-0 roundbg h-100 pb-3 bg-white shadow mx-0 col-12">
+          
+            <div className=" px-0 roundbg h-100 mx-0 row col-12">
+                <table className='table text-start my-0'>
                     <thead className='text-white'>
                         <tr>
-                            {/* Depending on numRowsToShow, show the table differently */}
-                            {numRowsToShow === 5 ? (
+                            {numRowsToShow < 20 ? (
                                 <>
-                                    <th>Budget</th>
+                                    <th style={{ width: '10%' }}>Ticket</th>
                                     <th>Title</th>
-                                    <th className='w-10'>Status</th>
-                                    <th className='text-center'>Action</th>
-                                </>
-                            ) : numRowsToShow === 6 ? (
-                                <>
-                                    <th style={{ width: '10%' }}>Budget</th>
-                                    <th>Product</th>
                                     <th>Date</th>
-                                    <th>Amount</th>
+                                    <th>Department</th>
+                                    <th className='w-10'>Priority</th>
                                     <th className='w-10'>Status</th>
-                                    <th className='text-center'>Action</th>
+                                    <th>Action</th>
                                 </>
                             ) : (
                                 <>
-                                    <th style={{ width: '10%' }} className="text-start pt-3">
+                                    <th>
                                         Budget
                                         <input
-                                            className="form-control w-50 text-start"
-                                            id="budgetnfilter"
-                                            type="number"
-                                            placeholder="Search.."
-                                            value={budgetNumberFilter}
-                                            onChange={(e) => setBudgetNumberFilter(e.target.value)}
-                                        />
-                                    </th>
-                                    <th>
-                                        Client
-                                        <input
                                             className="form-control w-75"
-                                            id="clientfilter"
-                                            type="text"
-                                            placeholder="Search.."
-                                            value={clientFilter}
-                                            onChange={(e) => setClientFilter(e.target.value)}
+                                            type="number"
+                                            placeholder="Search"
+                                            value={budgetIdFilter}
+                                            onChange={(e) => setBudgetIdFilter(e.target.value)}
                                         />
                                     </th>
+                                    
                                     <th>
                                         Date
-                                        <input
+                                        <DatePicker
+                                            selected={dateFilter}
+                                            onChange={(date) => setDateFilter(date)}
                                             className="form-control w-75"
-                                            id="datefilter"
-                                            type="text"
-                                            placeholder="Search.."
-                                            value={dateFilter}
-                                            onChange={(e) => setDateFilter(e.target.value)}
+                                            placeholderText="Select date"
                                         />
                                     </th>
-                                    <th className='align-text-top pt-3'>Amount</th>
-                                    <th className='w-10'>
+                                    <th>
                                         Status
                                         <input
                                             className="form-control w-75"
-                                            id="statusfilter"
                                             type="text"
-                                            placeholder="Search.."
+                                            placeholder="Search"
                                             value={statusFilter}
                                             onChange={(e) => setStatusFilter(e.target.value)}
                                         />
                                     </th>
+                                   
+                                  
                                     <th className='text-center align-text-top pt-3'>Action</th>
                                 </>
                             )}
                         </tr>
                     </thead>
-                    <tbody className='text-start'>
-                        {filteredRows.slice(0, numRowsToShow).map((row, rowIndex) => (
-                            <tr key={rowIndex} style={{ borderRadius: rowIndex === filteredRows.length - 1 ? '0 0 15px 15px' : '0' }}>
-                                {numRowsToShow === 5 && (
-                                    <>
-                                        <td style={{ width: '10%' }} className='ps-3'>{row[0]}</td>
-                                        <td>{row[1]}</td>
-                                        <td className='w-10' style={{ color: getStatusColor(row[4]) }}>{row[4]}</td>
-                                        <td className='text-center'>
-                                            <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
-                                        </td>
-                                    </>
-                                )}
-                                {numRowsToShow === 6 && (
-                                    <>
-                                        <td style={{ width: '10%' }} className='ps-3'>{row[0]}</td>
-                                        <td>{row[1]}</td>
-                                        <td>{row[2]}</td>
-                                        <td>{row[3]}</td>
-                                        <td className='w-10' style={{ color: getStatusColor(row[4]) }}>{row[4]}</td>
-                                        <td className='text-center'>
-                                            <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
-                                        </td>
-                                    </>
-                                )}
-                                {numRowsToShow === 20 && (
-                                    <>
-                                        <td style={{ width: '20%' }} className='ps-3'>{row[0]}</td>
-                                        <td>{row[1]}</td>
-                                        <td>{row[2]}</td>
-                                        <td>{row[3]}</td>
-                                        <td className='w-10' style={{ color: getStatusColor(row[4]) }}>{row[4]}</td>
-                                        <td className='text-center'>
-                                            <button className='btn btn-outline-warning' onClick={() => handleShow(row)}>See more</button>
-                                        </td>
-                                    </>
-                                )}
+                    <tbody>
+                        
+                        {currentBudgets.map((budget, rowIndex) => (
+                            <tr key={rowIndex}>
+                                <td className='ps-3' style={{ width: '10%' }}>{budget.idBudget}</td>
+                                
+                                <td>{formatDate(budget.
+                                    date)}</td>
+
+                                <td style={{ color: getStatusColor(budget.budgetStatus.budgetStatusDescript) }}>{budget.budgetStatus.budgetStatusDescript}</td>
+                                <td className='text-center'>
+                                 <Link to={`/ticketreply/${budget.idTicket}`} className='btn btn-outline-warning' onClick={() => console.log(budget.idTicket)}>
+                                        See more
+                                    </Link> 
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
                 {numRowsToShow === 20 && (
-                    <nav aria-label="..." className='ms-3'>
+                    <nav aria-label="..." className='mt-3 mb-0 d-flex justify-content-center'>
                         <ul className="pagination">
-                            <li className="page-item"><a className="page-link" href="#">1</a></li>
-                            <li className="page-item active">
-                                <a className="page-link" href="#">2</a>
-                            </li>
-                            <li className="page-item"><a className="page-link" href="#">3</a></li>
-                            <li className="page-item">
-                                <a className="page-link" href="#">Next</a>
-                            </li>
+                            {pageNumbers}
                         </ul>
                     </nav>
                 )}
-
-                {/* Modal for displaying selected budget details */}
-                <Modal
-                    size="lg"
-                    show={lgShow}
-                    onHide={() => setLgShow(false)}
-                    aria-labelledby="budgetDetails"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            Budget #{selectedBudget ? selectedBudget[0] : ''}
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {selectedBudget && (
-                            <form>
-                                <div className='container'>
-                                    <div className="row mb-5">
-                                        <div className="col-3 text-body-secondary">
-                                            CLIENT
-                                        </div>
-                                        <div className="col-9">
-                                            {selectedBudget[1]}
-                                        </div>
-                                    </div>
-                                    <div className="row mb-5">
-                                        <div className="col-3 text-body-secondary">
-                                            DATE
-                                        </div>
-                                        <div className="col-9">
-                                            {selectedBudget[2]}
-                                        </div>
-                                    </div>
-                                    <div className="row mb-5">
-                                        <div className="col-3 text-body-secondary">
-                                            DESCRIPTION
-                                        </div>
-                                        <div className="col-9">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                        </div>
-                                    </div>
-                                    <div className="row mb-5">
-                                        <div className="col-3 text-body-secondary">
-                                            PRODUCTS
-                                        </div>
-                                        <div className="col-9">
-                                            <div className="row">
-                                                <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                    Prints
-                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints"></img>
-                                                </div>
-                                                <div className="col-4 d-flex flex-column text-center fw-medium">
-                                                    Prints
-                                                    <img src={notificationicon} className='ticket-print mx-auto mt-1' alt="Prints"></img>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-5">
-                                        <div className="col-3 text-body-secondary">
-                                            MARGIN
-                                        </div>
-                                        <div className="col-9">
-                                            150-220€
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div className="row mb-5">
-                                        <div className="col-3 text-body-secondary">
-                                            REPLY
-                                        </div>
-                                        <div className="col-9">
-                                            <textarea className="form-control" placeholder="Reply" id="descriptioninput" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div className="row mb-3">
-                                        <div className="col-3 text-body-secondary">
-                                            PRICE
-                                        </div>
-                                        <div className="col-9">
-                                            <input type="number" className="form-control" id="budgetprice" placeholder="Price" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-12 text-center'>
-                                    <button className='btn btn-success'>Send</button>
-                                </div>
-                            </form>
-                        )}
-                    </Modal.Body>
-                </Modal>
             </div>
         </div>
     );
 }
+
 
 export default BudgetList;
