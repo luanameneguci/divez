@@ -117,11 +117,27 @@ controllers.product_update = async (req, res) => {
 };
 
 controllers.product_detail = async (req, res) => {
-  let idReceived = req.params.id;
-
-  const data = await Product.findOne({ where: { idProduct: idReceived } });
-  res.json(data);
+  try {
+    let idReceived = req.params.id;
+    
+    // Validate idReceived (ensure it's a valid integer)
+    if (!Number.isInteger(Number(idReceived))) {
+      return res.status(400).json({ error: 'Invalid idProduct' });
+    }
+    
+    const data = await Product.findOne({ where: { idProduct: idReceived } });
+    
+    if (!data) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    
+    res.json(data);
+  } catch (err) {
+    console.error('Error fetching product:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
+
 
 controllers.product_delete = async (req, res) => {
   let idReceived = req.params.id;

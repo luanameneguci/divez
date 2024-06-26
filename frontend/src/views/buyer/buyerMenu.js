@@ -127,7 +127,7 @@ const Menu = ({ userId }) => {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/checkout" element={<BuyerPayment />} />
               <Route path="/productitem" element={<BuyerProductItem />} />
-              <Route path="/shopitem" element={<BuyerShopItem />} />
+              <Route path="/shop/:id" element={<BuyerShopItem />} />
               <Route path="/budgetrequest" element={<BuyerBudgetReply />} />
             </Routes>
           </div>

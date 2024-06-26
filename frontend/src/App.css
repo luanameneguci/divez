@@ -98,6 +98,11 @@ a {
   height: 50px;
 }
 
+.thumb-img img {
+  width: 100px;
+  height: 100px;
+}
+
 
 .admin-box-maxw {
   max-width: 250px;
