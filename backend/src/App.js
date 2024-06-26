@@ -26,6 +26,7 @@ const ticketDepartmentRoutes = require('./routes/ticketDepartmentRoute.js');
 const ticketPrintRoutes = require('./routes/ticketPrintRoute.js');
 const ticketRoutes = require('./routes/ticketRoute.js');
 const ticketStatusRoutes = require('./routes/ticketStatusRoute.js'); 
+const ManagerProductRoutes = require('./routes/ManagerProductRoute.js')
 
 
 
@@ -68,6 +69,7 @@ app.use('/ticketDepartment',ticketDepartmentRoutes)
 app.use('/ticketPrint',ticketPrintRoutes)
 app.use('/ticket',ticketRoutes)
 app.use('/ticketStatus',ticketStatusRoutes)  
+app.use('/managerProduct',ManagerProductRoutes) 
 
 app.listen(app.get("port"), () => {
   console.log("Start server on port " + app.get("port"));
