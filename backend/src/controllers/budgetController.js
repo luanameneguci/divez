@@ -68,10 +68,14 @@ controllers.budget_detail = async (req, res) => {
   res.json(data);
 };
 
-controllers.budget_findByCartId = async (req, res) => {
+controllers.budget_findByCart = async (req, res) => {
   let idReceived = req.params.id;
 
-  const data = await Budget.findAll({ where: { idCart: idReceived } });
+  const data = await Budget.findAll({ where: { idCart: idReceived }, include: [
+ 
+    { model: BudgetStatus, as: 'budgetStatus' }
+
+  ] });
 
   res.json(data);
 };

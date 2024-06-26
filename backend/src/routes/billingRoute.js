@@ -11,7 +11,7 @@ router.post("/create", billController.bill_create);
 
 router.put("/update/:id", billController.bill_update);
 
-router.get("/getDetails/:idBuyer", billController.bill_getBillDetails)
+router.get("/Detail/:idBuyer", billController.getBillDetails);
 
 router.get("/lastBillId", billController.bill_getLastBillId);
 

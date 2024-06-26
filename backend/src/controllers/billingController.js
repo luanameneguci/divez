@@ -1,12 +1,11 @@
 const express = require("express");
 const sequelize = require("../models/database");
-const { Sequelize, Op, Model, DataTypes } = require('sequelize');
+const { Sequelize, Op, Model, DataTypes } = require("sequelize");
 const Bill = require("../models/bills");
 const Cart = require("../models/cart");
 const CartProduct = require("../models/CartProduct");
 const Product = require("../models/products");
 const Buyer = require("../models/buyer");
-
 
 const controllers = {};
 
@@ -41,65 +40,60 @@ controllers.bill_detail = async (req, res) => {
   res.json(data);
 };
 
-controllers.bill_getBillDetails = async (req, res) => {
-  try {
-    const idBuyer = req.params.idBuyer; // Extract idBuyer from the URL parameters
+controllers.getBillDetails = async (req, res) => {
+  const idBuyer = req.params.idBuyer; // Assuming idBuyer is passed in the URL params
 
+  if (!idBuyer) {
+    return res.status(400).json({ error: 'Missing idBuyer parameter' });
+  }
+
+  try {
     const bills = await Bill.findAll({
       include: [
         {
           model: Cart,
-          where: { idBuyer }, // Filter by idBuyer
+          attributes: ['licenseNumber'], // Select license number only
+          where: { idBuyer }, // Filter carts by idBuyer
           include: [
             {
-              model: CartProduct,
-              include: [
-                {
-                  model: Product,
-                  attributes: ['productName', 'productPrice']
-                }
-              ]
-            }
-          ]
-        }
-      ]
+              model: Buyer, // Include buyer details
+            },
+            {
+              model: Product, // Include products
+              through: {
+                model: CartProduct, // Include CartProduct to link Cart and Product
+              },
+              attributes: ['productName'], // Select product name only
+            },
+          ],
+          attributes: ['cartPrice'], // Select cart price only
+        },
+      ],
+      attributes: ['idBill', 'billDate'], // Select bill ID and bill date
     });
 
-    const result = bills.map(bill => {
-      const cart = bill.cart;
-      const totalCartPrice = cart.CartProducts.reduce((total, cartProduct) => total + cartProduct.product.productPrice, 0);
-
-      return {
-        idBill: bill.idBill,
-        billDate: bill.billDate,
-        licenseNumber: cart.licenseNumber,
-        productNames: cart.CartProducts.map(cp => cp.product.productName),
-        totalPrice: totalCartPrice
-      };
-    });
-
-    res.json(result);
+    res.json(bills);
   } catch (error) {
-    console.error("Error fetching bill details:", error);
-    res.status(500).send("Internal Server Error");
+    console.error('Error fetching bills:', error);
+    res.status(500).json({ error: 'Error fetching bills' });
   }
 };
 
 controllers.bill_getLastBillId = async (req, res) => {
   try {
     const lastBill = await Bill.findOne({
-      order: [['idBill', 'DESC']],
-      attributes: ['idBill'],
+      order: [["idBill", "DESC"]],
+      attributes: ["idBill"],
     });
 
     if (lastBill) {
       res.status(200).json({ idBill: lastBill.idBill });
     } else {
-      res.status(404).json({ error: 'No bills found' });
+      res.status(404).json({ error: "No bills found" });
     }
   } catch (error) {
-    console.error('Error fetching last bill id:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error fetching last bill id:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

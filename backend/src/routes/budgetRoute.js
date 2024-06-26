@@ -9,7 +9,7 @@ router.get("/", budgetController.budget_list);
 
 router.get("/:id", budgetController.budget_detail);
 
-router.get("/findByCart/:id", budgetController.budget_findByCartId); 
+router.get("/findByCart/:id", budgetController.budget_findByCart); 
 
 router.post("/create", budgetController.budget_create);
 
