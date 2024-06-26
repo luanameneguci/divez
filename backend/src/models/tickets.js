@@ -69,8 +69,8 @@ const Ticket = sequelize.define('ticket', {
   freezeTableName: true
 });
 
-Ticket.belongsTo(Manager, { foreignKey: 'idManager' });
-Manager.hasMany(Ticket, { foreignKey: 'idManager' });
+  Ticket.belongsTo(Manager, { foreignKey: 'idManager' });
+  Manager.hasMany(Ticket, { foreignKey: 'idManager' });
 
 Ticket.belongsTo(Buyer, { foreignKey: 'idBuyer' });
 Buyer.hasMany(Ticket, { foreignKey: 'idBuyer' });

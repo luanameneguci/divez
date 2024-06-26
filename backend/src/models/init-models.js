@@ -21,6 +21,7 @@ var TicketDepartment = require("../models/ticketDepartment");
 var TicketStatus = require("../models/ticketStatus");
 var Ticket = require("../models/tickets");
 var BudgetProduct = require("../models/budgetProduct");
+var ManagerProduct = require("../models/ManagerProducts");
 
 (async () => {
 
@@ -32,11 +33,11 @@ var BudgetProduct = require("../models/budgetProduct");
     await TicketDepartment.sync({ alter: true });
     await TicketStatus.sync({ alter: true });
     await Package.sync({ alter: true });
+    await Buyer.sync({ alter: true });
+    await Manager.sync({ alter: true });
     await Product.sync({ alter: true });
     await Category.sync({ alter: true });
     await Admin.sync({ alter: true });
-    await Buyer.sync({ alter: true });
-    await Manager.sync({ alter: true });
     await Cart.sync({ alter: true });
     await Bill.sync({ alter: true });
     await Budget.sync({ alter: true });
@@ -48,6 +49,8 @@ var BudgetProduct = require("../models/budgetProduct");
     await CartProduct.sync({ alter: true });
     await ManagerLicense.sync({ alter: true });
     await BudgetProduct.sync({ alter: true});
+    await ManagerProduct.sync({ alter: true});
+    
 
     console.log("All models were synchronized successfully.");
   } catch (error) {

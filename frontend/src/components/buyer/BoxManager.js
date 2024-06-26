@@ -29,7 +29,6 @@ function createDataArraysManager(manager) {
     let subArray = [
       manager[i].nome,
       manager[i].nomeApp,
-      manager[i].status,
       manager[i].photo,
     ];
     managers.push(subArray);
@@ -57,29 +56,17 @@ const UserStatus = ({ manager }) => {
   const statusColor = manager[2] === "Online" ? "LightGreen" : "LightGrey";
   return (
     <div className="col-12 d-flex align-items-center p-3 justify-content-between">
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center col-12">
         <img
           src={manager[3]}
           alt={`${manager[1]}`}
-          className="mr-3"
+          className="mr-3 col-1"
           style={{ width: "60px", height: "60px", borderRadius: "50%" }}
         />
-        <div className="d-flex flex-column align-items-start">
+        <div className="d-flex flex-column align-items-center col-11">
           <h5 className="mb-0">{manager[0]}</h5>
           <h6 className="mb-0">{manager[1]}</h6>
         </div>
-      </div>
-      <div className="d-flex align-items-center">
-        <div
-          className="ms-auto me-1"
-          style={{
-            width: "20px",
-            height: "20px",
-            borderRadius: "50%",
-            backgroundColor: statusColor,
-          }}
-        ></div>
-        <p className="mb-0">{manager[2]}</p>
       </div>
     </div>
   );

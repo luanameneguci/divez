@@ -346,6 +346,7 @@ function BuyerManagersTable() {
     if (dataManager.length > 0) {
       const transformedData = dataManager.map((manager) => ({
         nome: manager.managerName,
+        
       }));
       setTableManagers(transformedData);
     }
